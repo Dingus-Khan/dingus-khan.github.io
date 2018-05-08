@@ -135,8 +135,8 @@ requestAnimationFrame(render);
 function render() {
 		gl.clearColor(val, val, val, 1.0);
 		val += 0.001;
-		x += 0.01;
-		y += Math.sin(x);
+		x += 1;
+		y += sin(x / 100);
 
     var texSize = gl.getUniformLocation(program, "texSize");
     gl.uniform2f(texSize, image.width, image.height);
