@@ -135,6 +135,8 @@ function handleInput(event){
 		}
 }
 
+window.addEventListener("keydown", handleInput);
+
 var val = 0.001;
 var x = 0, y = 0;
 
