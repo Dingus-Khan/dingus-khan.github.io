@@ -126,18 +126,23 @@ function translation(tx, ty){
 	];
 }
 
-var modelLoc = gl.getUniformLocation(program, "model");
-gl.uniformMatrix4fv(modelLoc, false, translation(10, 10));
 
 var val = 0.001;
+var x = 0, y = 0;
 
 requestAnimationFrame(render);
 
 function render() {
 		gl.clearColor(val, val, val, 1.0);
 		val += 0.001;
+		x += 0.001;
+		y += Math.sin(x);
+
     var texSize = gl.getUniformLocation(program, "texSize");
     gl.uniform2f(texSize, image.width, image.height);
+
+		var modelLoc = gl.getUniformLocation(program, "model");
+		gl.uniformMatrix4fv(modelLoc, false, translation(x, y));
 
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
