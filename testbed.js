@@ -122,7 +122,7 @@ function translation(tx, ty){
 		1, 0, 0, 0,
 		0, 1, 0, 0,
 		0, 0, 1, 0,
-		tx, ty, 0, 1
+		Math.round(tx), Math.round(ty), 0, 1
 	];
 }
 
