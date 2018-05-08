@@ -21,7 +21,7 @@ var System = {
 		var success = gl.getProgramParameter(program, gl.LINK_STATUS);
 		if (success){
 			return program;
-		}	
+		}
 
 		console.log(gl.getProgramInfoLog(program));
 		gl.deleteProgram(program);
@@ -93,35 +93,41 @@ var image = new Image();
 image.onload = function(){
     gl.bindTexture(gl.TEXTURE_2D, texture);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
-    
+
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
 	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
 	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
 	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-    
+
     gl.generateMipmap(gl.TEXTURE_2D);
 }
 image.src = "test.png";
 
-gl.clearColor(0.1, 0.1, 0.1, 1.0);
 gl.useProgram(program);
 
 var proj = [
     2 / 800, 0, 0, 0,
     0, -2 / 600, 0, 0,
-    0, 0, 1, 0, 
+    0, 0, 1, 0,
     -1, 1, 0, 1
 ];
 
 var projLoc = gl.getUniformLocation(program, "proj");
 gl.uniformMatrix4fv(projLoc, false, proj);
 
+var val = 0.001;
+
+requestanimationframe(render);
+
 function render() {
+		gl.clearColor(val, val, val, 1.0);
+		val += 0.001;
     var texSize = gl.getUniformLocation(program, "texSize");
     gl.uniform2f(texSize, image.width, image.height);
-    
+
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+		requestanimationframe(render);
 }
 
 // Frame timer
