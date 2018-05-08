@@ -36,10 +36,11 @@ out vec2 Tex;
 
 uniform vec2 texSize;
 uniform mat4 proj;
+uniform mat4 model;
 
 void main(){
     Tex = tex / texSize;
-    gl_Position = proj * vec4(pos, 0.0, 1.0);
+    gl_Position = proj * model * vec4(pos, 0.0, 1.0);
 }`;
 
 var fragmentShader = `#version 300 es
@@ -114,6 +115,19 @@ var proj = [
 
 var projLoc = gl.getUniformLocation(program, "proj");
 gl.uniformMatrix4fv(projLoc, false, proj);
+
+
+function translation(tx, ty){
+	return [
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		tx, ty, 0, 1
+	];
+}
+
+var modelLoc = gl.getUniformLocation(program, "model");
+gl.uniformMatrix4fv(modelLoc, false, translation(10, 10));
 
 var val = 0.001;
 
