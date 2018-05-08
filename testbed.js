@@ -117,7 +117,7 @@ gl.uniformMatrix4fv(projLoc, false, proj);
 
 var val = 0.001;
 
-requestanimationframe(render);
+requestAnimationFrame(render);
 
 function render() {
 		gl.clearColor(val, val, val, 1.0);
@@ -127,7 +127,7 @@ function render() {
 
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-		requestanimationframe(render);
+		requestAnimationFrame(render);
 }
 
 // Frame timer
