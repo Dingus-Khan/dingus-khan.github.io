@@ -126,6 +126,14 @@ function translation(tx, ty){
 	];
 }
 
+function handleInput(event){
+		var x = event.key;
+		switch(x){
+				case "ArrowUp":
+						console.log("up");
+						break;
+		}
+}
 
 var val = 0.001;
 var x = 0, y = 0;
