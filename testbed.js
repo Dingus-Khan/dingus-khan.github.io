@@ -55,7 +55,7 @@ uniform vec2 velocity;
 uniform sampler2D texImage;
 
 void main(){
-    outColour = texture(texImage, Tex);
+    outColour = texture(texImage, vec2(Tex.x * velocity.x, Tex.y));
 }`;
 
 var canvas = document.getElementById("main");
@@ -165,8 +165,8 @@ function run() {
 		spd = 1;
 	}*/
 
-	velX = ((-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false)) * spd;
-	velY = ((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false)) * spd;
+	velY = ((-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false)) * spd;
+	velX = ((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false)) * spd;
 
 	x += velX;
 	y += velY;
