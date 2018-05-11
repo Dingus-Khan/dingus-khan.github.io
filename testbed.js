@@ -126,27 +126,32 @@ function translation(tx, ty){
 	];
 }
 
-function handleInput(event){
-		var x = event.key;
-		switch(x){
-				case "ArrowUp":
-						console.log("up");
-						break;
-		}
-}
-
 window.addEventListener("keydown", handleInput);
 
 var val = 0.001;
 var x = 0, y = 0;
 
-requestAnimationFrame(render);
+var keyDown = {},
+		keyMap = {
+			'left': 37,
+			'up': 38,
+			'right': 39,
+			'down': 40
+		};
 
-function render() {
+document.addEventListener("keydown", function(e){[keyMap[e.which]] = true;});
+document.addEventListener("keyup", function(e){[keyMap[e.which]] = false;});
+
+requestAnimationFrame(run);
+
+val += 0.001;
+x += 1;
+y += Math.sin(x / 100);
+
+function run() {
+		
+
 		gl.clearColor(val, val, val, 1.0);
-		val += 0.001;
-		x += 1;
-		y += Math.sin(x / 100);
 
     var texSize = gl.getUniformLocation(program, "texSize");
     gl.uniform2f(texSize, image.width, image.height);
@@ -156,7 +161,7 @@ function render() {
 
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-		requestAnimationFrame(render);
+		requestAnimationFrame(run);
 }
 
 // Frame timer
