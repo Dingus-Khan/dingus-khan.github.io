@@ -51,6 +51,7 @@ in vec2 Tex;
 
 out vec4 outColour;
 
+uniform vec2 velocity;
 uniform sampler2D texImage;
 
 void main(){
@@ -152,6 +153,8 @@ requestAnimationFrame(run);
 
 var x = 0;
 var y = 0;
+var velX = 0;
+var velY = 0;
 var spd = 1;
 
 function run() {
@@ -162,16 +165,20 @@ function run() {
 		spd = 1;
 	}*/
 
-	y += ((-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false)) * spd;
-	x += ((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false)) * spd;
+	velX = ((-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false)) * spd;
+	velY = ((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false)) * spd;
 
-	gl.clearColor(val, val, val, 1.0);
+	x += velX;
+	y += velY;
 
     var texSize = gl.getUniformLocation(program, "texSize");
     gl.uniform2f(texSize, image.width, image.height);
 
 	var modelLoc = gl.getUniformLocation(program, "model");
 	gl.uniformMatrix4fv(modelLoc, false, translation(x, y));
+
+	var velocityLoc = gl.getUniformLocation(program, "velocity");
+	gl.uniform2f(velocityLoc, velX, velY);
 
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
