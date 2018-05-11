@@ -137,8 +137,12 @@ var keyDown = {},
 			'down': 40
 		};
 
-document.addEventListener("keydown", function(e){keyDown[keyMap[e.which]] = true;});
-document.addEventListener("keyup", function(e){keyDown[keyMap[e.which]] = false;});
+document.addEventListener("keydown", function(e){
+	keyDown[keyMap[e.which]] = true;
+});
+document.addEventListener("keyup", function(e){
+	keyDown[keyMap[e.which]] = false;
+});
 
 requestAnimationFrame(run);
 
