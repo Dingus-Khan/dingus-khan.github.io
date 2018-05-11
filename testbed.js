@@ -147,7 +147,7 @@ x += 1;
 y += Math.sin(x / 100);
 
 function run() {
-
+		y = keyDown[keyMap['up']];
 
 		gl.clearColor(val, val, val, 1.0);
 
