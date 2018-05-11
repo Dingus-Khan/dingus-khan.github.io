@@ -148,10 +148,11 @@ requestAnimationFrame(run);
 
 var x = 0;
 var y = 0;
+var spd = 1;
 
 function run() {
-		y += ((-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false)) * 0.001;
-		x += ((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false)) * 0.001;
+		y += ((-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false)) * spd;
+		x += ((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false)) * spd;
 
 		gl.clearColor(val, val, val, 1.0);
 
