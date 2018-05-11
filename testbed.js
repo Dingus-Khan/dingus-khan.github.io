@@ -150,7 +150,7 @@ var x = 0;
 var y = 0;
 
 function run() {
-		y = keyDown[keyMap['up']];
+		y += -keyDown[keyMap['up']] + keyDown[keyMap['down']];
 
 		gl.clearColor(val, val, val, 1.0);
 
