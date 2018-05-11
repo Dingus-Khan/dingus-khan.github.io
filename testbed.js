@@ -138,10 +138,10 @@ var keyDown = {},
 		};
 
 document.addEventListener("keydown", function(e){
-	keyDown[keyMap[e.which]] = true;
+	keyDown[e.which] = true;
 });
 document.addEventListener("keyup", function(e){
-	keyDown[keyMap[e.which]] = false;
+	keyDown[e.which] = false;
 });
 
 requestAnimationFrame(run);
@@ -150,7 +150,7 @@ var x = 0;
 var y = 0;
 
 function run() {
-		y = keyDown['up'];
+		y = keyDown[keyMap['up']];
 
 		gl.clearColor(val, val, val, 1.0);
 
