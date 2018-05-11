@@ -157,6 +157,8 @@ var velX = 0;
 var velY = 0;
 var spd = 1;
 
+gl.clearColor(0.1, 0.1, 0.1, 1.0);
+
 function run() {
 	/* uncomment this to clean up diagonal speed. I kinda like the fast diagonals.
 	if ((keyDown[keyMap['up']] || keyDown[keyMap['down']]) && (keyDown[keyMap['left']] || keyDown[keyMap['right']])){
