@@ -55,7 +55,7 @@ uniform vec2 velocity;
 uniform sampler2D texImage;
 
 void main(){
-    outColour = texture(texImage, vec2(1.0 - Tex.x, Tex.y));
+    outColour = texture(texImage, vec2(-Tex.x, Tex.y));
 }`;
 
 var canvas = document.getElementById("main");
