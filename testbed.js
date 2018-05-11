@@ -150,8 +150,8 @@ var x = 0;
 var y = 0;
 
 function run() {
-		y += ((-keyDown[keyMap['up']] || 0) + (keyDown[keyMap['down']] || 0)) * 0.001;
-		x += ((-keyDown[keyMap['left']] || 0) + (keyDown[keyMap['right']] || 0)) * 0.001;
+		y += ((-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false)) * 0.001;
+		x += ((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false)) * 0.001;
 
 		gl.clearColor(val, val, val, 1.0);
 
