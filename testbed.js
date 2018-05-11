@@ -142,9 +142,9 @@ document.addEventListener("keyup", function(e){keyDown[keyMap[e.which]] = false;
 
 requestAnimationFrame(run);
 
-val += 0.001;
-x += 1;
-y += Math.sin(x / 100);
+var val += 0.001;
+var x = 0;
+var y = 0;
 
 function run() {
 		y = keyDown[keyMap['up']];
