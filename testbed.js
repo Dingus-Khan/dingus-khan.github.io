@@ -146,7 +146,7 @@ var x = 0;
 var y = 0;
 
 function run() {
-		y = keyDown[keyMap['up']];
+		y = keyDown['up'];
 
 		gl.clearColor(val, val, val, 1.0);
 
