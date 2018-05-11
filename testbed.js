@@ -126,8 +126,6 @@ function translation(tx, ty){
 	];
 }
 
-window.addEventListener("keydown", handleInput);
-
 var val = 0.001;
 var x = 0, y = 0;
 
@@ -149,7 +147,7 @@ x += 1;
 y += Math.sin(x / 100);
 
 function run() {
-		
+
 
 		gl.clearColor(val, val, val, 1.0);
 
