@@ -142,7 +142,6 @@ document.addEventListener("keyup", function(e){keyDown[keyMap[e.which]] = false;
 
 requestAnimationFrame(run);
 
-var val += 0.001;
 var x = 0;
 var y = 0;
 
