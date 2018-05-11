@@ -41,6 +41,7 @@ uniform mat4 model;
 void main(){
     Tex = tex / texSize;
     gl_Position = proj * model * vec4(pos, 0.0, 1.0);
+	gl_Position = vec4(gl_Position.x, gl_Position.y, gl_Position.y, gl_Position.w);
 }`;
 
 var fragmentShader = `#version 300 es
@@ -87,6 +88,8 @@ gl.enableVertexAttribArray(tex);
 
 gl.enable(gl.BLEND);
 gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+gl.enable(gl.DEPTH_TEST);
 
 var texture = gl.createTexture();
 
