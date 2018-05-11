@@ -90,6 +90,7 @@ gl.enable(gl.BLEND);
 gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
 gl.enable(gl.DEPTH_TEST);
+gl.depthFunc(gl.LESS);
 
 var texture = gl.createTexture();
 
@@ -172,7 +173,7 @@ function run() {
 	var modelLoc = gl.getUniformLocation(program, "model");
 	gl.uniformMatrix4fv(modelLoc, false, translation(x, y));
 
-    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 	requestAnimationFrame(run);
 }
