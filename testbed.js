@@ -151,11 +151,12 @@ var y = 0;
 var spd = 1;
 
 function run() {
+	/* uncomment this to clean up diagonal speed. I kinda like the fast diagonals.
 	if ((keyDown[keyMap['up']] || keyDown[keyMap['down']]) && (keyDown[keyMap['left']] || keyDown[keyMap['right']])){
 		spd = 0.5;
 	} else {
 		spd = 1;
-	}
+	}*/
 
 	y += ((-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false)) * spd;
 	x += ((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false)) * spd;
