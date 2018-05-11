@@ -51,11 +51,10 @@ in vec2 Tex;
 
 out vec4 outColour;
 
-uniform vec2 velocity;
 uniform sampler2D texImage;
 
 void main(){
-    outColour = texture(texImage, vec2(-Tex.x, Tex.y));
+    outColour = texture(texImage, Tex);
 }`;
 
 var canvas = document.getElementById("main");
