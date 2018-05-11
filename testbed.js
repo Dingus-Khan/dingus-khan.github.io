@@ -129,13 +129,13 @@ function translation(tx, ty){
 var val = 0.001;
 var x = 0, y = 0;
 
-var keyDown = {},
-		keyMap = {
-			'left': 37,
-			'up': 38,
-			'right': 39,
-			'down': 40
-		};
+var keyDown = {};
+var	keyMap = {
+	'left': 37,
+	'up': 38,
+	'right': 39,
+	'down': 40
+};
 
 document.addEventListener("keydown", function(e){
 	keyDown[e.which] = true;
@@ -151,22 +151,24 @@ var y = 0;
 var spd = 1;
 
 function run() {
-		y += ((-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false)) * spd;
-		x += ((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false)) * spd;
+	if ((keyDown[keyMap['up']] || keyDown[keyMap['down']]) && (keyDown[keyMap['left']] || keyDown[keyMap['right']])){
+		spd = 0.5;
+	} else {
+		spd = 1;
+	}
 
-		gl.clearColor(val, val, val, 1.0);
+	y += ((-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false)) * spd;
+	x += ((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false)) * spd;
+
+	gl.clearColor(val, val, val, 1.0);
 
     var texSize = gl.getUniformLocation(program, "texSize");
     gl.uniform2f(texSize, image.width, image.height);
 
-		var modelLoc = gl.getUniformLocation(program, "model");
-		gl.uniformMatrix4fv(modelLoc, false, translation(x, y));
+	var modelLoc = gl.getUniformLocation(program, "model");
+	gl.uniformMatrix4fv(modelLoc, false, translation(x, y));
 
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-		requestAnimationFrame(run);
+	requestAnimationFrame(run);
 }
-
-// Frame timer
-//https://hacks.mozilla.org/2011/08/animating-with-javascript-from-setinterval-to-requestanimationframe/
-//https://webglfundamentals.org/webgl/lessons/webgl-animation.html
