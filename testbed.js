@@ -60,10 +60,12 @@ void main(){
 function Sprite(x, y, w, h, tx, ty, tw, th, tex, texw, texh){
 	this.w = w;
 	this.h = h;
+	this.tex = {};
 	this.tex.x = tx;
 	thix.tex.y = ty;
 	this.tex.w = tw;
 	this.tex.h = th;
+	this.tex.texture = {};
 	this.tex.texture.id = tex;
 	this.tex.texture.w = texw;
 	this.tex.texture.h = texh;
@@ -72,6 +74,7 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texw, texh){
 	this.vao = gl.createVertexArray();
 	this.vbo = gl.createBuffer();
 	gl.bindVertexArray(this.vao);
+	gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 
 	var pos = gl.getAttribLocation(program, "pos");
 	gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 4 * 4, 0 * 4);
@@ -215,6 +218,8 @@ var spd = 1;
 
 gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
+var sprite = new Sprite(0, 0, 60, 60, 0, 0, 60, 60, texture, image.width, image.height);
+
 function run() {
 	/* uncomment this to clean up diagonal speed. I kinda like the fast diagonals.
 	if ((keyDown[keyMap['up']] || keyDown[keyMap['down']]) && (keyDown[keyMap['left']] || keyDown[keyMap['right']])){
@@ -231,5 +236,6 @@ function run() {
 	*/
 
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+	sprite.draw();
 	requestAnimationFrame(run);
 }
