@@ -137,6 +137,7 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texw, texh){
 		];
 	}
 
+	this.vel = {};
 	this.vel.x = 0;
 	this.vel.y = 0;
 
@@ -228,8 +229,8 @@ function run() {
 		spd = 1;
 	}*/
 
-	/*velY = ((-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false)) * spd;
-	velX = ((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false)) * spd;
+	/*(-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false);
+	(-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false).;*/
 
 	x += velX;
 	y += velY;
