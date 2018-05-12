@@ -223,20 +223,12 @@ function run() {
 		spd = 1;
 	}*/
 
-	velY = ((-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false)) * spd;
+	/*velY = ((-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false)) * spd;
 	velX = ((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false)) * spd;
 
 	x += velX;
 	y += velY;
-
-    var texSize = gl.getUniformLocation(program, "texSize");
-    gl.uniform2f(texSize, image.width, image.height);
-
-	var modelLoc = gl.getUniformLocation(program, "model");
-	gl.uniformMatrix4fv(modelLoc, false, translation(x, y));
-
-	var velocityLoc = gl.getUniformLocation(program, "velocity");
-	gl.uniform2f(velocityLoc, velX, velY);
+	*/
 
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
