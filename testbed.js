@@ -231,6 +231,5 @@ function run() {
 	*/
 
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 	requestAnimationFrame(run);
 }
