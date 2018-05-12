@@ -62,7 +62,7 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texw, texh){
 	this.h = h;
 	this.tex = {};
 	this.tex.x = tx;
-	thix.tex.y = ty;
+	this.tex.y = ty;
 	this.tex.w = tw;
 	this.tex.h = th;
 	this.tex.texture = {};
