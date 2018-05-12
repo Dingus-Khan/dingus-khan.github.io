@@ -40,7 +40,7 @@ uniform mat4 model;
 
 void main(){
     Tex = tex / texSize;
-    gl_Position = proj * model * vec4(pos, 0.0, 1.0);
+    gl_Position = proj * model * vec4(pos, -pos.y, 1.0);
 	gl_Position = vec4(gl_Position.x, gl_Position.y, gl_Position.z, gl_Position.w);
 }`;
 
