@@ -173,13 +173,6 @@ document.addEventListener("keyup", function(e){
 	keyDown[e.which] = false;
 });
 
-var vao = gl.createVertexArray();
-gl.bindVertexArray(vao);
-
-var vbo = gl.createBuffer();
-gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
-gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
-
 var vertex = System.buildShader(gl, gl.VERTEX_SHADER, vertexShader);
 var fragment = System.buildShader(gl, gl.FRAGMENT_SHADER, fragmentShader);
 var program = System.linkProgram(gl, vertex, fragment);
