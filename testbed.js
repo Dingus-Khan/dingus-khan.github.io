@@ -230,7 +230,7 @@ function run() {
 	}*/
 
 	/*(-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false);
-	(-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false).;*/
+	(-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false).;
 
 	x += velX;
 	y += velY;
