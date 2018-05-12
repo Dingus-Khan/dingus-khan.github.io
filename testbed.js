@@ -230,6 +230,7 @@ requestAnimationFrame(run);
 gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
 var sprite = new Sprite(0, 0, 60, 60, 0, 0, 60, 60, texture, image.width, image.height);
+var blockspr = new Sprite(0, 0, 128, 128, 0, 0, 64, 64, block, blockImg.width, blockImg.height);
 
 function run() {
 	sprite.setVelocity((-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false),
@@ -237,5 +238,6 @@ function run() {
 
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 	sprite.draw();
+	blockspr.draw();
 	requestAnimationFrame(run);
 }
