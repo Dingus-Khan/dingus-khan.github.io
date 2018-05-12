@@ -229,12 +229,8 @@ function run() {
 		spd = 1;
 	}*/
 
-	/*(-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false);
-	(-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false).;
-
-	x += velX;
-	y += velY;
-	*/
+	sprite.setVelocity((-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false),
+	(-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false));
 
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 	sprite.draw();
