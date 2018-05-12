@@ -219,8 +219,6 @@ var spd = 1;
 
 gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
-while(image.width === 0){}
-
 var sprite = new Sprite(0, 0, 60, 60, 0, 0, 60, 60, texture, image.width, image.height);
 
 function run() {
