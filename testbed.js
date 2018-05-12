@@ -57,15 +57,121 @@ void main(){
     outColour = texture(texImage, Tex);
 }`;
 
+function Sprite(x, y, w, h, tx, ty, tw, th, tex, texw, texh){
+	this.w = w;
+	this.h = h;
+	this.tex.x = tx;
+	thix.tex.y = ty;
+	this.tex.w = tw;
+	this.tex.h = th;
+	this.tex.texture.id = tex;
+	this.tex.texture.w = texw;
+	this.tex.texture.h = texh;
+	this.updateBuffer = true;
+
+	this.vao = gl.createVertexArray();
+	this.vbo = gl.createBuffer();
+	gl.bindVertexArray(this.vao);
+
+	var pos = gl.getAttribLocation(program, "pos");
+	gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 4 * 4, 0 * 4);
+	gl.enableVertexAttribArray(pos);
+
+	var tex = gl.getAttribLocation(program, "tex");
+	gl.vertexAttribPointer(tex, 2, gl.FLOAT, false, 4 * 4, 2 * 4);
+	gl.enableVertexAttribArray(tex);
+
+	this.build = function(){
+		gl.bindVertexArray(this.vao);
+		if (this.updateBuffer){
+			gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
+
+			var data = [
+				0.0, 0.0, this.tex.x, this.tex.y,
+				0.0, this.h, this.tex.x, this.tex.y + this.tex.h,
+				this.w, 0.0, this.tex.x + this.tex.w, this.tex.y,
+				this.w, this.h, this.tex.x + this.tex.w, this.tex.y + this.tex.h
+			];
+
+			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
+			this.updateBuffer = false;
+		}
+	}
+
+	this.draw = function(){
+		this.build();
+		gl.bindTexture(gl.TEXTURE_2D, this.tex.texture.id);
+
+		var texSize = gl.getUniformLocation(program, "texSize");
+		gl.uniform2f(texSize, this.tex.texture.w, this.tex.texture.h);
+
+		var modelLoc = gl.getUniformLocation(program, "model");
+		gl.uniformMatrix4fv(modelLoc, false, this.getModel());
+
+		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+	}
+
+	this.x = x;
+	this.y = y;
+
+	this.setPosition = function(x, y){
+		this.x = x;
+		this.y = y;
+		this.updateBuffer = true;
+	}
+
+	this.move = function(x, y){
+		this.x += x;
+		this.y += y;
+	}
+
+	this.getModel = function(){
+		return [
+			1, 0, 0, 0,
+			0, 1, 0, 0,
+			0, 0, 1, 0,
+			Math.round(this.x), Math.round(this.y), 0, 1
+		];
+	}
+
+	this.vel.x = 0;
+	this.vel.y = 0;
+
+	this.setVelocity = function(x, y){
+		this.vel.x = x;
+		this.vel.y = y;
+	}
+
+	this.update = function(){
+		this.move(this.vel.x, this.vel.y);
+		this.vel.x = 0;
+		this.vel.y = 0;
+	}
+}
+
 var canvas = document.getElementById("main");
 var gl = canvas.getContext("webgl2");
 
-var data = [
-    0.0, 0.0, 0.0, 0.0, // x, y, tX, tY
-    0.0, 60.0, 0.0, 60.0,
-    60.0, 0.0, 60.0, 0.0,
-    60.0, 60.0, 60.0, 60.0
-];
+gl.enable(gl.BLEND);
+gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+gl.enable(gl.DEPTH_TEST);
+gl.depthFunc(gl.LESS);
+
+var keyDown = {};
+var	keyMap = {
+	'left': 37,
+	'up': 38,
+	'right': 39,
+	'down': 40
+};
+
+document.addEventListener("keydown", function(e){
+	keyDown[e.which] = true;
+});
+document.addEventListener("keyup", function(e){
+	keyDown[e.which] = false;
+});
 
 var vao = gl.createVertexArray();
 gl.bindVertexArray(vao);
@@ -77,20 +183,6 @@ gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
 var vertex = System.buildShader(gl, gl.VERTEX_SHADER, vertexShader);
 var fragment = System.buildShader(gl, gl.FRAGMENT_SHADER, fragmentShader);
 var program = System.linkProgram(gl, vertex, fragment);
-
-var pos = gl.getAttribLocation(program, "pos");
-gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 4 * 4, 0 * 4);
-gl.enableVertexAttribArray(pos);
-
-var tex = gl.getAttribLocation(program, "tex");
-gl.vertexAttribPointer(tex, 2, gl.FLOAT, false, 4 * 4, 2 * 4);
-gl.enableVertexAttribArray(tex);
-
-gl.enable(gl.BLEND);
-gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-
-gl.enable(gl.DEPTH_TEST);
-gl.depthFunc(gl.LESS);
 
 var texture = gl.createTexture();
 
@@ -119,34 +211,6 @@ var proj = [
 
 var projLoc = gl.getUniformLocation(program, "proj");
 gl.uniformMatrix4fv(projLoc, false, proj);
-
-
-function translation(tx, ty){
-	return [
-		1, 0, 0, 0,
-		0, 1, 0, 0,
-		0, 0, 1, 0,
-		Math.round(tx), Math.round(ty), 0, 1
-	];
-}
-
-var val = 0.001;
-var x = 0, y = 0;
-
-var keyDown = {};
-var	keyMap = {
-	'left': 37,
-	'up': 38,
-	'right': 39,
-	'down': 40
-};
-
-document.addEventListener("keydown", function(e){
-	keyDown[e.which] = true;
-});
-document.addEventListener("keyup", function(e){
-	keyDown[e.which] = false;
-});
 
 requestAnimationFrame(run);
 
