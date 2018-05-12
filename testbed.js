@@ -197,6 +197,22 @@ image.onload = function(){
 }
 image.src = "test.png";
 
+var block = gl.createTexture();
+
+var blockImg = new Image();
+blockImg.onload = function(){
+	gl.bindTexture(gl.TEXTURE_2D, block);
+	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, blockImg);
+
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+
+	gl.generateMipmap(gl.TEXTURE_2D);
+}
+blockImg.src = "block.png";
+
 gl.useProgram(program);
 
 var proj = [
@@ -211,24 +227,11 @@ gl.uniformMatrix4fv(projLoc, false, proj);
 
 requestAnimationFrame(run);
 
-var x = 0;
-var y = 0;
-var velX = 0;
-var velY = 0;
-var spd = 1;
-
 gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
 var sprite = new Sprite(0, 0, 60, 60, 0, 0, 60, 60, texture, image.width, image.height);
 
 function run() {
-	/* uncomment this to clean up diagonal speed. I kinda like the fast diagonals.
-	if ((keyDown[keyMap['up']] || keyDown[keyMap['down']]) && (keyDown[keyMap['left']] || keyDown[keyMap['right']])){
-		spd = 0.5;
-	} else {
-		spd = 1;
-	}*/
-
 	sprite.setVelocity((-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false),
 	(-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false));
 
