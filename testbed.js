@@ -41,7 +41,7 @@ uniform mat4 model;
 void main(){
     Tex = tex / texSize;
     gl_Position = proj * model * vec4(pos, 0.0, 1.0);
-	gl_Position = vec4(gl_Position.x, gl_Position.y, gl_Position.y, gl_Position.w);
+	gl_Position = vec4(gl_Position.x, gl_Position.y, gl_Position.z, gl_Position.w);
 }`;
 
 var fragmentShader = `#version 300 es
