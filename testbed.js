@@ -60,7 +60,7 @@ void main(){
 function Sprite(x, y, w, h, tx, ty, tw, th, tex, texw, texh){
 	this.w = w;
 	this.h = h;
-	this.z = y;
+	this.z = -y;
 	this.tex = {};
 	this.tex.x = tx;
 	this.tex.y = ty;
@@ -124,14 +124,14 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texw, texh){
 	this.setPosition = function(x, y){
 		this.x = x;
 		this.y = y;
-		this.z = this.y;
+		this.z = -this.y;
 		this.updateBuffer = true;
 	}
 
 	this.move = function(x, y){
 		this.x += x;
 		this.y += y;
-		this.z = this.y;
+		this.z = -this.y;
 		this.updateBuffer = true;
 	}
 
