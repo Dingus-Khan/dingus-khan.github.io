@@ -240,6 +240,7 @@ var sprite = new Sprite(0, 0, 60, 60, 0, 0, 60, 60, texture, image.width, image.
 var blockspr = new Sprite(0, 0, 128, 128, 0, 0, 64, 64, block, blockImg.width, blockImg.height);
 
 function run() {
+	console.log(image.complete);
 	sprite.setVelocity((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false), (-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false));
 	sprite.update();
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
