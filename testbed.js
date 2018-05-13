@@ -57,7 +57,7 @@ void main(){
     outColour = texture(texImage, Tex);
 }`;
 
-function Sprite(x, y, w, h, tx, ty, tw, th, tex, texw, texh){
+function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 	this.w = w;
 	this.h = h;
 	this.z = -y;
@@ -68,8 +68,7 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texw, texh){
 	this.tex.h = th;
 	this.tex.texture = {};
 	this.tex.texture.id = tex;
-	this.tex.texture.w = texw;
-	this.tex.texture.h = texh;
+	this.tex.texture.image = texImage;
 	this.updateBuffer = true;
 
 	this.vao = gl.createVertexArray();
@@ -107,7 +106,7 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texw, texh){
 		gl.bindTexture(gl.TEXTURE_2D, this.tex.texture.id);
 
 		var texSize = gl.getUniformLocation(program, "texSize");
-		gl.uniform2f(texSize, this.tex.texture.w, this.tex.texture.h);
+		gl.uniform2f(texSize, this.tex.texture..image.width, this.tex.texture.image.height);
 
 		var zLoc = gl.getUniformLocation(program, "zOrder");
 		gl.uniform1f(zLoc, this.z);
