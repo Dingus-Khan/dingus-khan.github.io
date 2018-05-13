@@ -235,18 +235,10 @@ requestAnimationFrame(run);
 
 gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
-var sprite = new Sprite(0, 0, 0, 0, 0, 0, 0, 0, texture, image.width, image.height);
-var blockspr = new Sprite(0, 0, 0, 0, 0, 0, 0, 0, block, blockImg.width, blockImg.height);
+var sprite = new Sprite(0, 0, 0, 0, 0, 0, 0, 0, texture, image);
+var blockspr = new Sprite(0, 0, 0, 0, 0, 0, 0, 0, block, blockImg);
 
 function run() {
-	if (image.complete && sprite.tex.texture.w === 0){
-		sprite = new Sprite(0, 0, 60, 60, 0, 0, 60, 60, texture, image.width, image.height);
-	}
-
-	if (blockImg.complete && blockspr.tex.texture.w === 0){
-		blockspr = new Sprite(0, 0, 128, 128, 0, 0, 64, 64, block, blockImg.width, blockImg.height);
-	}
-
 	sprite.setVelocity((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false), (-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false));
 	sprite.update();
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
