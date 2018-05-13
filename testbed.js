@@ -106,7 +106,7 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 		gl.bindTexture(gl.TEXTURE_2D, this.tex.texture.id);
 
 		var texSize = gl.getUniformLocation(program, "texSize");
-		gl.uniform2f(texSize, this.tex.texture..image.width, this.tex.texture.image.height);
+		gl.uniform2f(texSize, this.tex.texture.image.width, this.tex.texture.image.height);
 
 		var zLoc = gl.getUniformLocation(program, "zOrder");
 		gl.uniform1f(zLoc, this.z);
