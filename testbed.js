@@ -157,6 +157,7 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 		this.vel.x = 0;
 		this.vel.y = 0;
 	}
+	return this;
 }
 
 var canvas = document.getElementById("main");
