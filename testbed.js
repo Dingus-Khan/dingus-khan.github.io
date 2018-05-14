@@ -295,8 +295,7 @@ function run() {
 	sprite.setVelocity((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false), (-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false));
 	sprite2.setVelocity((-keyDown[keyMap['a']] || false) + (keyDown[keyMap['d']] || false), (-keyDown[keyMap['w']] || false) + (keyDown[keyMap['s']] || false));
 
-	if ((Math.abs(sprite.collision.x - sprite2.collision.x) < sprite.collision.radius
-		|| Math.abs(sprite.collision.y - sprite2.collision.y) < sprite.collision.radius){
+	if ((Math.abs(sprite.collision.x - sprite2.collision.x) < sprite.collision.radius) || (Math.abs(sprite.collision.y - sprite2.collision.y) < sprite.collision.radius)){
 			var t = sprite.vel;
 			sprite.vel = sprite2.vel;
 			sprite2.vel = t;
