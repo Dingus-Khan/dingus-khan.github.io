@@ -172,7 +172,7 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 	}
 
 	this.update = function(){
-		if(vel.x + vel.y != 0){
+		if(this.vel.x + this.vel.y != 0){
 			this.anim = 1;
 		} else {
 			this.anim = 0;
