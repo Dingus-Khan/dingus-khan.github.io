@@ -205,7 +205,7 @@ var canvas = document.getElementById("main");
 var gl = canvas.getContext("webgl2");
 
 gl.enable(gl.BLEND);
-gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+gl.blendFunc(gl.ONE_MINUS_SRC_ALPHA, gl.SRC_ALPHA);
 
 gl.enable(gl.DEPTH_TEST);
 gl.depthFunc(gl.LESS);
