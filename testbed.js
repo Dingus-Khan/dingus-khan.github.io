@@ -197,15 +197,8 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 		this.move(this.vel.x, this.vel.y);
 		this.vel.x = 0;
 		this.vel.y = 0;
-
-		this.collision.x = x + (w / 2);
-		this.collision.y = y + (h / 2);
 	}
 
-	this.collision = {};
-	this.collision.x = x + (w / 2);
-	this.collision.y = y + (h / 2);
-	this.collision.radius = 60;
 	return this;
 }
 
