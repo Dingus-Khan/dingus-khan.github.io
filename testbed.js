@@ -146,7 +146,7 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 	this.tickCounter = 0;
 	this.anim = 0;
 	this.frame = 0;
-	this.frameSize = 60;
+	this.frameSize = tw;
 	this.animList = [];
 	this.animList[0] = {
 		start: 0,
