@@ -143,6 +143,25 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 		];
 	}
 
+	this.tickCounter = 0;
+	this.anim = 0;
+	this.frame = 0;
+	this.frameSize = 60;
+	this.animList = [];
+	this.animList[0] = {
+		start: 0,
+		end: 0,
+		y: 0,
+		t: 1
+	};
+
+	this.animList[0] = {
+		start: 0,
+		end: 1,
+		y: 0,
+		t: 30
+	};
+
 	this.vel = {};
 	this.vel.x = 0;
 	this.vel.y = 0;
@@ -153,6 +172,17 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 	}
 
 	this.update = function(){
+		this.tickCounter++;
+		if (this.tickCounter >= this.animList[this.anim].t){
+			this.frame++;
+			if (this.frame >= this.animList[this.anim].end){
+				this.frame = this.animList[this.anim].start;
+			}
+			this.tickCounter = 0;
+		}
+
+		this.tex.x = this.frame * this.frameSize;
+
 		this.move(this.vel.x, this.vel.y);
 
 		if (this.vel.x < 0 && this.tex.w > 0){
