@@ -181,7 +181,7 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 		this.tickCounter++;
 		if (this.tickCounter >= this.animList[this.anim].t){
 			this.frame++;
-			if (this.frame >= this.animList[this.anim].end){
+			if (this.frame > this.animList[this.anim].end){
 				this.frame = this.animList[this.anim].start;
 			}
 			this.tickCounter = 0;
