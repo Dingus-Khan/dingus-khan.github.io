@@ -37,11 +37,10 @@ out vec2 Tex;
 uniform vec2 texSize;
 uniform mat4 proj;
 uniform mat4 model;
-uniform float zOrder;
 
 void main(){
     Tex = tex / texSize;
-    gl_Position = proj * model * vec4(pos, zOrder, 1.0);
+    gl_Position = proj * model * vec4(pos, 0.0, 1.0);
 }`;
 
 var fragmentShader = `#version 300 es
@@ -108,9 +107,6 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 		var texSize = gl.getUniformLocation(program, "texSize");
 		gl.uniform2f(texSize, this.tex.texture.image.width, this.tex.texture.image.height);
 
-		var zLoc = gl.getUniformLocation(program, "zOrder");
-		gl.uniform1f(zLoc, this.z);
-
 		var modelLoc = gl.getUniformLocation(program, "model");
 		gl.uniformMatrix4fv(modelLoc, false, this.getModel());
 
@@ -123,14 +119,12 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 	this.setPosition = function(x, y){
 		this.x = x;
 		this.y = y;
-		this.z = -this.y;
 		this.updateBuffer = true;
 	}
 
 	this.move = function(x, y){
 		this.x += x;
 		this.y += y;
-		this.z = -this.y;
 		this.updateBuffer = true;
 	}
 
