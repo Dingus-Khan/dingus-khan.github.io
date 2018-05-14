@@ -152,14 +152,14 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 		start: 0,
 		end: 0,
 		y: 0,
-		t: 1
+		t: 0
 	};
 
 	this.animList[1] = {
 		start: 0,
 		end: 1,
 		y: 0,
-		t: 30
+		t: 5
 	};
 
 	this.vel = {};
