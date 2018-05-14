@@ -288,8 +288,8 @@ var spriteList = {
 	}
 };
 
-sprites[0] = sprite;
-sprites[1] = sprite2;
+spriteList.sprites[0] = sprite;
+spriteList.sprites[1] = sprite2;
 
 function run() {
 	sprite.setVelocity((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false), (-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false));
@@ -298,7 +298,6 @@ function run() {
 	sprite.update();
 	sprite2.update();
     gl.clear(gl.COLOR_BUFFER_BIT);
-	sprite.draw();
-	sprite2.draw();
+	spriteList.draw();
 	requestAnimationFrame(run);
 }
