@@ -192,7 +192,7 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 		this.move(this.vel.x, this.vel.y);
 
 		if (this.vel.x < 0 && this.tex.w > 0){
-			this.tex.x += this.tex.w;
+			this.tex.x += Math.abs(this.tex.w);
 			this.tex.w = -this.tex.w;
 		}
 
