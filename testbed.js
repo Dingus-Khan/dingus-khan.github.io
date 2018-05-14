@@ -188,6 +188,7 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 			this.tickCounter = 0;
 		}
 
+		this.dir = (this.vel.x == 0 ? this.dir : (this.vel.x > 0 ? 1 : -1));
 		this.tex.x = this.frame * this.frameSize + (this.dir > 0 ? this.frameSize : 0);
 		this.tex.w = this.frameSize * this.dir;
 
