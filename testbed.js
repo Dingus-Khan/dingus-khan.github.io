@@ -150,15 +150,15 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 	this.animList = [];
 	this.animList[0] = {
 		start: 0,
-		end: 0,
+		end: 5,
 		y: 0,
-		t: 0
+		t: 5
 	};
 
 	this.animList[1] = {
 		start: 0,
-		end: 1,
-		y: 0,
+		end: 5,
+		y: 1,
 		t: 5
 	};
 
@@ -190,6 +190,7 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 
 		this.dir = (this.vel.x == 0 ? this.dir : (this.vel.x > 0 ? 1 : -1));
 		this.tex.x = this.frame * this.frameSize + (this.dir < 0 ? this.frameSize : 0);
+		this.tex.y = this.animList[this.anim].y * this.frameSize;
 		this.tex.w = this.frameSize * this.dir;
 
 		this.move(this.vel.x, this.vel.y);
