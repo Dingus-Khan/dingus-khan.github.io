@@ -197,7 +197,15 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 		this.move(this.vel.x, this.vel.y);
 		this.vel.x = 0;
 		this.vel.y = 0;
+
+		this.collision.x = x + (w / 2);
+		this.collision.y = y + (h / 2);
 	}
+
+	this.collision = {};
+	this.collision.x = x + (w / 2);
+	this.collision.y = y + (h / 2);
+	this.collision.radius = 60;
 	return this;
 }
 
@@ -286,6 +294,14 @@ var sprite2 = new Sprite(300, 200, 60, 60, 0, 0, 120, 120, texture, image);
 function run() {
 	sprite.setVelocity((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false), (-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false));
 	sprite2.setVelocity((-keyDown[keyMap['a']] || false) + (keyDown[keyMap['d']] || false), (-keyDown[keyMap['w']] || false) + (keyDown[keyMap['s']] || false));
+
+	if ((Math.abs(sprite.collision.x - sprite2.collision.x) < sprite.collision.radius
+		|| Math.abs(sprite.collision.y - sprite2.collision.y) < sprite.collision.radius){
+			var t = sprite.vel;
+			sprite.vel = sprite2.vel;
+			sprite2.vel = t;
+		}
+
 	sprite.update();
 	sprite2.update();
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
