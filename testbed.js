@@ -214,7 +214,11 @@ var	keyMap = {
 	'left': 37,
 	'up': 38,
 	'right': 39,
-	'down': 40
+	'down': 40,
+	'a': 65,
+	'd': 68,
+	's': 83,
+	'w': 87
 };
 
 document.addEventListener("keydown", function(e){
@@ -281,6 +285,7 @@ var sprite2 = new Sprite(0, 0, 60, 60, 0, 0, 120, 120, texture, image);
 
 function run() {
 	sprite.setVelocity((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false), (-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false));
+	sprite2.setVelocity((-keyDown[keyMap['a']] || false) + (keyDown[keyMap['d']] || false), (-keyDown[keyMap['w']] || false) + (keyDown[keyMap['s']] || false));
 	sprite.update();
 	sprite2.update();
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
