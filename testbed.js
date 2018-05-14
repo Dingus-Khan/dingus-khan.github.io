@@ -165,11 +165,13 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 	this.vel = {};
 	this.vel.x = 0;
 	this.vel.y = 0;
+	this.spd = 2;
 	this.dir = 1; // 1 == right, -1 == left
 
 	this.setVelocity = function(x, y){
-		this.vel.x = x;
-		this.vel.y = y;
+		this.vel.x = x * this.spd;
+		this.vel.y = y * this.spd;
+		this.dir = (this.vel.x == 0 ? this.dir : (this.vel.x > 0 ? 1 : -1));
 	}
 
 	this.update = function(){
@@ -188,7 +190,6 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 			this.tickCounter = 0;
 		}
 
-		this.dir = (this.vel.x == 0 ? this.dir : (this.vel.x > 0 ? 1 : -1));
 		this.tex.x = this.frame * this.frameSize + (this.dir < 0 ? this.frameSize : 0);
 		this.tex.y = this.animList[this.anim].y * this.frameSize;
 		this.tex.w = this.frameSize * this.dir;
