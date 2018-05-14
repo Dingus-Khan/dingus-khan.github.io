@@ -154,6 +154,12 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 
 	this.update = function(){
 		this.move(this.vel.x, this.vel.y);
+
+		if (this.vel.x < 0){
+			this.tex.x += this.tex.w;
+			this.tex.w = -this.tex.w;
+		}
+
 		this.vel.x = 0;
 		this.vel.y = 0;
 	}
