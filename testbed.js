@@ -202,8 +202,6 @@ var gl = canvas.getContext("webgl2");
 gl.enable(gl.BLEND);
 gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-gl.enable(gl.DEPTH_TEST);
-
 var keyDown = {};
 var	keyMap = {
 	'left': 37,
@@ -284,7 +282,7 @@ function run() {
 
 	sprite.update();
 	sprite2.update();
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.clear(gl.COLOR_BUFFER_BIT);
 	sprite.draw();
 	sprite2.draw();
 	requestAnimationFrame(run);
