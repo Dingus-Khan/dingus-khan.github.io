@@ -280,8 +280,7 @@ var spriteList = {
 	sprites: [],
 	sort: function(){
 		sprites.sort(function(a, b){ return a.y < b.y; });
-	}
-
+	},
 	draw: function(){
 		for(i = 0; i < sprites.length; i++){
 			sprites[i].draw();
