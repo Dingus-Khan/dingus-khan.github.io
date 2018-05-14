@@ -276,6 +276,22 @@ gl.clearColor(0.1, 0.1, 0.1, 1.0);
 var sprite = new Sprite(300, 200, 120, 120, 0, 0, 120, 120, texture, image);
 var sprite2 = new Sprite(0, 0, 60, 60, 0, 0, 120, 120, texture, image);
 
+var spriteList = {
+	sprites: [],
+	sort: function(){
+		sprites.sort(function(a, b){ return a.y < b.y; });
+	}
+
+	draw: function(){
+		for(i = 0; i < sprites.length; i++){
+			sprites[i].draw();
+		}
+	}
+};
+
+sprites[0] = sprite;
+sprites[1] = sprite2;
+
 function run() {
 	sprite.setVelocity((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false), (-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false));
 	sprite2.setVelocity((-keyDown[keyMap['a']] || false) + (keyDown[keyMap['d']] || false), (-keyDown[keyMap['w']] || false) + (keyDown[keyMap['s']] || false));
