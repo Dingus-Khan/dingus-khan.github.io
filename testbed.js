@@ -195,11 +195,12 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 
 		if (this.vel.x < 0){
 			this.tex.x += Math.abs(this.tex.w);
-			if (this.tex.w > 0)
-				this.tex.w = -this.tex.w;
 		} else if (this.vel.x > 0 && this.tex.w < 0){
-			this.tex.w = -this.tex.w;
 			this.tex.x -= this.tex.w;
+		}
+
+		if (this.vel.x != 0){
+			this.tex.w = this.frameSize * this.vel.x;
 		}
 
 		this.vel.x = 0;
