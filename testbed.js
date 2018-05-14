@@ -155,7 +155,7 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 		t: 1
 	};
 
-	this.animList[0] = {
+	this.animList[1] = {
 		start: 0,
 		end: 1,
 		y: 0,
@@ -172,6 +172,12 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 	}
 
 	this.update = function(){
+		if(vel.x + vel.y != 0){
+			this.anim = 1;
+		} else {
+			this.anim = 0;
+		}
+
 		this.tickCounter++;
 		if (this.tickCounter >= this.animList[this.anim].t){
 			this.frame++;
