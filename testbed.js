@@ -264,8 +264,8 @@ gl.useProgram(program);
 var proj = [
     2 / 800, 0, 0, 0,
     0, -2 / 600, 0, 0,
-    0, 0, 2 / 600, 0,
-    -1, 1, 0, 1
+    0, 0, 2 / 1200, 0,
+    -1, 1, 0.5, 1
 ];
 
 var projLoc = gl.getUniformLocation(program, "proj");
