@@ -300,8 +300,8 @@ var spriteList = {
 };
 
 function checkCollision(a, b){
-	var c1 = {r: a.w / 2, x: a.x + (a.w / 2) + a.vel.x, y: a.y + (a.h / 2) + a.vel.y};
-	var c2 = {r: b.w / 2, x: b.x + (b.w / 2) + b.vel.x, y: b.y + (b.h / 2) + b.vel.y};
+	var c1 = {r: a.w / 3, x: a.x + (a.w / 2) + a.vel.x, y: a.y + (a.h / 1.5) + a.vel.y};
+	var c2 = {r: b.w / 3, x: b.x + (b.w / 2) + b.vel.x, y: b.y + (b.h / 1.5) + b.vel.y};
 	var dx = c1.x - c2.x;
 	var dy = c1.y - c2.y;
 	var dist = Math.sqrt(dx * dx + dy * dy);
