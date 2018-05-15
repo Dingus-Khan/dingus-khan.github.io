@@ -296,7 +296,7 @@ function checkCollision(a, b){
 	var dy = c1.y - c2.y;
 	var dist = Math.sqrt(dx * dx + dy * dy);
 	if (dist < c1.r + c2.r){
-		return true;
+		return {x: dx, y: dy};
 	} else {
 		return false;
 	}
