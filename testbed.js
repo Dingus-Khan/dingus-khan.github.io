@@ -282,6 +282,7 @@ var spriteList = {
 		this.sprites.sort(function(a, b){ return a.y + a.h < b.y + b.h; });
 	},
 	draw: function(){
+		this.sort();
 		for(i = 0; i < this.sprites.length; i++){
 			this.sprites[i].draw();
 		}
