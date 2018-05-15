@@ -202,33 +202,45 @@ var gl = canvas.getContext("webgl2");
 gl.enable(gl.BLEND);
 gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-var keyDown = {};
-var	keyMap = {
-	'left': 37,
-	'up': 38,
-	'right': 39,
-	'down': 40,
-	'space': 32,
-	'a': 65,
-	'd': 68,
-	's': 83,
-	'w': 87
+var Keyboard = {
+	keyDown: {},
+	keyMap: {},
+	registerKey: function(key, code){
+		this.keyMap[key] = code;
+		this.keyDown[this.keyMap[key]] = false;
+	},
+	getKey: function(key){
+		return this.keyDown[this.keyMap[key]];
+	}
 };
-var mousePos = {
-	x: 0,
-	y: 0
-};
+
+Keyboard.registerKey('left', 37);
+Keyboard.registerKey('up', 38);
+Keyboard.registerKey('right', 39);
+Keyboard.registerKey('down', 40);
+Keyboard.registerKey('space', 32);
+Keyboard.registerKey('a', 65);
+Keyboard.registerKey('d', 68);
+Keyboard.registerKey('s', 83);
+Keyboard.registerKey('w', 87);
 
 document.addEventListener("keydown", function(e){
-	keyDown[e.which] = true;
+	Keyboard.keyDown[e.which] = true;
 });
 document.addEventListener("keyup", function(e){
-	keyDown[e.which] = false;
+	Keyboard.keyDown[e.which] = false;
 });
 
+var Mouse = {
+	x: 0,
+	y: 0,
+	b1: false,
+	b2: false
+};
+
 document.addEventListener("mousemove", function(e){
-	mousePos.x = e.clientX;
-	mousePos.y = e.clientY;
+	Mouse.x = e.clientX;
+	Mouse.y = e.clientY;
 });
 
 var vertex = System.buildShader(gl, gl.VERTEX_SHADER, vertexShader);
@@ -316,8 +328,8 @@ spriteList.sprites[0] = sprite;
 spriteList.sprites[1] = sprite2;
 
 function run() {
-	sprite.setVelocity((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false), (-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false));
-	sprite2.setVelocity((-keyDown[keyMap['a']] || false) + (keyDown[keyMap['d']] || false), (-keyDown[keyMap['w']] || false) + (keyDown[keyMap['s']] || false));
+	sprite.setVelocity((-Keyboard.getKey('left') || false) + (Keyboard.getKey('right') || false), (-Keyboard.getKey('up') || false) + (Keyboard.getKey('down') || false));
+	sprite2.setVelocity((-Keyboard.getKey('a') || false) + (Keyboard.getKey('d') || false), (-Keyboard.getKey('w') || false) + (Keyboard.getKey('s') || false));
 
 	if (checkCollision(sprite, sprite2)){
 		//sprite.setVelocity(0, 0);
