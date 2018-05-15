@@ -279,7 +279,7 @@ var sprite2 = new Sprite(0, 0, 60, 60, 0, 0, 120, 120, texture, image);
 var spriteList = {
 	sprites: [],
 	sort: function(){
-		this.sprites.sort(function(a, b){ return a.y < b.y; });
+		this.sprites.sort(function(a, b){ return a.y + a.h < b.y + b.h; });
 	},
 	draw: function(){
 		for(i = 0; i < this.sprites.length; i++){
