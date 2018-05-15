@@ -215,8 +215,8 @@ var	keyMap = {
 	'w': 87
 };
 var mousePos = {
-	x: 0;
-	y: 0;
+	x: 0,
+	y: 0
 };
 
 document.addEventListener("keydown", function(e){
