@@ -310,8 +310,8 @@ function run() {
 	sprite2.setVelocity((-keyDown[keyMap['a']] || false) + (keyDown[keyMap['d']] || false), (-keyDown[keyMap['w']] || false) + (keyDown[keyMap['s']] || false));
 
 	if (checkCollision(sprite, sprite2)){
-		sprite.setVelocity(-sprite.vel.x, -sprite.vel.y);
-		sprite2.setVelocity(-sprite2.vel.x, -sprite2.vel.y);
+		sprite.setVelocity(0, 0);
+		sprite2.setVelocity(0, 0);
 	}
 
 	sprite.update();
