@@ -324,7 +324,10 @@ function run() {
 		sprite2.setVelocity(0, 0);
 	}
 
-	sprite.dir = mousePos.x > sprite.x ? 1 : -1;
+	if (mousePos.x > sprite.x + sprite.w)
+		sprite.dir = 1;
+	else if (mousePos.x < sprite.x)
+		sprite.dir = -1;
 
 	sprite.update();
 	sprite2.update();
