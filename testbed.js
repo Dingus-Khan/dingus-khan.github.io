@@ -289,6 +289,15 @@ var spriteList = {
 	}
 };
 
+function checkCollision(a, b){
+	var c1 = {r: a.w / 2, x: a.x + (a.w / 2), y: a.y + (a.h / 2)};
+	var c2 = {r: b.w / 2, x: b.x + (b.w / 2), y: b.y + (b.h / 2)};
+	var dx = c1.x - c2.x;
+	var dy = c1.y - c2.y;
+	var dist = Math.sqrt(dx * dx + dy * dy);
+	return dist < c1.r + c2.r;
+}
+
 spriteList.sprites[0] = sprite;
 spriteList.sprites[1] = sprite2;
 
