@@ -214,12 +214,21 @@ var	keyMap = {
 	's': 83,
 	'w': 87
 };
+var mousePos = {
+	x: 0;
+	y: 0;
+};
 
 document.addEventListener("keydown", function(e){
 	keyDown[e.which] = true;
 });
 document.addEventListener("keyup", function(e){
 	keyDown[e.which] = false;
+});
+
+document.addEventListener("mousemove", function(e){
+	mousePos.x = e.clientX;
+	mousePos.y = e.clientY;
 });
 
 var vertex = System.buildShader(gl, gl.VERTEX_SHADER, vertexShader);
@@ -314,6 +323,8 @@ function run() {
 		sprite.setVelocity(0, 0);
 		sprite2.setVelocity(0, 0);
 	}
+
+	sprite.dir = mousePos.x > sprite.x ? 1 : -1;
 
 	sprite.update();
 	sprite2.update();
