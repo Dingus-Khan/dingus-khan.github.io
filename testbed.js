@@ -296,7 +296,7 @@ function checkCollision(a, b){
 	var dy = c1.y - c2.y;
 	var dist = Math.sqrt(dx * dx + dy * dy);
 	if (dist < c1.r + c2.r){
-		return {x: dx, y: dy};
+		return true;
 	} else {
 		return false;
 	}
@@ -308,6 +308,11 @@ spriteList.sprites[1] = sprite2;
 function run() {
 	sprite.setVelocity((-keyDown[keyMap['left']] || false) + (keyDown[keyMap['right']] || false), (-keyDown[keyMap['up']] || false) + (keyDown[keyMap['down']] || false));
 	sprite2.setVelocity((-keyDown[keyMap['a']] || false) + (keyDown[keyMap['d']] || false), (-keyDown[keyMap['w']] || false) + (keyDown[keyMap['s']] || false));
+
+	if (checkCollision(sprite, sprite2)){
+		sprite.setVelocity(-sprite.vel.x, -sprite.vel.y);
+		sprite2.setVelocity(-sprite2.vel.x, -sprite2.vel.y);
+	}
 
 	sprite.update();
 	sprite2.update();
