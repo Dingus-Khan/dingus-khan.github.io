@@ -208,6 +208,7 @@ var	keyMap = {
 	'up': 38,
 	'right': 39,
 	'down': 40,
+	'space': 32,
 	'a': 65,
 	'd': 68,
 	's': 83,
