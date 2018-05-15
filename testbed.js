@@ -295,7 +295,11 @@ function checkCollision(a, b){
 	var dx = c1.x - c2.x;
 	var dy = c1.y - c2.y;
 	var dist = Math.sqrt(dx * dx + dy * dy);
-	return dist < c1.r + c2.r;
+	if (dist < c1.r + c2.r){
+		return true;
+	} else {
+		return false;
+	}
 }
 
 spriteList.sprites[0] = sprite;
