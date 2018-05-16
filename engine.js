@@ -296,8 +296,8 @@ var TileBatch = {
 	},
 	draw: function(){
 		if (this.tileData.length > 0){
+			gl.bindVertexArray(this.vao);
 			gl.bindTexture(gl.TEXTURE_2D, this.tex.texture.id);
-
 
 			var texSize = gl.getUniformLocation(program, "texSize");
 			gl.uniform2f(texSize, this.tex.image.width, this.tex.image.height);
