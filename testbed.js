@@ -94,8 +94,6 @@ function run() {
 	tile.y = Mouse.y - Mouse.y % gridFactorY;
 	sprite.w = tile.w;
 	sprite.h = tile.h;
-	sprite.tex.w = tile.w;
-	sprite.tex.h = tile.h;
 	sprite.updateBuffer = true;
 	sprite.setPosition(tile.x, tile.y);
 
