@@ -243,6 +243,18 @@ document.addEventListener("mousemove", function(e){
 	Mouse.y = e.clientY;
 });
 
+document.addEventListener("mousedown", function(e){
+
+});
+
+document.addEventListener("mousedown", function(e){
+	
+});
+
+canvas.addEventListener("contextmenu", function(e){
+	e.preventDefault();
+})
+
 var vertex = System.buildShader(gl, gl.VERTEX_SHADER, vertexShader);
 var fragment = System.buildShader(gl, gl.FRAGMENT_SHADER, fragmentShader);
 var program = System.linkProgram(gl, vertex, fragment);
