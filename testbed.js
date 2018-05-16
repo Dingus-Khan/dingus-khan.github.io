@@ -77,6 +77,9 @@ function checkCollision(a, b){
 spriteList.sprites[0] = sprite;
 spriteList.sprites[1] = sprite2;
 
+var tileSet = new Texture("tileset.png");
+TileBatch.init(tileSet);
+
 function run() {
 	sprite.setVelocity((-Keyboard.getKey('left') || false) + (Keyboard.getKey('right') || false), (-Keyboard.getKey('up') || false) + (Keyboard.getKey('down') || false));
 	sprite2.setVelocity((-Keyboard.getKey('a') || false) + (Keyboard.getKey('d') || false), (-Keyboard.getKey('w') || false) + (Keyboard.getKey('s') || false));
@@ -94,6 +97,7 @@ function run() {
 	sprite.update();
 	sprite2.update();
     gl.clear(gl.COLOR_BUFFER_BIT);
+	TileBatch.draw();
 	spriteList.draw();
 	requestAnimationFrame(run);
 }
