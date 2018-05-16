@@ -234,8 +234,8 @@ document.addEventListener("keyup", function(e){
 var Mouse = {
 	x: 0,
 	y: 0,
-	b1: false,
-	b2: false
+	left: false,
+	right: false
 };
 
 document.addEventListener("mousemove", function(e){
@@ -243,12 +243,26 @@ document.addEventListener("mousemove", function(e){
 	Mouse.y = e.clientY;
 });
 
-document.addEventListener("mousedown", function(e){
-
+canvas.addEventListener("mousedown", function(e){
+	switch(e.button){
+		case 0:
+			Mouse.left = true;
+			break;
+		case 1:
+			Mouse.right = true;
+			break;
+	}
 });
 
-document.addEventListener("mousedown", function(e){
-	
+canvas.addEventListener("mouseup", function(e){
+	switch(e.button){
+		case 0:
+			Mouse.left = false;
+			break;
+		case 1:
+			Mouse.right = false;
+			break;
+	}
 });
 
 canvas.addEventListener("contextmenu", function(e){
