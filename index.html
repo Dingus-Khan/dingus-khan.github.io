@@ -19,7 +19,10 @@
 			Cell W: <br>
 			<input type="number" id="GridX" onchange="gridFactorX = parseInt(this.value)" min="1" value="100" disabled><br>
 			Cell H: <br>
-			<input type="number" id="GridY" onchange="gridFactorY = parseInt(this.value)" min="1" value="100" disabled><br>
+			<input type="number" id="GridY" onchange="gridFactorY = parseInt(this.value)" min="1" value="100" disabled><br><br>
+
+			<input type="button" onclick="TileBatch.undo()" value="Undo Last Tile" /><br>
+			<input type="button" onclick="if(alert('Are you sure?')) { TileBatch.undo() }" value="Clear All Tiles" />
 		</div>
 		<canvas id="main" width="800" height="600">
 		</canvas>
