@@ -122,6 +122,14 @@ function run() {
 		tile.y = Mouse.y - Mouse.y % tile.th;
 		selectionSprite.x = tile.x;
 		selectionSprite.y = tile.y;
+
+		if(Mouse.left){
+			tile.tx = tile.x;
+			tile.ty = tile.y;
+			showOverlay = !showOverlay;
+			Mouse.left = false;
+		}
+
 		tileSetOverlay.draw();
 		selectionSprite.draw();
 	}
