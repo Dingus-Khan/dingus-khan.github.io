@@ -92,7 +92,7 @@ var gridFactorY = 1;
 var showOverlay = false;
 
 var selectionTex = new Texture("selection.png");
-var tileSetOverlay = new Sprite(0, 0, tileSet.image.width, tileSet.image.height, 0, 0, tileSet.image.width, tileSet.iamge.height, tileSet);
+var tileSetOverlay = new Sprite(0, 0, tileSet.image.width, tileSet.image.height, 0, 0, tileSet.image.width, tileSet.image.height, tileSet);
 var selectionSprite = new Sprite(tile.tx, tile.ty, tile.tw, tile.th, tile.tx, tile.ty, tile.tw, tile.th, tileSet);
 
 function run() {
