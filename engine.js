@@ -295,15 +295,18 @@ var TileBatch = {
 		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.tileData), gl.STATIC_DRAW);
 	},
 	draw: function(){
-		gl.bindTexture(gl.TEXTURE_2D, this.tex.texture.id);
+		if (this.tileData.length > 0){
+			gl.bindTexture(gl.TEXTURE_2D, this.tex.texture.id);
 
-		var texSize = gl.getUniformLocation(program, "texSize");
-		gl.uniform2f(texSize, this.tex.texture.image.width, this.tex.texture.image.height);
 
-		var modelLoc = gl.getUniformLocation(program, "model");
-		gl.uniformMatrix4fv(modelLoc, false, [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
+			var texSize = gl.getUniformLocation(program, "texSize");
+			gl.uniform2f(texSize, this.tex.image.width, this.tex.image.height);
 
-		gl.drawArrays(gl.TRIANGLES, 0, this.tileData.length / 4);
+			var modelLoc = gl.getUniformLocation(program, "model");
+			gl.uniformMatrix4fv(modelLoc, false, [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
+
+			gl.drawArrays(gl.TRIANGLES, 0, this.tileData.length / 4);
+		}
 	}
 };
 
