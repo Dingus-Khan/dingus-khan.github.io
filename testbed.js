@@ -73,6 +73,7 @@ var tileSet = new Texture("tileset.png");
 TileBatch.init(tileSet);
 
 var sprite = new Sprite(0, 0, tile.w, tile.h, 0, 0, tile.w, tile.h, tileSet);
+spriteList[0] = sprite;
 
 var tile = {
 	x: 0,
