@@ -43,6 +43,7 @@ var Keyboard = {
 document.addEventListener("keydown", function(e){
 	Keyboard.keyDown[e.which] = true;
 });
+
 document.addEventListener("keyup", function(e){
 	Keyboard.keyDown[e.which] = false;
 });
@@ -85,7 +86,7 @@ canvas.addEventListener("contextmenu", function(e){
 	e.preventDefault();
 });
 
-function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
+function Sprite(x, y, w, h, tx, ty, tw, th, texture){
 	this.w = w;
 	this.h = h;
 	this.z = -y;
@@ -95,8 +96,8 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 	this.tex.w = tw;
 	this.tex.h = th;
 	this.tex.texture = {};
-	this.tex.texture.id = tex;
-	this.tex.texture.image = texImage;
+	this.tex.texture.id = texture.texture;
+	this.tex.texture.image = texture.image;
 	this.updateBuffer = true;
 
 	this.vao = gl.createVertexArray();
@@ -237,6 +238,24 @@ var spriteList = {
 		}
 	}
 };
+
+function Texture(src){
+	this.texture = gl.createTexture();
+	this.image = new Image();
+
+	this.image.onload = function(){
+		gl.bindTexture(gl.TEXTURE_2D, this.texture);
+		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.image);
+
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+
+		gl.generateMipmap(gl.TEXTURE_2D);
+	};
+	this.image.src = src;
+}
 
 var canvas = document.getElementById("main");
 var gl = canvas.getContext("webgl2");
