@@ -75,8 +75,8 @@ TileBatch.init(tileSet);
 var tile = {
 	x: 0,
 	y: 0,
-	width: 0,
-	height: 0
+	w: 0,
+	h: 0
 };
 
 var sprite = new Sprite(0, 0, tile.w, tile.h, 0, 0, tile.w, tile.h, tileSet);
