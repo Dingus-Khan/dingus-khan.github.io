@@ -72,6 +72,8 @@ function checkCollision(a, b){
 var tileSet = new Texture("tileset.png");
 TileBatch.init(tileSet);
 
+var sprite = new Sprite(0, 0, tile.w, tile.h, 0, 0, tile.w, tile.h, tileSet);
+
 var tile = {
 	x: 0,
 	y: 0,
