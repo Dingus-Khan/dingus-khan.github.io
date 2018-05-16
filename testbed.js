@@ -84,10 +84,12 @@ spriteList.sprites[0] = sprite;
 
 
 function run() {
+	tile.x = Mouse.x - Mouse.x % 100;
+	tile.y = Mouse.y - Mouse.y % 100
 	sprite.w = tile.w;
 	sprite.h = tile.h;
 	sprite.updateBuffer = true;
-	sprite.setPosition(Mouse.x - Mouse.x % 100, Mouse.y - Mouse.y % 100);
+	sprite.setPosition(tile.x, tile.y);
 
 	if(Mouse.left){
 		TileBatch.addTile(tile.x, tile.y, tile.w, tile.h, 0, 0, tile.w, tile.h);
