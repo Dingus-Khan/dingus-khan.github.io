@@ -76,7 +76,11 @@ var tile = {
 	x: 0,
 	y: 0,
 	w: 100,
-	h: 100
+	h: 100,
+	tx: 0,
+	ty: 0,
+	tw: 100,
+	th: 100
 };
 
 var sprite = new Sprite(0, 0, tile.w, tile.h, 0, 0, tile.w, tile.h, tileSet);
@@ -96,7 +100,7 @@ function run() {
 	sprite.setPosition(tile.x, tile.y);
 
 	if(Mouse.left){
-		TileBatch.addTile(tile.x, tile.y, tile.w, tile.h, 0, 0, tile.w, tile.h);
+		TileBatch.addTile(tile.x, tile.y, tile.w, tile.h, tile.tx, tile.ty, tile.tw, tile.th);
 		Mouse.left = false;
 	}
 
