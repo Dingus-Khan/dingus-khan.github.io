@@ -230,3 +230,16 @@ function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 
 	return this;
 }
+
+var spriteList = {
+	sprites: [],
+	sort: function(){
+		this.sprites.sort(function(a, b){ return a.y + a.h > b.y + b.h; });
+	},
+	draw: function(){
+		this.sort();
+		for(i = 0; i < this.sprites.length; i++){
+			this.sprites[i].draw();
+		}
+	}
+};
