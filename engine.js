@@ -21,182 +21,212 @@ var System = {
 		var success = gl.getProgramParameter(program, gl.LINK_STATUS);
 		if (success){
 			return program;
-		}	
+		}
 
 		console.log(gl.getProgramInfoLog(program));
 		gl.deleteProgram(program);
 	}
 };
 
-function Shader(vertex, fragment){
-	var gl = Game.gl;
-	vertexShader = System.buildShader(gl, gl.VERTEX_SHADER, vertex);
-	fragmentShader = System.buildShader(gl, gl.FRAGMENT_SHADER, fragment);
-	this.program = System.linkProgram(gl, vertexShader, fragmentShader);
+var canvas = document.getElementById("main");
+var gl = canvas.getContext("webgl2");
 
-	this.setUniformv1 = function(uniform, value){
-		var gl = Game.gl;
-		gl.useProgram(this.program);
+gl.enable(gl.BLEND);
+gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-		var uniLoc = gl.getUniformLocation(this.program, uniform);
-		gl.uniform1f(uniLoc, value);
-	}
-	this.setUniformv2 = function(uniform, value1, value2){
-		var gl = Game.gl;
-		gl.useProgram(this.program);
-
-		var uniLoc = gl.getUniformLocation(this.program, uniform);
-		gl.uniform2f(uniLoc, value1, value2);
-	}
-	this.setUniformv3 = function(uniform, value1, value2, value3){
-		var gl = Game.gl;
-		gl.useProgram(this.program);
-
-		var uniLoc = gl.getUniformLocation(this.program, uniform);
-		gl.uniform3f(uniLoc, value1, value2, value3);
-	}
-	this.setUniformv4 = function(uniform, value1, value2, value3, value4){
-		var gl = Game.gl;
-		gl.useProgram(this.program);
-
-		var uniLoc = gl.getUniformLocation(this.program, uniform);
-		gl.uniform4f(uniLoc, value1, value2, value3, value4);
-	}
-	this.setUniformm4 = function(uniform, value){
-		var gl = Game.gl;
-		gl.useProgram(this.program);
-
-		var uniLoc = gl.getUniformLocation(this.program, uniform);
-		gl.uniformMatrix4fv(uniLoc, false, value);
+var Keyboard = {
+	keyDown: {},
+	keyMap: {},
+	registerKey: function(key, code){
+		this.keyMap[key] = code;
+		this.keyDown[this.keyMap[key]] = false;
+	},
+	getKey: function(key){
+		return this.keyDown[this.keyMap[key]];
 	}
 };
 
-function Point(x, y, z, r, g, b, texX, texY) {
-	this.x = x;
-	this.y = y;
-	this.z = z;
-	this.r = r;
-	this.g = g;
-	this.b = b;
-	this.tX = texX;
-	this.tY = texY;
+document.addEventListener("keydown", function(e){
+	Keyboard.keyDown[e.which] = true;
+});
+document.addEventListener("keyup", function(e){
+	Keyboard.keyDown[e.which] = false;
+});
+
+var Mouse = {
+	x: 0,
+	y: 0,
+	left: false,
+	right: false
 };
 
-function Texture(src) {
-	var gl = Game.gl;
+document.addEventListener("mousemove", function(e){
+	Mouse.x = e.clientX;
+	Mouse.y = e.clientY;
+});
 
-	this.textureId = gl.createTexture();
-	this.image = new Image();
-	this.image.textureId = this.textureId;
-
-	this.image.onload = function(){
-		gl.bindTexture(gl.TEXTURE_2D, this.textureId);
-		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this);
-
-		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
-		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
-		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-		gl.generateMipmap(gl.TEXTURE_2D);
+canvas.addEventListener("mousedown", function(e){
+	switch(e.button){
+		case 0:
+			Mouse.left = true;
+			break;
+		case 1:
+			Mouse.right = true;
+			break;
 	}
-	this.image.src = src;
-};
+});
 
-function Sprite(texture, w, h, tx, ty, tw, th){
-	var gl = Game.gl;
+canvas.addEventListener("mouseup", function(e){
+	switch(e.button){
+		case 0:
+			Mouse.left = false;
+			break;
+		case 1:
+			Mouse.right = false;
+			break;
+	}
+});
 
-	this.texture = texture;
+canvas.addEventListener("contextmenu", function(e){
+	e.preventDefault();
+});
+
+function Sprite(x, y, w, h, tx, ty, tw, th, tex, texImage){
 	this.w = w;
 	this.h = h;
-	this.tX = tx;
-	this.tY = ty;
-	this.tW = tw;
-	this.tH = th;
+	this.z = -y;
+	this.tex = {};
+	this.tex.x = tx;
+	this.tex.y = ty;
+	this.tex.w = tw;
+	this.tex.h = th;
+	this.tex.texture = {};
+	this.tex.texture.id = tex;
+	this.tex.texture.image = texImage;
+	this.updateBuffer = true;
 
 	this.vao = gl.createVertexArray();
 	this.vbo = gl.createBuffer();
+	gl.bindVertexArray(this.vao);
+	gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 
-	this.update = function(){
-			var gl = Game.gl;
-			gl.bindVertexArray(this.vao);
+	var pos = gl.getAttribLocation(program, "pos");
+	gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 4 * 4, 0 * 4);
+	gl.enableVertexAttribArray(pos);
+
+	var tex = gl.getAttribLocation(program, "tex");
+	gl.vertexAttribPointer(tex, 2, gl.FLOAT, false, 4 * 4, 2 * 4);
+	gl.enableVertexAttribArray(tex);
+
+	this.build = function(){
+		gl.bindVertexArray(this.vao);
+		if (this.updateBuffer){
 			gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 
-			this.points = [];
-			this.points[0] = new Point(0, 0, 0, 1, 1, 1, this.tx, this.ty);
-			this.points[1] = new Point(0, h, 0, 1, 1, 1, this.tx, this.ty + this.th);
-			this.points[2] = new Point(w, 0, 0, 1, 1, 1, this.tx + this.tw, this.ty);
-			this.points[3] = new Point(w, h, 0, 1, 1, 1, this.tx + this.tw, this.ty + this.th);
+			var data = [
+				0.0, 0.0, this.tex.x, this.tex.y,
+				0.0, this.h, this.tex.x, this.tex.y + this.tex.h,
+				this.w, 0.0, this.tex.x + this.tex.w, this.tex.y,
+				this.w, this.h, this.tex.x + this.tex.w, this.tex.y + this.tex.h
+			];
 
-			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(
-					0.0, 0.0, 0.0, 1.0, 1.0, 1.0, this.tx, this.ty,
-					0.0, h, 0.0, 1.0, 1.0, 1.0, this.tx, this.ty + this.th,
-					w, 0.0, 0.0, 1.0, 1.0, 1.0, this.tx + this.tw, this.ty,
-					w, h, 0.0, 1.0, 1.0, 1.0, this.tx + this.tw, this.ty + this.th
-				), gl.STATIC_DRAW)
-
-			var pos = gl.getAttribLocation(Game.shader.program, "pos");
-			gl.vertexAttribPointer(pos, 3, gl.FLOAT, false, 8 * 4, 0);
-			gl.enableVertexAttribArray(pos);
-
-			var col = gl.getAttribLocation(Game.shader.program, "col");
-			gl.vertexAttribPointer(col, 3, gl.FLOAT, false, 8 * 4, 0);
-			gl.enableVertexAttribArray(col);
-
-			var tex = gl.getAttribLocation(Game.shader.program, "tex");
-			gl.vertexAttribPointer(tex, 2, gl.FLOAT, false, 8 * 4, 0);
-			gl.enableVertexAttribArray(tex);
-
-	};
+			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
+			this.updateBuffer = false;
+		}
+	}
 
 	this.draw = function(){
-		var gl = Game.gl;
-		gl.bindVertexArray(this.vao);
-		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
+		this.build();
+		gl.bindTexture(gl.TEXTURE_2D, this.tex.texture.id);
 
-		this.update();
+		var texSize = gl.getUniformLocation(program, "texSize");
+		gl.uniform2f(texSize, this.tex.texture.image.width, this.tex.texture.image.height);
 
-		Game.shader.setUniformv2("texSize", this.texture.image.width, this.texture.image.height);
+		var modelLoc = gl.getUniformLocation(program, "model");
+		gl.uniformMatrix4fv(modelLoc, false, this.getModel());
 
 		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 	}
 
-	this.update();
-}
+	this.x = x;
+	this.y = y;
 
-var Game = {
-	canvas: undefined,
-	gl: undefined,
-	shader: undefined,
-	proj: undefined,
-	resX: 0,
-	resY: 0,
-	init: function(canvasId, resX, resY){
-		this.canvas = document.getElementById(canvasId);
-		this.gl = this.canvas.getContext("webgl2");
-
-		this.setResolution(resX === undefined ? this.canvas.width : resX,
-			resY === undefined ? this.canvas.height : resY);
-	},
-	setResolution(resX, resY){
-		this.resX = (resX === undefined) ? this.canvas.width : resX;
-		this.resY = (resY === undefined) ? this.canvas.height : resY;
-
-		this.proj = [
-			2 / this.resX, 0, 0, 0,
-			0, -2 / this.resY, 0, 0,
-			0, 0, 1, 0,
-			-1, 1, 0, 1
-		];
-
-		this.gl.viewport(0, this.resX, 0, this.resY);
-	},
-	clear: function(r, g, b){
-		this.gl.clearColor(r, g, b, 1.0);
-		this.gl.clear(this.gl.COLOR_BUFFER_BIT);
-	},
-	useShader: function(shader){
-		this.shader = shader;
-		this.gl.useProgram(this.shader.program);
-		this.shader.setUniformm4("proj", this.proj);
+	this.setPosition = function(x, y){
+		this.x = x;
+		this.y = y;
+		this.updateBuffer = true;
 	}
-};
+
+	this.move = function(x, y){
+		this.x += x;
+		this.y += y;
+		this.updateBuffer = true;
+	}
+
+	this.getModel = function(){
+		return [
+			1, 0, 0, 0,
+			0, 1, 0, 0,
+			0, 0, 1, 0,
+			Math.round(this.x), Math.round(this.y), 0, 1
+		];
+	}
+
+	this.tickCounter = 0;
+	this.anim = 0;
+	this.frame = 0;
+	this.frameSize = tw;
+	this.animList = [];
+	this.animList[0] = {
+		start: 0,
+		end: 5,
+		y: 0,
+		t: 5
+	};
+
+	this.animList[1] = {
+		start: 0,
+		end: 5,
+		y: 1,
+		t: 5
+	};
+
+	this.vel = {};
+	this.vel.x = 0;
+	this.vel.y = 0;
+	this.spd = 2;
+	this.dir = 1; // 1 == right, -1 == left
+
+	this.setVelocity = function(x, y){
+		this.vel.x = x * this.spd;
+		this.vel.y = y * this.spd;
+		this.dir = (this.vel.x == 0 ? this.dir : (this.vel.x > 0 ? 1 : -1));
+	}
+
+	this.update = function(){
+		if(this.vel.x != 0 || this.vel.y != 0){
+			this.anim = 1;
+		} else {
+			this.anim = 0;
+		}
+
+		this.tickCounter++;
+		if (this.tickCounter >= this.animList[this.anim].t){
+			this.frame++;
+			if (this.frame > this.animList[this.anim].end){
+				this.frame = this.animList[this.anim].start;
+			}
+			this.tickCounter = 0;
+		}
+
+		this.tex.x = this.frame * this.frameSize + (this.dir < 0 ? this.frameSize : 0);
+		this.tex.y = this.animList[this.anim].y * this.frameSize;
+		this.tex.w = this.frameSize * this.dir;
+
+		this.move(this.vel.x, this.vel.y);
+		this.vel.x = 0;
+		this.vel.y = 0;
+	}
+
+	return this;
+}
