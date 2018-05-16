@@ -11,15 +11,15 @@
 		</div>
 		<div id="Utilities" style="float: right;">
 			Tile W: <br>
-			<input type="number" id="TileW" onchange="tile.w = this.value" min="0" /><br>
+			<input type="number" onchange="tile.w = this.value" min="0" /><br>
 			Tile H: <br>
-			<input type="number" id="TileH" onchange="tile.h = this.value" min="0" /><br><br>
+			<input type="number" onchange="tile.h = this.value" min="0" /><br><br>
 
-			Snap to grid? <input type="checkbox"><br><br>
+			Snap to grid? <input type="checkbox" onchange="console.log(this.value)"><br><br>
 			Cell W: <br>
-			<input type="number"><br>
+			<input type="number" onchange="gridFactorX = this.value" min="1"><br>
 			Cell H: <br>
-			<input type="number"><br>
+			<input type="number" onchange="gridFactorY = this.value" min="1"><br>
 		</div>
 		<canvas id="main" width="800" height="600">
 		</canvas>

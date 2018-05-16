@@ -82,10 +82,12 @@ var tile = {
 var sprite = new Sprite(0, 0, tile.w, tile.h, 0, 0, tile.w, tile.h, tileSet);
 spriteList.sprites[0] = sprite;
 
+var gridFactorX = 1;
+var gridFactorY = 1;
 
 function run() {
-	tile.x = Mouse.x - Mouse.x % 100;
-	tile.y = Mouse.y - Mouse.y % 100
+	tile.x = Mouse.x - Mouse.x % gridFactorX;
+	tile.y = Mouse.y - Mouse.y % gridFactorY;
 	sprite.w = tile.w;
 	sprite.h = tile.h;
 	sprite.updateBuffer = true;
