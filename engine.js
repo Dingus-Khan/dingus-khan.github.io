@@ -281,7 +281,7 @@ var TileBatch = {
 		gl.enableVertexAttribArray(tex);
 	},
 	addTile: function(x, y, w, h, tx, ty, tw, th){
-		this.tileData.concat([ // push in vertex data variables for 6 points
+		this.tileData = this.tileData.concat([ // push in vertex data variables for 6 points
 			x, y, tx, ty,
 			x + w, y, tx + tw, ty,
 			x, y + h, tx, ty + th,
