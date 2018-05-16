@@ -152,13 +152,11 @@ function Sprite(x, y, w, h, tx, ty, tw, th, texture){
 	this.setPosition = function(x, y){
 		this.x = x;
 		this.y = y;
-		this.updateBuffer = true;
 	}
 
 	this.move = function(x, y){
 		this.x += x;
 		this.y += y;
-		this.updateBuffer = true;
 	}
 
 	this.getModel = function(){
