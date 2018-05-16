@@ -59,7 +59,6 @@ requestAnimationFrame(run);
 gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
 var sprite = new Sprite(300, 200, 120, 120, 0, 0, 120, 120, entTexture);
-var sprite2 = new Sprite(0, 0, 60, 60, 0, 0, 120, 120, entTexture);
 
 function checkCollision(a, b){
 	var c1 = {r: a.w / 3, x: a.x + (a.w / 2) + a.vel.x, y: a.y + (a.h / 1.5) + a.vel.y};
@@ -74,28 +73,10 @@ function checkCollision(a, b){
 	}
 }
 
-spriteList.sprites[0] = sprite;
-spriteList.sprites[1] = sprite2;
-
 var tileSet = new Texture("tileset.png");
 TileBatch.init(tileSet);
 
 function run() {
-	sprite.setVelocity((-Keyboard.getKey('left') || false) + (Keyboard.getKey('right') || false), (-Keyboard.getKey('up') || false) + (Keyboard.getKey('down') || false));
-	sprite2.setVelocity((-Keyboard.getKey('a') || false) + (Keyboard.getKey('d') || false), (-Keyboard.getKey('w') || false) + (Keyboard.getKey('s') || false));
-
-	if (checkCollision(sprite, sprite2)){
-		//sprite.setVelocity(0, 0);
-		sprite2.setVelocity(sprite.vel.x, sprite.vel.y);
-	}
-
-	if (Mouse.x > sprite.x + sprite.w)
-		sprite.dir = 1;
-	else if (Mouse.x < sprite.x)
-		sprite.dir = -1;
-
-	sprite.update();
-	sprite2.update();
     gl.clear(gl.COLOR_BUFFER_BIT);
 	TileBatch.draw();
 	spriteList.draw();
