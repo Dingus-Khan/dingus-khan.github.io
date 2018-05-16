@@ -89,26 +89,37 @@ spriteList.sprites[0] = sprite;
 var gridFactorX = 1;
 var gridFactorY = 1;
 
+var showOverlay = false;
+
+var selectionTex = new Texture("selection.png");
+var tileSetOverlay = new Sprite(0, 0, tileSet.image.width, tileSet.image.height, 0, 0, tileSet.image.width, tileSet.iamge.height, tileSet);
+var selectionSprite = new Sprite(tile.tx, tile.ty, tile.tw, tile.th, tile.tx, tile.ty, tile.tw, tile.th, tileSet);
+
 function run() {
 	gl.clear(gl.COLOR_BUFFER_BIT);
 
-	tile.x = Mouse.x - Mouse.x % gridFactorX;
-	tile.y = Mouse.y - Mouse.y % gridFactorY;
-	sprite.w = tile.w;
-	sprite.h = tile.h;
-	sprite.tex.x = tile.tx;
-	sprite.tex.y = tile.ty;
-	sprite.tex.w = tile.tw;
-	sprite.tex.h = tile.th;
-	sprite.updateBuffer = true;
-	sprite.setPosition(tile.x, tile.y);
+	if (!showOverlay){
+		tile.x = Mouse.x - Mouse.x % gridFactorX;
+		tile.y = Mouse.y - Mouse.y % gridFactorY;
+		sprite.w = tile.w;
+		sprite.h = tile.h;
+		sprite.tex.x = tile.tx;
+		sprite.tex.y = tile.ty;
+		sprite.tex.w = tile.tw;
+		sprite.tex.h = tile.th;
+		sprite.updateBuffer = true;
+		sprite.setPosition(tile.x, tile.y);
 
-	if(Mouse.left){
-		TileBatch.addTile(tile.x, tile.y, tile.w, tile.h, tile.tx, tile.ty, tile.tw, tile.th);
-		Mouse.left = false;
+		if(Mouse.left){
+			TileBatch.addTile(tile.x, tile.y, tile.w, tile.h, tile.tx, tile.ty, tile.tw, tile.th);
+			Mouse.left = false;
+		}
+
+		TileBatch.draw();
+		spriteList.draw();
+	} else {
+		tile.x = Mouse.x - Mouse.x % tile.tw;
+		tile.y = Mouse.y - Mouse.y % tile.th;
 	}
-
-	TileBatch.draw();
-	spriteList.draw();
 	requestAnimationFrame(run);
 }

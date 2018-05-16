@@ -23,6 +23,8 @@
 
 			<input type="button" onclick="TileBatch.undo()" value="Undo Last Tile" /><br>
 			<input type="button" onclick="if(confirm('Are you sure?')) { TileBatch.clear() }" value="Clear All Tiles" /><br><br>
+
+			<input type="button" onclick="showOverlay = !showOverlay" value="Show Sprite Sheet">
 		</div>
 		<canvas id="main" width="800" height="600">
 		</canvas>
