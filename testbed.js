@@ -90,7 +90,7 @@ function run() {
 	sprite.setPosition(Mouse.x - Mouse.x % 100, Mouse.y - Mouse.y % 100);
 
 	if(Mouse.left){
-		TileBatch.addTile(tile.x, tile.y, tile.w, tile.y, 0, 0, tile.w, tile.y);
+		TileBatch.addTile(tile.x, tile.y, tile.w, tile.h, 0, 0, tile.w, tile.h);
 		Mouse.left = false;
 	}
 
