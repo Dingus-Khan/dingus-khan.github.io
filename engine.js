@@ -298,6 +298,7 @@ var TileBatch = {
 	},
 	clear: function(){
 		this.tileData = [];
+		
 		gl.bindVertexArray(this.vao);
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.tileData), gl.STATIC_DRAW);
