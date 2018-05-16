@@ -93,7 +93,7 @@ var showOverlay = false;
 
 var selectionTex = new Texture("selection.png");
 var tileSetOverlay = new Sprite(0, 0, tileSet.image.width, tileSet.image.height, 0, 0, tileSet.image.width, tileSet.image.height, tileSet);
-var selectionSprite = new Sprite(tile.tx, tile.ty, tile.tw, tile.th, tile.tx, tile.ty, tile.tw, tile.th, tileSet);
+var selectionSprite = new Sprite(tile.tx, tile.ty, tile.tw, tile.th, tile.tx, tile.ty, tile.tw, tile.th, selectionTex);
 
 function run() {
 	gl.clear(gl.COLOR_BUFFER_BIT);
