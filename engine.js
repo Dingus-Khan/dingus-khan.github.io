@@ -28,6 +28,9 @@ var System = {
 	}
 };
 
+var canvas = document.getElementById("main");
+var gl = canvas.getContext("webgl2");
+
 var Keyboard = {
 	keyDown: {},
 	keyMap: {},
@@ -256,9 +259,6 @@ function Texture(src){
 	};
 	this.image.src = src;
 }
-
-var canvas = document.getElementById("main");
-var gl = canvas.getContext("webgl2");
 
 gl.enable(gl.BLEND);
 gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
