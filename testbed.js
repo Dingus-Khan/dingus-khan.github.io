@@ -40,37 +40,7 @@ var vertex = System.buildShader(gl, gl.VERTEX_SHADER, vertexShader);
 var fragment = System.buildShader(gl, gl.FRAGMENT_SHADER, fragmentShader);
 var program = System.linkProgram(gl, vertex, fragment);
 
-var texture = gl.createTexture();
-
-var image = new Image();
-image.onload = function(){
-    gl.bindTexture(gl.TEXTURE_2D, texture);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
-
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
-	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
-	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-
-    gl.generateMipmap(gl.TEXTURE_2D);
-}
-image.src = "test.png";
-
-var block = gl.createTexture();
-
-var blockImg = new Image();
-blockImg.onload = function(){
-	gl.bindTexture(gl.TEXTURE_2D, block);
-	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, blockImg);
-
-	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
-	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
-	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-
-	gl.generateMipmap(gl.TEXTURE_2D);
-}
-blockImg.src = "block.png";
+var entTexture = new Texture("test.png");
 
 gl.useProgram(program);
 
@@ -88,8 +58,8 @@ requestAnimationFrame(run);
 
 gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
-var sprite = new Sprite(300, 200, 120, 120, 0, 0, 120, 120, texture, image);
-var sprite2 = new Sprite(0, 0, 60, 60, 0, 0, 120, 120, texture, image);
+var sprite = new Sprite(300, 200, 120, 120, 0, 0, 120, 120, entTexture);
+var sprite2 = new Sprite(0, 0, 60, 60, 0, 0, 120, 120, entTexture);
 
 function checkCollision(a, b){
 	var c1 = {r: a.w / 3, x: a.x + (a.w / 2) + a.vel.x, y: a.y + (a.h / 1.5) + a.vel.y};
