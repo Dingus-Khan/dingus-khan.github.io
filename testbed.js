@@ -40,8 +40,6 @@ var vertex = System.buildShader(gl, gl.VERTEX_SHADER, vertexShader);
 var fragment = System.buildShader(gl, gl.FRAGMENT_SHADER, fragmentShader);
 var program = System.linkProgram(gl, vertex, fragment);
 
-var entTexture = new Texture("test.png");
-
 gl.useProgram(program);
 
 var proj = [
@@ -58,8 +56,6 @@ requestAnimationFrame(run);
 
 gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
-var sprite = new Sprite(300, 200, 120, 120, 0, 0, 120, 120, entTexture);
-
 function checkCollision(a, b){
 	var c1 = {r: a.w / 3, x: a.x + (a.w / 2) + a.vel.x, y: a.y + (a.h / 1.5) + a.vel.y};
 	var c2 = {r: b.w / 3, x: b.x + (b.w / 2) + b.vel.x, y: b.y + (b.h / 1.5) + b.vel.y};
@@ -75,6 +71,13 @@ function checkCollision(a, b){
 
 var tileSet = new Texture("tileset.png");
 TileBatch.init(tileSet);
+
+var tile = {
+	x: 0,
+	y: 0,
+	width: 0,
+	height: 0
+};
 
 function run() {
     gl.clear(gl.COLOR_BUFFER_BIT);

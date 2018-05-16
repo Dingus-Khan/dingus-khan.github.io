@@ -9,11 +9,9 @@
 			<img src="test.png" id="ImageOne" crossorigin="Anonymous"/>
 			<img src="block.png" id="ImageTwo" crossorigin="Anonymous"/>
 		</div>
-		<div id="Instructions" style="float: right;">
-			Arrow keys for big dude, WASD for little dude <br>
-			If big dude pushes little dude, little dude moves <br>
-			Little dude be too small for make big dude move <br>
-			Big dude will look at mouse
+		<div id="Utilities" style="float: right;">
+			W: <input type="range" id="TileW" onchange="tile.w = this.value" min="0" max="200" />
+			H: <input type="range" id="TileH" onchange="tile.h = this.value" min="0" max="200" />
 		</div>
 		<canvas id="main" width="800" height="600">
 		</canvas>
