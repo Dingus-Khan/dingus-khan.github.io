@@ -261,5 +261,51 @@ function Texture(src){
 	this.image.src = src;
 }
 
+var TileBatch = {
+	tileData: [],
+	tex: {},
+	init: function (texture){
+		this.tex = texture;
+
+		this.vao = gl.createVertexArray();
+		this.vbo = gl.createBuffer();
+		gl.bindVertexArray(this.vao);
+		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
+
+		var pos = gl.getAttribLocation(program, "pos");
+		gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 4 * 4, 0 * 4);
+		gl.enableVertexAttribArray(pos);
+
+		var tex = gl.getAttribLocation(program, "tex");
+		gl.vertexAttribPointer(tex, 2, gl.FLOAT, false, 4 * 4, 2 * 4);
+		gl.enableVertexAttribArray(tex);
+	},
+	addTile: function(x, y, w, h, tx, ty, tw, th){
+		this.tileData.concat([ // push in vertex data variables for 6 points
+			x, y, tx, ty,
+			x + w, y, tx + tw, ty,
+			x, y + h, tx, ty + th,
+			x + w, y, tx + tw, ty,
+			x + w, y + h, tx + tw, ty + th,
+			x, y + h, tx, ty + th
+		]);
+
+		gl.bindVertexArray(this.vao);
+		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
+	},
+	draw: function(){
+		gl.bindTexture(gl.TEXTURE_2D, this.tex.texture.id);
+
+		var texSize = gl.getUniformLocation(program, "texSize");
+		gl.uniform2f(texSize, this.tex.texture.image.width, this.tex.texture.image.height);
+
+		var modelLoc = gl.getUniformLocation(program, "model");
+		gl.uniformMatrix4fv(modelLoc, false, [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
+
+		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+	}
+};
+
 gl.enable(gl.BLEND);
 gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
