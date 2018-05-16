@@ -120,6 +120,8 @@ function run() {
 	} else {
 		tile.x = Mouse.x - Mouse.x % tile.tw;
 		tile.y = Mouse.y - Mouse.y % tile.th;
+		tileSetOverlay.draw();
+		selectionSprite.draw();
 	}
 	requestAnimationFrame(run);
 }
