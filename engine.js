@@ -292,6 +292,10 @@ var TileBatch = {
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.tileData), gl.STATIC_DRAW);
 	},
+	undo: function(){
+		for(i = 0; i < 8; i++)
+			this.tileData.pop();
+	},
 	draw: function(){
 		if (this.tileData.length > 0){
 			gl.bindVertexArray(this.vao);
