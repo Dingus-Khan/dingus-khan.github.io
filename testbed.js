@@ -72,15 +72,16 @@ function checkCollision(a, b){
 var tileSet = new Texture("tileset.png");
 TileBatch.init(tileSet);
 
-var sprite = new Sprite(0, 0, tile.w, tile.h, 0, 0, tile.w, tile.h, tileSet);
-spriteList[0] = sprite;
-
 var tile = {
 	x: 0,
 	y: 0,
 	width: 0,
 	height: 0
 };
+
+var sprite = new Sprite(0, 0, tile.w, tile.h, 0, 0, tile.w, tile.h, tileSet);
+spriteList[0] = sprite;
+
 
 function run() {
     gl.clear(gl.COLOR_BUFFER_BIT);
