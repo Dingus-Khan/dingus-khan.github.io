@@ -15,11 +15,11 @@
 			Tile H: <br>
 			<input type="number" onchange="tile.h = this.value" min="0" /><br><br>
 
-			Snap to grid? <input type="checkbox" onchange="console.log(this.value)"><br><br>
+			Snap to grid? <input type="checkbox" onchange="gridFactorX = (this.checked ? document.querySelector('#GridX').value : 1); gridFactorY = (this.checked ? document.querySelector('#GridY').value : 1); document.querySelector('#GridX').disabled = !this.checked; document.querySelector('#GridY').disabled = !this.checked;"><br><br>
 			Cell W: <br>
-			<input type="number" onchange="gridFactorX = this.value" min="1"><br>
+			<input type="number" id="GridX" onchange="gridFactorX = this.value" min="1"><br>
 			Cell H: <br>
-			<input type="number" onchange="gridFactorY = this.value" min="1"><br>
+			<input type="number" id="GridY" onchange="gridFactorY = this.value" min="1"><br>
 		</div>
 		<canvas id="main" width="800" height="600">
 		</canvas>
