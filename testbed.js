@@ -87,7 +87,6 @@ var sprite = new Sprite(0, 0, tile.w, tile.h, 0, 0, tile.w, tile.h, tileSet);
 spriteList.sprites[0] = sprite;
 
 var tileSetDisplay = new Sprite(0, 0, tileSet.image.width, tileSet.image.height, 0, 0, tileSet.image.width, tileSet.image.height, tileSet);
-spriteList.sprites[1] = tileSetDisplay;
 
 var gridFactorX = 1;
 var gridFactorY = 1;
@@ -112,5 +111,6 @@ function run() {
     gl.clear(gl.COLOR_BUFFER_BIT);
 	TileBatch.draw();
 	spriteList.draw();
+	tileSetDisplay.draw();
 	requestAnimationFrame(run);
 }
