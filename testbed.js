@@ -84,9 +84,10 @@ spriteList.sprites[0] = sprite;
 
 
 function run() {
-	sprite.setPosition(Mouse.x, Mouse.y);
-
-	sprite.update();
+	sprite.w = tile.w;
+	sprite.h = tile.h;
+	sprite.updateBuffer = true;
+	sprite.setPosition(Mouse.x - Mouse.x % 100, Mouse.y - Mouse.y % 100);
 
     gl.clear(gl.COLOR_BUFFER_BIT);
 	TileBatch.draw();
