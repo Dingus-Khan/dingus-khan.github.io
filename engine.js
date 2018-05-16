@@ -292,7 +292,7 @@ var TileBatch = {
 
 		gl.bindVertexArray(this.vao);
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
-		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.tileData), gl.STATIC_DRAW);
 	},
 	draw: function(){
 		gl.bindTexture(gl.TEXTURE_2D, this.tex.texture.id);
@@ -303,7 +303,7 @@ var TileBatch = {
 		var modelLoc = gl.getUniformLocation(program, "model");
 		gl.uniformMatrix4fv(modelLoc, false, [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
 
-		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+		gl.drawArrays(gl.TRIANGLES, 0, this.tileData.length / 4);
 	}
 };
 
