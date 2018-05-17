@@ -180,7 +180,26 @@ function Sprite(x, y, w, h, tx, ty, tw, th, texture){
 		this.dir = (this.vel.x == 0 ? this.dir : (this.vel.x > 0 ? 1 : -1));
 	}
 
-	this.animate = function(){}
+	this.ticks = 0;
+	this.frame = 0;
+	this.anim = 0;
+	this.animList = [];
+	this.animList[0] = new Animation(0, 0, 0, this.tex.w, this.tex.h, 1);
+
+	this.animate = function(){
+		this.ticks++;
+		if (this.ticks >= this.animList[this.anim].t){
+			this.frame++;
+			if (this.frame > this.animList[this.anim.end]){
+				this.frame = this.animList[this.anim].start;
+			}
+			this.ticks = 0;
+		}
+
+		this.tex.x = this.frame * this.animList[this.anim].w + (this.dir < 0 ? this.animList[this.anim].w : 0);
+		this.tex.y = this.animList[this.anim].y * this.animList[this.anim].h;
+		this.tex.w = this.animList[this.anim].w * this.dir;
+	}
 
 	this.update = function(){
 		this.animate();
@@ -191,6 +210,19 @@ function Sprite(x, y, w, h, tx, ty, tw, th, texture){
 	}
 
 	return this;
+}
+
+// start = starting frame, end = ending frame (both on x axis)
+// y = y axis
+// w = width of frame, h = height of frame
+// t = number of ticks for frame
+function Animation(start, end, y, w, h, t){
+	this.start = start;
+	this.end = end;
+	this.y = y;
+	this.w = w;
+	this.h = h;
+	this.t = t;
 }
 
 var SpriteList = {
