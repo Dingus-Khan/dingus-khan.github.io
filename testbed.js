@@ -68,6 +68,8 @@ function checkCollision(a, b){
 }
 
 var sprite = new Texture("test.png");
+sprite.addAnimation(new Animation(0, 5, 0, 120, 120, 5));
+sprite.anim = 1;
 
 var spr = new Sprite(0, 0, 120, 120, 0, 0, 120, 120, sprite);
 SpriteList.sprites[0] = spr;
