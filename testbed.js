@@ -75,6 +75,8 @@ var spr = new Sprite(0, 0, 120, 120, 0, 0, 120, 120, sprite);
 spriteList.sprites[0] = spr;
 
 function run() {
+	spr.update();
+
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	spriteList.draw();
 	requestAnimationFrame(run);
