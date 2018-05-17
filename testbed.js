@@ -120,6 +120,8 @@ function run() {
 	} else {
 		tileSetOverlay.w = tileSet.image.width;
 		tileSetOverlay.h = tileSet.image.height;
+		tileSetOverlay.tex.w = tileSet.image.width;
+		tileSetOverlay.tex.h = tileSet.image.height;
 		tile.x = Mouse.x - Mouse.x % tile.tw;
 		tile.y = Mouse.y - Mouse.y % tile.th;
 		selectionSprite.x = tile.x;
