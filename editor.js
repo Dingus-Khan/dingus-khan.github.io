@@ -71,7 +71,7 @@ var tile = {
 };
 
 var sprite = new Sprite(0, 0, tile.w, tile.h, 0, 0, tile.w, tile.h, tileSet);
-spriteList.sprites[0] = sprite;
+SpriteList.sprites[0] = sprite;
 
 var gridFactorX = 1;
 var gridFactorY = 1;
@@ -103,7 +103,7 @@ function run() {
 		}
 
 		TileBatch.draw();
-		spriteList.draw();
+		SpriteList.draw();
 	} else {
 		tileSetOverlay.w = tileSet.image.width;
 		tileSetOverlay.h = tileSet.image.height;

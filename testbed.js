@@ -52,7 +52,6 @@ var proj = [
 var projLoc = gl.getUniformLocation(program, "proj");
 gl.uniformMatrix4fv(projLoc, false, proj);
 
-requestAnimationFrame(run);
 
 gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
@@ -72,12 +71,13 @@ function checkCollision(a, b){
 var sprite = new Texture("test.png");
 
 var spr = new Sprite(0, 0, 120, 120, 0, 0, 120, 120, sprite);
-spriteList.sprites[0] = spr;
+SpriteList.sprites[0] = spr;
 
+requestAnimationFrame(run);
 function run() {
 	spr.update();
 
 	gl.clear(gl.COLOR_BUFFER_BIT);
-	spriteList.draw();
+	SpriteList.draw();
 	requestAnimationFrame(run);
 }

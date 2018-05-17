@@ -193,7 +193,7 @@ function Sprite(x, y, w, h, tx, ty, tw, th, texture){
 	return this;
 }
 
-var spriteList = {
+var SpriteList = {
 	sprites: [],
 	sort: function(){
 		this.sprites.sort(function(a, b){ return a.y + a.h > b.y + b.h; });
