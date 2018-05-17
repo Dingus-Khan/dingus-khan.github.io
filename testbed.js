@@ -67,11 +67,12 @@ function checkCollision(a, b){
 	}
 }
 
-var sprite = new Texture("test.png");
+var tileSet = new Texture("tileset.png");
+TileBatch.init(tileSet);
 
+var sprite = new Texture("test.png");
 var spr = new Sprite(0, 0, 120, 120, 0, 0, 120, 120, sprite);
 spr.addAnimation(new Animation(0, 5, 0, 120, 120, 5));
-
 SpriteList.sprites[0] = spr;
 
 requestAnimationFrame(run);
