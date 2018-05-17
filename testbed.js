@@ -52,7 +52,6 @@ var proj = [
 var projLoc = gl.getUniformLocation(program, "proj");
 gl.uniformMatrix4fv(projLoc, false, proj);
 
-
 gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
 function checkCollision(a, b){

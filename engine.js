@@ -186,6 +186,10 @@ function Sprite(x, y, w, h, tx, ty, tw, th, texture){
 	this.animList = [];
 	this.animList[0] = new Animation(0, 0, 0, this.tex.w, this.tex.h, 1);
 
+	this.addAnimation = function(anim){
+		this.animList.push(anim);
+	}
+
 	this.animate = function(){
 		this.ticks++;
 		if (this.ticks >= this.animList[this.anim].t){
