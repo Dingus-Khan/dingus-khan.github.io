@@ -168,25 +168,6 @@ function Sprite(x, y, w, h, tx, ty, tw, th, texture){
 		];
 	}
 
-	this.tickCounter = 0;
-	this.anim = 0;
-	this.frame = 0;
-	this.frameSize = tw;
-	this.animList = [];
-	this.animList[0] = {
-		start: 0,
-		end: 5,
-		y: 0,
-		t: 5
-	};
-
-	this.animList[1] = {
-		start: 0,
-		end: 5,
-		y: 1,
-		t: 5
-	};
-
 	this.vel = {};
 	this.vel.x = 0;
 	this.vel.y = 0;
@@ -298,7 +279,7 @@ var TileBatch = {
 	},
 	clear: function(){
 		this.tileData = [];
-		
+
 		gl.bindVertexArray(this.vao);
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.tileData), gl.STATIC_DRAW);
