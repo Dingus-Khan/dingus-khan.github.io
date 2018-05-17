@@ -298,7 +298,6 @@ var TileBatch = {
 	loadFromString: function(string){
 		var array = string.split(',');
 		for(i = 0; i < array.length; i++){
-			this.addTile
 		}
 	}
 	undo: function(){
