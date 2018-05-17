@@ -297,8 +297,14 @@ var TileBatch = {
 	},
 	loadFromString: function(string){
 		var array = string.split(',');
-		for(i = 0; i < array.length; i++){
+		var data = [];
+		for(i = 0; i < array.length; i += 24){
+			data.push(parseInt(array[i]));
 		}
+		
+		gl.bindVertexArray(this.vao);
+		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.tileData), gl.STATIC_DRAW);
 	},
 	undo: function(){
 		for(i = 0; i < 24; i++)
