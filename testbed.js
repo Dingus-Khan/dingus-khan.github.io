@@ -118,8 +118,8 @@ function run() {
 		TileBatch.draw();
 		spriteList.draw();
 	} else {
-		tileSetOverlay.w = tile.w;
-		tileSetOverlay.h = tile.h;
+		tileSetOverlay.w = tileSet.image.width;
+		tileSetOverlay.h = tileSet.image.height;
 		tile.x = Mouse.x - Mouse.x % tile.tw;
 		tile.y = Mouse.y - Mouse.y % tile.th;
 		selectionSprite.x = tile.x;
