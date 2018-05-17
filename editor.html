@@ -24,6 +24,8 @@
 		</div>
 		<canvas id="main" width="800" height="600">
 		</canvas>
+		<input type="text" id="Code"><br>
+		<input type="button" onclick="document.getElementById('Code').value = TileBatch.tileData.join(',');" value="Get Level Code">
 		<script src="engine.js"></script>
 		<script src="editor.js" defer></script>
 	</body>
