@@ -190,7 +190,7 @@ function Sprite(x, y, w, h, tx, ty, tw, th, texture){
 		this.ticks++;
 		if (this.ticks >= this.animList[this.anim].t){
 			this.frame++;
-			if (this.frame > this.animList[this.anim.end]){
+			if (this.frame > this.animList[this.anim].end){
 				this.frame = this.animList[this.anim].start;
 			}
 			this.ticks = 0;
