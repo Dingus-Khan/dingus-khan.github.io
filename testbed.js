@@ -69,7 +69,13 @@ function checkCollision(a, b){
 	}
 }
 
+var sprite = new Texture("test.png");
+
+var spr = new Sprite(0, 0, 120, 120, 0, 0, 120, 120, sprite);
+spriteList.sprites[0] = spr;
+
 function run() {
 	gl.clear(gl.COLOR_BUFFER_BIT);
+	spriteList.draw();
 	requestAnimationFrame(run);
 }
