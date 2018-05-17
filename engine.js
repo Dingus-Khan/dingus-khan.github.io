@@ -180,25 +180,10 @@ function Sprite(x, y, w, h, tx, ty, tw, th, texture){
 		this.dir = (this.vel.x == 0 ? this.dir : (this.vel.x > 0 ? 1 : -1));
 	}
 
+	this.animate = function(){}
+
 	this.update = function(){
-		if(this.vel.x != 0 || this.vel.y != 0){
-			this.anim = 1;
-		} else {
-			this.anim = 0;
-		}
-
-		this.tickCounter++;
-		if (this.tickCounter >= this.animList[this.anim].t){
-			this.frame++;
-			if (this.frame > this.animList[this.anim].end){
-				this.frame = this.animList[this.anim].start;
-			}
-			this.tickCounter = 0;
-		}
-
-		this.tex.x = this.frame * this.frameSize + (this.dir < 0 ? this.frameSize : 0);
-		this.tex.y = this.animList[this.anim].y * this.frameSize;
-		this.tex.w = this.frameSize * this.dir;
+		this.animate();
 
 		this.move(this.vel.x, this.vel.y);
 		this.vel.x = 0;
