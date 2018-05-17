@@ -71,7 +71,6 @@ var sprite = new Texture("test.png");
 
 var spr = new Sprite(0, 0, 120, 120, 0, 0, 120, 120, sprite);
 spr.addAnimation(new Animation(0, 5, 0, 120, 120, 5));
-spr.anim = 0;
 
 SpriteList.sprites[0] = spr;
 
