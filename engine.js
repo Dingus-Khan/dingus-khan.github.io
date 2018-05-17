@@ -184,7 +184,6 @@ function Sprite(x, y, w, h, tx, ty, tw, th, texture){
 	this.frame = 0;
 	this.anim = 0;
 	this.animList = [];
-	this.animList[0] = new Animation(0, 0, 0, this.tex.w, this.tex.h, 1);
 
 	this.addAnimation = function(anim){
 		this.animList.push(anim);
@@ -207,7 +206,8 @@ function Sprite(x, y, w, h, tx, ty, tw, th, texture){
 	}
 
 	this.update = function(){
-		this.animate();
+		if (this.animList.length > 0)
+			this.animate();
 
 		this.move(this.vel.x, this.vel.y);
 		this.vel.x = 0;
@@ -295,6 +295,12 @@ var TileBatch = {
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.tileData), gl.STATIC_DRAW);
 	},
+	loadFromString: function(string){
+		var array = string.split(',');
+		for(i = 0; i < array.length; i++){
+			this.addTile
+		}
+	}
 	undo: function(){
 		for(i = 0; i < 24; i++)
 			this.tileData.pop();
