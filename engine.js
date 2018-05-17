@@ -196,7 +196,7 @@ function Sprite(x, y, w, h, tx, ty, tw, th, texture){
 			this.ticks = 0;
 		}
 
-		this.tex.x = this.frame * this.animList[this.anim].w + (this.dir < 0 ? this.animList[this.anim].w : 0);
+		this.tex.x = this.frame * this.animList[this.anim].w;
 		this.tex.y = this.animList[this.anim].y * this.animList[this.anim].h;
 		this.tex.w = this.animList[this.anim].w * this.dir;
 	}
