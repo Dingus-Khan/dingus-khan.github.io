@@ -198,6 +198,7 @@ function Sprite(x, y, w, h, tx, ty, tw, th, texture){
 				this.frame = this.animList[this.anim].start;
 			}
 			this.ticks = 0;
+			this.updateBuffer = true;
 		}
 
 		this.tex.x = this.frame * this.animList[this.anim].w;
