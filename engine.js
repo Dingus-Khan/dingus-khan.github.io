@@ -299,7 +299,7 @@ var TileBatch = {
 		var array = string.split(',');
 		for(i = 0; i < array.length; i++){
 		}
-	}
+	},
 	undo: function(){
 		for(i = 0; i < 24; i++)
 			this.tileData.pop();
