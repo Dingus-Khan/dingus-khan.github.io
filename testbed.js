@@ -80,6 +80,7 @@ function run() {
 	spr.update();
 
 	gl.clear(gl.COLOR_BUFFER_BIT);
+	TileBatch.draw();
 	SpriteList.draw();
 	requestAnimationFrame(run);
 }
