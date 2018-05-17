@@ -298,7 +298,7 @@ var TileBatch = {
 	loadFromString: function(string){
 		var array = string.split(',');
 		this.tileData = [];
-		for(i = 0; i < array.length; i += 24){
+		for(i = 0; i < array.length; i++){
 			this.tileData.push(parseInt(array[i]));
 		}
 
