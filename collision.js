@@ -33,7 +33,18 @@ var DebugGraphics = {
 	},
 };
 
+var blocks = [];
+var colour = {
+	r: 1.0,
+	g: 1.0,
+	b: 1.0
+};
+
 function run() {
+	for(i = 0; i < blocks.length; i++){
+		DebugGraphics.drawRect(blocks[i].x, blocks[i].y, blocks[i].w, blocks[i].h, colour.r, colour.g, colour.b);
+	}
+
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	DebugGraphics.draw();
 	requestAnimationFrame(run);
