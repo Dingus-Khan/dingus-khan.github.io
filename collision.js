@@ -46,6 +46,8 @@ var colour = {
 };
 
 function run() {
+	DebugGraphics.clear();
+
 	for(i = 0; i < blocks.length; i++){
 		if (pointBox({x: Mouse.x, y: Mouse.y}, blocks[i])){
 			colour.r = 1.0;
