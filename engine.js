@@ -379,7 +379,7 @@ out vec4 outColour;
 uniform sampler2D texImage;
 
 void main(){
-    outColour = texture(texImage, Tex) * vec4(col, 1.0);
+    outColour = texture(texImage, Tex) * vec4(Col, 1.0);
 }`;
 
 

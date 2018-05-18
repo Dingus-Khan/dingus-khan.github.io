@@ -11,7 +11,11 @@ Keyboard.registerKey('w', 87);
 requestAnimationFrame(run);
 
 var DebugGraphics = {
-	drawRect: function(x, y, w, h){
+	drawRect: function(x, y, w, h, r, g, b){
+		r = r || 1.0;
+		g = g || 1.0;
+		b = b || 1.0;
+
 		
 	},
 };
