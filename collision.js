@@ -35,5 +35,6 @@ var DebugGraphics = {
 
 function run() {
 	gl.clear(gl.COLOR_BUFFER_BIT);
+	DebugGraphics.draw();
 	requestAnimationFrame(run);
 }
