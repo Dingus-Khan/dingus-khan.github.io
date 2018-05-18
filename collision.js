@@ -33,6 +33,11 @@ var DebugGraphics = {
 	},
 };
 
+function pointBox(point, box){
+	return (point.x > box.x && point.x < box.x + box.w
+	&& point.y > box.y && point.y < box.y + box.h);
+}
+
 var blocks = [];
 var colour = {
 	r: 1.0,
@@ -42,6 +47,16 @@ var colour = {
 
 function run() {
 	for(i = 0; i < blocks.length; i++){
+		if (pointBox({x: Mouse.x, y: Mouse.y}, blocks[i])){
+			colour.r = 1.0;
+			colour.g = 0.0;
+			colour.b = 0.0;
+		} else {
+			colour.r = 0.0;
+			colour.g = 1.0;
+			colour.b = 0.0;
+		}
+
 		DebugGraphics.drawRect(blocks[i].x, blocks[i].y, blocks[i].w, blocks[i].h, colour.r, colour.g, colour.b);
 	}
 
