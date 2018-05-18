@@ -34,7 +34,22 @@ function pointBox(point, box){
 	&& point.y > box.y && point.y < box.y + box.h);
 }
 
+/*
+if (rect1.x < rect2.x + rect2.width &&
+   rect1.x + rect1.width > rect2.x &&
+   rect1.y < rect2.y + rect2.height &&
+   rect1.height + rect1.y > rect2.y) {
+*/
+
+function boxBox(box1, box2){
+	return (box1.x < box2.x + box2.w
+	&& box1.x + box1.w > box2.x
+	&& box1.y < box2.y + box2.h
+	&& box1.y + box1.h > box2.y);
+}
+
 var blocks = [];
+blocks[0] = {x: 0, y: 0, w: 50, h: 50};
 var colour = {
 	r: 1.0,
 	g: 1.0,
@@ -44,17 +59,23 @@ var colour = {
 DebugGraphics.init();
 
 function run() {
+	if (Keyboard.getKey('up')){
+		blocks[0].y -= 1;
+	}
+
 	DebugGraphics.clear();
 
 	for(i = 0; i < blocks.length; i++){
-		if (pointBox({x: Mouse.x, y: Mouse.y}, blocks[i])){
-			colour.r = 1.0;
-			colour.g = 0.0;
-			colour.b = 0.0;
-		} else {
-			colour.r = 0.0;
-			colour.g = 1.0;
-			colour.b = 0.0;
+		if (i > 0){
+			if (boxBox(blocks[0], blocks[i])){
+				colour.r = 1.0;
+				colour.g = 0.0;
+				colour.b = 0.0;
+			} else {
+				colour.r = 0.0;
+				colour.g = 1.0;
+				colour.b = 0.0;
+			}
 		}
 
 		DebugGraphics.drawRect(blocks[i].x, blocks[i].y, blocks[i].w, blocks[i].h, colour.r, colour.g, colour.b);
