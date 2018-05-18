@@ -76,9 +76,10 @@ function run() {
 				colour.g = 1.0;
 				colour.b = 0.0;
 			}
+			DebugGraphics.drawRect(blocks[i].x, blocks[i].y, blocks[i].w, blocks[i].h, colour.r, colour.g, colour.b);
+		} else {
+			DebugGraphics.drawRect(blocks[i].x, blocks[i].y, blocks[i].w, blocks[i].h, 1, 1, 1);
 		}
-
-		DebugGraphics.drawRect(blocks[i].x, blocks[i].y, blocks[i].w, blocks[i].h, colour.r, colour.g, colour.b);
 	}
 
 	gl.clear(gl.COLOR_BUFFER_BIT);
