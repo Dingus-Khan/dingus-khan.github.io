@@ -102,9 +102,9 @@ function Sprite(x, y, w, h, tx, ty, tw, th, texture, r, g, b){
 	this.tex.texture.id = texture.texture;
 	this.tex.texture.image = texture.image;
 	this.updateBuffer = true;
-	this.r = r || 1.0;
-	this.g = g || 1.0;
-	this.b = b || 1.0;
+	this.r = (r == undefined ? 1.0 : r);
+	this.g = (g == undefined ? 1.0 : g);
+	this.b = (b == undefined ? 1.0 : b);
 
 	this.vao = gl.createVertexArray();
 	this.vbo = gl.createBuffer();

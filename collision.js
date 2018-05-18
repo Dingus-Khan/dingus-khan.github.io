@@ -17,10 +17,6 @@ var DebugGraphics = {
 		this.texture = new Texture("debug.png");
 	},
 	drawRect: function(x, y, w, h, r, g, b){
-		r = r || 1.0;
-		g = g || 1.0;
-		b = b || 1.0;
-
 		this.shapes.push(new Sprite(x, y, w, h, 0, 0, 1, 1, this.texture, r, g, b));
 	},
 	draw: function(){
