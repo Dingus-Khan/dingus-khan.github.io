@@ -41,6 +41,8 @@ var colour = {
 	b: 1.0
 };
 
+DebugGraphics.init();
+
 function run() {
 	DebugGraphics.clear();
 
