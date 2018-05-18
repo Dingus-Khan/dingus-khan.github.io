@@ -59,9 +59,14 @@ var colour = {
 DebugGraphics.init();
 
 function run() {
-	if (Keyboard.getKey('up')){
+	if (Keyboard.getKey('up'))
 		blocks[0].y -= 1;
-	}
+	if (Keyboard.getKey('down'))
+		blocks[0].y += 1;
+	if (Keyboard.getKey('left'))
+		blocks[0].x -= 1;
+	if (Keyboard.getKey('right'))
+		blocks[0].x += 1;
 
 	DebugGraphics.clear();
 
