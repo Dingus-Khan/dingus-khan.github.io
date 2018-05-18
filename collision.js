@@ -12,8 +12,8 @@ requestAnimationFrame(run);
 
 var DebugGraphics = {
 	drawRect: function(x, y, w, h){
-
-	}
+		
+	},
 };
 
 function run() {

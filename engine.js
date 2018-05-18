@@ -89,7 +89,7 @@ canvas.addEventListener("contextmenu", function(e){
 	e.preventDefault();
 });
 
-function Sprite(x, y, w, h, tx, ty, tw, th, texture){
+function Sprite(x, y, w, h, tx, ty, tw, th, texture, r, g, b){
 	this.w = w;
 	this.h = h;
 	this.z = -y;
@@ -102,6 +102,9 @@ function Sprite(x, y, w, h, tx, ty, tw, th, texture){
 	this.tex.texture.id = texture.texture;
 	this.tex.texture.image = texture.image;
 	this.updateBuffer = true;
+	this.r = r || 1.0;
+	this.g = g || 1.0;
+	this.b = b || 1.0;
 
 	this.vao = gl.createVertexArray();
 	this.vbo = gl.createBuffer();
@@ -109,12 +112,16 @@ function Sprite(x, y, w, h, tx, ty, tw, th, texture){
 	gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 
 	var pos = gl.getAttribLocation(program, "pos");
-	gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 4 * 4, 0 * 4);
+	gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 7 * 4, 0 * 4);
 	gl.enableVertexAttribArray(pos);
 
 	var tex = gl.getAttribLocation(program, "tex");
-	gl.vertexAttribPointer(tex, 2, gl.FLOAT, false, 4 * 4, 2 * 4);
+	gl.vertexAttribPointer(tex, 2, gl.FLOAT, false, 7 * 4, 2 * 4);
 	gl.enableVertexAttribArray(tex);
+
+	var col = gl.getAttribLocation(program, "col");
+	gl.vertexAttribPointer(col, 3, gl.FLOAT, false, 7 * 4, 4 * 4);
+	gl.enableVertexAttribArray(col);
 
 	this.build = function(){
 		gl.bindVertexArray(this.vao);
@@ -122,10 +129,10 @@ function Sprite(x, y, w, h, tx, ty, tw, th, texture){
 			gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 
 			var data = [
-				0.0, 0.0, this.tex.x, this.tex.y,
-				0.0, this.h, this.tex.x, this.tex.y + this.tex.h,
-				this.w, 0.0, this.tex.x + this.tex.w, this.tex.y,
-				this.w, this.h, this.tex.x + this.tex.w, this.tex.y + this.tex.h
+				0.0, 0.0, this.tex.x, this.tex.y, this.r, this.g, this.b,
+				0.0, this.h, this.tex.x, this.tex.y + this.tex.h, this.r, this.g, this.b,
+				this.w, 0.0, this.tex.x + this.tex.w, this.tex.y, this.r, this.g, this.b,
+				this.w, this.h, this.tex.x + this.tex.w, this.tex.y + this.tex.h, this.r, this.g, this.b,
 			];
 
 			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
@@ -274,21 +281,28 @@ var TileBatch = {
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 
 		var pos = gl.getAttribLocation(program, "pos");
-		gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 4 * 4, 0 * 4);
+		gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 7 * 4, 0 * 4);
 		gl.enableVertexAttribArray(pos);
 
 		var tex = gl.getAttribLocation(program, "tex");
-		gl.vertexAttribPointer(tex, 2, gl.FLOAT, false, 4 * 4, 2 * 4);
+		gl.vertexAttribPointer(tex, 2, gl.FLOAT, false, 7 * 4, 2 * 4);
 		gl.enableVertexAttribArray(tex);
+
+		var col = gl.getAttribLocation(program, "col");
+		gl.vertexAttribPointer(col, 3, gl.FLOAT, false, 7 * 4, 4 * 4);
+		gl.enableVertexAttribArray(col);
 	},
-	addTile: function(x, y, w, h, tx, ty, tw, th){
+	addTile: function(x, y, w, h, tx, ty, tw, th, r, g, b){
+		r = r || 1.0;
+		g = g || 1.0;
+		b = b || 1.0;
 		this.tileData = this.tileData.concat([ // push in vertex data variables for 6 points
-			x, y, tx, ty,
-			x + w, y, tx + tw, ty,
-			x, y + h, tx, ty + th,
-			x + w, y, tx + tw, ty,
-			x + w, y + h, tx + tw, ty + th,
-			x, y + h, tx, ty + th
+			x, y, tx, ty, r, g, b,
+			x + w, y, tx + tw, ty, r, g, b,
+			x, y + h, tx, ty + th, r, g, b,
+			x + w, y, tx + tw, ty, r, g, b,
+			x + w, y + h, tx + tw, ty + th, r, g, b,
+			x, y + h, tx, ty + th, r, g, b
 		]);
 
 		gl.bindVertexArray(this.vao);
@@ -339,8 +353,10 @@ gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 var vertexShader = `#version 300 es
 in vec2 pos;
 in vec2 tex;
+in vec3 col;
 
 out vec2 Tex;
+out vec3 Col;
 
 uniform vec2 texSize;
 uniform mat4 proj;
@@ -348,6 +364,7 @@ uniform mat4 model;
 
 void main(){
     Tex = tex / texSize;
+	Col = col;
     gl_Position = proj * model * vec4(pos, 0.0, 1.0);
 }`;
 
@@ -355,13 +372,14 @@ var fragmentShader = `#version 300 es
 precision mediump float;
 
 in vec2 Tex;
+in vec3 Col;
 
 out vec4 outColour;
 
 uniform sampler2D texImage;
 
 void main(){
-    outColour = texture(texImage, Tex);
+    outColour = texture(texImage, Tex) * vec4(col, 1.0);
 }`;
 
 

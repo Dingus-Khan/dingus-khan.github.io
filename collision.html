@@ -6,26 +6,9 @@
 	</head>
 	<body>
 		<div id="Utilities" style="float: right;">
-			Tile W: <br>
-			<input type="number" onchange="tile.w = parseInt(this.value)" min="0" value="100"/><br>
-			Tile H: <br>
-			<input type="number" onchange="tile.h = parseInt(this.value)" min="0" value="100"/><br><br>
-
-			Snap to grid? <input type="checkbox" onchange="gridFactorX = parseInt(this.checked ? document.querySelector('#GridX').value : 1); gridFactorY = parseInt(this.checked ? document.querySelector('#GridY').value : 1); document.querySelector('#GridX').disabled = !this.checked; document.querySelector('#GridY').disabled = !this.checked;"><br><br>
-			Cell W: <br>
-			<input type="number" id="GridX" onchange="gridFactorX = parseInt(this.value)" min="1" value="100" disabled><br>
-			Cell H: <br>
-			<input type="number" id="GridY" onchange="gridFactorY = parseInt(this.value)" min="1" value="100" disabled><br><br>
-
-			<input type="button" onclick="TileBatch.undo()" value="Undo Last Tile" /><br>
-			<input type="button" onclick="if(confirm('Are you sure?')) { TileBatch.clear() }" value="Clear All Tiles" /><br><br>
-
-			<input type="button" onclick="showOverlay = !showOverlay" value="Show Sprite Sheet">
 		</div>
 		<canvas id="main" width="800" height="600">
 		</canvas>
-		<input type="text" id="Code"><br>
-		<input type="button" onclick="document.getElementById('Code').value = TileBatch.tileData.join(',');" value="Get Level Code">
 		<script src="engine.js"></script>
 		<script src="collision.js" defer></script>
 	</body>
