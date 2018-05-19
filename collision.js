@@ -38,11 +38,18 @@ function boxBox(box1, box2, vel){
 	if (vel == undefined){
 		vel = {x: 0, y: 0}
 	}
-	
-	return (box1.x + vel.x < box2.x + box2.w
-	&& box1.x + vel.x + box1.w > box2.x
-	&& box1.y + vel.y < box2.y + box2.h
-	&& box1.y + vel.y + box1.h > box2.y);
+
+	var colX = box1.x + vel.x < box2.x + box2.w	&& box1.x + vel.x + box1.w > box2.x;
+	var colY = box1.y + vel.y < box2.y + box2.h && box1.y + vel.y + box1.h > box2.y;
+
+	if (colX && colY){
+		var keepX = colY && (box1.x < box2.x + box2.w && box1.x + box1.w > box2.x);
+		var keepY = colX && (box1.y < box2.y + box2.h && box1.y + box1.h > box2.y);
+		vel.x *= keepX;
+		vel.y *= keepY;
+	}
+
+	return vel;
 }
 
 var blocks = [];
@@ -65,12 +72,12 @@ function run() {
 
 	for(i = blocks.length - 1; i > -1; i--){
 		if (i > 0){
-			if (boxBox(blocks[0], blocks[i], vel)){
+			var newVel = boxBox(blocks[0], blocks[i], vel);
+			if (newVel.x != vel.x && newVel.y != vel.y){
 				colour.r = 1.0;
 				colour.g = 0.0;
 				colour.b = 0.0;
-				vel.x = 0;
-				vel.y = 0;
+
 			} else {
 				colour.r = 0.0;
 				colour.g = 1.0;
