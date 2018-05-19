@@ -34,13 +34,6 @@ function pointBox(point, box){
 	&& point.y > box.y && point.y < box.y + box.h);
 }
 
-/*
-if (rect1.x < rect2.x + rect2.width &&
-   rect1.x + rect1.width > rect2.x &&
-   rect1.y < rect2.y + rect2.height &&
-   rect1.height + rect1.y > rect2.y) {
-*/
-
 function boxBox(box1, box2){
 	var pen = {
 	};
@@ -61,15 +54,11 @@ var colour = {
 
 DebugGraphics.init();
 
+vel = {x: 0, y: 0};
+
 function run() {
-	if (Keyboard.getKey('up'))
-		blocks[0].y -= 1;
-	if (Keyboard.getKey('down'))
-		blocks[0].y += 1;
-	if (Keyboard.getKey('left'))
-		blocks[0].x -= 1;
-	if (Keyboard.getKey('right'))
-		blocks[0].x += 1;
+	vel.x = Keyboard.getKey('right') + -Keyboard.getKey('left');
+	vel.y = Keyboard.getKey('down') + -Keyboard.getKey('up');
 
 	DebugGraphics.clear();
 
@@ -86,6 +75,8 @@ function run() {
 			}
 			DebugGraphics.drawRect(blocks[i].x, blocks[i].y, blocks[i].w, blocks[i].h, colour.r, colour.g, colour.b);
 		} else {
+			blocks[0].x += vel.x;
+			blocks[0].y += vel.y;
 			DebugGraphics.drawRect(blocks[i].x, blocks[i].y, blocks[i].w, blocks[i].h, 1, 1, 1);
 		}
 	}
