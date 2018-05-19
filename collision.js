@@ -34,14 +34,15 @@ function pointBox(point, box){
 	&& point.y > box.y && point.y < box.y + box.h);
 }
 
-function boxBox(box1, box2){
-	var pen = {
-	};
+function boxBox(box1, box2, vel){
+	if (vel == undefined){
+		vel = {x: 0, y: 0}
+	}
 
-	return (box1.x < box2.x + box2.w
-	&& box1.x + box1.w > box2.x
-	&& box1.y < box2.y + box2.h
-	&& box1.y + box1.h > box2.y);
+	return (box1.x + vel.x < box2.x + box2.w
+	&& box1.x + vel.x + box1.w > box2.x
+	&& box1.y + vel.y < box2.y + box2.h
+	&& box1.y + vel.y + box1.h > box2.y);
 }
 
 var blocks = [];
