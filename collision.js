@@ -65,7 +65,7 @@ function run() {
 
 	for(i = blocks.length - 1; i > 0; i--){
 		if (i > 0){
-			if (boxBox(blocks[0], blocks[i])){
+			if (boxBox(blocks[0], blocks[i], vel)){
 				colour.r = 1.0;
 				colour.g = 0.0;
 				colour.b = 0.0;
