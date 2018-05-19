@@ -60,7 +60,7 @@ blocks.push({x: 0, y: 0, w: 10, h: 600});
 blocks.push({x: 0, y: 590, w: 800, h: 10});
 blocks.push({x: 790, y: 0, w: 10, h: 600});
 blocks.push({x: 60, y: 0, w: 10, h: 540});
-blocks.push({x: 60, y: 540, w: 800, h: 10});
+blocks.push({x: 60, y: 540, w: 500, h: 10});
 blocks.push({x: 140, y: 340, w: 20, h: 200});
 blocks.push({x: 600, y: 340, w: 200, h: 20});
 blocks.push({x: 600, y: 340, w: 20, h: 220});
