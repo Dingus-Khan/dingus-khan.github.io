@@ -69,6 +69,8 @@ function run() {
 				colour.r = 1.0;
 				colour.g = 0.0;
 				colour.b = 0.0;
+				vel.x = 0;
+				vel.y = 0;
 			} else {
 				colour.r = 0.0;
 				colour.g = 1.0;
