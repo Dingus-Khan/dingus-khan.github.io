@@ -75,9 +75,11 @@ DebugGraphics.init();
 
 vel = {x: 0, y: 0};
 
+var spd = 2;
+
 function run() {
-	vel.x = Keyboard.getKey('right') + -Keyboard.getKey('left');
-	vel.y = Keyboard.getKey('down') + -Keyboard.getKey('up');
+	vel.x = (Keyboard.getKey('right') + -Keyboard.getKey('left')) * spd;
+	vel.y = (Keyboard.getKey('down') + -Keyboard.getKey('up')) * spd;
 
 	DebugGraphics.clear();
 
