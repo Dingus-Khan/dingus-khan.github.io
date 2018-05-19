@@ -63,7 +63,7 @@ function run() {
 
 	DebugGraphics.clear();
 
-	for(i = blocks.length - 1; i > 0; i--){
+	for(i = blocks.length - 1; i > -1; i--){
 		if (i > 0){
 			if (boxBox(blocks[0], blocks[i], vel)){
 				colour.r = 1.0;
