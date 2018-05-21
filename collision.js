@@ -45,7 +45,7 @@ var block = {
 	y: 200,
 	w: 100,
 	h: 100,
-	colour: {r: 1.0, g: 1.0, b: 1.0}
+	colour: {r: 0.0, g: 1.0, b: 0.0}
 };
 
 requestAnimationFrame(run);
@@ -54,5 +54,6 @@ function run() {
 
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	DebugGraphics.drawRect(block.x, block.y, block.w, block.h, block.colour.r, block.colour.g, block.colour.b);
+	DebugGraphics.drawRect(player.x, player.y, player.w, player.h, 1.0, 1.0, 1.0);
 	requestAnimationFrame(run);
 }
