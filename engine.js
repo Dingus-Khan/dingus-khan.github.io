@@ -33,8 +33,8 @@ var Physics = {
 		return (point.x > box.x && point.x < box.x + box.w
 		&& point.y > box.y && point.y < box.y + box.h);
 	},
-	circleBox = function(circle, box){
-		
+	circleBox: function(circle, box){
+
 	},
 	boxBox: function(box1, box2, vel){
 		if (vel == undefined){
