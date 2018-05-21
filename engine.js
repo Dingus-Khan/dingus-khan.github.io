@@ -29,9 +29,12 @@ var System = {
 };
 
 var Physics = {
-	PointBox: function(point, box){
+	pointBox: function(point, box){
 		return (point.x > box.x && point.x < box.x + box.w
 		&& point.y > box.y && point.y < box.y + box.h);
+	},
+	circleBox = function(circle, box){
+		
 	},
 	boxBox: function(box1, box2, vel){
 		if (vel == undefined){
@@ -49,7 +52,29 @@ var Physics = {
 		}
 		return vel;
 	},
+	getVectorDirection: function(vec){
+		var dir = "";
+		if (vec.x == 0 && vec.y == 0)
+			dir = "S";
+		else if (vec.x > 0 && vec.y == 0)
+			dir = "R";
+		else if (vec.x < 0 && vec.y == 0)
+			dir = "L";
+		else if (vec.x == 0 && vec.y > 0)
+			dir = "D";
+		else if (vec.x == 0 && vec.y < 0)
+			dir = "U";
+		else if (vec.x > 0 && vec.y > 0)
+			dir = "RD";
+		else if (vec.x > 0 && vec.y < 0)
+			dir = "RU";
+		else if (vec.x < 0 && vec.y > 0)
+			dir = "LD";
+		else if (vec.x < 0 && vec.y < 0)
+			dir = "LU";
 
+		return dir;
+	}
 };
 
 var canvas = document.getElementById("main");
