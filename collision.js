@@ -65,6 +65,16 @@ function run() {
 	player.x += vel.x;
 	player.y += vel.y;
 
+	block.colour.g = 1.0;
+	block.colour.r = 0.0;
+
+	if (Keyboard.getKey('space')){
+		if (circleCircle({x: player.x + player.hitCircle.x, y: player.y + player.hitCircle.y, r: player.hitCircle.r}, {x: block.x + block.hurtCircle.x, y: block.y + block.hurtCircle.y, r: block.hurtCircle.r })){
+			block.colour.g = 0.0;
+			block.colour.r = 1.0;
+		}
+	}
+
 	DebugGraphics.drawRect(block.x, block.y, block.w, block.h, block.colour.r, block.colour.g, block.colour.b);
 	DebugGraphics.drawRect(player.x, player.y, player.w, player.h, 1.0, 1.0, 1.0);
 
