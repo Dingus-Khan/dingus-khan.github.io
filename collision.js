@@ -24,8 +24,8 @@ function run() {
 	nearestX = Math.max(squareSpr.x, Math.min(circleSpr.x, squareSpr.x + squareSpr.w));
 
 	// circle point collision
-	distX = nearestX - circleSpr.x;
-	distY = nearestY - circleSpr.y;
+	distX = nearestX - (circleSpr.x - circleSpr.w / 2);
+	distY = nearestY - (circleSpr.y - circleSpr.h / 2);
 	dist = Math.sqrt((distX * distX) + (distY * distY));
 	if (dist < (circleSpr.w / 2))
 		console.log("hit");
