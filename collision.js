@@ -51,9 +51,10 @@ var block = {
 requestAnimationFrame(run);
 function run() {
 	DebugGraphics.clear();
-
-	gl.clear(gl.COLOR_BUFFER_BIT);
 	DebugGraphics.drawRect(block.x, block.y, block.w, block.h, block.colour.r, block.colour.g, block.colour.b);
 	DebugGraphics.drawRect(player.x, player.y, player.w, player.h, 1.0, 1.0, 1.0);
+
+	gl.clear(gl.COLOR_BUFFER_BIT);
+	DebugGraphics.draw();
 	requestAnimationFrame(run);
 }
