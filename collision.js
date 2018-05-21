@@ -54,11 +54,14 @@ var vel = {x: 0, y: 0}
 requestAnimationFrame(run);
 function run() {
 	DebugGraphics.clear();
-	DebugGraphics.drawRect(block.x, block.y, block.w, block.h, block.colour.r, block.colour.g, block.colour.b);
-	DebugGraphics.drawRect(player.x, player.y, player.w, player.h, 1.0, 1.0, 1.0);
-
 	vel.x = -(Keyboard.getKey('left') * spd) + (Keyboard.getKey('right') * spd);
 	vel.y = -(Keyboard.getKey('up') * spd) + (Keyboard.getKey('down') * spd);
+
+	player.x += vel.x;
+	player.y += vel.y;
+
+	DebugGraphics.drawRect(block.x, block.y, block.w, block.h, block.colour.r, block.colour.g, block.colour.b);
+	DebugGraphics.drawRect(player.x, player.y, player.w, player.h, 1.0, 1.0, 1.0);
 
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	DebugGraphics.draw();
