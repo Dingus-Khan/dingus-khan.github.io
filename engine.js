@@ -28,6 +28,30 @@ var System = {
 	}
 };
 
+var Physics = {
+	PointBox: function(point, box){
+		return (point.x > box.x && point.x < box.x + box.w
+		&& point.y > box.y && point.y < box.y + box.h);
+	},
+	BoxBox: function(box1, box2, vel){
+		if (vel == undefined){
+			vel = {x: 0, y: 0}
+		}
+
+		var colX = box1.x + vel.x < box2.x + box2.w	&& box1.x + vel.x + box1.w > box2.x;
+		var colY = box1.y + vel.y < box2.y + box2.h && box1.y + vel.y + box1.h > box2.y;
+
+		if (colX && colY){
+			var keepX = colY && (box1.x < box2.x + box2.w && box1.x + box1.w > box2.x);
+			var keepY = colX && (box1.y < box2.y + box2.h && box1.y + box1.h > box2.y);
+			vel.x *= keepX;
+			vel.y *= keepY;
+		}
+
+		return vel;
+	}
+};
+
 var canvas = document.getElementById("main");
 var gl = canvas.getContext("webgl2");
 
