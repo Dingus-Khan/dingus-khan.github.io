@@ -52,7 +52,7 @@ var block = {
 		y: 50,
 		r: 50
 	},
-	hp = 200,
+	hp: 200,
 };
 
 var spd = 2;
