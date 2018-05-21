@@ -61,7 +61,7 @@ var Physics = {
 		this.y1 = y1 || 0;
 		this.x2 = x2 || 0;
 		this.y2 = y2 || 0;
-	}
+	},
 	Box: function(x, y, w, h){
 		this.x = x || 0;
 		this.y = y || 0;
