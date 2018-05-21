@@ -14,7 +14,7 @@ var circleTex = new Texture("circle.png");
 var circleSpr = new Sprite(0, 0, 100, 100, 0, 0, 100, 100, circleTex);
 
 var squareTex = new Texture("square.png");
-var squareSpr = new Sprite(200, 450, 100, 100, 0, 0, 100, 100, squareTex);
+var squareSpr = new Sprite(300, 250, 100, 100, 0, 0, 100, 100, squareTex);
 
 function run() {
 	circleSpr.x = Mouse.x - (circleSpr.w / 2);
