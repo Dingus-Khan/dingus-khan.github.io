@@ -33,7 +33,7 @@ var Physics = {
 		return (point.x > box.x && point.x < box.x + box.w
 		&& point.y > box.y && point.y < box.y + box.h);
 	},
-	BoxBox: function(box1, box2, vel){
+	boxBox: function(box1, box2, vel){
 		if (vel == undefined){
 			vel = {x: 0, y: 0}
 		}
@@ -47,9 +47,9 @@ var Physics = {
 			vel.x *= keepX;
 			vel.y *= keepY;
 		}
-
 		return vel;
-	}
+	},
+
 };
 
 var canvas = document.getElementById("main");

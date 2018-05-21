@@ -54,41 +54,17 @@ vel = {x: 0, y: 0};
 
 var spd = 2;
 
-function getDirection(vel){
-	var dir = "";
-	if (vel.x == 0 && vel.y == 0)
-		dir = "S";
-	else if (vel.x > 0 && vel.y == 0)
-		dir = "R";
-	else if (vel.x < 0 && vel.y == 0)
-		dir = "L";
-	else if (vel.x == 0 && vel.y > 0)
-		dir = "D";
-	else if (vel.x == 0 && vel.y < 0)
-		dir = "U";
-	else if (vel.x > 0 && vel.y > 0)
-		dir = "RD";
-	else if (vel.x > 0 && vel.y < 0)
-		dir = "RU";
-	else if (vel.x < 0 && vel.y > 0)
-		dir = "LD";
-	else if (vel.x < 0 && vel.y < 0)
-		dir = "LU";
-
-	return dir;
-}
-
 function run() {
 	vel.x = (Keyboard.getKey('right') + -Keyboard.getKey('left')) * spd;
 	vel.y = (Keyboard.getKey('down') + -Keyboard.getKey('up')) * spd;
 
-	console.log(getDirection(vel));
+	console.log(Physics.getDirection(vel));
 
 	DebugGraphics.clear();
 
 	for(i = blocks.length - 1; i > -1; i--){
 		if (i > 0){
-			var newVel = Physics.BoxBox(blocks[0], blocks[i], vel);
+			var newVel = Physics.boxBox(blocks[0], blocks[i], vel);
 			if (newVel.x != vel.x && newVel.y != vel.y){
 				colour.r = 1.0;
 				colour.g = 0.0;
