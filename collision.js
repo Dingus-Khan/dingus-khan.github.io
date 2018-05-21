@@ -58,7 +58,7 @@ function run() {
 	vel.x = (Keyboard.getKey('right') + -Keyboard.getKey('left')) * spd;
 	vel.y = (Keyboard.getKey('down') + -Keyboard.getKey('up')) * spd;
 
-	console.log(Physics.getDirection(vel));
+	console.log(Physics.getVectorDirection(vel));
 
 	DebugGraphics.clear();
 
