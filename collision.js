@@ -36,8 +36,9 @@ var player = {
 	hurtCircle: {
 		x: 25,
 		y: 25,
-		r: 25
+		r: 50
 	},
+	dmg: 1,
 };
 
 var block = {
@@ -50,7 +51,8 @@ var block = {
 		x: 50,
 		y: 50,
 		r: 50
-	}
+	},
+	hp = 200,
 };
 
 var spd = 2;
@@ -68,10 +70,16 @@ function run() {
 	block.colour.g = 1.0;
 	block.colour.r = 0.0;
 
+	if (block.hp <= 0){
+		block.w = 0;
+		block.h = 0;
+	}
+
 	if (Keyboard.getKey('space')){
 		if (circleCircle({x: player.x + player.hitCircle.x, y: player.y + player.hitCircle.y, r: player.hitCircle.r}, {x: block.x + block.hurtCircle.x, y: block.y + block.hurtCircle.y, r: block.hurtCircle.r })){
 			block.colour.g = 0.0;
 			block.colour.r = 1.0;
+			block.hp -= 1;
 		}
 	}
 
