@@ -20,8 +20,8 @@ function run() {
 	circleSpr.x = Mouse.x - (circleSpr.w / 2);
 	circleSpr.y = Mouse.y - (circleSpr.h / 2);
 
-	nearestY = Math.Max(squareSpr.y, Math.Min(circleSpr.y, squareSpr.y + squareSpr.h));
-	nearestX = Math.Max(squareSpr.x, Math.Min(circleSpr.x, squareSpr.x + squareSpr.w));
+	nearestY = Math.max(squareSpr.y, Math.min(circleSpr.y, squareSpr.y + squareSpr.h));
+	nearestX = Math.max(squareSpr.x, Math.min(circleSpr.x, squareSpr.x + squareSpr.w));
 
 	console.log(nearestX + " " + nearestY);
 
