@@ -23,7 +23,12 @@ function run() {
 	nearestY = Math.max(squareSpr.y, Math.min(circleSpr.y, squareSpr.y + squareSpr.h));
 	nearestX = Math.max(squareSpr.x, Math.min(circleSpr.x, squareSpr.x + squareSpr.w));
 
-	console.log(nearestX + " " + nearestY);
+	// circle point collision
+	distX = nearestX - circleSpr.x;
+	distY = nearestY - circleSpr.y;
+	dist = Math.sqrt((distX * distX) + (distY * distY));
+	if (dist < (circleSpr.w / 2))
+		console.log("hit");
 
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	squareSpr.draw();
