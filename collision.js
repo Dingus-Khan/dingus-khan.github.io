@@ -14,8 +14,8 @@ var circleTex = new Texture("circle.png");
 var circleSpr = new Sprite(0, 0, 100, 100, 0, 0, 100, 100, circleTex);
 
 function run() {
-	circleSpr.x = Mouse.x;
-	circleSpr.y = Mouse.y;
+	circleSpr.x = Mouse.x - (circleSpr.w / 2);
+	circleSpr.y = Mouse.y - (circleSpr.h / 2);
 
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	circleSpr.draw();
