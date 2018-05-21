@@ -8,30 +8,51 @@ Keyboard.registerKey('d', 68);
 Keyboard.registerKey('s', 83);
 Keyboard.registerKey('w', 87);
 
+function circlePoint(circle, point){
+	dX = point.x - circle.x;
+	dY = point.y - circle.y;
+	return ((dX * dX) + (dY * dY) < (circle.r * circle.r));
+}
+
+function circleCircle(circle1, circle2){
+	dX = circle2.x - circle1.x;
+	dY = circle2.y - circle1.y;
+	r = circle1.r + circle2.r;
+	return ((dX * dX) + (dY * dY) < (r * r));
+}
+
+DebugGraphics.init();
+
+var player = {
+	x: 0,
+	y: 0,
+	w: 50,
+	h: 50,
+	hitCircle: {
+		x: 40,
+		y: 25,
+		r: 25
+	},
+	hurtCircle: {
+		x: 25,
+		y: 25,
+		r: 25
+	},
+};
+
+var block = {
+	x: 200,
+	y: 200,
+	w: 100,
+	h: 100,
+	colour: {r: 1.0, g: 1.0, b: 1.0}
+};
+
 requestAnimationFrame(run);
-
-var circleTex = new Texture("circle.png");
-var circleSpr = new Sprite(0, 0, 100, 100, 0, 0, 100, 100, circleTex);
-
-var squareTex = new Texture("square.png");
-var squareSpr = new Sprite(300, 250, 100, 100, 0, 0, 100, 100, squareTex);
-
 function run() {
-	circleSpr.x = Mouse.x - (circleSpr.w / 2);
-	circleSpr.y = Mouse.y - (circleSpr.h / 2);
-
-	nearestY = Math.max(squareSpr.y, Math.min(circleSpr.y, squareSpr.y + squareSpr.h));
-	nearestX = Math.max(squareSpr.x, Math.min(circleSpr.x, squareSpr.x + squareSpr.w));
-
-	// circle point collision
-	distX = nearestX - (circleSpr.x - circleSpr.w / 2);
-	distY = nearestY - (circleSpr.y - circleSpr.h / 2);
-	dist = Math.sqrt((distX * distX) + (distY * distY));
-	if (dist < (circleSpr.w / 2))
-		console.log("hit");
+	DebugGraphics.clear();
 
 	gl.clear(gl.COLOR_BUFFER_BIT);
-	squareSpr.draw();
-	circleSpr.draw();
+	DebugGraphics.drawRect(block.x, block.y, block.w, block.h, block.colour.r, block.colour.g, block.colour.b);
 	requestAnimationFrame(run);
 }
