@@ -45,7 +45,12 @@ var block = {
 	y: 200,
 	w: 100,
 	h: 100,
-	colour: {r: 0.0, g: 1.0, b: 0.0}
+	colour: {r: 0.0, g: 1.0, b: 0.0},
+	hurtCircle: {
+		x: 50,
+		y: 50,
+		r: 50
+	}
 };
 
 var spd = 2;
