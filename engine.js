@@ -27,11 +27,57 @@ var System = {
 		gl.deleteProgram(program);
 	}
 };
+var DebugGraphics = {
+	texture: {},
+	shapes: [],
+	init: function(){
+		this.texture = new Texture("debug.png");
+	},
+	drawRect: function(x, y, w, h, r, g, b){
+		this.shapes.push(new Sprite(x, y, w, h, 0, 0, 1, 1, this.texture, r, g, b));
+	},
+	draw: function(){
+		for(i = 0; i < this.shapes.length; i++){
+			this.shapes[i].draw();
+		}
+	},
+	clear: function(){
+		this.shapes = [];
+	},
+};
 
 var Physics = {
+	Point: function(x, y){
+		this.x = x || 0;
+		this.y = y || 0;
+	},
+	Circle: function(x, y, radius){
+		this.x = x || 0;
+		this.y = y || 0;
+		this.radius = radius || 0;
+	},
+	Line: function(x1, y1, x2, y2){
+		this.x1 = x1 || 0;
+		this.y1 = y1 || 0;
+		this.x2 = x2 || 0;
+		this.y2 = y2 || 0;
+	}
+	Box: function(x, y, w, h){
+		this.x = x || 0;
+		this.y = y || 0;
+		this.w = w || 0;
+		this.h = h || 0;
+	},
+
 	pointBox: function(point, box){
 		return (point.x > box.x && point.x < box.x + box.w
 		&& point.y > box.y && point.y < box.y + box.h);
+	},
+	circleCircle: function(circle1, circle2){
+		var xdist = circle2.x - circle1.x;
+		var ydist = circle2.y - circle1.y;
+		var dist = Math.sqrt((xdist * xdist) + (ydist * ydist));
+		return dist < (circle1.radius + circle2.radius);
 	},
 	circleBox: function(circle, box){
 
