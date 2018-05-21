@@ -68,7 +68,6 @@ var Physics = {
 		this.w = w || 0;
 		this.h = h || 0;
 	},
-
 	pointBox: function(point, box){
 		return (point.x > box.x && point.x < box.x + box.w
 		&& point.y > box.y && point.y < box.y + box.h);
