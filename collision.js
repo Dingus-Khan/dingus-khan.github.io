@@ -92,12 +92,13 @@ function run() {
 			block.colour.g = 0.0;
 			block.colour.r = 1.0;
 			block.hp -= 1;
-			Keyboard.setKey('space', false);
 		}
 	}
 
 	DebugGraphics.drawRect(block.x, block.y, block.w, block.h, block.colour.r, block.colour.g, block.colour.b);
 	DebugGraphics.drawRect(player.x, player.y, player.w, player.h, 1.0, 1.0, 1.0);
+
+	console.log(Keyboard.wasKeyPressed('space'));
 
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	DebugGraphics.draw();

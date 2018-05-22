@@ -127,16 +127,21 @@ var gl = canvas.getContext("webgl2");
 
 var Keyboard = {
 	keyDown: {},
+	keyPressed: {},
 	keyMap: {},
 	registerKey: function(key, code){
 		this.keyMap[key] = code;
 		this.keyDown[this.keyMap[key]] = false;
+		this.keyPressed[this.keyMap[key]] = false;
 	},
 	getKey: function(key){
 		return this.keyDown[this.keyMap[key]];
 	},
-	setKey: function(key, value){
-		this.keyDown[this.keyMap[key]] = value;
+	wasKeyPressed: function(key){
+		if (this.getKey(key) == true && this.keyPressed[this.keyMap[key]] == false){
+			this.keyPressed[this.keyMap[key]] = true;
+			return true;
+		}
 	}
 };
 
