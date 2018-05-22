@@ -143,7 +143,11 @@ var Keyboard = {
 };
 
 document.addEventListener("keydown", function(e){
-	Keyboard.keyPressed[e.which] = !Keyboard.keyDown[e.which];
+	if (Keyboard.keyDown[e.which] == false){
+		Keyboard.keyPressed[e.which] = true;
+	} else {
+		Keyboard.keyPressed[e.which] = false;
+	}
 	Keyboard.keyDown[e.which] = true;
 });
 
