@@ -138,7 +138,7 @@ var Keyboard = {
 		return this.keyDown[this.keyMap[key]];
 	},
 	wasKeyPressed: function(key){
-		return this.getKey(key) == true && this.keyPressed[this.keyMap[key]] == false;
+		return this.keyPressed[this.keyMap[key]];
 	}
 };
 
