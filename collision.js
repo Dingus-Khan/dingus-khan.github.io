@@ -62,9 +62,9 @@ var bullets = {
 			projectiles.x += projectiles.spd;
 		}
 	},
-	fire: function(x, y, spd, dmg){
-
-	}
+	fire: function(x, y, spd, dmg, range){
+		this.projectiles.push({ x: x, y: y, spd: spd, dmg: dmg, range: range, oX: x, oY: y });
+	},
 };
 
 var spd = 2;
@@ -93,13 +93,28 @@ function run() {
 			block.colour.r = 1.0;
 			block.hp -= 1;
 		}
+
+		bullets.fire(player.x, player.y, 2, 10, 200);
 	}
 
 	DebugGraphics.drawRect(block.x, block.y, block.w, block.h, block.colour.r, block.colour.g, block.colour.b);
 	DebugGraphics.drawRect(player.x, player.y, player.w, player.h, 1.0, 1.0, 1.0);
 
-	Keyboard.update();
+	bullets.update();
 
+	for(i = 0; i < bullets.projectiles.length; i++){
+		DebugGraphics.drawRect({
+			bullets.projectiles[i].x,
+			bullets.projectiles[i].y,
+			10,
+			10,
+			0.0,
+			0.0,
+			1.0
+		});
+	}
+
+	Keyboard.update();
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	DebugGraphics.draw();
 	requestAnimationFrame(run);
