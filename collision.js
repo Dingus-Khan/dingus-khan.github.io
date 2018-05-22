@@ -59,7 +59,9 @@ var bullets = {
 	projectiles: [],
 	update: function(){
 		for(i = 0; i < this.projectiles.length; i++){
-			this.projectiles.x += this.projectiles.spd;
+			this.projectiles[i].x += this.projectiles[i].spd;
+			if (this.projectiles[i].x - this.projectiles[i].oX > this.projectiles[i].range)
+				this.projectiles[i] = {};
 		}
 	},
 	fire: function(x, y, spd, dmg, range){
