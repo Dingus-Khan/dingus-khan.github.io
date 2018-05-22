@@ -2,7 +2,7 @@ Keyboard.registerKey('left', 37);
 Keyboard.registerKey('up', 38);
 Keyboard.registerKey('right', 39);
 Keyboard.registerKey('down', 40);
-Keyboard.registerKey('space', 32);
+Keyboard.registerKey('z', 32);
 Keyboard.registerKey('a', 65);
 Keyboard.registerKey('d', 68);
 Keyboard.registerKey('s', 83);
@@ -95,7 +95,7 @@ function run() {
 		block.h = 0;
 	}
 
-	if (Keyboard.wasKeyPressed('space')){
+	if (Keyboard.wasKeyPressed('z')){
 		if (circleCircle({x: player.x + player.hitCircle.x, y: player.y + player.hitCircle.y, r: player.hitCircle.r}, {x: block.x + block.hurtCircle.x, y: block.y + block.hurtCircle.y, r: block.hurtCircle.r })){
 			block.colour.g = 0.0;
 			block.colour.r = 1.0;
