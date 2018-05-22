@@ -134,6 +134,9 @@ var Keyboard = {
 	},
 	getKey: function(key){
 		return this.keyDown[this.keyMap[key]];
+	},
+	setKey: function(key, value){
+		this.keyDown[this.keyMap[key]] = value;
 	}
 };
 

@@ -92,7 +92,7 @@ function run() {
 			block.colour.g = 0.0;
 			block.colour.r = 1.0;
 			block.hp -= 1;
-			Keyboard.keyDown[this.keyMap['space']] = false;
+			Keyboard.setKey('space', false);
 		}
 	}
 
