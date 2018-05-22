@@ -151,6 +151,7 @@ document.addEventListener("keydown", function(e){
 
 document.addEventListener("keyup", function(e){
 	Keyboard.keyDown[e.which] = false;
+	Keyboard.keyPressed[e.which] = false;
 });
 
 var Mouse = {
