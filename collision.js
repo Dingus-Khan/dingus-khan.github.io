@@ -58,8 +58,8 @@ var block = {
 var bullets = {
 	projectiles: [],
 	update: function(){
-		for(i = 0; i < projectiles.length; i++){
-			projectiles.x += projectiles.spd;
+		for(i = 0; i < this.projectiles.length; i++){
+			this.projectiles.x += this.projectiles.spd;
 		}
 	},
 	fire: function(x, y, spd, dmg, range){
