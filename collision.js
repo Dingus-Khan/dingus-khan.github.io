@@ -61,7 +61,7 @@ var bullets = {
 		for(i = 0; i < this.projectiles.length; i++){
 			this.projectiles[i].x += this.projectiles[i].spd;
 			if (this.projectiles[i].x - this.projectiles[i].oX > this.projectiles[i].range)
-				this.projectiles[i] = {};
+				this.projectiles.splice(i);
 		}
 	},
 	fire: function(x, y, spd, dmg, range){
