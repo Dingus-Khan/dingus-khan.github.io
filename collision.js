@@ -65,8 +65,7 @@ var bullets = {
 				block.colour.r = 1.0;
 				block.hp -= this.projectiles[i].dmg;
 				this.projectiles.splice(i, 1);
-			}
-			if (this.projectiles[i].x - this.projectiles[i].oX > this.projectiles[i].range){
+			} else if (this.projectiles[i].x - this.projectiles[i].oX > this.projectiles[i].range){
 				this.projectiles.splice(i, 1);
 			}
 		}
