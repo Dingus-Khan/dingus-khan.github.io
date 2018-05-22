@@ -105,10 +105,10 @@ function run() {
 		bullets.fire(player.x, player.y, 2, 10, 200);
 	}
 
+	bullets.update();
+
 	DebugGraphics.drawRect(block.x, block.y, block.w, block.h, block.colour.r, block.colour.g, block.colour.b);
 	DebugGraphics.drawRect(player.x, player.y, player.w, player.h, 1.0, 1.0, 1.0);
-
-	bullets.update();
 
 	for(i = 0; i < bullets.projectiles.length; i++){
 		DebugGraphics.drawRect(
