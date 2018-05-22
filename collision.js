@@ -103,7 +103,7 @@ function run() {
 	bullets.update();
 
 	for(i = 0; i < bullets.projectiles.length; i++){
-		DebugGraphics.drawRect({
+		DebugGraphics.drawRect(
 			bullets.projectiles[i].x,
 			bullets.projectiles[i].y,
 			10,
@@ -111,7 +111,7 @@ function run() {
 			0.0,
 			0.0,
 			1.0
-		});
+		);
 	}
 
 	Keyboard.update();
