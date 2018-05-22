@@ -55,6 +55,18 @@ var block = {
 	hp: 200,
 };
 
+var bullets = {
+	projectiles: [],
+	update: function(){
+		for(i = 0; i < projectiles.length; i++){
+			projectiles.x += projectiles.spd;
+		}
+	},
+	fire: function(x, y, spd, dmg){
+
+	}
+};
+
 var spd = 2;
 var vel = {x: 0, y: 0}
 
@@ -80,6 +92,7 @@ function run() {
 			block.colour.g = 0.0;
 			block.colour.r = 1.0;
 			block.hp -= 1;
+			Keyboard.keyDown[this.keyMap['space']] = false;
 		}
 	}
 
