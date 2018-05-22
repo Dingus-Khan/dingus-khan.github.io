@@ -102,7 +102,7 @@ function run() {
 			block.hp -= 1;
 		}
 
-		bullets.fire(player.x, player.y, 2, 10, 200);
+		bullets.fire(player.x, player.y, 25, 10, 2000);
 	}
 
 	bullets.update();
