@@ -2,7 +2,7 @@ Keyboard.registerKey('left', 37);
 Keyboard.registerKey('up', 38);
 Keyboard.registerKey('right', 39);
 Keyboard.registerKey('down', 40);
-Keyboard.registerKey('z', 32);
+Keyboard.registerKey('z', 90);
 Keyboard.registerKey('a', 65);
 Keyboard.registerKey('d', 68);
 Keyboard.registerKey('s', 83);
