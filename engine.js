@@ -139,6 +139,11 @@ var Keyboard = {
 	},
 	wasKeyPressed: function(key){
 		return this.keyPressed[this.keyMap[key]];
+	},
+	update: function(){
+		for(var prop in this.keyMap){
+			this.keyPressed[this.keyMap[prop]] = false;
+		}
 	}
 };
 
