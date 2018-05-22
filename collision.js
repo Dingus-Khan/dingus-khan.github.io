@@ -60,8 +60,14 @@ var bullets = {
 	update: function(){
 		for(i = 0; i < this.projectiles.length; i++){
 			this.projectiles[i].x += this.projectiles[i].spd;
-			if (this.projectiles[i].x - this.projectiles[i].oX > this.projectiles[i].range)
+			if (circlePoint({x: block.x + block.hurtCircle.x, y: block.y + block.hurtCircle.y, r: block.hurtCircle.r}, {x: this.projectiles[i].x + 5, this.projectiles[i].y + 5})){
+				block.colour.g = 0.0;
+				block.colour.r = 1.0;
+				block.hp -= this.projectiles[i].dmg;
+			}
+			if (this.projectiles[i].x - this.projectiles[i].oX > this.projectiles[i].range){
 				this.projectiles.splice(i, 1);
+			}
 		}
 	},
 	fire: function(x, y, spd, dmg, range){
