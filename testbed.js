@@ -40,6 +40,11 @@ var Camera = {
 		if (trauma > 0){
 			trauma--;
 		}
+		var shakeX = (trauma * (-1 + getRandomInt(2));
+		var shakeY = (trauma * (-1 + getRandomInt(2));
+		var shakeR = (trauma * (-30 + getRandomInt(60));
+
+		console.log(shakeX + " " + shakeY + " " + shakeR);
 	}
 };
 
@@ -48,6 +53,7 @@ var sprite = new Sprite(0, 0, 120, 120, 0, 0, 120, 120, spritesheet, 1.0, 1.0, 1
 
 requestAnimationFrame(run);
 function run() {
+	Camera.update();
 	Keyboard.update();
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	sprite.draw();
