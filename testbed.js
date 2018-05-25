@@ -46,8 +46,6 @@ var Camera = {
 
 		this.panTo(shakeX, shakeY);
 		this.rotateTo(shakeR);
-
-		console.log(shakeX + " " + shakeY + " " + shakeR);
 	}
 };
 
