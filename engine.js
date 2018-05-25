@@ -553,7 +553,7 @@ uniform mat4 model;
 void main(){
     Tex = tex / texSize;
 	Col = col;
-    gl_Position = model * view * proj * vec4(pos, 0.0, 1.0);
+    gl_Position = proj * view * model * vec4(pos, 0.0, 1.0);
 }`;
 
 var fragmentShader = `#version 300 es
