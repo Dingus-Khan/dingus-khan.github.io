@@ -567,7 +567,7 @@ var Camera = {
 	},
 	update: function(){
 		if (this.trauma > 0){
-			this.trauma *= 0.75;
+			this.trauma *= 0.95;
 		}
 		var shakeX = (this.trauma * (-1 + getRandomInt(3)));
 		var shakeY = (this.trauma * (-1 + getRandomInt(3)));
