@@ -37,12 +37,12 @@ var Camera = {
 		return this.matrix;
 	},
 	update: function(){
-		if (trauma > 0){
-			trauma--;
+		if (this.trauma > 0){
+			this.trauma--;
 		}
-		var shakeX = (trauma * (-1 + getRandomInt(2)));
-		var shakeY = (trauma * (-1 + getRandomInt(2)));
-		var shakeR = (trauma * (-30 + getRandomInt(60)));
+		var shakeX = (this.trauma * (-1 + getRandomInt(2)));
+		var shakeY = (this.trauma * (-1 + getRandomInt(2)));
+		var shakeR = (this.trauma * (-30 + getRandomInt(60)));
 
 		console.log(shakeX + " " + shakeY + " " + shakeR);
 	}
