@@ -326,10 +326,10 @@ function Sprite(x, y, w, h, tx, ty, tw, th, texture, r, g, b){
 		gl.uniform2f(texSize, this.tex.texture.image.width, this.tex.texture.image.height);
 
 		var viewLoc = gl.getUniformLocation(program, "view");
-		gl.uniformMatrix4fv(viewLoc, false, Camera.getModel());
+		gl.uniformMatrix4fv(viewLoc, false, Camera.getMatrix());
 
 		var modelLoc = gl.getUniformLocation(program, "model");
-		gl.uniformMatrix4fv(modelLoc, false, this.getMatrix());
+		gl.uniformMatrix4fv(modelLoc, false, this.getModel());
 
 		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 	}
