@@ -37,9 +37,13 @@ var Camera = {
 	},
 };
 
+var spritesheet = new Texture("test.png");
+var sprite = new Sprite(0, 0, 60, 60, 0, 0, 60, 60, spritesheet, 1.0, 1.0, 1.0);
+
 requestAnimationFrame(run);
 function run() {
 	Keyboard.update();
 	gl.clear(gl.COLOR_BUFFER_BIT);
+	sprite.draw();
 	requestAnimationFrame(run);
 }
