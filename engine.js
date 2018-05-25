@@ -527,9 +527,9 @@ var TileBatch = {
 			gl.uniform2f(texSize, this.tex.image.width, this.tex.image.height);
 
 			var modelLoc = gl.getUniformLocation(program, "model");
-			gl.uniformMatrix4fv(modelLoc, false, [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
+			gl.uniformMatrix4fv(modelLoc, false, Matrix.identity());
 
-			gl.drawArrays(gl.TRIANGLES, 0, this.tileData.length / 4);
+			gl.drawArrays(gl.TRIANGLES, 0, this.tileData.length / 7);
 		}
 	}
 };
