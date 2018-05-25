@@ -44,6 +44,9 @@ var Camera = {
 		var shakeY = (this.trauma * (-1 + getRandomInt(2)));
 		var shakeR = (this.trauma * (-30 + getRandomInt(60)));
 
+		this.panTo(shakeX, shakeY);
+		this.rotateTo(shakeR);
+
 		console.log(shakeX + " " + shakeY + " " + shakeR);
 	}
 };
