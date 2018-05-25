@@ -13,6 +13,9 @@
 		<button onclick="Camera.trauma += 10;">shake</button>
 		<button onclick="Camera.trauma += 50;">SHAKE</button>
 		<button onclick="Camera.trauma += 999;">SAAAAAAAKE</button>
+		<br>
+		<button onclick="var t = parseInt(document.getElementById('trauma').value; Camera.trauma += t;)"></button>
+		<input type="number" value="0" id="trauma" />
 		<script src="engine.js"></script>
 		<script src="testbed.js" defer></script>
 	</body>

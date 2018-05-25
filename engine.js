@@ -559,7 +559,11 @@ var Camera = {
 		if(this.updateMatrix){
 			this.matrix = Matrix.identity();
 			this.matrix = Matrix.translate(this.matrix, this.x, this.y);
+
+			this.matrix = Matrix.translate(this.matrix, -400, -300);
 			this.matrix = Matrix.rotate(this.matrix, this.r);
+			this.matrix = Matrix.translate(this.matrix, 400, 300);
+
 			this.matrix = Matrix.scale(this.matrix, this.z, this.z);
 			this.updateMatrix = false;
 		}
@@ -572,7 +576,7 @@ var Camera = {
 		var shakeX = (this.trauma * (-1 + getRandomInt(3)));
 		var shakeY = (this.trauma * (-1 + getRandomInt(3)));
 		var shakeR = (this.trauma * (0.03 * (-1 + getRandomInt(3))));
-		
+
 
 		this.panTo(shakeX, shakeY);
 		this.rotateTo(shakeR);
