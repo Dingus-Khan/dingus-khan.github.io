@@ -67,8 +67,8 @@ var Matrix = {
 			0, 0, 0, 1
 		];
 	},
-	scale: function(m, s){
-		return this.multiply(m, this.scaling(s));
+	scale: function(m, sx, sy){
+		return this.multiply(m, this.scaling(sx, sy));
 	},
 	multiply: function(m1, m2){
 		return [
