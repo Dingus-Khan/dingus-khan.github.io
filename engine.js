@@ -42,7 +42,7 @@ var Matrix = {
 			1, 0, 0, 0,
 			0, 1, 0, 0,
 			0, 0, 1, 0,
-			Math.round(x), Math,round(y), 0, 1
+			Math.round(x), Math.round(y), 0, 1
 		];
 	},
 	translate: function(m, x, y){
