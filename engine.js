@@ -52,8 +52,8 @@ var Matrix = {
 		var sine = Math.sin(r);
 		var cosine = Math.cos(r);
 		return [
-			c, -s, 0, 0,
-			s, c, 0, 0,
+			cosine, -sine, 0, 0,
+			sine, cosine, 0, 0,
 			0, 0, 1, 0,
 			0, 0, 0, 1
 		];
