@@ -40,9 +40,9 @@ var Camera = {
 		if (trauma > 0){
 			trauma--;
 		}
-		var shakeX = (trauma * (-1 + getRandomInt(2));
-		var shakeY = (trauma * (-1 + getRandomInt(2));
-		var shakeR = (trauma * (-30 + getRandomInt(60));
+		var shakeX = (trauma * (-1 + getRandomInt(2)));
+		var shakeY = (trauma * (-1 + getRandomInt(2)));
+		var shakeR = (trauma * (-30 + getRandomInt(60)));
 
 		console.log(shakeX + " " + shakeY + " " + shakeR);
 	}
