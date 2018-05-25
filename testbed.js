@@ -30,7 +30,7 @@ var Camera = {
 			this.matrix = Matrix.identity();
 			this.matrix = Matrix.translate(this.matrix, this.x, this.y);
 			this.matrix = Matrix.rotate(this.matrix, this.r);
-			this.matrix = Matrix.scale(this.matrix, this.z);
+			this.matrix = Matrix.scale(this.matrix, this.z, this.z);
 			this.update = false;
 		}
 		return this.matrix;
