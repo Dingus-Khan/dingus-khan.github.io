@@ -49,9 +49,11 @@ var Matrix = {
 		return this.multiply(m, this.translation(x, y));
 	},
 	rotation: function(r){
+		var sine = Math.sin(r);
+		var cosine = Math.cos(r);
 		return [
-			1, 0, 0, 0,
-			0, 1, 0, 0,
+			c, -s, 0, 0,
+			s, c, 0, 0,
 			0, 0, 1, 0,
 			0, 0, 0, 1
 		];

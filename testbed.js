@@ -12,12 +12,12 @@ var Camera = {
 	z: 1,
 	update: true,
 	matrix: Matrix.identity(),
-	pan: function(x, y){
+	panTo: function(x, y){
 		this.x = -x;
 		this.y = -y;
 		this.update = true;
 	},
-	rotate: function(r){
+	rotateTo: function(r){
 		this.r = -r;
 		this.update = true;
 	},
