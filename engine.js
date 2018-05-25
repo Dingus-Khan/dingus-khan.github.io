@@ -571,6 +571,7 @@ var Camera = {
 		}
 		var shakeX = (this.trauma * (-1 + getRandomInt(3)));
 		var shakeY = (this.trauma * (-1 + getRandomInt(3)));
+		var shakeR = (this.trauma * 0.3);
 
 		this.panTo(shakeX, shakeY);
 	}
