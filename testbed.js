@@ -9,7 +9,7 @@ var Camera = {
 	x: 0,
 	y: 0,
 	r: 0,
-	z: 0,
+	z: 1,
 	update: true,
 	matrix: Matrix.identity(),
 	pan: function(x, y){
