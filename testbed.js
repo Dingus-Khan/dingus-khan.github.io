@@ -2,7 +2,7 @@
 var ShaderCache = {
 	"sprite": {},
 	"debug": {},
-	"til0e": {},
+	"tile": {},
 };
 
 var Camera = {

@@ -325,6 +325,9 @@ function Sprite(x, y, w, h, tx, ty, tw, th, texture, r, g, b){
 		var texSize = gl.getUniformLocation(program, "texSize");
 		gl.uniform2f(texSize, this.tex.texture.image.width, this.tex.texture.image.height);
 
+		var viewLoc = gl.getUniformLocation(program, "view");
+		gl.uniformMatrix4fv(viewLoc, false, Camera.getModel());
+
 		var modelLoc = gl.getUniformLocation(program, "model");
 		gl.uniformMatrix4fv(modelLoc, false, this.getModel());
 
@@ -538,12 +541,13 @@ out vec3 Col;
 
 uniform vec2 texSize;
 uniform mat4 proj;
+uniform mat4 view;
 uniform mat4 model;
 
 void main(){
     Tex = tex / texSize;
 	Col = col;
-    gl_Position = proj * model * vec4(pos, 0.0, 1.0);
+    gl_Position = proj * view * model * vec4(pos, 0.0, 1.0);
 }`;
 
 var fragmentShader = `#version 300 es
