@@ -8,9 +8,9 @@ var ShaderCache = {
 var Camera = {
 	x: 0,
 	y: 0,
-	trauma: 0,
 	r: 0,
 	z: 1,
+	trauma: 0,
 	updateMatrix: true,
 	matrix: Matrix.identity(),
 	panTo: function(x, y){
@@ -38,14 +38,12 @@ var Camera = {
 	},
 	update: function(){
 		if (this.trauma > 0){
-			this.trauma--;
+			this.trauma *= 0.75;
 		}
 		var shakeX = (this.trauma * (-1 + getRandomInt(2)));
 		var shakeY = (this.trauma * (-1 + getRandomInt(2)));
-		var shakeR = (this.trauma * (-30 + getRandomInt(60)));
 
 		this.panTo(shakeX, shakeY);
-		this.rotateTo(shakeR);
 	}
 };
 
