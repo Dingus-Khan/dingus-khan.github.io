@@ -14,8 +14,12 @@
 		<button onclick="Camera.trauma += 50;">SHAKE</button>
 		<button onclick="Camera.trauma += 999;">SAAAAAAAKE</button>
 		<br>
-		<button onclick="var t = parseInt(document.getElementById('trauma').value); Camera.trauma += t;">Custom shake fam</button>
-		<input type="number" value="0" id="trauma" />
+		<button onclick="var t = parseInt(document.getElementById('trauma').value); Camera.trauma = t;">CUSTOM SHAKE FAM</button>
+		<input type="number" value="1" id="trauma" />
+		<br>
+		<button onclick="var t = parseInt(document.getElementById('traumaDecay').value); Camera.traumaDecay = t;">Change the shake decay yeh blud</button>
+		<input type="number" value="0.95" id="traumaDecay" />
+		<br>
 		<script src="engine.js"></script>
 		<script src="testbed.js" defer></script>
 	</body>

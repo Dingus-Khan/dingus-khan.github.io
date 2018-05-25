@@ -540,6 +540,7 @@ var Camera = {
 	r: 0,
 	z: 1,
 	trauma: 0,
+	traumaDecay: 0.95,
 	updateMatrix: true,
 	matrix: Matrix.identity(),
 	panTo: function(x, y){
@@ -571,7 +572,7 @@ var Camera = {
 	},
 	update: function(){
 		if (this.trauma > 0){
-			this.trauma *= 0.95;
+			this.trauma *= this.traumaDecay;
 		}
 		var shakeX = (this.trauma * (-1 + getRandomInt(3)));
 		var shakeY = (this.trauma * (-1 + getRandomInt(3)));
