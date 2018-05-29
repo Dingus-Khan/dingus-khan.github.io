@@ -202,17 +202,40 @@ var Drawing = {
 		TRIANGLE_STRIP: gl.TRIANGLE_STRIP,
 		TRIANGLE_FAN: gl.TRIANGLE_FAN
 	},
-	VertexArray: function(drawMode){
+	VertexArray: function(drawMode, texture){
 		this.drawMode = drawMode;
+		this.texture = texture;
+		this.vertices = [];
+		this.update = true;
 
 		this.vao = gl.createVertexArray();
 		this.vbo = gl.createBuffer();
 		gl.bindVertexArray(this.vao);
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 
-		this.draw = function(){}
-		this.addVertex = function(){},
-		this.update = function(){},
+		this.draw = function(){
+			gl.bindVertexArray(this.vao);
+			gl.bindBuffer(GL_ARRAY_BUFFER, this.vbo);
+
+			if(this.texture != undefined)
+				gl.bindTexture(GL_TEXTURE_2D, this.texture.id);
+			
+			if(this.update)
+				this.build();
+		}
+		this.addVertex = function(vertex){
+			if (!vertex) vertex = {};
+			if (!vertex.x) vertex.x = 0;
+			if (!vertex.y) vertex.y = 0;
+			if (!vertex.r) vertex.r = 0;
+			if (!vertex.g) vertex.g = 0;
+			if (!vertex.b) vertex.b = 0;
+			if (!vertex.tx) vertex.tx = 0;
+			if (!vertex.ty) vertex.ty = 0;
+
+			this.vertices.push(vertex);
+		},
+		this.build = function(){},
 	},
 	Sprite: function(){
 		this.prototype = new VertexArray();
