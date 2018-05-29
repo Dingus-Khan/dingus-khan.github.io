@@ -202,11 +202,16 @@ var Drawing = {
 		TRIANGLE_STRIP: gl.TRIANGLE_STRIP,
 		TRIANGLE_FAN: gl.TRIANGLE_FAN
 	},
-	VertexArray: function(){
-		this.texture = null,
-		this.setTexture = function(texture){
-			this.texture = texture;
-		}
+	VertexArray: function(drawMode){
+		this.drawMode = drawMode;
+
+		this.init = function(){}
+		this.draw = function(){}
+		this.addVertex = function(){},
+		this.update = function(){},
+	},
+	Sprite: function(){
+		this.prototype = new VertexArray();
 	},
 };
 
