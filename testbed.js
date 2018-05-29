@@ -18,8 +18,8 @@ TileBatch.init(tileSet);
 
 requestAnimationFrame(run);
 function run() {
-	Camera.x = 400 + (sprite.x - (sprite.w / 2));
-	Camera.y = 300 + (sprite.y - (sprite.h / 2));
+	Camera.x = (sprite.x - (sprite.w / 2));
+	Camera.y = (sprite.y - (sprite.h / 2));
 
 	Camera.update();
 	Keyboard.update();
