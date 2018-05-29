@@ -3,6 +3,9 @@ var gl = canvas.getContext("webgl2");
 
 var System = {
 	Init: function(){
+		gl.enable(gl.BLEND);
+		gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+		
 		document.addEventListener("keydown", function(e){
 			if (System.Keyboard.keyDown[e.which] == false){
 				System.Keyboard.keyPressed[e.which] = true;
@@ -103,7 +106,15 @@ var System = {
 		y: 0,
 		left: false,
 		right: false
-	}
+	},
+	Display: {
+		Clear: function(){
+			gl.clear(gl.COLOR_BUFFER_BIT);
+		},
+		ClearColor: function(r, g, b){
+			gl.clearColor(r, g, b, 1.0);
+		}
+	},
 };
 
 var Maths = {
