@@ -18,10 +18,10 @@ TileBatch.init(tileSet);
 
 requestAnimationFrame(run);
 function run() {
-	Camera.x = (sprite.x - (sprite.w / 2));
-	Camera.y = (sprite.y - (sprite.h / 2));
+	System.Camera.x = (sprite.x - (sprite.w / 2));
+	System.Camera.y = (sprite.y - (sprite.h / 2));
 
-	Camera.update();
+	System.Camera.update();
 	Keyboard.update();
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	sprite.draw();

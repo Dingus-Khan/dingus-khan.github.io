@@ -25,6 +25,46 @@ var System = {
 
 		console.log(gl.getProgramInfoLog(program));
 		gl.deleteProgram(program);
+	},
+	Camera: {
+		x: 0,
+		y: 0,
+		r: 0,
+		z: 1,
+		trauma: 0,
+		traumaDecay: 0.95,
+		updateMatrix: true,
+		matrix: Matrix.identity(),
+		panTo: function(x, y){
+			this.x = -x;
+			this.y = -y;
+			this.updateMatrix = true;
+		},
+		rotateTo: function(r){
+			this.r = -r;
+			this.updateMatrix = true;
+		},
+		zoom: function(z){
+			this.z = z;
+			this.updateMatrix = true;
+		},
+		getMatrix: function(){
+			if(this.updateMatrix){
+				this.matrix = Matrix.identity();
+				this.matrix = Matrix.translate(this.matrix, this.x, this.y);
+
+				this.matrix = Matrix.translate(this.matrix, -400, -300);
+				this.matrix = Matrix.rotate(this.matrix, this.r);
+				this.matrix = Matrix.translate(this.matrix, 400, 300);
+
+				this.matrix = Matrix.scale(this.matrix, this.z, this.z);
+				this.updateMatrix = false;
+			}
+			return this.matrix;
+		},
+		update: function(){
+
+		}
 	}
 };
 
@@ -332,7 +372,7 @@ function Sprite(x, y, w, h, tx, ty, tw, th, texture, r, g, b){
 		gl.uniform2f(texSize, this.tex.texture.image.width, this.tex.texture.image.height);
 
 		var viewLoc = gl.getUniformLocation(program, "view");
-		gl.uniformMatrix4fv(viewLoc, false, Camera.getMatrix());
+		gl.uniformMatrix4fv(viewLoc, false, System.Camera.getMatrix());
 
 		var modelLoc = gl.getUniformLocation(program, "model");
 		gl.uniformMatrix4fv(modelLoc, false, this.getModel());
@@ -531,55 +571,6 @@ var TileBatch = {
 
 			gl.drawArrays(gl.TRIANGLES, 0, this.tileData.length / 7);
 		}
-	}
-};
-
-var Camera = {
-	x: 0,
-	y: 0,
-	r: 0,
-	z: 1,
-	trauma: 0,
-	traumaDecay: 0.95,
-	updateMatrix: true,
-	matrix: Matrix.identity(),
-	panTo: function(x, y){
-		this.x = -x;
-		this.y = -y;
-		this.updateMatrix = true;
-	},
-	rotateTo: function(r){
-		this.r = -r;
-		this.updateMatrix = true;
-	},
-	zoom: function(z){
-		this.z = z;
-		this.updateMatrix = true;
-	},
-	getMatrix: function(){
-		if(this.updateMatrix){
-			this.matrix = Matrix.identity();
-			this.matrix = Matrix.translate(this.matrix, this.x, this.y);
-
-			this.matrix = Matrix.translate(this.matrix, -400, -300);
-			this.matrix = Matrix.rotate(this.matrix, this.r);
-			this.matrix = Matrix.translate(this.matrix, 400, 300);
-
-			this.matrix = Matrix.scale(this.matrix, this.z, this.z);
-			this.updateMatrix = false;
-		}
-		return this.matrix;
-	},
-	update: function(){
-/*		if (this.trauma != 0){
-			this.trauma *= this.traumaDecay;
-		}
-		var shakeX = (this.trauma * (-1 + getRandomInt(3)));
-		var shakeY = (this.trauma * (-1 + getRandomInt(3)));
-		var shakeR = (this.trauma * (0.01 * (-1 + getRandomInt(3))));
-
-		this.panTo(shakeX, shakeY);
-		this.rotateTo(shakeR);*/
 	}
 };
 
