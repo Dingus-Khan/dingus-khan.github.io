@@ -539,8 +539,8 @@ var Camera = {
 	y: 0,
 	r: 0,
 	z: 1,
-	trauma: 0,
-	traumaDecay: 0.95,
+/*	trauma: 0,
+	traumaDecay: 0.95,*/
 	updateMatrix: true,
 	matrix: Matrix.identity(),
 	panTo: function(x, y){
