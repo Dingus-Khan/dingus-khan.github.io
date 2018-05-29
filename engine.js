@@ -571,7 +571,7 @@ var Camera = {
 		return this.matrix;
 	},
 	update: function(){
-		if (this.trauma > 0){
+		if (this.trauma != 0){
 			this.trauma *= this.traumaDecay;
 		}
 		var shakeX = (this.trauma * (-1 + getRandomInt(3)));
