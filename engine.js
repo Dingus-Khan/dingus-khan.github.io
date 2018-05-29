@@ -25,122 +25,81 @@ var System = {
 
 		console.log(gl.getProgramInfoLog(program));
 		gl.deleteProgram(program);
-	},
-	Maths: {
-		Matrix: {
-			identity: function(){
-				return [
-					1, 0, 0, 0,
-					0, 1, 0, 0,
-					0, 0, 1, 0,
-					0, 0, 0, 1
-				];
-			},
-			translation: function(x, y){
-				return [
-					1, 0, 0, 0,
-					0, 1, 0, 0,
-					0, 0, 1, 0,
-					Math.round(x), Math.round(y), 0, 1
-				];
-			},
-			translate: function(m, x, y){
-				return this.multiply(m, this.translation(x, y));
-			},
-			rotation: function(r){
-				var sine = Math.sin(r);
-				var cosine = Math.cos(r);
-				return [
-					cosine, -sine, 0, 0,
-					sine, cosine, 0, 0,
-					0, 0, 1, 0,
-					0, 0, 0, 1
-				];
-			},
-			rotate: function(m, r){
-				return this.multiply(m, this.rotation(r));
-			},
-			scaling: function(sx, sy){
-				return [
-					sx, 0, 0, 0,
-					0, sy, 0, 0,
-					0, 0, 1, 0,
-					0, 0, 0, 1
-				];
-			},
-			scale: function(m, sx, sy){
-				return this.multiply(m, this.scaling(sx, sy));
-			},
-			multiply: function(m1, m2){
-				return [
-					((m1[0] * m2[0]) + (m1[1] * m2[4]) + (m1[2] * m2[8]) + (m1[3] * m2[12])),
-					((m1[0] * m2[1]) + (m1[1] * m2[5]) + (m1[2] * m2[9]) + (m1[3] * m2[13])),
-					((m1[0] * m2[2]) + (m1[1] * m2[6]) + (m1[2] * m2[10]) + (m1[3] * m2[14])),
-					((m1[0] * m2[3]) + (m1[1] * m2[7]) + (m1[2] * m2[11]) + (m1[3] * m2[15])),
-
-					((m1[4] * m2[0]) + (m1[5] * m2[4]) + (m1[6] * m2[8]) + (m1[7] * m2[12])),
-					((m1[4] * m2[1]) + (m1[5] * m2[5]) + (m1[6] * m2[9]) + (m1[7] * m2[13])),
-					((m1[4] * m2[2]) + (m1[5] * m2[6]) + (m1[6] * m2[10]) + (m1[7] * m2[14])),
-					((m1[4] * m2[3]) + (m1[5] * m2[7]) + (m1[6] * m2[11]) + (m1[7] * m2[15])),
-
-					((m1[8] * m2[0]) + (m1[9] * m2[4]) + (m1[10] * m2[8]) + (m1[11] * m2[12])),
-					((m1[8] * m2[1]) + (m1[9] * m2[5]) + (m1[10] * m2[9]) + (m1[11] * m2[13])),
-					((m1[8] * m2[2]) + (m1[9] * m2[6]) + (m1[10] * m2[10]) + (m1[11] * m2[14])),
-					((m1[8] * m2[3]) + (m1[9] * m2[7]) + (m1[10] * m2[11]) + (m1[11] * m2[15])),
-
-					((m1[12] * m2[0]) + (m1[13] * m2[4]) + (m1[14] * m2[8]) + (m1[15] * m2[12])),
-					((m1[12] * m2[1]) + (m1[13] * m2[5]) + (m1[14] * m2[9]) + (m1[15] * m2[13])),
-					((m1[12] * m2[2]) + (m1[13] * m2[6]) + (m1[14] * m2[10]) + (m1[15] * m2[14])),
-					((m1[12] * m2[3]) + (m1[13] * m2[7]) + (m1[14] * m2[11]) + (m1[15] * m2[15]))
-				];
-			}
-		}
-	},
-	Camera: {
-		x: 0,
-		y: 0,
-		r: 0,
-		z: 1,
-		trauma: 0,
-		traumaDecay: 0.95,
-		updateMatrix: true,
-		matrix: Matrix.identity(),
-		panTo: function(x, y){
-			this.x = -x;
-			this.y = -y;
-			this.updateMatrix = true;
-		},
-		rotateTo: function(r){
-			this.r = -r;
-			this.updateMatrix = true;
-		},
-		zoom: function(z){
-			this.z = z;
-			this.updateMatrix = true;
-		},
-		getMatrix: function(){
-			if(this.updateMatrix){
-				this.matrix = System.Maths.Matrix.identity();
-				this.matrix = System.Maths.Matrix.translate(this.matrix, this.x, this.y);
-
-				this.matrix = System.Maths.Matrix.translate(this.matrix, -400, -300);
-				this.matrix = System.Maths.Matrix.rotate(this.matrix, this.r);
-				this.matrix = System.Maths.Matrix.translate(this.matrix, 400, 300);
-
-				this.matrix = System.Maths.Matrix.scale(this.matrix, this.z, this.z);
-				this.updateMatrix = false;
-			}
-			return this.matrix;
-		},
-		update: function(){
-
-		}
 	}
 };
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
+
+var Matrix = {
+	identity: function(){
+		return [
+			1, 0, 0, 0,
+			0, 1, 0, 0,
+			0, 0, 1, 0,
+			0, 0, 0, 1
+		];
+	},
+	translation: function(x, y){
+		return [
+			1, 0, 0, 0,
+			0, 1, 0, 0,
+			0, 0, 1, 0,
+			Math.round(x), Math.round(y), 0, 1
+		];
+	},
+	translate: function(m, x, y){
+		return this.multiply(m, this.translation(x, y));
+	},
+	rotation: function(r){
+		var sine = Math.sin(r);
+		var cosine = Math.cos(r);
+		return [
+			cosine, -sine, 0, 0,
+			sine, cosine, 0, 0,
+			0, 0, 1, 0,
+			0, 0, 0, 1
+		];
+	},
+	rotate: function(m, r){
+		return this.multiply(m, this.rotation(r));
+	},
+	scaling: function(sx, sy){
+		return [
+			sx, 0, 0, 0,
+			0, sy, 0, 0,
+			0, 0, 1, 0,
+			0, 0, 0, 1
+		];
+	},
+	scale: function(m, sx, sy){
+		return this.multiply(m, this.scaling(sx, sy));
+	},
+	multiply: function(m1, m2){
+		return [
+			((m1[0] * m2[0]) + (m1[1] * m2[4]) + (m1[2] * m2[8]) + (m1[3] * m2[12])),
+			((m1[0] * m2[1]) + (m1[1] * m2[5]) + (m1[2] * m2[9]) + (m1[3] * m2[13])),
+			((m1[0] * m2[2]) + (m1[1] * m2[6]) + (m1[2] * m2[10]) + (m1[3] * m2[14])),
+			((m1[0] * m2[3]) + (m1[1] * m2[7]) + (m1[2] * m2[11]) + (m1[3] * m2[15])),
+
+			((m1[4] * m2[0]) + (m1[5] * m2[4]) + (m1[6] * m2[8]) + (m1[7] * m2[12])),
+			((m1[4] * m2[1]) + (m1[5] * m2[5]) + (m1[6] * m2[9]) + (m1[7] * m2[13])),
+			((m1[4] * m2[2]) + (m1[5] * m2[6]) + (m1[6] * m2[10]) + (m1[7] * m2[14])),
+			((m1[4] * m2[3]) + (m1[5] * m2[7]) + (m1[6] * m2[11]) + (m1[7] * m2[15])),
+
+			((m1[8] * m2[0]) + (m1[9] * m2[4]) + (m1[10] * m2[8]) + (m1[11] * m2[12])),
+			((m1[8] * m2[1]) + (m1[9] * m2[5]) + (m1[10] * m2[9]) + (m1[11] * m2[13])),
+			((m1[8] * m2[2]) + (m1[9] * m2[6]) + (m1[10] * m2[10]) + (m1[11] * m2[14])),
+			((m1[8] * m2[3]) + (m1[9] * m2[7]) + (m1[10] * m2[11]) + (m1[11] * m2[15])),
+
+			((m1[12] * m2[0]) + (m1[13] * m2[4]) + (m1[14] * m2[8]) + (m1[15] * m2[12])),
+			((m1[12] * m2[1]) + (m1[13] * m2[5]) + (m1[14] * m2[9]) + (m1[15] * m2[13])),
+			((m1[12] * m2[2]) + (m1[13] * m2[6]) + (m1[14] * m2[10]) + (m1[15] * m2[14])),
+			((m1[12] * m2[3]) + (m1[13] * m2[7]) + (m1[14] * m2[11]) + (m1[15] * m2[15]))
+		];
+	}
+};
 
 var DebugGraphics = {
 	texture: {},
@@ -373,7 +332,7 @@ function Sprite(x, y, w, h, tx, ty, tw, th, texture, r, g, b){
 		gl.uniform2f(texSize, this.tex.texture.image.width, this.tex.texture.image.height);
 
 		var viewLoc = gl.getUniformLocation(program, "view");
-		gl.uniformMatrix4fv(viewLoc, false, System.Camera.getMatrix());
+		gl.uniformMatrix4fv(viewLoc, false, Camera.getMatrix());
 
 		var modelLoc = gl.getUniformLocation(program, "model");
 		gl.uniformMatrix4fv(modelLoc, false, this.getModel());
@@ -572,6 +531,55 @@ var TileBatch = {
 
 			gl.drawArrays(gl.TRIANGLES, 0, this.tileData.length / 7);
 		}
+	}
+};
+
+var Camera = {
+	x: 0,
+	y: 0,
+	r: 0,
+	z: 1,
+	trauma: 0,
+	traumaDecay: 0.95,
+	updateMatrix: true,
+	matrix: Matrix.identity(),
+	panTo: function(x, y){
+		this.x = -x;
+		this.y = -y;
+		this.updateMatrix = true;
+	},
+	rotateTo: function(r){
+		this.r = -r;
+		this.updateMatrix = true;
+	},
+	zoom: function(z){
+		this.z = z;
+		this.updateMatrix = true;
+	},
+	getMatrix: function(){
+		if(this.updateMatrix){
+			this.matrix = Matrix.identity();
+			this.matrix = Matrix.translate(this.matrix, this.x, this.y);
+
+			this.matrix = Matrix.translate(this.matrix, -400, -300);
+			this.matrix = Matrix.rotate(this.matrix, this.r);
+			this.matrix = Matrix.translate(this.matrix, 400, 300);
+
+			this.matrix = Matrix.scale(this.matrix, this.z, this.z);
+			this.updateMatrix = false;
+		}
+		return this.matrix;
+	},
+	update: function(){
+/*		if (this.trauma != 0){
+			this.trauma *= this.traumaDecay;
+		}
+		var shakeX = (this.trauma * (-1 + getRandomInt(3)));
+		var shakeY = (this.trauma * (-1 + getRandomInt(3)));
+		var shakeR = (this.trauma * (0.01 * (-1 + getRandomInt(3))));
+
+		this.panTo(shakeX, shakeY);
+		this.rotateTo(shakeR);
 	}
 };
 
