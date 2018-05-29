@@ -571,16 +571,15 @@ var Camera = {
 		return this.matrix;
 	},
 	update: function(){
-		if (this.trauma != 0){
+/*		if (this.trauma != 0){
 			this.trauma *= this.traumaDecay;
 		}
 		var shakeX = (this.trauma * (-1 + getRandomInt(3)));
 		var shakeY = (this.trauma * (-1 + getRandomInt(3)));
 		var shakeR = (this.trauma * (0.01 * (-1 + getRandomInt(3))));
 
-
 		this.panTo(shakeX, shakeY);
-		this.rotateTo(shakeR);
+		this.rotateTo(shakeR);*/
 	}
 };
 
