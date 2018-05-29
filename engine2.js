@@ -5,7 +5,7 @@ var System = {
 	Init: function(){
 		gl.enable(gl.BLEND);
 		gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-		
+
 		document.addEventListener("keydown", function(e){
 			if (System.Keyboard.keyDown[e.which] == false){
 				System.Keyboard.keyPressed[e.which] = true;
@@ -52,7 +52,8 @@ var System = {
 		});
 	},
 	Shaders: {
-		buildShader: function(gl, type, src){
+		ActiveShader: undefined,
+		BuildShader: function(gl, type, src){
 			var shader = gl.createShader(type);
 			gl.shaderSource(shader, src);
 			gl.compileShader(shader);
@@ -65,7 +66,7 @@ var System = {
 			console.log(gl.getShaderInfoLog(shader));
 			gl.deleteShader(shader);
 		},
-		linkProgram: function(gl, vertex, fragment){
+		LinkProgram: function(gl, vertex, fragment){
 			var program = gl.createProgram();
 			gl.attachShader(program, vertex);
 			gl.attachShader(program, fragment);
@@ -78,7 +79,11 @@ var System = {
 
 			console.log(gl.getProgramInfoLog(program));
 			gl.deleteProgram(program);
-		}
+		},
+		UseProgram: function(program){
+			this.Shaders.ActiveShader = program;
+			gl.useProgram(program);
+		},
 	},
 	Keyboard: {
 		keyDown: {},
@@ -186,6 +191,23 @@ var Maths = {
 			];
 		}
 	}
+};
+
+var Drawing = {
+	Modes: {
+		POINTS: gl.POINTS,
+		LINES: gl.LINES,
+		LINE_STRIP: gl.LINE_STRIP,
+		TRIANGLES: gl.TRIANGLES,
+		TRIANGLE_STRIP: gl.TRIANGLE_STRIP,
+		TRIANGLE_FAN: gl.TRIANGLE_FAN
+	},
+	VertexArray: function(){
+		this.texture = null,
+		this.setTexture = function(texture){
+			this.texture = texture;
+		}
+	},
 };
 
 System.Init();
