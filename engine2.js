@@ -205,7 +205,11 @@ var Drawing = {
 	VertexArray: function(drawMode){
 		this.drawMode = drawMode;
 
-		this.init = function(){}
+		this.vao = gl.createVertexArray();
+		this.vbo = gl.createBuffer();
+		gl.bindVertexArray(this.vao);
+		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
+
 		this.draw = function(){}
 		this.addVertex = function(){},
 		this.update = function(){},
