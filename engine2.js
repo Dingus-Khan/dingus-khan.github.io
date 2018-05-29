@@ -98,7 +98,7 @@ var System = {
 			}
 		}
 	},
-	{
+	Mouse: {
 		x: 0,
 		y: 0,
 		left: false,
@@ -176,3 +176,5 @@ var Maths = {
 		}
 	}
 };
+
+System.Init();
