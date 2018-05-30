@@ -212,7 +212,7 @@ var Drawing = {
 		TRIANGLE_FAN: gl.TRIANGLE_FAN
 	},
 	VertexArray: function(drawMode, texture){
-		this.drawMode = drawMode;
+		this.drawMode = drawMode || Drawing.Modes.TRIANGLES;
 		this.texture = texture;
 		this.vertices = [];
 		this.update = true;

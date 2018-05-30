@@ -31,6 +31,8 @@ void main(){
     outColour = texture(texImage, Tex) * vec4(Col, 1.0);
 }`;
 
+System.Display.SetProj(800, 600);
+
 requestAnimationFrame(run);
 function run() {
 	gl.clear(gl.COLOR_BUFFER_BIT);
