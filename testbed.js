@@ -31,6 +31,9 @@ void main(){
     outColour = texture(texImage, Tex) * vec4(Col, 1.0);
 }`;
 
+var v = System.Shader.
+
+
 System.Display.SetProj(800, 600);
 
 System.Display.ClearColor(0.2, 0.2, 0.2);

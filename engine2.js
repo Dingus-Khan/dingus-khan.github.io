@@ -54,7 +54,7 @@ var System = {
 	},
 	Shaders: {
 		ActiveShader: undefined,
-		BuildShader: function(gl, type, src){
+		BuildShader: function(type, src){
 			var shader = gl.createShader(type);
 			gl.shaderSource(shader, src);
 			gl.compileShader(shader);
@@ -67,7 +67,7 @@ var System = {
 			console.log(gl.getShaderInfoLog(shader));
 			gl.deleteShader(shader);
 		},
-		LinkProgram: function(gl, vertex, fragment){
+		LinkProgram: function(vertex, fragment){
 			var program = gl.createProgram();
 			gl.attachShader(program, vertex);
 			gl.attachShader(program, fragment);
