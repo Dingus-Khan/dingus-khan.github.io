@@ -6,15 +6,12 @@ in vec3 col;
 out vec2 Tex;
 out vec3 Col;
 
-uniform vec2 texSize;
 uniform mat4 proj;
-uniform mat4 view;
-uniform mat4 model;
 
 void main(){
-    Tex = tex / texSize;
+    Tex = tex;
 	Col = col;
-    gl_Position = proj * view * model * vec4(pos, 0.0, 1.0);
+    gl_Position = proj * vec4(pos, 0.0, 1.0);
 }`;
 
 var fragmentShader = `#version 300 es
@@ -25,10 +22,8 @@ in vec3 Col;
 
 out vec4 outColour;
 
-//uniform sampler2D texImage;
-
 void main(){
-    outColour = /*texture(texImage, Tex) */ vec4(Col, 1.0);
+    outColour = vec4(Col, 1.0);
 }`;
 
 var v = System.Shaders.BuildShader(gl.VERTEX_SHADER, vertexShader);
