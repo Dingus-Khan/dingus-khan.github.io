@@ -33,8 +33,9 @@ void main(){
 
 System.Display.SetProj(800, 600);
 
+System.Display.ClearColor(0.2, 0.2, 0.2);
 requestAnimationFrame(run);
 function run() {
-	gl.clear(gl.COLOR_BUFFER_BIT);
+	System.Display.Clear();
 	requestAnimationFrame(run);
 }
