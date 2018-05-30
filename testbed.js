@@ -33,10 +33,14 @@ System.Shaders.UseProgram(p);
 System.Display.SetProj(800, 600);
 System.Display.ClearColor(0.2, 0.2, 0.2);
 
-
+var arr = new Drawing.VertexArray();
+arr.addVertex({x: 0, y: 0});
+arr.addVertex({x: 10, y: 0});
+arr.addVertex({x: 10, y: 10});
 
 requestAnimationFrame(run);
 function run() {
 	System.Display.Clear();
+	arr.draw();
 	requestAnimationFrame(run);
 }
