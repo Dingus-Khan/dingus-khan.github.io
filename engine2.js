@@ -245,7 +245,7 @@ var Drawing = {
 
 			this.vertices.push(vertex);
 			this.update = true;
-		},
+		}
 		this.build = function(){
 			gl.bindVertexArray(this.vao);
 			gl.bindBuffer(GL_ARRAY_BUFFER, this.vbo);
