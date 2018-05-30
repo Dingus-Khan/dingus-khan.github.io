@@ -81,7 +81,7 @@ var System = {
 			gl.deleteProgram(program);
 		},
 		UseProgram: function(program){
-			this.Shaders.ActiveShader = program;
+			this.ActiveShader = program;
 			gl.useProgram(program);
 		},
 	},
@@ -214,16 +214,13 @@ var Drawing = {
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 
 		this.draw = function(){
-			gl.bindVertexArray(this.vao);
-			gl.bindBuffer(GL_ARRAY_BUFFER, this.vbo);
+			this.build();
 
 			if(this.texture != undefined)
 				gl.bindTexture(GL_TEXTURE_2D, this.texture.id);
 
-			if(this.update)
-				this.build();
-
-			
+			var texSize = gl.getUniformLocation(program, "texSize");
+			gl.uniform2f(texSize, this.tex.texture.image.width, this.tex.texture.image.height);
 		}
 		this.addVertex = function(vertex){
 			if (!vertex) vertex = {};
@@ -236,11 +233,38 @@ var Drawing = {
 			if (!vertex.ty) vertex.ty = 0;
 
 			this.vertices.push(vertex);
+			this.update = true;
 		},
-		this.build = function(){},
+		this.build = function(){
+			gl.bindVertexArray(this.vao);
+			gl.bindBuffer(GL_ARRAY_BUFFER, this.vbo);
+
+			var pos = gl.getAttribLocation(System.Shaders.ActiveShader, "pos");
+			gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 7 * 4, 0 * 4);
+			gl.enableVertexAttribArray(pos);
+
+			var tex = gl.getAttribLocation(System.Shaders.ActiveShader, "tex");
+			gl.vertexAttribPointer(tex, 2, gl.FLOAT, false, 7 * 4, 2 * 4);
+			gl.enableVertexAttribArray(tex);
+
+			var col = gl.getAttribLocation(System.Shaders.ActiveShader, "col");
+			gl.vertexAttribPointer(col, 3, gl.FLOAT, false, 7 * 4, 4 * 4);
+			gl.enableVertexAttribArray(col);
+
+			if (this.update){
+				var data = [];
+				for(i = 0; i < this.vertices.length; i++){
+					data.push(this.vertices[i].x, this.vertices[i].y);
+					data.push(this.vertices[i].tx, this.vertices[i].ty);
+					data.push(this.vertices[i].r, this.vertices[i].g, this.vertices[i].b);
+				}
+				gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
+				this.update = false;
+			}
+		},
 	},
-	Sprite: function(){
-		this.prototype = new VertexArray();
+	Sprite: function(texture){
+		this.prototype = new VertexArray(Drawing.Modes.TRIANGLE_STRIP, texture);
 	},
 };
 
