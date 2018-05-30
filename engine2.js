@@ -226,7 +226,7 @@ var Drawing = {
 			this.build();
 
 			if(this.texture != undefined)
-				gl.bindTexture(GL_TEXTURE_2D, this.texture.id);
+				gl.bindTexture(gl.TEXTURE_2D, this.texture.id);
 
 			var texSize = gl.getUniformLocation(System.Shaders.ActiveShader, "texSize");
 			gl.uniform2f(texSize, this.tex.texture.image.width, this.tex.texture.image.height);
@@ -248,7 +248,7 @@ var Drawing = {
 		}
 		this.build = function(){
 			gl.bindVertexArray(this.vao);
-			gl.bindBuffer(GL_ARRAY_BUFFER, this.vbo);
+			gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 
 			var pos = gl.getAttribLocation(System.Shaders.ActiveShader, "pos");
 			gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 7 * 4, 0 * 4);
