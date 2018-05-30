@@ -25,10 +25,10 @@ in vec3 Col;
 
 out vec4 outColour;
 
-uniform sampler2D texImage;
+//uniform sampler2D texImage;
 
 void main(){
-    outColour = texture(texImage, Tex) * vec4(Col, 1.0);
+    outColour = /*texture(texImage, Tex) */ vec4(Col, 1.0);
 }`;
 
 var v = System.Shaders.BuildShader(gl.VERTEX_SHADER, vertexShader);
