@@ -272,7 +272,7 @@ var Drawing = {
 				gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
 				this.update = false;
 			}
-		},
+		}
 	},
 	Sprite: function(texture){
 		this.prototype = new VertexArray(Drawing.Modes.TRIANGLE_STRIP, texture);
