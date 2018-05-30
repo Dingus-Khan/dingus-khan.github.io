@@ -219,9 +219,11 @@ var Drawing = {
 
 			if(this.texture != undefined)
 				gl.bindTexture(GL_TEXTURE_2D, this.texture.id);
-			
+
 			if(this.update)
 				this.build();
+
+			
 		}
 		this.addVertex = function(vertex){
 			if (!vertex) vertex = {};
