@@ -276,7 +276,7 @@ var Drawing = {
 	},
 	Sprite: function(texture){
 		this.prototype = new VertexArray(Drawing.Modes.TRIANGLE_STRIP, texture);
-	},
+	}
 };
 
 System.Init();
