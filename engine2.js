@@ -2,6 +2,7 @@ var canvas = document.getElementById("main");
 var gl = canvas.getContext("webgl2");
 
 var System = {
+	Proj: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
 	Init: function(){
 		gl.enable(gl.BLEND);
 		gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
@@ -118,6 +119,14 @@ var System = {
 		},
 		ClearColor: function(r, g, b){
 			gl.clearColor(r, g, b, 1.0);
+		},
+		SetProj: function(w, h){
+			System.Proj = [
+				2 / w, 0, 0, 0,
+				0, -2 / h, 0, 0,
+				0, 0, 1, 0,
+				-1, 1, 0.5, 1
+			];
 		}
 	},
 };
