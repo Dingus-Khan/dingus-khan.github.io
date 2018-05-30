@@ -228,7 +228,7 @@ var Drawing = {
 			if(this.texture != undefined)
 				gl.bindTexture(GL_TEXTURE_2D, this.texture.id);
 
-			var texSize = gl.getUniformLocation(program, "texSize");
+			var texSize = gl.getUniformLocation(System.Shaders.ActiveShader, "texSize");
 			gl.uniform2f(texSize, this.tex.texture.image.width, this.tex.texture.image.height);
 
 			gl.drawArrays(this.drawMode, 0, this.vertices.length);
