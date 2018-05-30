@@ -31,12 +31,15 @@ void main(){
     outColour = texture(texImage, Tex) * vec4(Col, 1.0);
 }`;
 
-var v = System.Shader.
-
-
+var v = System.Shaders.BuildShader(gl.VERTEX_SHADER, vertexShader);
+var f = System.Shaders.BuildShader(gl.FRAGMENT_SHADER, fragmentShader);
+var p = System.Shaders.LinkProgram(v, f);
+System.Shaders.UseProgram(p);
 System.Display.SetProj(800, 600);
-
 System.Display.ClearColor(0.2, 0.2, 0.2);
+
+
+
 requestAnimationFrame(run);
 function run() {
 	System.Display.Clear();
