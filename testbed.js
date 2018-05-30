@@ -1,15 +1,11 @@
 var vertexShader = `#version 300 es
 in vec2 pos;
-in vec2 tex;
 in vec3 col;
-
-out vec2 Tex;
 out vec3 Col;
 
 uniform mat4 proj;
 
 void main(){
-    Tex = tex;
 	Col = col;
     gl_Position = proj * vec4(pos, 0.0, 1.0);
 }`;
@@ -17,7 +13,6 @@ void main(){
 var fragmentShader = `#version 300 es
 precision mediump float;
 
-in vec2 Tex;
 in vec3 Col;
 
 out vec4 outColour;
