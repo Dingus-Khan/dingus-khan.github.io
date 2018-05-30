@@ -221,6 +221,8 @@ var Drawing = {
 
 			var texSize = gl.getUniformLocation(program, "texSize");
 			gl.uniform2f(texSize, this.tex.texture.image.width, this.tex.texture.image.height);
+
+			gl.drawArrays(this.drawMode, 0, this.vertices.length);
 		}
 		this.addVertex = function(vertex){
 			if (!vertex) vertex = {};
