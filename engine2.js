@@ -225,11 +225,11 @@ var Drawing = {
 		this.draw = function(){
 			this.build();
 
-			if(this.texture != undefined)
+			if(this.texture != undefined){
 				gl.bindTexture(gl.TEXTURE_2D, this.texture.id);
-
-			var texSize = gl.getUniformLocation(System.Shaders.ActiveShader, "texSize");
-			gl.uniform2f(texSize, this.tex.texture.image.width, this.tex.texture.image.height);
+				var texSize = gl.getUniformLocation(System.Shaders.ActiveShader, "texSize");
+				gl.uniform2f(texSize, this.tex.texture.image.width, this.tex.texture.image.height);
+			}
 
 			gl.drawArrays(this.drawMode, 0, this.vertices.length);
 		}
