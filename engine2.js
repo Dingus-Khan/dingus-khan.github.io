@@ -116,5 +116,7 @@ function Drawable(drawMode, bufferStride){
 
 function Sprite(){
 	Drawable.call(this, gl.TRIANGLE_STRIP);
-	
+
 }
+
+System.Init();

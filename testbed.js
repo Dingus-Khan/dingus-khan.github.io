@@ -21,21 +21,8 @@ void main(){
     outColour = vec4(Col, 1.0);
 }`;
 
-var v = System.Shaders.BuildShader(gl.VERTEX_SHADER, vertexShader);
-var f = System.Shaders.BuildShader(gl.FRAGMENT_SHADER, fragmentShader);
-var p = System.Shaders.LinkProgram(v, f);
-System.Shaders.UseProgram(p);
-System.Display.SetProj(800, 600);
-System.Display.ClearColor(0.2, 0.2, 0.2);
-
-var arr = new Drawing.VertexArray();
-arr.addVertex({x: 0, y: 0});
-arr.addVertex({x: 10, y: 0});
-arr.addVertex({x: 10, y: 10});
-
 requestAnimationFrame(run);
 function run() {
-	System.Display.Clear();
-	arr.draw();
+	Clear();
 	requestAnimationFrame(run);
 }
