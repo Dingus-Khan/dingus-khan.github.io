@@ -89,34 +89,37 @@ function Shader(vertexShader, fragmentShader){
 	}
 }
 
-function Drawable(drawMode, bufferStride){
+function Drawable(drawMode, vertexCount){
 	this.vao = gl.createVertexArray();
 	this.vbo = gl.createBuffer();
 	this.drawMode = drawMode;
 	this.bufferData = [];
-	this.bufferStride = 1;
+	this.vertexCount = vertexCount;
 	this.updateBuffer = true;
 
 	this.build = function(){
 		if (this.updateBuffer){
-			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
+			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.bufferData), gl.STATIC_DRAW);
 			this.updateBuffer = false;
 		}
 	}
 
-	this.draw = function(){
-		gl.bindVertexArray(this.vao);
-		gl.bindBuffer(this.vbo);
+	this.draw = function(shader){
+		if (this.vertexCount > 0){
+			gl.bindVertexArray(this.vao);
+			gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 
-		this.build();
+			this.build();
 
-		gl.drawArrays(this.drawMode, 0, this.bufferData.length / this.bufferStride);
+			shader.enableAttributes();
+
+			gl.drawArrays(this.drawMode, 0, this.vertexCount);
+		}
 	}
 }
 
 function Sprite(){
 	Drawable.call(this, gl.TRIANGLE_STRIP);
-
 }
 
 Init();
