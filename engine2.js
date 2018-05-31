@@ -49,7 +49,7 @@ function Shader(vertexShader, fragmentShader){
 	this.addAttribute = function(name, count, type, normalise, stride, offset){
 		var loc = gl.getAttribLocation(this.shader, name);
 		this.attributes.push({
-			loc: loc, count: count, type: type, normalise: normalise, stride: stride, offset: offset;
+			loc: loc, count: count, type: type, normalise: normalise, stride: stride, offset: offset
 		});
 	}
 
