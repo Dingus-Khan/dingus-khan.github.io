@@ -119,4 +119,4 @@ function Sprite(){
 
 }
 
-System.Init();
+Init();
