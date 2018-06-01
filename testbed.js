@@ -25,17 +25,62 @@ shader.use();
 
 shader.setUniform("proj", [2 / 800, 0, 0, 0, 0, -2 / 600, 0, 0, 0, 0, 1, 0, -1, 1, 0, 1]);
 
-var drawable = new Drawable(gl.TRIANGLES, 0);
+function SquareBatch(){
+	Drawable.call(this, gl.TRIANGLES);
 
-drawable.bufferData = [
-];
+	this.squares = [];
+	this.add = function(square){
+		this.squares.push(square);
+	}
+	this.refresh = function(){
+		this.bufferData = [];
+		for(i = 0; i < this.squares.length; i++){
+			var s = this.squares[i];
+			s.update();
+			this.bufferData = this.bufferData.concat([
+				s.x, s.y, s.r, s.g, s.b, 1.0,
+				s.x + s.w, s.y, s.r, s.g, s.b, 1.0,
+				s.x + s.w, s.y + s.h, s.r, s.g, s.b, 1.0,
+				s.x, s.y, s.r, s.g, s.b, 1.0,
+				s.x + s.w, s.y + s.h, s.r, s.g, s.b, 1.0,
+				s.x, s.y + s.h, s.r, s.g, s.b, 1.0,
+			]);
+		}
 
-drawable.vertexCount = drawable.bufferData.length / 6;
-drawable.updateBuffer = true;
+		this.vertexCount = this.bufferData.length / 6;
+		this.update = true;
+	}
+}
+
+function Square(x, y, w, h, r, g, b){
+	this.x = x;
+	this.y = y;
+	this.w = w;
+	this.h = h;
+	this.r = r;
+	this.g = g;
+	this.b = b;
+
+	this.vx = 0;
+	this.vy = 0;
+
+	this.update = function(){
+		this.x += this.vx;
+		this.y += this.vy;
+	}
+}
+
+var squares = new SquareBatch();
+var me = new Square(0, 0, 100, 100, 0, 1, 0);
+squares.add(me);
 
 requestAnimationFrame(run);
 function run() {
+	me.vx = 1;
+
+	squares.refresh();
+	
 	Clear();
-	drawable.draw(shader);
+	squares.draw(shader);
 	requestAnimationFrame(run);
 }
