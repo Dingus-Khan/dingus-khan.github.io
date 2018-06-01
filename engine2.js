@@ -56,7 +56,7 @@ function Shader(vertexShader, fragmentShader){
 	this.enableAttributes = function(){
 		for(i = 0; i < this.attributes.length; i++){
 			var attr = this.attributes[i];
-			gl.vertexAttribPointer(attr.loc, attr.count, attr.type, attr.normalise, attr.stride, attr.offset);
+			gl.vertexAttribPointer(attr.loc, attr.count, attr.type, attr.normalise, attr.stride * 4, attr.offset * 4);
 			gl.enableVertexAttribArray(attr.loc);
 		}
 	}
@@ -121,5 +121,42 @@ function Drawable(drawMode, vertexCount){
 function Sprite(){
 	Drawable.call(this, gl.TRIANGLE_STRIP);
 }
+
+var Keyboard = {
+	keyDown: {},
+	keyPressed: {},
+	keyMap: {},
+	registerKey: function(key, code){
+		this.keyMap[key] = code;
+		this.keyDown[this.keyMap[key]] = false;
+		this.keyPressed[this.keyMap[key]] = false;
+	},
+	getKey: function(key){
+		return this.keyDown[this.keyMap[key]];
+	},
+	wasKeyPressed: function(key){
+		return this.keyPressed[this.keyMap[key]];
+	},
+	update: function(){
+		for(var prop in this.keyMap){
+			this.keyPressed[this.keyMap[prop]] = false;
+		}
+	}
+};
+
+document.addEventListener("keydown", function(e){
+	if (Keyboard.keyDown[e.which] == false){
+		Keyboard.keyPressed[e.which] = true;
+	} else {
+		Keyboard.keyPressed[e.which] = false;
+	}
+	Keyboard.keyDown[e.which] = true;
+});
+
+document.addEventListener("keyup", function(e){
+	Keyboard.keyDown[e.which] = false;
+	Keyboard.keyPressed[e.which] = false;
+});
+
 
 Init();
