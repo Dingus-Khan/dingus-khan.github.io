@@ -74,13 +74,54 @@ var squares = new SquareBatch();
 var me = new Square(0, 0, 100, 100, 0, 1, 0);
 squares.add(me);
 
+// AI TESTING
+function Bot(){
+	this.dx = 0;
+	this.dy = 0;
+	this.x = 400;
+	this.y = 300;
+	this.behaviours = {};
+	this.activeState = undefined;
+	this.addBehaviour = function(state, func){
+		this.behaviours[state] = func;
+	}
+	this.setState = function(state){
+		this.activeState = state;
+	}
+	this.update = function(){
+		this.behaviours[this.activeState](this);
+	}
+}
+
+var b1 = new Bot();
+b1.addBehaviour("idle", function(bot){
+	var result = (1 + Math.floor(Math.random() * 40));
+	if (result % 10 === 0){
+		switch(result){
+			case 10:
+				console.log("up");
+				break;
+			case 20:
+				console.log("up");
+				break;
+			case 30:
+				console.log("up");
+				break;
+			case 40:
+				console.log("up");
+				break;
+		}
+	}
+
+	console.log(`wander ${bot.x} ${bot.y}`);
+});
+
+b1.setState("idle");
+
 requestAnimationFrame(run);
 function run() {
-	me.vx = 1;
+	b1.update();
 
-	squares.refresh();
-	
 	Clear();
-	squares.draw(shader);
 	requestAnimationFrame(run);
 }
