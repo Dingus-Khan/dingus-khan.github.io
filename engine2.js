@@ -33,6 +33,8 @@ var System = {
 
 function Init(){
 	gl.clearColor(0.2, 0.2, 0.2, 1.0);
+	gl.enable(gl.BLEND);
+	gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
 }
 
 function Clear(){
@@ -121,5 +123,39 @@ function Drawable(drawMode, vertexCount){
 function Sprite(){
 	Drawable.call(this, gl.TRIANGLE_STRIP);
 }
+
+var Mouse = {
+	x: 0,
+	y: 0,
+	left: false,
+	right: false
+};
+
+document.addEventListener("mousemove", function(e){
+	Mouse.x = e.clientX;
+	Mouse.y = e.clientY;
+});
+
+canvas.addEventListener("mousedown", function(e){
+	switch(e.button){
+		case 0:
+			Mouse.left = true;
+			break;
+		case 1:
+			Mouse.right = true;
+			break;
+	}
+});
+
+canvas.addEventListener("mouseup", function(e){
+	switch(e.button){
+		case 0:
+			Mouse.left = false;
+			break;
+		case 1:
+			Mouse.right = false;
+			break;
+	}
+});
 
 Init();
