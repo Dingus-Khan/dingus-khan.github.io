@@ -7,10 +7,8 @@ out vec2 Tex;
 uniform mat4 proj;
 uniform mat4 model;
 
-uniform vec2 texSize;
-
 void main(){
-	Tex = tex / texSize;
+	Tex = tex;
     gl_Position = proj * model * vec4(pos, 0.0, 1.0);
 }`;
 
@@ -23,7 +21,8 @@ in vec2 Tex;
 uniform sampler2D texImage;
 
 void main(){
-    outColour = texture(texImage, Tex);
+	ivec2 texSize = textureSize(texImage, 0);
+    outColour = texture(texImage / texImage, Tex);
 }`;
 
 Keyboard.registerKey('w', 87);
@@ -96,7 +95,6 @@ function ParticleEngine(texture){
 
 var particles = new ParticleEngine(new Texture("proj.png"));
 particles.addParticleType("bullet", 0, 0, 20, 20, 1);
-particles.addParticleType("water", 0, 80, 20, 20, 1);
 
 requestAnimationFrame(run);
 function run() {
