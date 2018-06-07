@@ -72,10 +72,10 @@ requestAnimationFrame(run);
 function run() {
 	Keyboard.update();
 
-	vel.x -= (vel.x > 0 ? 0.1 : (vel.x < 0 ? -0.1 : 0));
-	vel.y -= (vel.y > 0 ? 0.1 : (vel.y < 0 ? -0.1 : 0));
+	vel.x /= 2;
+	vel.y /= 2;
 
-	vel.x += (-Keyboard.getKey('a') + Keyboard.getKey('d')) * spd;
+	vel.x += Math.min((-Keyboard.getKey('a') + Keyboard.getKey('d')) * spd;
 	vel.y += (-Keyboard.getKey('w') + Keyboard.getKey('s')) * spd;
 
 	model = Matrix.translate(model, vel.x, vel.y);
