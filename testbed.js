@@ -26,6 +26,11 @@ void main(){
     outColour = texture(texImage, Tex);
 }`;
 
+Keyboard.registerKey('w', 87);
+Keyboard.registerKey('a', 65);
+Keyboard.registerKey('s', 83);
+Keyboard.registerKey('d', 68);
+
 var shader = new Shader(vertexShader, fragmentShader);
 shader.addAttribute("pos", 2, gl.FLOAT, false, 4, 0);
 shader.addAttribute("tex", 2, gl.FLOAT, false, 4, 2);
