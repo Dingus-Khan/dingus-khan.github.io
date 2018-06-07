@@ -61,6 +61,11 @@ var model = Matrix.identity();
 
 var spd = 2;
 
+function impulse(x, y){
+	vel.x += (x / 2);
+	vel.y += (y / 2);
+}
+
 requestAnimationFrame(run);
 function run() {
 	Keyboard.update();
