@@ -81,6 +81,8 @@ function ParticleEngine(texture){
 };
 
 var particles = new ParticleEngine(new Texture("proj.png"));
+particles.addParticleType("bullet", 0, 0, 20, 20, 1);
+particles.addParticleType("water", 0, 80, 20, 20, 1);
 
 requestAnimationFrame(run);
 function run() {
