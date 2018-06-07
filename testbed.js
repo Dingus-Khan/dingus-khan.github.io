@@ -66,12 +66,14 @@ function impulse(x, y){
 	vel.y += (y / 2);
 }
 
+var decay = 0;
+
 requestAnimationFrame(run);
 function run() {
 	Keyboard.update();
 
-	vel.x -= 0.1;
-	vel.y -= 0.1;
+	vel.x -= (vel.x > 0 ? 0.1 : (vel.x < 0 ? -0.1 : 0));
+	vel.y -= (vel.y > 0 ? 0.1 : (vel.y < 0 ? -0.1 : 0));
 
 	vel.x += (-Keyboard.getKey('a') + Keyboard.getKey('d')) * spd;
 	vel.y += (-Keyboard.getKey('w') + Keyboard.getKey('s')) * spd;
