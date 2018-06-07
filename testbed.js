@@ -59,12 +59,14 @@ var vel = {
 
 var model = Matrix.identity();
 
+var spd = 2;
+
 requestAnimationFrame(run);
 function run() {
 	Keyboard.update();
 
-	vel.x = -Keyboard.getKey('a') + Keyboard.getKey('d');
-	vel.y = -Keyboard.getKey('w') + Keyboard.getKey('s');
+	vel.x = (-Keyboard.getKey('a') + Keyboard.getKey('d')) * spd;
+	vel.y = (-Keyboard.getKey('w') + Keyboard.getKey('s')) * spd;
 
 	model = Matrix.translate(model, vel.x, vel.y);
 	shader.setUniform("model", model);
