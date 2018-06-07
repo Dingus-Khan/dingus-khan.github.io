@@ -59,7 +59,7 @@ var vel = {
 
 var model = Matrix.identity();
 
-var spd = 0.1;
+var spd = 1;
 
 function impulse(x, y){
 	vel.x += (x / 2);
