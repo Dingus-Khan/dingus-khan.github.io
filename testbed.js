@@ -49,7 +49,6 @@ drawable.bufferData = [
 drawable.vertexCount = drawable.bufferData.length / 4;
 
 var t = new Texture("test.png");
-shader.setUniform("texSize", [ t.image.width, t.image.height ]);
 
 var vel = {
 	x: 0,
