@@ -47,9 +47,17 @@ drawable.vertexCount = drawable.bufferData.length / 4;
 var t = new Texture("test.png");
 shader.setUniform("texSize", [ t.image.width, t.image.height ]);
 
+var vel = {
+	x: 0,
+	y: 0
+};
+
+var model = Matrix.identity();
+
 requestAnimationFrame(run);
 function run() {
-	shader.setUniform("model", Matrix.identity());
+
+	shader.setUniform("model", Matrix.translate(vel.x, vel.y));
 
 	Clear();
 	drawable.draw(shader, t);
