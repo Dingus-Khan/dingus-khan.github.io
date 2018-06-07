@@ -72,7 +72,7 @@ requestAnimationFrame(run);
 function run() {
 	Keyboard.update();
 
-	vel.x /= 2;
+	vel.x /= 1.5;
 	vel.y /= 2;
 
 	vel.x += (-Keyboard.getKey('a') + Keyboard.getKey('d')) * spd;
