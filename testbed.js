@@ -56,8 +56,8 @@ var model = Matrix.identity();
 
 requestAnimationFrame(run);
 function run() {
-
-	shader.setUniform("model", Matrix.translate(model, vel.x, vel.y));
+	model = Matrix.translate(model, vel.x, vel.y));
+	shader.setUniform("model", model);
 
 	Clear();
 	drawable.draw(shader, t);
