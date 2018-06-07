@@ -99,5 +99,6 @@ function run() {
 
 	Clear();
 	drawable.draw(shader, t);
+	particles.draw(shader, particles.texture);
 	requestAnimationFrame(run);
 }
