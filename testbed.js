@@ -66,7 +66,7 @@ function impulse(x, y){
 	vel.y += y;
 }
 
-var decay = 0.1;
+var decay = 0.15;
 
 requestAnimationFrame(run);
 function run() {
