@@ -145,6 +145,7 @@ function Texture(image, wrapMode, filterMode){
 
 		gl.generateMipmap(gl.TEXTURE_2D);
 	}
+
 	this.image.src = image;
 
 	this.bind = function(){

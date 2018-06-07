@@ -5,12 +5,13 @@ in vec2 tex;
 out vec2 Tex;
 
 uniform mat4 proj;
+uniform mat4 model;
 
 uniform vec2 texSize;
 
 void main(){
 	Tex = tex / texSize;
-    gl_Position = proj * vec4(pos, 0.0, 1.0);
+    gl_Position = proj * model * vec4(pos, 0.0, 1.0);
 }`;
 
 var fragmentShader = `#version 300 es
@@ -44,11 +45,12 @@ drawable.bufferData = [
 drawable.vertexCount = drawable.bufferData.length / 4;
 
 var t = new Texture("test.png");
-
 shader.setUniform("texSize", [ t.image.width, t.image.height ]);
 
 requestAnimationFrame(run);
 function run() {
+	shader.setUniform("model", Matrix.identity());
+
 	Clear();
 	drawable.draw(shader, t);
 	requestAnimationFrame(run);
