@@ -68,6 +68,20 @@ function impulse(x, y){
 
 var decay = 0.15;
 
+function ParticleEngine(texture){
+	Drawable.call(this, gl.TRIANGLES);
+
+	this.texture = texture;
+	this.particleTypes = {};
+	this.emitters = [];
+
+	this.addParticleType = function(name, tx, ty, tw, th, decay){
+		this.particleTypes[name] = {tx, ty, tw, th, decay};
+	}
+};
+
+var particles = new ParticleEngine(new Texture("proj.png"));
+
 requestAnimationFrame(run);
 function run() {
 	Keyboard.update();
