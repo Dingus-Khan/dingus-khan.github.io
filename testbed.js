@@ -75,7 +75,7 @@ function run() {
 	vel.x /= 2;
 	vel.y /= 2;
 
-	vel.x += Math.min((-Keyboard.getKey('a') + Keyboard.getKey('d')) * spd;
+	vel.x += (-Keyboard.getKey('a') + Keyboard.getKey('d')) * spd;
 	vel.y += (-Keyboard.getKey('w') + Keyboard.getKey('s')) * spd;
 
 	model = Matrix.translate(model, vel.x, vel.y);
