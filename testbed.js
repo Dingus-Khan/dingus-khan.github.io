@@ -56,7 +56,7 @@ var model = Matrix.identity();
 
 requestAnimationFrame(run);
 function run() {
-	
+	vel.x = -Keyboard.getKey('a') + Keyboard.getKey('d');
 
 	model = Matrix.translate(model, vel.x, vel.y);
 	shader.setUniform("model", model);
