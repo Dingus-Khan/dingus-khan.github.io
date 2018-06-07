@@ -72,11 +72,11 @@ requestAnimationFrame(run);
 function run() {
 	Keyboard.update();
 
-	vel.x /= 1.5;
-	vel.y /= 2;
-
 	vel.x += (-Keyboard.getKey('a') + Keyboard.getKey('d')) * spd;
 	vel.y += (-Keyboard.getKey('w') + Keyboard.getKey('s')) * spd;
+
+	vel.x /= 2;
+	vel.y /= 2;
 
 	model = Matrix.translate(model, vel.x, vel.y);
 	shader.setUniform("model", model);
