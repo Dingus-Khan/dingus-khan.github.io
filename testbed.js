@@ -61,6 +61,8 @@ var model = Matrix.identity();
 
 requestAnimationFrame(run);
 function run() {
+	Keyboard.update();
+
 	vel.x = -Keyboard.getKey('a') + Keyboard.getKey('d');
 	vel.y = -Keyboard.getKey('w') + Keyboard.getKey('s');
 
