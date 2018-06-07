@@ -62,8 +62,8 @@ var model = Matrix.identity();
 var spd = 2;
 
 function impulse(x, y){
-	vel.x += (x / 2);
-	vel.y += (y / 2);
+	vel.x += x;
+	vel.y += y;
 }
 
 var decay = 0;
@@ -75,8 +75,8 @@ function run() {
 	vel.x += (-Keyboard.getKey('a') + Keyboard.getKey('d')) * spd;
 	vel.y += (-Keyboard.getKey('w') + Keyboard.getKey('s')) * spd;
 
-	vel.x /= 2;
-	vel.y /= 2;
+	vel.x -= (vel.x * decay);
+	vel.y -= (vel.y * decay);
 
 	model = Matrix.translate(model, vel.x, vel.y);
 	shader.setUniform("model", model);
