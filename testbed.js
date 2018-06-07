@@ -78,6 +78,20 @@ function ParticleEngine(texture){
 	this.addParticleType = function(name, tx, ty, tw, th, decay){
 		this.particleTypes[name] = {tx, ty, tw, th, decay};
 	}
+
+	this.emit = function(x, y, type){
+		var part = this.particleTypes[type];
+		this.bufferData = this.bufferData.concat([
+			x, y, part.tx, part.ty,
+			x + part.tw, y, part.tx + part.tw, part.ty,
+			x + part.tw, y + part.th, part.tx + part.tw, part.ty + part.th,
+			x, y, part.tx, part.ty,
+			x + part.tw, y + part.th, part.tx + part.tw, part.ty + part.th,
+			x, y + part.th, part.tx, part.ty + part.th
+		]);
+		this.vertexCount = this.bufferData.length / 4;
+		this.updateBuffer = true;
+	}
 };
 
 var particles = new ParticleEngine(new Texture("proj.png"));
