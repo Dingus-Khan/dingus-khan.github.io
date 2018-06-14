@@ -87,11 +87,11 @@ requestAnimationFrame(run);
 function run() {
 	Keyboard.update();
 
-	vel.x += (-Keyboard.getKey('a') + Keyboard.getKey('d')) * spd;
-	vel.y += (-Keyboard.getKey('w') + Keyboard.getKey('s')) * spd;
+	spr.vel.x += (-Keyboard.getKey('a') + Keyboard.getKey('d')) * spr.spd;
+	spr.vel.y += (-Keyboard.getKey('w') + Keyboard.getKey('s')) * spr.spd;
 
-	vel.x -= (vel.x * decay);
-	vel.y -= (vel.y * decay);
+	spr.vel.x -= (spr.vel.x * decay);
+	spr.vel.y -= (spr.vel.y * decay);
 
 	model = Matrix.translate(model, vel.x, vel.y);
 	shader.setUniform("model", model);
