@@ -38,28 +38,6 @@ shader.use();
 
 shader.setUniform("proj", [2 / 800, 0, 0, 0, 0, -2 / 600, 0, 0, 0, 0, 1, 0, -1, 1, 0, 1]);
 
-var drawable = new Drawable(gl.TRIANGLE_STRIP, 0);
-
-drawable.bufferData = [
-	0, 0, 0, 0,
-	120, 0, 120, 0,
-	0, 120, 0, 120,
-	120, 120, 120, 120
-];
-
-drawable.vertexCount = drawable.bufferData.length / 4;
-
-var t = new Texture("test.png");
-
-var vel = {
-	x: 0,
-	y: 0
-};
-
-var model = Matrix.identity();
-var spd = 2;
-var decay = 0.2;
-
 function Sprite(){
 	Drawable.call(this, gl.TRIANGLE_STRIP, 4);
 
@@ -93,8 +71,8 @@ function run() {
 	spr.vel.x -= (spr.vel.x * decay);
 	spr.vel.y -= (spr.vel.y * decay);
 
-	model = Matrix.translate(model, vel.x, vel.y);
-	shader.setUniform("model", model);
+	spr.model = Matrix.translate(spr.model, vel.x, vel.y);
+	shader.setUniform("model", spr.model);
 
 	Clear();
 	spr.draw(shader, spr.tex);
