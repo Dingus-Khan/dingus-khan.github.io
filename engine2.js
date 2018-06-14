@@ -3,6 +3,24 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 var gl = canvas.getContext("webgl2");
 
+var proj = [
+	2 / canvas.width, 0, 0, 0,
+	0, -2 / canvas.height, 0,
+	0, 0, 0, 1, 0,
+	-1, 1, 0, 1
+];
+
+window.onresize = function(){
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
+	var proj = [
+		2 / canvas.width, 0, 0, 0,
+		0, -2 / canvas.height, 0,
+		0, 0, 0, 1, 0,
+		-1, 1, 0, 1
+	];
+}
+
 var System = {
 	BuildShader: function(type, src){
 		var shader = gl.createShader(type);
