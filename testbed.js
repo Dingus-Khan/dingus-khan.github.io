@@ -42,7 +42,7 @@ function Sprite(){
 	Drawable.call(this, gl.TRIANGLE_STRIP, 4);
 
 	this.anims = {
-		idle: { 0, 6, 0, 1 },
+		idle: { s: 0, e: 6, y: 0, t: 1 },
 		walk: {}
 	};
 	this.frame = 0;
