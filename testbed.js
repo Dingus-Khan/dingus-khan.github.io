@@ -68,12 +68,17 @@ function Sprite(){
 	this.render = function(shader){
 		this.dir = this.vel.x > 0 ? 1 : (this.vel.x < 0 ? -1 : this.dir);
 
-		this.bufferData = [
-			0, 0, this.frame * (this.dir == 1 ? 0 : 120), 0,
-			120, 0, this.frame * (this.dir == 1 ? 120 : 0), 0,
-			0, 120, this.frame * (this.dir == 1 ? 0 : 120), 120,
-			120, 120, this.frame * (this.dir == 1 ? 120 : 0), 120,
-		];
+		if (this.dir == 1){
+			this.bufferData = [
+				0, 0, this.frame * 120, 0,
+				120, 0, this.frame * 120 + 120, 0,
+				0, 120, this.frame * 0, 120,
+				120, 120, this.frame * 120 + 120, 120,
+			];
+		} else {
+
+		}
+
 
 		this.updateBuffer = true;
 		this.draw(shader, this.tex);
