@@ -42,10 +42,12 @@ function Sprite(){
 	Drawable.call(this, gl.TRIANGLE_STRIP, 4);
 
 	this.anims = {
-		idle: { s: 0, e: 6, y: 0, t: 1 },
+		idle: { s: 0, e: 6, y: 0, t: 6 },
 		walk: {}
 	};
+	this.anim = this.anims.idle;
 	this.frame = 0;
+	this.ticks = 0;
 
 	this.bufferData = [
 		0, 0, 0, 0,
@@ -86,7 +88,11 @@ function Sprite(){
 
 		this.updateBuffer = true;
 		this.draw(shader, this.tex);
-		//this.frame++;
+		this.ticks++;
+		if(this.ticks >= this.anim.t){
+			this.ticks -= this.anim.t;
+			this.frame++;
+		}
 		if (this.frame == 6)
 			this.frame = 0;
 	}
