@@ -57,14 +57,7 @@ var vel = {
 };
 
 var model = Matrix.identity();
-
 var spd = 2;
-
-function impulse(x, y){
-	vel.x += x;
-	vel.y += y;
-}
-
 var decay = 0.15;
 
 
@@ -83,6 +76,5 @@ function run() {
 
 	Clear();
 	drawable.draw(shader, t);
-	particles.draw(shader, particles.texture);
 	requestAnimationFrame(run);
 }
