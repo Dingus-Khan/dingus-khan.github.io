@@ -86,7 +86,7 @@ function Sprite(){
 			];
 		}
 
-		if ((this.vel.x > this.decay || this.vel.x < -this.decay) || (this.vel.y > this.decay || this.vel.y < -this.decay )) this.anim = this.anims.walk; else this.anim = this.anims.idle;
+		if ((this.vel.x > this.decay * 2 || this.vel.x < -(this.decay * 2)) || (this.vel.y > this.decay * 2 || this.vel.y < -(this.decay * 2))) this.anim = this.anims.walk; else this.anim = this.anims.idle;
 
 		this.updateBuffer = true;
 		this.draw(shader, this.tex);
