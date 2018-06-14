@@ -60,6 +60,28 @@ var model = Matrix.identity();
 var spd = 2;
 var decay = 0.2;
 
+function Sprite(){
+	Drawable.call(this, gl.TRIANGLE_STRIP, 4);
+
+	this.bufferData = [
+		0, 0, 0, 0,
+		120, 0, 120, 0,
+		0, 120, 0, 120,
+		120, 120, 120, 120
+	];
+
+	this.tex = new Texture("test.png");
+
+	this.vel = {
+		x: 0,
+		y: 0
+	};
+	this.spd = 2;
+	this.decay = 0.2;
+	this.model = Matrix.identity();
+}
+
+var spr = new Sprite();
 
 requestAnimationFrame(run);
 function run() {
@@ -75,6 +97,6 @@ function run() {
 	shader.setUniform("model", model);
 
 	Clear();
-	drawable.draw(shader, t);
+	spr.draw(shader, spr.tex);
 	requestAnimationFrame(run);
 }
