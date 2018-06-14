@@ -57,8 +57,18 @@ function Sprite(){
 	this.spd = 2;
 	this.decay = 0.2;
 	this.model = Matrix.identity();
+	this.dir = 1; // 1 = left, -1 = right
 
 	this.render = function(shader){
+		this.dir = this.vel.x > 0 ? 1 : (this.vel.x < 0 ? -1 : this.dir);
+
+		this.bufferData = [
+			0, 0, (this.dir == 1 ? 0 : 120), 0,
+			120, 0, (this.dir == 1 ? 120 : 0), 0,
+			0, 120, (this.dir == 1 ? 0 : 120), 120,
+			120, 120, (this.dir == 1 ? 120 : 0), 120,
+		];
+
 		this.updateBuffer = true;
 		this.draw(shader, this.tex);
 	}
