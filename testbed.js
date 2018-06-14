@@ -36,7 +36,7 @@ shader.addAttribute("pos", 2, gl.FLOAT, false, 4, 0);
 shader.addAttribute("tex", 2, gl.FLOAT, false, 4, 2);
 shader.use();
 
-shader.setUniform("proj", [2 / EWW, 0, 0, 0, 0, -2 / EWH, 0, 0, 0, 0, 1, 0, -1, 1, 0, 1]);
+shader.setUniform("proj", [2 / canvas.width, 0, 0, 0, 0, -2 / canvas.height, 0, 0, 0, 0, 1, 0, -1, 1, 0, 1]);
 
 function Sprite(){
 	Drawable.call(this, gl.TRIANGLE_STRIP, 4);

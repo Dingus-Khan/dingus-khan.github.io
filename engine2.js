@@ -1,7 +1,7 @@
 var canvas = document.getElementById("main");
+canvas.width = document.body.clientWidth;
+canvas.height = document.body.clientHeight;
 var gl = canvas.getContext("webgl2");
-var EWW = window.innerWidth;
-var EWH = window.innerHeight;
 
 var System = {
 	BuildShader: function(type, src){
