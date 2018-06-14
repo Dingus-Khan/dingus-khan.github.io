@@ -43,7 +43,7 @@ function Sprite(){
 
 	this.anims = {
 		idle: { s: 0, e: 6, y: 0, t: 6 },
-		walk: {}
+		walk: { s: 0, e: 6, y: 1, t: 6 }
 	};
 	this.anim = this.anims.idle;
 	this.frame = 0;
@@ -86,7 +86,7 @@ function Sprite(){
 			];
 		}
 
-		if (this.vel.x != 0 && this.vel.y != 0) this.anim = this.anims.walk; else this.anim = this.anims.idle;
+		if (this.vel.x != 0 || this.vel.y != 0) this.anim = this.anims.walk; else this.anim = this.anims.idle;
 
 		this.updateBuffer = true;
 		this.draw(shader, this.tex);
@@ -109,8 +109,10 @@ function run() {
 	spr.vel.x += (-Keyboard.getKey('a') + Keyboard.getKey('d')) * spr.spd;
 	spr.vel.y += (-Keyboard.getKey('w') + Keyboard.getKey('s')) * spr.spd;
 
-	spr.vel.x -= (spr.vel.x * spr.decay);
-	spr.vel.y -= (spr.vel.y * spr.decay);
+	if (spr.vel.x > spr.decay || spr.vel.x < -spr.decay){
+		spr.vel.x -= (spr.vel.x * spr.decay);
+		spr.vel.y -= (spr.vel.y * spr.decay);
+	}
 
 	spr.model = Matrix.translate(spr.model, spr.vel.x, spr.vel.y);
 	shader.setUniform("model", spr.model);
