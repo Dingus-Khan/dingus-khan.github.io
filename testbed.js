@@ -68,10 +68,10 @@ function run() {
 	spr.vel.x += (-Keyboard.getKey('a') + Keyboard.getKey('d')) * spr.spd;
 	spr.vel.y += (-Keyboard.getKey('w') + Keyboard.getKey('s')) * spr.spd;
 
-	spr.vel.x -= (spr.vel.x * decay);
-	spr.vel.y -= (spr.vel.y * decay);
+	spr.vel.x -= (spr.vel.x * spr.decay);
+	spr.vel.y -= (spr.vel.y * spr.decay);
 
-	spr.model = Matrix.translate(spr.model, vel.x, vel.y);
+	spr.model = Matrix.translate(spr.model, spr.vel.x, spr.vel.y);
 	shader.setUniform("model", spr.model);
 
 	Clear();
