@@ -1,25 +1,17 @@
 var canvas = document.getElementById("main");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+
+var resolution = { w: 800, h: 600, aspect: 800 / 600 };
+
+canvas.width = 800;
+canvas.height = canvas.width / resolution.aspect;
 var gl = canvas.getContext("webgl2");
 
 var proj = [
-	2 / canvas.width, 0, 0, 0,
-	0, -2 / canvas.height, 0,
+	2 / resolution.w, 0, 0, 0,
+	0, -2 / resolution.h, 0,
 	0, 0, 0, 1, 0,
 	-1, 1, 0, 1
 ];
-
-window.onresize = function(){
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
-	var proj = [
-		2 / canvas.width, 0, 0, 0,
-		0, -2 / canvas.height, 0,
-		0, 0, 0, 1, 0,
-		-1, 1, 0, 1
-	];
-}
 
 var System = {
 	BuildShader: function(type, src){
