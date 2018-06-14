@@ -58,7 +58,7 @@ var vel = {
 
 var model = Matrix.identity();
 var spd = 2;
-var decay = 0.15;
+var decay = 0.2;
 
 
 requestAnimationFrame(run);
