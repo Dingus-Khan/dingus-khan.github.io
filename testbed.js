@@ -86,7 +86,7 @@ function Sprite(){
 
 		this.updateBuffer = true;
 		this.draw(shader, this.tex);
-		this.frame++;
+		//this.frame++;
 		if (this.frame == 6)
 			this.frame = 0;
 	}
