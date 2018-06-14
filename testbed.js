@@ -57,6 +57,10 @@ function Sprite(){
 	this.spd = 2;
 	this.decay = 0.2;
 	this.model = Matrix.identity();
+
+	this.render = function(shader){
+		this.draw(shader, this.tex);
+	}
 }
 
 var spr = new Sprite();
@@ -75,6 +79,6 @@ function run() {
 	shader.setUniform("model", spr.model);
 
 	Clear();
-	spr.draw(shader, spr.tex);
+	spr.render(shader);
 	requestAnimationFrame(run);
 }
