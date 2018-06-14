@@ -41,6 +41,12 @@ shader.setUniform("proj", [2 / 800, 0, 0, 0, 0, -2 / 600, 0, 0, 0, 0, 1, 0, -1, 
 function Sprite(){
 	Drawable.call(this, gl.TRIANGLE_STRIP, 4);
 
+	this.anims = {
+		idle: { 0, 6, 0, 1 },
+		walk: {}
+	};
+	this.frame = 0;
+
 	this.bufferData = [
 		0, 0, 0, 0,
 		120, 0, 120, 0,
@@ -63,14 +69,15 @@ function Sprite(){
 		this.dir = this.vel.x > 0 ? 1 : (this.vel.x < 0 ? -1 : this.dir);
 
 		this.bufferData = [
-			0, 0, (this.dir == 1 ? 0 : 120), 0,
-			120, 0, (this.dir == 1 ? 120 : 0), 0,
-			0, 120, (this.dir == 1 ? 0 : 120), 120,
-			120, 120, (this.dir == 1 ? 120 : 0), 120,
+			0, 0, this.frame * (this.dir == 1 ? 0 : 120), 0,
+			120, 0, this.frame * (this.dir == 1 ? 120 : 0), 0,
+			0, 120, this.frame * (this.dir == 1 ? 0 : 120), 120,
+			120, 120, this.frame * (this.dir == 1 ? 120 : 0), 120,
 		];
 
 		this.updateBuffer = true;
 		this.draw(shader, this.tex);
+		this.frame++;
 	}
 }
 
