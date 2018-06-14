@@ -109,10 +109,11 @@ function run() {
 	spr.vel.x += (-Keyboard.getKey('a') + Keyboard.getKey('d')) * spr.spd;
 	spr.vel.y += (-Keyboard.getKey('w') + Keyboard.getKey('s')) * spr.spd;
 
-	if (spr.vel.x > spr.decay || spr.vel.x < -spr.decay){
-		spr.vel.x -= (spr.vel.x * spr.decay);
-		spr.vel.y -= (spr.vel.y * spr.decay);
-	}
+	//spr.vel.x -= (spr.vel.x * spr.decay);
+	//spr.vel.y -= (spr.vel.y * spr.decay);
+
+	spr.vel.x -= (spr.vel.x > spr.decay / 10 || spr.vel.x < -(spr.decay / 10) ? spr.vel.x * spr.decay : spr.vel.x);
+	spr.vel.y -= (spr.vel.y > spr.decay / 10 || spr.vel.y < -(spr.decay / 10) ? spr.vel.y * spr.decay : spr.vel.y);
 
 	spr.model = Matrix.translate(spr.model, spr.vel.x, spr.vel.y);
 	shader.setUniform("model", spr.model);
