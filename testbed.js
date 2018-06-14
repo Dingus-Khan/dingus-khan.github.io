@@ -72,17 +72,17 @@ function Sprite(){
 
 		if (this.dir == 1){
 			this.bufferData = [
-				0, 0, this.frame * 120, 0,
-				120, 0, this.frame * 120 + 120, 0,
-				0, 120, this.frame * 0, 120,
-				120, 120, this.frame * 120 + 120, 120,
+				0, 0, this.frame * 120, this.anim.y * 120,
+				120, 0, this.frame * 120 + 120, this.anim.y * 120,
+				0, 120, this.frame * 120, this.anim.y * 120 + 120,
+				120, 120, this.frame * 120 + 120, this.anim.y * 120 + 120,
 			];
 		} else {
 			this.bufferData = [
-				120, 0, this.frame * 120 - 120, 0,
-				0, 0, this.frame * 120, 0,
-				120, 120, this.frame * 120 - 120, 120,
-				0, 120, this.frame * 120, 120,
+				120, 0, this.frame * 120 - 120, this.anim.y * 120,
+				0, 0, this.frame * 120, this.anim.y * 120,
+				120, 120, this.frame * 120 - 120, this.anim.y * 120 + 120,
+				0, 120, this.frame * 120, this.anim.y * 120 + 120,
 			];
 		}
 
