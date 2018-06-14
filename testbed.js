@@ -86,6 +86,8 @@ function Sprite(){
 			];
 		}
 
+		if (this.vel.x != 0 && this.vel.y != 0) this.anim = this.anims.walk; else this.anim = this.anims.idle;
+
 		this.updateBuffer = true;
 		this.draw(shader, this.tex);
 		this.ticks++;
