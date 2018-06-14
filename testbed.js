@@ -59,6 +59,8 @@ function Sprite(){
 	this.model = Matrix.identity();
 
 	this.render = function(shader){
+		this.updateBuffer = true;
+		this.update();
 		this.draw(shader, this.tex);
 	}
 }
