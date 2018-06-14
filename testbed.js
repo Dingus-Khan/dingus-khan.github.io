@@ -14,15 +14,16 @@ void main(){
 
 var fragmentShader = `#version 300 es
 precision mediump float;
-out vec4 outColour;
 
 in vec2 Tex;
+
+out vec4 outColour;
 
 uniform sampler2D texImage;
 
 void main(){
 	ivec2 texSize = textureSize(texImage, 0);
-    outColour = texture(texImage / texImage, Tex);
+    outColour = texture(texImage, vec2(Tex.x / float(texSize.x), Tex.y / float(texSize.y)));
 }`;
 
 Keyboard.registerKey('w', 87);
