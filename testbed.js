@@ -139,11 +139,16 @@ var WalkState = {
 		} else {
 			drawable.vel.x = (Keyboard.getKey('d') - Keyboard.getKey('a')) * drawable.spd;
 		}
+
+		drawable.vel.x -= (drawable.vel.x > this.decay / 10 || drawable.vel.x < -(this.decay / 10) ? drawable.vel.x * this.decay : drawable.vel.x);
+		drawable.vel.y -= (drawable.vel.y > this.decay / 10 || drawable.vel.y < -(this.decay / 10) ? drawable.vel.y * this.decay : drawable.vel.y);
 	},
 	anim: { start: 0, end: 6, y: 1, time: 4 },
 	frame: 0,
 	ticks: 0,
-	dir: 1
+	dir: 1,
+	walkSpd = 2,
+	spdDecay = 0.2
 };
 
 var spr = new Sprite();
