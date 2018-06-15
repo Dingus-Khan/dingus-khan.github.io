@@ -149,7 +149,7 @@ var WalkState = {
 	frame: 0,
 	ticks: 0,
 	dir: 1,
-	walkSpd: 2,
+	walkSpd: 4,
 };
 
 var spr = new Sprite();
