@@ -31,6 +31,7 @@ Keyboard.registerKey('a', 65);
 Keyboard.registerKey('s', 83);
 Keyboard.registerKey('d', 68);
 Keyboard.registerKey('space', 32);
+Keyboard.registerKey('lshift', 16);
 
 var shader = new Shader(vertexShader, fragmentShader);
 shader.addAttribute("pos", 2, gl.FLOAT, false, 4, 0);
@@ -140,8 +141,8 @@ var WalkState = {
 		if (!(Keyboard.getKey('w') != Keyboard.getKey('s')) && !(Keyboard.getKey('a') != Keyboard.getKey('d'))){
 			drawable.setState('idle');
 		} else {
-			drawable.vel.x = (Keyboard.getKey('d') - Keyboard.getKey('a')) * this.walkSpd;
-			drawable.vel.y = (Keyboard.getKey('w') - Keyboard.getKey('s')) * this.walkSpd;
+			drawable.vel.x = (Keyboard.getKey('d') - Keyboard.getKey('a')) * (this.walkSpd + this.walkSpd * Keyboard.getKey('lshift'));
+			drawable.vel.y = (Keyboard.getKey('w') - Keyboard.getKey('s')) * (this.walkSpd + this.walkSpd * Keyboard.getKey('lshift'));
 		}
 	},
 	anim: { start: 0, end: 6, y: 1, time: 4 },
