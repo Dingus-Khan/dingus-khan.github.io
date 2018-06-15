@@ -124,7 +124,7 @@ var IdleState = {
 var WalkState = {
 	update: function(drawable){
 		this.ticks++;
-		if (this.ticks > (this.anim.time + (this.anim.time * Keyboard.getKey('lshift')))){
+		if (this.ticks > (this.anim.time - (this.anim.time * Keyboard.getKey('lshift')))){
 			this.frame++;
 			this.ticks = 0;
 
