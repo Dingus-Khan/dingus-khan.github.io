@@ -105,8 +105,8 @@ var IdleState = {
 		}
 		if (this.frame == this.anim.end) this.frame = this.anim.start;
 
-		if ((Keyboard.keyPressed('w') != Keyboard.KeyPressed('s'))
-		|| (Keyboard.keyPressed('a') != Keyboard.keyPressed('d')))
+		if ((Keyboard.getKey('w') != Keyboard.getKey('s'))
+		|| (Keyboard.getKey('a') != Keyboard.getKey('d')))
 			drawable.setState('walk');
 	},
 	anim: { start: 0, end: 6, y: 0, time: 4 },
