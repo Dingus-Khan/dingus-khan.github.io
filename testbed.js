@@ -68,7 +68,7 @@ function Sprite(){
 		x: 0,
 		y: 0
 	};
-
+	this.dir = 1;
 	this.decay = 0.2;
 
 	this.model = Matrix.identity();
