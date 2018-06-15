@@ -39,17 +39,13 @@ shader.use();
 
 shader.setUniform("proj", proj);
 
+function Actor(){
+	this.c = "Working";
+}
+
 function Sprite(){
 	Drawable.call(this, gl.TRIANGLE_STRIP, 4);
-
-	this.anims = {
-		idle: { s: 0, e: 6, y: 0, t: 6 },
-		walk: { s: 0, e: 6, y: 1, t: 6 },
-		attack: { s: 0, e: 6, y: 2, t: 6 },
-	};
-	this.anim = 'idle';
-	this.frame = 0;
-	this.ticks = 0;
+	Actor.call(this);
 
 	this.bufferData = [
 		0, 0, 0, 0,
@@ -64,72 +60,22 @@ function Sprite(){
 		x: 0,
 		y: 0
 	};
+
 	this.spd = 2;
 	this.decay = 0.2;
 	this.model = Matrix.identity();
 	this.dir = 1; // 1 = left, -1 = right
+}
 
-	this.render = function(shader){
-		this.dir = this.vel.x > 0 ? 1 : (this.vel.x < 0 ? -1 : this.dir);
-
-		if (this.dir == 1){
-			this.bufferData = [
-				0, 0, this.frame * 120, this.anims[this.anim].y * 120,
-				120, 0, this.frame * 120 + 120, this.anims[this.anim].y * 120,
-				0, 120, this.frame * 120, this.anims[this.anim].y * 120 + 120,
-				120, 120, this.frame * 120 + 120, this.anims[this.anim].y * 120 + 120,
-			];
-		} else {
-			this.bufferData = [
-				120, 0, this.frame * 120 - 120, this.anims[this.anim].y * 120,
-				0, 0, this.frame * 120, this.anims[this.anim].y * 120,
-				120, 120, this.frame * 120 - 120, this.anims[this.anim].y * 120 + 120,
-				0, 120, this.frame * 120, this.anims[this.anim].y * 120 + 120,
-			];
-		}
-
-		if (this.anim != 'attack'){
-			if ((this.vel.x > this.decay * 2 || this.vel.x < -(this.decay * 2)) || (this.vel.y > this.decay * 2 || this.vel.y < -(this.decay * 2))) this.anim = 'walk'; else this.anim = 'idle';
-		}
-
-		this.updateBuffer = true;
-		this.draw(shader, this.tex);
-		this.ticks++;
-		if(this.ticks >= this.anims[this.anim].t){
-			this.ticks -= this.anims[this.anim].t;
-			this.frame++;
-		}
-
-		if (this.anim == 'attack' && this.frame == this.anims[this.anim].e){
-			this.anim = 'idle';
-		}
-
-		if (this.frame == 6)
-			this.frame = 0;
-	}
+var State = function(){
+	this.anim = {};
+	this.return = undefined;
 }
 
 var spr = new Sprite();
 
 requestAnimationFrame(run);
 function run() {
-	if (Keyboard.wasKeyPressed('space') && spr.anim != 'attack'){
-		spr.anim = 'attack';
-		spr.frame = 0;
-	}
-
-	Keyboard.update();
-
-	spr.vel.x += (-Keyboard.getKey('a') + Keyboard.getKey('d')) * spr.spd;
-	spr.vel.y += (-Keyboard.getKey('w') + Keyboard.getKey('s')) * spr.spd;
-
-	spr.vel.x -= (spr.vel.x > spr.decay / 10 || spr.vel.x < -(spr.decay / 10) ? spr.vel.x * spr.decay : spr.vel.x);
-	spr.vel.y -= (spr.vel.y > spr.decay / 10 || spr.vel.y < -(spr.decay / 10) ? spr.vel.y * spr.decay : spr.vel.y);
-
-	spr.model = Matrix.translate(spr.model, spr.vel.x, spr.vel.y);
-	shader.setUniform("model", spr.model);
-
 	Clear();
-	spr.render(shader);
 	requestAnimationFrame(run);
 }
