@@ -75,11 +75,14 @@ function Sprite(){
 
 	this.render = function(shader){
 		this.activeState.update(this);
+
 		this.dir = this.vel.x > 0 ? 1 : this.vel.x < 0 ? -1 : this.dir;
 		this.vel.x -= (this.vel.x > this.decay / 10 || this.vel.x < -(this.decay / 10) ? this.vel.x * this.decay : this.vel.x);
 		this.vel.y -= (this.vel.y > this.decay / 10 || this.vel.y < -(this.decay / 10) ? this.vel.y * this.decay : this.vel.y);
+
 		this.model = Matrix.translate(this.model, this.vel.x, this.vel.y);
 		shader.setUniform("model", this.model);
+
 		this.draw(shader, this.tex);
 	}
 }
@@ -149,13 +152,36 @@ var WalkState = {
 	anim: { start: 0, end: 6, y: 1, time: 4 },
 	frame: 0,
 	ticks: 0,
-	dir: 1,
+	walkSpd: 4,
+};
+
+var AttackState = {
+	update: function(drawable){
+		this.ticks++;
+		if (this.ticks > this.anim.time){
+			this.frame++;
+			this.ticks = 0;
+
+			drawable.bufferData = [
+				0, 0, this.frame * 120, this.anim.y * 120,
+				120, 0, this.frame * 120 + (drawable.dir * 120), this.anim.y * 120,
+				0, 120, this.frame * 120, this.anim.y * 120 + 120,
+				120, 120, this.frame * 120 + (drawable.dir * 120), this.anim.y * 120 + 120
+			];
+			drawable.updateBuffer = true;
+		}
+		if (this.frame == this.anim.end) drawable.setState('idle');
+	},
+	anim: { start: 0, end: 6, y: 3, time: 4 },
+	frame: 0,
+	ticks: 0,
 	walkSpd: 4,
 };
 
 var spr = new Sprite();
 spr.addState('idle', IdleState);
 spr.addState('walk', WalkState);
+spr.addState('attack', AttackState);
 spr.setState('idle');
 
 requestAnimationFrame(run);
