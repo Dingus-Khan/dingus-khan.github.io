@@ -158,8 +158,8 @@ spr.addState('walk', WalkState);
 spr.setState('idle');
 
 var doubleClick = {
-	tto: 4;
-	ticks = 0;
+	tto: 4,
+	ticks: 0,
 };
 
 requestAnimationFrame(run);
