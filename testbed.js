@@ -137,6 +137,7 @@ var WalkState = {
 
 var spr = new Sprite();
 spr.addState('idle', IdleState);
+spr.addState('walk', WalkState);
 spr.setState('idle');
 
 requestAnimationFrame(run);
