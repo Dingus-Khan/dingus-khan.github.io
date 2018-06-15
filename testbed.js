@@ -115,6 +115,9 @@ var IdleState = {
 		}
 		if (this.frame == this.anim.end) this.frame = this.anim.start;
 
+		if (keyboard.wasKeyPressed('space'))
+			drawable.setState('attack');
+
 		if ((Keyboard.getKey('w') != Keyboard.getKey('s'))
 		|| (Keyboard.getKey('a') != Keyboard.getKey('d')))
 			drawable.setState('walk');
@@ -141,6 +144,9 @@ var WalkState = {
 			drawable.updateBuffer = true;
 		}
 		if (this.frame == this.anim.end) this.frame = this.anim.start;
+
+		if (keyboard.wasKeyPressed('space'))
+			drawable.setState('attack');
 
 		if (!(Keyboard.getKey('w') != Keyboard.getKey('s')) && !(Keyboard.getKey('a') != Keyboard.getKey('d'))){
 			drawable.setState('idle');
@@ -170,7 +176,7 @@ var AttackState = {
 			];
 			drawable.updateBuffer = true;
 		}
-		if (this.frame == this.anim.end) drawable.setState('idle');
+		if (this.frame == this.anim.end) { this.ticks = 0; this.frame = 0; drawable.setState('idle'); };
 	},
 	anim: { start: 0, end: 6, y: 3, time: 4 },
 	frame: 0,
