@@ -72,6 +72,8 @@ function Sprite(){
 
 	this.render = function(shader){
 		this.activeState.update(this);
+
+		this.model = Matrix.translate(this.model, this.vel.x, this.vel.y);
 		shader.setUniform("model", this.model);
 		this.draw(shader, this.tex);
 	}
@@ -134,6 +136,8 @@ var WalkState = {
 
 		if (!(Keyboard.getKey('w') != Keyboard.getKey('s')) && !(Keyboard.getKey('a') != Keyboard.getKey('d'))){
 			drawable.setState('idle');
+		} else {
+			drawable.vel.x = Keyboard.getKey('d') - Keyboard.getKey('a');
 		}
 	},
 	anim: { start: 0, end: 6, y: 1, time: 4 },
