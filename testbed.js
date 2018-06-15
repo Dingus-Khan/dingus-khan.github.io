@@ -30,6 +30,7 @@ Keyboard.registerKey('w', 87);
 Keyboard.registerKey('a', 65);
 Keyboard.registerKey('s', 83);
 Keyboard.registerKey('d', 68);
+Keyboard.registerKey('space', 32);
 
 var shader = new Shader(vertexShader, fragmentShader);
 shader.addAttribute("pos", 2, gl.FLOAT, false, 4, 0);
@@ -43,9 +44,10 @@ function Sprite(){
 
 	this.anims = {
 		idle: { s: 0, e: 6, y: 0, t: 6 },
-		walk: { s: 0, e: 6, y: 1, t: 6 }
+		walk: { s: 0, e: 6, y: 1, t: 6 },
+		attack: { s: 0, e: 6, y: 2, t: 6 },
 	};
-	this.anim = this.anims.idle;
+	this.anim = 'idle';
 	this.frame = 0;
 	this.ticks = 0;
 
@@ -72,29 +74,36 @@ function Sprite(){
 
 		if (this.dir == 1){
 			this.bufferData = [
-				0, 0, this.frame * 120, this.anim.y * 120,
-				120, 0, this.frame * 120 + 120, this.anim.y * 120,
-				0, 120, this.frame * 120, this.anim.y * 120 + 120,
-				120, 120, this.frame * 120 + 120, this.anim.y * 120 + 120,
+				0, 0, this.frame * 120, this.anims[this.anim].y * 120,
+				120, 0, this.frame * 120 + 120, this.anims[this.anim].y * 120,
+				0, 120, this.frame * 120, this.anims[this.anim].y * 120 + 120,
+				120, 120, this.frame * 120 + 120, this.anims[this.anim].y * 120 + 120,
 			];
 		} else {
 			this.bufferData = [
-				120, 0, this.frame * 120 - 120, this.anim.y * 120,
-				0, 0, this.frame * 120, this.anim.y * 120,
-				120, 120, this.frame * 120 - 120, this.anim.y * 120 + 120,
-				0, 120, this.frame * 120, this.anim.y * 120 + 120,
+				120, 0, this.frame * 120 - 120, this.anims[this.anim].y * 120,
+				0, 0, this.frame * 120, this.anims[this.anim].y * 120,
+				120, 120, this.frame * 120 - 120, this.anims[this.anim].y * 120 + 120,
+				0, 120, this.frame * 120, this.anims[this.anim].y * 120 + 120,
 			];
 		}
 
-		if ((this.vel.x > this.decay * 2 || this.vel.x < -(this.decay * 2)) || (this.vel.y > this.decay * 2 || this.vel.y < -(this.decay * 2))) this.anim = this.anims.walk; else this.anim = this.anims.idle;
+		if (this.anim != 'attack'){
+			if ((this.vel.x > this.decay * 2 || this.vel.x < -(this.decay * 2)) || (this.vel.y > this.decay * 2 || this.vel.y < -(this.decay * 2))) this.anim = 'walk'; else this.anim = 'idle';
+		}
 
 		this.updateBuffer = true;
 		this.draw(shader, this.tex);
 		this.ticks++;
-		if(this.ticks >= this.anim.t){
-			this.ticks -= this.anim.t;
+		if(this.ticks >= this.anims[this.anim].t){
+			this.ticks -= this.anims[this.anim].t;
 			this.frame++;
 		}
+
+		if (this.anim == 'attack' && this.frame == this.anims[this.anim].e){
+			this.anim = 'idle';
+		}
+
 		if (this.frame == 6)
 			this.frame = 0;
 	}
@@ -104,13 +113,15 @@ var spr = new Sprite();
 
 requestAnimationFrame(run);
 function run() {
+	if (Keyboard.wasKeyPressed('space') && spr.anim != 'attack'){
+		spr.anim = 'attack';
+		spr.frame = 0;
+	}
+
 	Keyboard.update();
 
 	spr.vel.x += (-Keyboard.getKey('a') + Keyboard.getKey('d')) * spr.spd;
 	spr.vel.y += (-Keyboard.getKey('w') + Keyboard.getKey('s')) * spr.spd;
-
-	//spr.vel.x -= (spr.vel.x * spr.decay);
-	//spr.vel.y -= (spr.vel.y * spr.decay);
 
 	spr.vel.x -= (spr.vel.x > spr.decay / 10 || spr.vel.x < -(spr.decay / 10) ? spr.vel.x * spr.decay : spr.vel.x);
 	spr.vel.y -= (spr.vel.y > spr.decay / 10 || spr.vel.y < -(spr.decay / 10) ? spr.vel.y * spr.decay : spr.vel.y);

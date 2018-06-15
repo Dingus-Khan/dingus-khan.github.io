@@ -267,6 +267,7 @@ document.addEventListener("keydown", function(e){
 	} else {
 		Keyboard.keyPressed[e.which] = false;
 	}
+
 	Keyboard.keyDown[e.which] = true;
 });
 
