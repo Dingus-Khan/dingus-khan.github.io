@@ -40,7 +40,14 @@ shader.use();
 shader.setUniform("proj", proj);
 
 function Actor(){
-	this.c = "Working";
+	this.states = {};
+	this.activeState = {};
+	this.addState = function(stateName, state){
+		this.states[stateName] = state;
+	}
+	this.setState = function(stateName){
+		this.activeState = states[stateName];
+	}
 }
 
 function Sprite(){
@@ -61,21 +68,54 @@ function Sprite(){
 		y: 0
 	};
 
-	this.spd = 2;
-	this.decay = 0.2;
 	this.model = Matrix.identity();
-	this.dir = 1; // 1 = left, -1 = right
+
+	this.render = function(shader){
+		this.activeState.update(this);
+		this.draw(shader, this.tex);
+	}
 }
 
-var State = function(){
-	this.anim = {};
-	this.return = undefined;
-}
+/*
+	State Handling -
+		States should implement	the following methods
+		and fields:
+
+		update(drawable)
+		anim{start, end, y, time}
+		frame
+		ticks
+*/
+
+var IdleState = {
+	update: function(drawable){
+		this.ticks++;
+		if (this.ticks > this.anim.time){
+			this.frame++;
+			this.ticks = 0;
+
+			drawable.bufferData = [
+				0, 0, this.frame * 120, this.anim.y * 120,
+				120, 0, this.frame * 120 + 120, this.anim.y * 120,
+				0, 120, this.frame * 120, this.anim.y * 120 + 120,
+				120, 120, this.frame * 120 + 120, this.anim.y * 120 + 120
+			];
+			drawable.updateBuffer = true;
+		}
+
+		if (this.frame == this.anim.end) this.frame = this.anim.start;
+	},
+	anim: { start: 0, end: 6, y: 0, time: 6 },
+	frame: 0,
+	ticks: 0,
+	dir: 1,
+};
 
 var spr = new Sprite();
 
 requestAnimationFrame(run);
 function run() {
 	Clear();
+	spr.render(shader);
 	requestAnimationFrame(run);
 }
