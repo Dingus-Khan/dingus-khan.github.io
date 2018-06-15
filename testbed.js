@@ -112,6 +112,8 @@ var IdleState = {
 };
 
 var spr = new Sprite();
+spr.addState('idle', IdleState);
+spr.setState('idle');
 
 requestAnimationFrame(run);
 function run() {
