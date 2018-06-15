@@ -131,6 +131,10 @@ var WalkState = {
 			drawable.updateBuffer = true;
 		}
 		if (this.frame == this.anim.end) this.frame = this.anim.start;
+
+		if (!Keyboard.getKey('w') && !Keyboard.getKey('s') && !Keyboard.getKey('a') && !Keyboard.getKey('d')){
+			drawable.setState('idle');
+		}
 	},
 	anim: { start: 0, end: 6, y: 1, time: 4 },
 	frame: 0,
