@@ -124,7 +124,7 @@ var IdleState = {
 var WalkState = {
 	update: function(drawable){
 		this.ticks++;
-		if (this.ticks > (this.anim.time - (this.anim.time * Keyboard.getKey('lshift')) / 4)){
+		if (this.ticks > (this.anim.time){
 			this.frame++;
 			this.ticks = 0;
 
@@ -141,8 +141,8 @@ var WalkState = {
 		if (!(Keyboard.getKey('w') != Keyboard.getKey('s')) && !(Keyboard.getKey('a') != Keyboard.getKey('d'))){
 			drawable.setState('idle');
 		} else {
-			drawable.vel.x = (Keyboard.getKey('d') - Keyboard.getKey('a')) * (this.walkSpd + this.walkSpd * Keyboard.getKey('lshift'));
-			drawable.vel.y = (Keyboard.getKey('s') - Keyboard.getKey('w')) * (this.walkSpd + this.walkSpd * Keyboard.getKey('lshift'));
+			drawable.vel.x = (Keyboard.getKey('d') - Keyboard.getKey('a')) * this.walkSpd;
+			drawable.vel.y = (Keyboard.getKey('s') - Keyboard.getKey('w')) * this.walkSpd;
 		}
 	},
 	anim: { start: 0, end: 6, y: 1, time: 4 },
