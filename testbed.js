@@ -142,7 +142,7 @@ var WalkState = {
 			drawable.setState('idle');
 		} else {
 			drawable.vel.x = (Keyboard.getKey('d') - Keyboard.getKey('a')) * (this.walkSpd + this.walkSpd * Keyboard.getKey('lshift'));
-			drawable.vel.y = (Keyboard.getKey('w') - Keyboard.getKey('s')) * (this.walkSpd + this.walkSpd * Keyboard.getKey('lshift'));
+			drawable.vel.y = (Keyboard.getKey('s') - Keyboard.getKey('w')) * (this.walkSpd + this.walkSpd * Keyboard.getKey('lshift'));
 		}
 	},
 	anim: { start: 0, end: 6, y: 1, time: 4 },
