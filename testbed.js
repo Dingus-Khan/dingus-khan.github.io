@@ -115,7 +115,7 @@ var IdleState = {
 		}
 		if (this.frame == this.anim.end) this.frame = this.anim.start;
 
-		if (keyboard.wasKeyPressed('space'))
+		if (Keyboard.wasKeyPressed('space'))
 			drawable.setState('attack');
 
 		if ((Keyboard.getKey('w') != Keyboard.getKey('s'))
@@ -145,7 +145,7 @@ var WalkState = {
 		}
 		if (this.frame == this.anim.end) this.frame = this.anim.start;
 
-		if (keyboard.wasKeyPressed('space'))
+		if (Keyboard.wasKeyPressed('space'))
 			drawable.setState('attack');
 
 		if (!(Keyboard.getKey('w') != Keyboard.getKey('s')) && !(Keyboard.getKey('a') != Keyboard.getKey('d'))){
