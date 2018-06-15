@@ -47,7 +47,6 @@ function Actor(){
 	}
 	this.setState = function(stateName){
 		this.activeState = this.states[stateName];
-		this.activeState.update();
 	}
 }
 
