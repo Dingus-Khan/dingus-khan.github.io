@@ -75,6 +75,7 @@ function Sprite(){
 
 	this.render = function(shader){
 		this.activeState.update(this);
+		this.dir = this.vel.x > 0 ? 1 : this.vel.x < 0 ? -1 : this.dir;
 		this.vel.x -= (this.vel.x > this.decay / 10 || this.vel.x < -(this.decay / 10) ? this.vel.x * this.decay : this.vel.x);
 		this.vel.y -= (this.vel.y > this.decay / 10 || this.vel.y < -(this.decay / 10) ? this.vel.y * this.decay : this.vel.y);
 		this.model = Matrix.translate(this.model, this.vel.x, this.vel.y);
@@ -103,9 +104,9 @@ var IdleState = {
 
 			drawable.bufferData = [
 				0, 0, this.frame * 120, this.anim.y * 120,
-				120, 0, this.frame * 120 + 120, this.anim.y * 120,
+				120, 0, this.frame * 120 + (drawable.dir * 120), this.anim.y * 120,
 				0, 120, this.frame * 120, this.anim.y * 120 + 120,
-				120, 120, this.frame * 120 + 120, this.anim.y * 120 + 120
+				120, 120, this.frame * 120 + (drawable.dir * 120), this.anim.y * 120 + 120
 			];
 			drawable.updateBuffer = true;
 		}
@@ -130,9 +131,9 @@ var WalkState = {
 
 			drawable.bufferData = [
 				0, 0, this.frame * 120, this.anim.y * 120,
-				120, 0, this.frame * 120 + 120, this.anim.y * 120,
+				120, 0, this.frame * 120 + (drawable.dir * 120), this.anim.y * 120,
 				0, 120, this.frame * 120, this.anim.y * 120 + 120,
-				120, 120, this.frame * 120 + 120, this.anim.y * 120 + 120
+				120, 120, this.frame * 120 + (drawable.dir * 120), this.anim.y * 120 + 120
 			];
 			drawable.updateBuffer = true;
 		}
