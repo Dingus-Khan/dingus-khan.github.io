@@ -137,8 +137,8 @@ var WalkState = {
 		if (!(Keyboard.getKey('w') != Keyboard.getKey('s')) && !(Keyboard.getKey('a') != Keyboard.getKey('d'))){
 			drawable.setState('idle');
 		} else {
-			drawable.vel.x = (Keyboard.getKey('d') - Keyboard.getKey('a')) * this.spd;
-			drawable.vel.y = (Keyboard.getKey('w') - Keyboard.getKey('s')) * this.spd;
+			drawable.vel.x = (Keyboard.getKey('d') - Keyboard.getKey('a')) * this.walkSpd;
+			drawable.vel.y = (Keyboard.getKey('w') - Keyboard.getKey('s')) * this.walkSpd;
 		}
 
 		drawable.vel.x -= (drawable.vel.x > this.decay / 10 || drawable.vel.x < -(this.decay / 10) ? drawable.vel.x * this.decay : drawable.vel.x);
@@ -149,7 +149,7 @@ var WalkState = {
 	ticks: 0,
 	dir: 1,
 	walkSpd: 2,
-	spdDecay: 0.2
+	decay: 0.2
 };
 
 var spr = new Sprite();
