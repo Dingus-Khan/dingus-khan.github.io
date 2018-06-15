@@ -137,7 +137,7 @@ var WalkState = {
 		if (!(Keyboard.getKey('w') != Keyboard.getKey('s')) && !(Keyboard.getKey('a') != Keyboard.getKey('d'))){
 			drawable.setState('idle');
 		} else {
-			drawable.vel.x = Keyboard.getKey('d') - Keyboard.getKey('a');
+			drawable.vel.x = (Keyboard.getKey('d') - Keyboard.getKey('a')) * drawable.spd;
 		}
 	},
 	anim: { start: 0, end: 6, y: 1, time: 4 },
