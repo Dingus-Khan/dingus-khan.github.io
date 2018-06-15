@@ -47,6 +47,7 @@ function Actor(){
 	}
 	this.setState = function(stateName){
 		this.activeState = this.states[stateName];
+		this.activeState.update();
 	}
 }
 
@@ -103,13 +104,35 @@ var IdleState = {
 			];
 			drawable.updateBuffer = true;
 		}
-
 		if (this.frame == this.anim.end) this.frame = this.anim.start;
 	},
-	anim: { start: 0, end: 6, y: 0, time: 6 },
+	anim: { start: 0, end: 6, y: 0, time: 4 },
 	frame: 0,
 	ticks: 0,
 	dir: 1,
+};
+
+var WalkState = {
+	update: function(drawable){
+		this.ticks++;
+		if (this.ticks > this.anim.time){
+			this.frame++;
+			this.ticks = 0;
+
+			drawable.bufferData = [
+				0, 0, this.frame * 120, this.anim.y * 120,
+				120, 0, this.frame * 120 + 120, this.anim.y * 120,
+				0, 120, this.frame * 120, this.anim.y * 120 + 120,
+				120, 120, this.frame * 120 + 120, this.anim.y * 120 + 120
+			];
+			drawable.updateBuffer = true;
+		}
+		if (this.frame == this.anim.end) this.frame = this.anim.start;
+	},
+	anim: { start: 0, end: 6, y: 1, time: 4 },
+	frame: 0,
+	ticks: 0,
+	dir: 1
 };
 
 var spr = new Sprite();
