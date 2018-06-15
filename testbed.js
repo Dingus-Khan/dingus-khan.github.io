@@ -157,22 +157,8 @@ spr.addState('idle', IdleState);
 spr.addState('walk', WalkState);
 spr.setState('idle');
 
-var doubleClick = {
-	tto: 4,
-	ticks: 0,
-};
-
 requestAnimationFrame(run);
 function run() {
-	if (Keyboard.wasKeyPressed('d')){
-		doubleClick.ticks++;
-		if (doubleClick.ticks > doubleClick.tto)
-			doubleClick.ticks = 0;
-
-		if (doubleClick.ticks != 0)
-			spr.vel.x += 5;
-	}
-
 	Clear();
 	spr.render(shader);
 	requestAnimationFrame(run);
