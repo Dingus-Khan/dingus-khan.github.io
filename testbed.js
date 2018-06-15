@@ -72,6 +72,7 @@ function Sprite(){
 
 	this.render = function(shader){
 		this.activeState.update(this);
+		shader.setUniform("model", this.model);
 		this.draw(shader, this.tex);
 	}
 }
