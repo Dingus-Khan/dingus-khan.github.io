@@ -68,11 +68,14 @@ function Sprite(){
 		y: 0
 	};
 
+	this.decay = 0.2;
+
 	this.model = Matrix.identity();
 
 	this.render = function(shader){
 		this.activeState.update(this);
-
+		this.vel.x -= (this.vel.x > this.decay / 10 || this.vel.x < -(this.decay / 10) ? this.vel.x * this.decay : this.vel.x);
+		this.vel.y -= (this.vel.y > this.decay / 10 || this.vel.y < -(this.decay / 10) ? this.vel.y * this.decay : this.vel.y);
 		this.model = Matrix.translate(this.model, this.vel.x, this.vel.y);
 		shader.setUniform("model", this.model);
 		this.draw(shader, this.tex);
@@ -140,16 +143,12 @@ var WalkState = {
 			drawable.vel.x = (Keyboard.getKey('d') - Keyboard.getKey('a')) * this.walkSpd;
 			drawable.vel.y = (Keyboard.getKey('w') - Keyboard.getKey('s')) * this.walkSpd;
 		}
-
-		drawable.vel.x -= (drawable.vel.x > this.decay / 10 || drawable.vel.x < -(this.decay / 10) ? drawable.vel.x * this.decay : drawable.vel.x);
-		drawable.vel.y -= (drawable.vel.y > this.decay / 10 || drawable.vel.y < -(this.decay / 10) ? drawable.vel.y * this.decay : drawable.vel.y);
 	},
 	anim: { start: 0, end: 6, y: 1, time: 4 },
 	frame: 0,
 	ticks: 0,
 	dir: 1,
 	walkSpd: 2,
-	decay: 0.2
 };
 
 var spr = new Sprite();
