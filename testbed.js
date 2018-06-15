@@ -104,6 +104,9 @@ var IdleState = {
 			drawable.updateBuffer = true;
 		}
 		if (this.frame == this.anim.end) this.frame = this.anim.start;
+
+		if ((Keyboard.keyPressed('w') != Keyboard.KeyPressed('s') || (Keyboard.keyPressed('a') != Keyboard.keyPressed('d')))
+			drawable.setState('walk');
 	},
 	anim: { start: 0, end: 6, y: 0, time: 4 },
 	frame: 0,
