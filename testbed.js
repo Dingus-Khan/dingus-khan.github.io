@@ -46,7 +46,7 @@ function Actor(){
 		this.states[stateName] = state;
 	}
 	this.setState = function(stateName){
-		this.activeState = states[stateName];
+		this.activeState = this.states[stateName];
 	}
 }
 
