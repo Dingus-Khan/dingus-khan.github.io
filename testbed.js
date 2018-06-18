@@ -65,12 +65,13 @@ function Sprite(tex, w, h, tx, ty, tw, th){
 	}
 }
 
-var spr = new Sprite("test.png");
-var spr2 = new Sprite("cowsheet.png");
+var spr = new Sprite("test.png", 120, 120, 0, 0, 120, 120);
+var spr2 = new Sprite("cowsheet.png", 110, 110, 0, 0, 110, 110);
 
 requestAnimationFrame(run);
 function run() {
 	Clear();
 	spr.render(shader);
+	spr2.render(shader);
 	requestAnimationFrame(run);
 }
