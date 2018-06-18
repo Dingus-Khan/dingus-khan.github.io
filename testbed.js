@@ -82,6 +82,9 @@ var SpriteBatch = {
 	}
 };
 
+SpriteBatch.sprites[0] = spr;
+SpriteBatch.sprites[1] = spr2;
+
 requestAnimationFrame(run);
 function run() {
 	Keyboard.update();
