@@ -95,12 +95,24 @@ function circleCollision(ax, ay, ar, bx, by, br){
 	return d < (ar + br);
 }
 
-function actionGen(min, max){
+function randomInt(min, max){
 	return parseInt(min + Math.rand() * max);
+}
+
+function actionGen(){
+	var action = randomInt(0, 10);
+	if (action < 4)
+		console.log("idle");
+	else if (action < 6)
+		console.log("walk");
+	else
+		console.log("continue");
 }
 
 requestAnimationFrame(run);
 function run() {
+	actionGen();
+
 	Keyboard.update();
 
 	spr.pos.x += (Keyboard.getKey('d') - Keyboard.getKey('a')) * 2;
