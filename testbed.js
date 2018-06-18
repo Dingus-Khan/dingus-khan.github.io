@@ -93,10 +93,7 @@ function circleCollision(ax, ay, ar, bx, by, br){
 	var y = ay - by;
 	var d = Math.sqrt((x * x) + (y * y));
 
-	var colX = ((ax * br) + (bx * ar)) / (ar + br);
-	var colY = ((ax * br) + (bx * ar)) / (ar + br);
 
-	console.log(colX + " " + colY);
 
 	return d < (ar + br);
 }
@@ -112,35 +109,15 @@ var actionGen = function(){
 		this.actionTimer = 0;
 
 	if (this.actionTimer == 0){
-		this.action = randomInt(0, 15);
+		this.action = randomInt(0, 20);
 
-		if (action < 5) {
-			console.log("idle");
-			spr2.vel.x = 0;
-			spr2.vel.y = 0;
-			this.actionTimer = randomInt(150, 150);
-		} else if (action < 7) {
-			console.log("walk up");
-			spr2.vel.x = 0;
-			spr2.vel.y = -2;
-			this.actionTimer = randomInt(50, 150);
-		} else if (action < 9) {
-			console.log("walk down");
-			spr2.vel.x = 0;
-			spr2.vel.y = 2;
-			this.actionTimer = randomInt(50, 150);
-		} else if (action < 11) {
-			console.log("walk left");
-			spr2.vel.x = -2;
-			spr2.vel.y = 0;
-			this.actionTimer = randomInt(50, 150);
-		} else if (action < 13) {
-			console.log("walk right");
-			spr2.vel.x = 2;
-			spr2.vel.y = 0;
-			this.actionTimer = randomInt(50, 150);
-		} else {
-			this.actionTimer = 1;
+		if (this.action < 10){
+			this.actionTimer = randomInt(5, 150);
+		}
+
+		if (this.action >= 10 && this.action < 15){
+			spr2.pos.x += (this.action % 5 == 0) * 2;
+			spr2.pos.y += (this.action % 5 == 0) * 2;
 		}
 	}
 
