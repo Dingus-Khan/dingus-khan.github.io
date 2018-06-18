@@ -76,6 +76,10 @@ function run() {
 	Keyboard.update();
 
 	spr.pos.x += (Keyboard.getKey('d') - Keyboard.getKey('a')) * 2;
+	spr.pos.y += (Keyboard.getKey('s') - Keyboard.getKey('w')) * 2;
+
+	spr2.pos.x += (Keyboard.getKey('right') - Keyboard.getKey('left')) * 2;
+	spr2.pos.y += (Keyboard.getKey('down') - Keyboard.getKey('up')) * 2;
 
 	Clear();
 	spr.render(shader);
