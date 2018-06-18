@@ -76,8 +76,8 @@ var SpriteBatch = {
 	draw: function(shader){
 		this.sprites.sort(function(a, b){ return a.pos.y < b.pos.y; });
 
-		for(i = 0; i < this.sprites.length; i++){
-			this.sprites[i].render(shader);
+		for(s = 0; s < this.sprites.length; s++){
+			this.sprites[s].render(shader);
 		}
 	}
 };
@@ -96,8 +96,6 @@ function run() {
 	spr2.pos.y += (Keyboard.getKey('down') - Keyboard.getKey('up')) * 2;
 
 	Clear();
-	for(s = 0; s < SpriteBatch.sprites.length; s++){
-		SpriteBatch.sprites[s].render(shader);
-	}
+	SpriteBatch.draw(shader);
 	requestAnimationFrame(run);
 }
