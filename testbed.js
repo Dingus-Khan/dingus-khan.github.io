@@ -127,6 +127,8 @@ var actionGen = function(){
 	this.actionTimer--;
 }
 
+actionGen.actionTimer = 0;
+
 requestAnimationFrame(run);
 function run() {
 	actionGen();
