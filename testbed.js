@@ -100,6 +100,9 @@ function randomInt(min, max){
 }
 
 var actionGen = function(){
+	if (this.actionTimer == undefined)
+		this.actionTimer = 0;
+
 	if (this.actionTimer == 0){
 		this.action = randomInt(0, 15);
 
@@ -126,8 +129,6 @@ var actionGen = function(){
 
 	this.actionTimer--;
 }
-
-actionGen.actionTimer = 0;
 
 requestAnimationFrame(run);
 function run() {
