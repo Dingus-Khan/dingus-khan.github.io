@@ -95,6 +95,13 @@ function circleCollision(ax, ay, ar, bx, by, br){
 	return d < (ar + br);
 }
 
+function actionGen(){
+	var min = 0;
+	var max = 3;
+	var c = Math.rand() * max;
+	console.log(c);
+}
+
 requestAnimationFrame(run);
 function run() {
 	Keyboard.update();
