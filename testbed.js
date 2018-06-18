@@ -134,7 +134,6 @@ var actionGen = function(){
 			spr2.vel.y = 0;
 			this.actionTimer = randomInt(50, 150);
 		} else {
-			console.log("continue");
 			this.actionTimer = 1;
 		}
 	}
