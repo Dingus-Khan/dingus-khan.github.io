@@ -99,20 +99,32 @@ function randomInt(min, max){
 	return parseInt(min + Math.random() * max);
 }
 
-function actionGen(){
-	var action = randomInt(0, 15);
-	if (action < 5)
-		console.log("idle");
-	else if (action < 7)
-		console.log("walk up");
-	else if (action < 9)
-		console.log("walk down");
-	else if (action < 11)
-		console.log("walk left");
-	else if (action < 13)
-		console.log("walk right");
-	else
-		console.log("continue");
+var actionGen = function(){
+	if (this.actionTimer == 0){
+		this.action = randomInt(0, 15);
+
+		if (action < 5) {
+			console.log("idle");
+			this.actionTimer = randomInt(5, 20);
+		} else if (action < 7) {
+			console.log("walk up");
+			this.actionTimer = randomInt(5, 20);
+		} else if (action < 9) {
+			console.log("walk down");
+			this.actionTimer = randomInt(5, 20);
+		} else if (action < 11) {
+			console.log("walk left");
+			this.actionTimer = randomInt(5, 20);
+		} else if (action < 13) {
+			console.log("walk right");
+			this.actionTimer = randomInt(5, 20);
+		} else {
+			console.log("continue");
+			this.actionTimer = 1;
+		}
+	}
+
+	this.actionTimer--;
 }
 
 requestAnimationFrame(run);
