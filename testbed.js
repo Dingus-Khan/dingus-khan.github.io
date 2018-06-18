@@ -108,7 +108,7 @@ var actionGen = function(){
 	if (this.actionTimer == undefined)
 		this.actionTimer = 0;
 
-	if (this.actionTimer == 0){
+	if (this.actionTimer <= 0){
 		this.action = randomInt(0, 20);
 
 		if (this.action < 10){
