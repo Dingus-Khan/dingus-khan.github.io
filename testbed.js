@@ -92,6 +92,12 @@ function circleCollision(ax, ay, ar, bx, by, br){
 	var x = ax - bx;
 	var y = ay - by;
 	var d = Math.sqrt((x * x) + (y * y));
+
+	var colX = ((ax * br) + (bx * ar)) / (ar + br);
+	var colY = ((ax * br) + (bx * ar)) / (ar + br);
+
+	console.log(colX + " " + colY);
+
 	return d < (ar + br);
 }
 
