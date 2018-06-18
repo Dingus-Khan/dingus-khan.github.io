@@ -96,7 +96,7 @@ function circleCollision(ax, ay, ar, bx, by, br){
 }
 
 function randomInt(min, max){
-	return parseInt(min + Math.rand() * max);
+	return parseInt(min + Math.random() * max);
 }
 
 function actionGen(){
