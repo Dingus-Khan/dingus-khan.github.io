@@ -116,8 +116,8 @@ var actionGen = function(){
 		}
 
 		if (this.action >= 10 && this.action < 15){
-			spr2.pos.x += (this.action % 5 == 0) * 2;
-			spr2.pos.y += (this.action % 5 == 0) * 2;
+			spr2.vel.x += (this.action % 5 == 0);
+			spr2.vel.y += (this.action % 5 == 0);
 		}
 	}
 
