@@ -99,6 +99,8 @@ function randomInt(min, max){
 	return parseInt(min + Math.random() * max);
 }
 
+spr2.vel = {x: 0, y: 0};
+
 var actionGen = function(){
 	if (this.actionTimer == undefined)
 		this.actionTimer = 0;
@@ -108,18 +110,28 @@ var actionGen = function(){
 
 		if (action < 5) {
 			console.log("idle");
+			spr2.vel.x = 0;
+			spr2.vel.y = 0;
 			this.actionTimer = randomInt(150, 150);
 		} else if (action < 7) {
 			console.log("walk up");
+			spr2.vel.x = 0;
+			spr2.vel.y = -2;
 			this.actionTimer = randomInt(50, 150);
 		} else if (action < 9) {
 			console.log("walk down");
+			spr2.vel.x = 0;
+			spr2.vel.y = 2;
 			this.actionTimer = randomInt(50, 150);
 		} else if (action < 11) {
 			console.log("walk left");
+			spr2.vel.x = -2;
+			spr2.vel.y = 0;
 			this.actionTimer = randomInt(50, 150);
 		} else if (action < 13) {
 			console.log("walk right");
+			spr2.vel.x = 2;
+			spr2.vel.y = 0;
 			this.actionTimer = randomInt(50, 150);
 		} else {
 			console.log("continue");
@@ -138,10 +150,14 @@ function run() {
 
 	spr.pos.x += (Keyboard.getKey('d') - Keyboard.getKey('a')) * 2;
 	spr.pos.y += (Keyboard.getKey('s') - Keyboard.getKey('w')) * 2;
+	spr2.pos.x += spr2.vel.x;
+	spr2.pos.y += spr2.vel.y;
 
 	if (circleCollision(spr.pos.x + spr.dim.w / 2, spr.pos.y + spr.dim.h, spr.hitCircle, spr2.pos.x + spr2.dim.w / 2, spr2.pos.y + spr2.dim.h, spr2.hitCircle)){
 		spr.pos.x -= (Keyboard.getKey('d') - Keyboard.getKey('a')) * 2;
 		spr.pos.y -= (Keyboard.getKey('s') - Keyboard.getKey('w')) * 2;
+		spr2.pos.x -= spr2.vel.x;
+		spr2.pos.y -= spr2.vel.y;
 	}
 
 	Clear();
