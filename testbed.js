@@ -49,9 +49,9 @@ function Sprite(tex, w, h, tx, ty, tw, th){
 
 	this.bufferData = [
 		0, 0, this.texCoords.x, this.texCoords.y,
-		this.dim.x, 0, this.texCoords.x + this.texCoords.w, this.texCoords.y,
-		0, this.dim.y, this.texCoords.x, this.texCoords.y + this.texCoords.h,
-		this.dim.x, this.dim.y,	this.texCoords.x + this.texCoords.w, this.texCoords.y + this.texCoords.h
+		this.dim.w, 0, this.texCoords.x + this.texCoords.w, this.texCoords.y,
+		0, this.dim.h, this.texCoords.x, this.texCoords.y + this.texCoords.h,
+		this.dim.w, this.dim.h,	this.texCoords.x + this.texCoords.w, this.texCoords.y + this.texCoords.h
 	];
 	this.updateBuffer = true;
 
