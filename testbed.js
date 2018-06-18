@@ -85,15 +85,24 @@ var SpriteBatch = {
 SpriteBatch.sprites[0] = spr;
 SpriteBatch.sprites[1] = spr2;
 
+spr.hitCircle = 25;
+spr2.hitCircle = 20;
+
+function circleCollision(ax, ay, ar, bx, by, br){
+	return (bx - ax) + (ay - by) < (ar + a2);
+}
+
 requestAnimationFrame(run);
 function run() {
 	Keyboard.update();
 
-	spr.pos.x += (Keyboard.getKey('d') - Keyboard.getKey('a')) * 2;
-	spr.pos.y += (Keyboard.getKey('s') - Keyboard.getKey('w')) * 2;
+	if (!circleCollision(spr.pos.x, spr.pos.y, spr.hitCircle, spr2.pos.x, spr2.pos.y, spr2.hitCircle)){
+		spr.pos.x += (Keyboard.getKey('d') - Keyboard.getKey('a')) * 2;
+		spr.pos.y += (Keyboard.getKey('s') - Keyboard.getKey('w')) * 2;
 
-	spr2.pos.x += (Keyboard.getKey('right') - Keyboard.getKey('left')) * 2;
-	spr2.pos.y += (Keyboard.getKey('down') - Keyboard.getKey('up')) * 2;
+		spr2.pos.x += (Keyboard.getKey('right') - Keyboard.getKey('left')) * 2;
+		spr2.pos.y += (Keyboard.getKey('down') - Keyboard.getKey('up')) * 2;
+	}
 
 	Clear();
 	SpriteBatch.draw(shader);
