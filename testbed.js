@@ -74,7 +74,7 @@ var spr2 = new Sprite("cowsheet.png", 110, 110, 0, 0, 110, 110);
 var SpriteBatch = {
 	sprites: [],
 	draw: function(shader){
-		this.sprites.sort(function(a, b){ return a.pos.y < b.pos.y; });
+		this.sprites.sort(function(a, b){ return a.pos.y > b.pos.y; });
 
 		for(s = 0; s < this.sprites.length; s++){
 			this.sprites[s].render(shader);
