@@ -100,11 +100,17 @@ function randomInt(min, max){
 }
 
 function actionGen(){
-	var action = randomInt(0, 10);
-	if (action < 4)
+	var action = randomInt(0, 15);
+	if (action < 5)
 		console.log("idle");
-	else if (action < 6)
-		console.log("walk");
+	else if (action < 7)
+		console.log("walk up");
+	else if (action < 9)
+		console.log("walk down");
+	else if (action < 11)
+		console.log("walk left");
+	else if (action < 13)
+		console.log("walk right");
 	else
 		console.log("continue");
 }
