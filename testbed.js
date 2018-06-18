@@ -102,7 +102,7 @@ function run() {
 	spr2.pos.x += (Keyboard.getKey('right') - Keyboard.getKey('left')) * 2;
 	spr2.pos.y += (Keyboard.getKey('down') - Keyboard.getKey('up')) * 2;
 
-	if (circleCollision(spr.pos.x, spr.pos.y, spr.hitCircle, spr2.pos.x, spr2.pos.y, spr2.hitCircle)){
+	if (circleCollision(spr.pos.x + spr.dim.w / 2, spr.pos.y + spr.dim.h, spr.hitCircle, spr2.pos.x + spr2.dim.w / 2, spr2.pos.y + spr2.dim.h, spr2.hitCircle)){
 		spr.pos.x -= (Keyboard.getKey('d') - Keyboard.getKey('a')) * 2;
 		spr.pos.y -= (Keyboard.getKey('s') - Keyboard.getKey('w')) * 2;
 
