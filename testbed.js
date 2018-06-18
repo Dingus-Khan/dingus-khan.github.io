@@ -30,8 +30,10 @@ Keyboard.registerKey('w', 87);
 Keyboard.registerKey('a', 65);
 Keyboard.registerKey('s', 83);
 Keyboard.registerKey('d', 68);
-Keyboard.registerKey('space', 32);
-Keyboard.registerKey('lshift', 16);
+Keyboard.registerKey('up', 38);
+Keyboard.registerKey('left', 37);
+Keyboard.registerKey('down', 40);
+Keyboard.registerKey('right', 39);
 
 var shader = new Shader(vertexShader, fragmentShader);
 shader.addAttribute("pos", 2, gl.FLOAT, false, 4, 0);
@@ -71,6 +73,10 @@ var spr2 = new Sprite("cowsheet.png", 110, 110, 0, 0, 110, 110);
 
 requestAnimationFrame(run);
 function run() {
+	Keyboard.update();
+
+	spr.pos.x += (Keyboard.getKey('d') - Keyboard.getKey('a')) * 2;
+
 	Clear();
 	spr.render(shader);
 	spr2.render(shader);
