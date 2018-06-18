@@ -53,6 +53,7 @@ function Sprite(tex, w, h, tx, ty, tw, th){
 		0, this.dim.y, this.texCoords.x, this.texCoords.y + this.texCoords.h,
 		this.dim.x, this.dim.y,	this.texCoords.x + this.texCoords.w, this.texCoords.y + this.texCoords.h
 	];
+	this.updateBuffer = true;
 
 	this.model = Matrix.identity();
 	this.pos = { x: 0, y: 0 };
