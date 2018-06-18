@@ -71,6 +71,17 @@ function Sprite(tex, w, h, tx, ty, tw, th){
 var spr = new Sprite("test.png", 120, 120, 0, 0, 120, 120);
 var spr2 = new Sprite("cowsheet.png", 110, 110, 0, 0, 110, 110);
 
+var SpriteBatch = {
+	sprites: [],
+	draw: function(shader){
+		this.sprites.sort(function(a, b){ return a.pos.y < b.pos.y; });
+
+		for(i = 0; i < this.sprites.length; i++){
+			this.sprites[i].render(shader);
+		}
+	}
+};
+
 requestAnimationFrame(run);
 function run() {
 	Keyboard.update();
@@ -82,7 +93,6 @@ function run() {
 	spr2.pos.y += (Keyboard.getKey('down') - Keyboard.getKey('up')) * 2;
 
 	Clear();
-	spr.render(shader);
-	spr2.render(shader);
+	SpriteBatch.draw(shader);
 	requestAnimationFrame(run);
 }
