@@ -40,155 +40,33 @@ shader.use();
 
 shader.setUniform("proj", proj);
 
-function Actor(){
-	this.states = {};
-	this.activeState = {};
-	this.addState = function(stateName, state){
-		this.states[stateName] = state;
-	}
-	this.setState = function(stateName){
-		this.activeState = this.states[stateName];
-	}
-}
-
-function Sprite(){
+function Sprite(tex, w, h, tx, ty, tw, th){
 	Drawable.call(this, gl.TRIANGLE_STRIP, 4);
-	Actor.call(this);
+
+	this.tex = new Texture(tex);
+	this.dim = { w: w, h: h };
+	this.texCoords = { x: tx, y: ty, w: tw, h: th };
 
 	this.bufferData = [
-		0, 0, 0, 0,
-		120, 0, 120, 0,
-		0, 120, 0, 120,
-		120, 120, 120, 120
+		0, 0, this.texCoords.x, this.texCoords.y,
+		this.dim.x, 0, this.texCoords.x + this.texCoords.w, this.texCoords.y,
+		0, this.dim.y, this.texCoords.x, this.texCoords.y + this.texCoords.h,
+		this.dim.x, this.dim.y,	this.texCoords.x + this.texCoords.w, this.texCoords.y + this.texCoords.h
 	];
 
-	this.tex = new Texture("test.png");
-
-	this.vel = {
-		x: 0,
-		y: 0
-	};
-	this.dir = 1;
-	this.decay = 0.2;
-
 	this.model = Matrix.identity();
+	this.pos = { x: 0, y: 0 };
 
 	this.render = function(shader){
-		this.activeState.update(this);
-
-		this.dir = this.vel.x > 0 ? 1 : this.vel.x < 0 ? -1 : this.dir;
-		this.vel.x -= (this.vel.x > this.decay / 10 || this.vel.x < -(this.decay / 10) ? this.vel.x * this.decay : this.vel.x);
-		this.vel.y -= (this.vel.y > this.decay / 10 || this.vel.y < -(this.decay / 10) ? this.vel.y * this.decay : this.vel.y);
-
-		this.model = Matrix.translate(this.model, this.vel.x, this.vel.y);
+		this.model = Matrix.translation(this.pos.x, this.pos.y);
 		shader.setUniform("model", this.model);
 
 		this.draw(shader, this.tex);
 	}
 }
 
-/*
-	State Handling -
-		States should implement	the following methods
-		and fields:
-
-		update(drawable)
-		anim{start, end, y, time}
-		frame
-		ticks
-*/
-
-var IdleState = {
-	update: function(drawable){
-		this.ticks++;
-		if (this.ticks > this.anim.time){
-			this.frame++;
-			this.ticks = 0;
-
-			drawable.bufferData = [
-				0, 0, this.frame * 120, this.anim.y * 120,
-				120, 0, this.frame * 120 + (drawable.dir * 120), this.anim.y * 120,
-				0, 120, this.frame * 120, this.anim.y * 120 + 120,
-				120, 120, this.frame * 120 + (drawable.dir * 120), this.anim.y * 120 + 120
-			];
-			drawable.updateBuffer = true;
-		}
-		if (this.frame == this.anim.end) this.frame = this.anim.start;
-
-		if (Keyboard.wasKeyPressed('space'))
-			drawable.setState('attack');
-
-		if ((Keyboard.getKey('w') != Keyboard.getKey('s'))
-		|| (Keyboard.getKey('a') != Keyboard.getKey('d')))
-			drawable.setState('walk');
-	},
-	anim: { start: 0, end: 6, y: 0, time: 4 },
-	frame: 0,
-	ticks: 0,
-	dir: 1,
-};
-
-var WalkState = {
-	update: function(drawable){
-		this.ticks++;
-		if (this.ticks > this.anim.time){
-			this.frame++;
-			this.ticks = 0;
-
-			drawable.bufferData = [
-				0, 0, this.frame * 120, this.anim.y * 120,
-				120, 0, this.frame * 120 + (drawable.dir * 120), this.anim.y * 120,
-				0, 120, this.frame * 120, this.anim.y * 120 + 120,
-				120, 120, this.frame * 120 + (drawable.dir * 120), this.anim.y * 120 + 120
-			];
-			drawable.updateBuffer = true;
-		}
-		if (this.frame == this.anim.end) this.frame = this.anim.start;
-
-		if (Keyboard.wasKeyPressed('space'))
-			drawable.setState('attack');
-
-		if (!(Keyboard.getKey('w') != Keyboard.getKey('s')) && !(Keyboard.getKey('a') != Keyboard.getKey('d'))){
-			drawable.setState('idle');
-		} else {
-			drawable.vel.x = (Keyboard.getKey('d') - Keyboard.getKey('a')) * this.walkSpd;
-			drawable.vel.y = (Keyboard.getKey('s') - Keyboard.getKey('w')) * this.walkSpd;
-		}
-	},
-	anim: { start: 0, end: 6, y: 1, time: 4 },
-	frame: 0,
-	ticks: 0,
-	walkSpd: 4,
-};
-
-var AttackState = {
-	update: function(drawable){
-		this.ticks++;
-		if (this.ticks > this.anim.time){
-			this.frame++;
-			this.ticks = 0;
-
-			drawable.bufferData = [
-				0, 0, this.frame * 120, this.anim.y * 120,
-				120, 0, this.frame * 120 + (drawable.dir * 120), this.anim.y * 120,
-				0, 120, this.frame * 120, this.anim.y * 120 + 120,
-				120, 120, this.frame * 120 + (drawable.dir * 120), this.anim.y * 120 + 120
-			];
-			drawable.updateBuffer = true;
-		}
-		if (this.frame == this.anim.end) { this.ticks = 0; this.frame = 0; drawable.setState('idle'); };
-	},
-	anim: { start: 0, end: 6, y: 3, time: 4 },
-	frame: 0,
-	ticks: 0,
-	walkSpd: 4,
-};
-
-var spr = new Sprite();
-spr.addState('idle', IdleState);
-spr.addState('walk', WalkState);
-spr.addState('attack', AttackState);
-spr.setState('idle');
+var spr = new Sprite("test.png");
+var spr2 = new Sprite("cowsheet.png");
 
 requestAnimationFrame(run);
 function run() {
