@@ -142,6 +142,9 @@ var actionGen = function(){
 	this.actionTimer--;
 }
 
+spr2.pos.x = 200;
+spr2.pos.y = 100;
+
 requestAnimationFrame(run);
 function run() {
 	actionGen();
