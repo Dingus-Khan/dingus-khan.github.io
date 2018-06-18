@@ -89,7 +89,7 @@ spr.hitCircle = 25;
 spr2.hitCircle = 20;
 
 function circleCollision(ax, ay, ar, bx, by, br){
-	return (bx - ax) + (ay - by) < (ar + a2);
+	return (bx - ax) + (ay - by) < (ar + br);
 }
 
 requestAnimationFrame(run);
