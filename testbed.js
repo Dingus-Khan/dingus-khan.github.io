@@ -96,6 +96,8 @@ function run() {
 	spr2.pos.y += (Keyboard.getKey('down') - Keyboard.getKey('up')) * 2;
 
 	Clear();
-	SpriteBatch.draw(shader);
+	//SpriteBatch.draw(shader);
+	SpriteBatch.sprites[0].render(shader);
+	SpriteBatch.sprites[1].render(shader);
 	requestAnimationFrame(run);
 }
