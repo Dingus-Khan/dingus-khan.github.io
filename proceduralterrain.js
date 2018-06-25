@@ -48,5 +48,6 @@ var c = new Terrain();
 requestAnimationFrame(run);
 function run() {
 	Clear();
+	c.draw(shader);
 	requestAnimationFrame(run);
 }
