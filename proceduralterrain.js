@@ -27,9 +27,24 @@ shader.addAttribute("col", 3, gl.FLOAT, false, 5, 2);
 shader.use();
 
 shader.setUniform("proj", proj);
+
+var Terrain = function(){
+	Drawable.call(this, gl.TRIANGLE_STRIP, 8);
+
+	this.bufferData = [
+		0, 0, 1.0, 1.0, 1.0,
+		0, 0, 1.0, 1.0, 0.0,
+		0, 0, 1.0, 0.0, 1.0,
+		0, 0, 0.0, 1.0, 1.0,
+		0, 0, 1.0, 1.0, 1.0,
+		0, 0, 1.0, 1.0, 0.0,
+		0, 0, 1.0, 0.0, 1.0,
+		0, 0, 0.0, 1.0, 1.0,
+	];
+}
+
 requestAnimationFrame(run);
 function run() {
 	Clear();
-	SpriteBatch.draw(shader);
 	requestAnimationFrame(run);
 }
