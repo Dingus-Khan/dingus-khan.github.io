@@ -32,22 +32,22 @@ var Terrain = function(){
 	Drawable.call(this, gl.TRIANGLE_STRIP, 16);
 
 	this.bufferData = [
-		0, 0, 1.0, 1.0, 1.0,
-		100, 0, 1.0, 1.0, 1.0,
-		0, 100, 1.0, 1.0, 1.0,
-		100, 100, 1.0, 1.0, 1.0,
-		100, 0, 1.0, 1.0, 1.0,
-		200, 0, 1.0, 1.0, 1.0,
-		100, 100, 1.0, 1.0, 1.0,
-		200, 100, 1.0, 1.0, 1.0,
-		0, 100, 1.0, 1.0, 1.0,
-		100, 100, 1.0, 1.0, 1.0,
-		0, 200, 1.0, 1.0, 1.0,
-		100, 200, 1.0, 1.0, 1.0,
-		100, 100, 1.0, 1.0, 1.0,
-		200, 100, 1.0, 1.0, 1.0,
-		100, 200, 1.0, 1.0, 1.0,
-		200, 200, 1.0, 1.0, 1.0
+		0, 0, Math.random(), Math.random(), Math.random(),
+		100, 0, Math.random(), Math.random(), Math.random(),
+		0, 100, Math.random(), Math.random(), Math.random(),
+		100, 100, Math.random(), Math.random(), Math.random(),
+		100, 0, Math.random(), Math.random(), Math.random(),
+		200, 0, Math.random(), Math.random(), Math.random(),
+		100, 100, Math.random(), Math.random(), Math.random(),
+		200, 100, Math.random(), Math.random(), Math.random(),
+		0, 100, Math.random(), Math.random(), Math.random(),
+		100, 100, Math.random(), Math.random(), Math.random(),
+		0, 200, Math.random(), Math.random(), Math.random(),
+		100, 200, Math.random(), Math.random(), Math.random(),
+		100, 100, Math.random(), Math.random(), Math.random(),
+		200, 100, Math.random(), Math.random(), Math.random(),
+		100, 200, Math.random(), Math.random(), Math.random(),
+		200, 200, Math.random(), Math.random(), Math.random()
 	];
 }
 
