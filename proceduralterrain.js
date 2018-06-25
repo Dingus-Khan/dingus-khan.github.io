@@ -43,6 +43,8 @@ var Terrain = function(){
 	];
 }
 
+var c = new Terrain();
+
 requestAnimationFrame(run);
 function run() {
 	Clear();
