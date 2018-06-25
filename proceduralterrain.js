@@ -2,7 +2,7 @@ var vertexShader = `#version 300 es
 in vec2 pos;
 in vec3 col;
 
-out vec2 Col;
+out vec3 Col;
 
 uniform mat4 proj;
 
