@@ -52,8 +52,8 @@ function run() {
 		c.updateBuffer = true;
 		c.vertexCount = c.bufferData.length / 5;
 
-		x += (-30 + (Math.random() * 60));
-		y += (-30 + (Math.random() * 60));
+		x += (-30 + (Math.random() * y));
+		y += (-30 + (Math.random() * x));
 
 		counter++;
 		if (counter > 3){
