@@ -50,19 +50,19 @@ var Tile = function(tx, ty, tw, th, w, h){
 }
 
 var TileTypes = {
-	"Platform": new Tile(0, 0, 100, 100),
-	"PlatformEdge": new Tile(100, 0, 100, 100),
-	"PlatformBreakR": new Tile(200, 0, 100, 100),
-	"RedCircle": new Tile(300, 0, 200, 200),
-	"BlueCircle": new Tile(500, 0, 200, 200),
-	"PlatformBreakL": new Tile(700, 0, 100, 100),
-	"PlatformStandEnd": new Tile(0, 100, 100, 100),
-	"PlatformEdgeStand": new Tile(100, 100, 100, 100),
-	"PlatformStandMiddle": new Tile(100, 200, 100, 100),
-	"BlueSafeZone": new Tile(400, 200, 100, 100),
-	"RedSafeZone": new Tile(500, 200, 100, 100),
-	"BlueSpawnZone": new Tile(600, 200, 100, 100),
-	"RedSpawnZone": new Tile(700, 200, 100, 100)
+	"Platform": function(){ return new Tile(0, 0, 100, 100)},
+	"PlatformEdge": function(){ return new Tile(100, 0, 100, 100); },
+	"PlatformBreakR": function(){ return new Tile(200, 0, 100, 100); },
+	"RedCircle": function(){ return new Tile(300, 0, 200, 200); },
+	"BlueCircle": function(){ return new Tile(500, 0, 200, 200); },
+	"PlatformBreakL": function(){ return new Tile(700, 0, 100, 100); },
+	"PlatformStandEnd": function(){ return new Tile(0, 100, 100, 100); },
+	"PlatformEdgeStand": function(){ return new Tile(100, 100, 100, 100); },
+	"PlatformStandMiddle": function(){ return new Tile(100, 200, 100, 100); },
+	"BlueSafeZone": function(){ return new Tile(400, 200, 100, 100); },
+	"RedSafeZone": function(){ return new Tile(500, 200, 100, 100); },
+	"BlueSpawnZone": function(){ return new Tile(600, 200, 100, 100); },
+	"RedSpawnZone": function(){ return new Tile(700, 200, 100, 100); }
 };
 
 requestAnimationFrame(run);
