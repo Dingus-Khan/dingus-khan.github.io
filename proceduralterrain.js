@@ -21,9 +21,6 @@ void main(){
     outColour = vec4(Col, 1.0);
 }`;
 
-Keyboard.registerKey('up', 38);
-Keyboard.registerKey('left', 37);
-Keyboard.registerKey('down', 40);
 Keyboard.registerKey('right', 39);
 
 var shader = new Shader(vertexShader, fragmentShader);
@@ -62,26 +59,15 @@ function run() {
 			z = 0;
 		}
 
-		c.bufferData.push(x, y, Math.random(), Math.random(), Math.random());
-		c.updateBuffer = true;
-		c.vertexCount = c.bufferData.length / 5;
-	}
-	if (Keyboard.wasKeyPressed('left')){
-		if (z == 0){
-			x += 100;
-			y -= 100;
-			z = 1;
-		} else {
+		if (x > 600){
+			x = 0;
 			y += 100;
-			z = 0;
 		}
 
 		c.bufferData.push(x, y, Math.random(), Math.random(), Math.random());
 		c.updateBuffer = true;
 		c.vertexCount = c.bufferData.length / 5;
 	}
-	if (Keyboard.wasKeyPressed('up')){}
-	if (Keyboard.wasKeyPressed('down')){}
 
 	Keyboard.update();
 	Clear();
