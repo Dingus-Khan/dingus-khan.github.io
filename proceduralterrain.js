@@ -21,6 +21,9 @@ void main(){
     outColour = vec4(Col, 1.0);
 }`;
 
+Keyboard.registerKey('up', 38);
+Keyboard.registerKey('left', 37);
+Keyboard.registerKey('down', 40);
 Keyboard.registerKey('right', 39);
 
 var shader = new Shader(vertexShader, fragmentShader);
@@ -48,6 +51,8 @@ var z = 0;
 
 requestAnimationFrame(run);
 function run() {
+	Keyboard.update();
+
 	if (Keyboard.wasKeyPressed('right')){
 		if (z == 0){
 			x += 100;
