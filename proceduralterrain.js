@@ -60,7 +60,7 @@ function run() {
 			z = 0;
 		}
 
-		if (x > 600){
+		if (x > 800){
 			xInc = -xInc;
 			y += 100;
 		}
