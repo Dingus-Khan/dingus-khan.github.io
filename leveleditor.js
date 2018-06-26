@@ -38,11 +38,11 @@ shader.use();
 
 shader.setUniform("proj", proj);
 
-var Tile = function(tx, ty, tw, th){
-	this.x = x;
-	this.y = y;
-	this.w = w;
-	this.h = h;
+var Tile = function(tx, ty, tw, th, w, h){
+	this.x = 0;
+	this.y = 0;
+	this.w = w || tw;
+	this.h = h || th;
 	this.tx = tx;
 	this.ty = ty;
 	this.tw = tw;
