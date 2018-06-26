@@ -49,7 +49,7 @@ var Tile = function(tx, ty, tw, th, w, h){
 	this.th = th;
 }
 
-var TileTypes = {
+var Tiles = {
 	"Platform": function(){ return new Tile(0, 0, 100, 100)},
 	"PlatformEdge": function(){ return new Tile(100, 0, 100, 100); },
 	"PlatformBreakR": function(){ return new Tile(200, 0, 100, 100); },
