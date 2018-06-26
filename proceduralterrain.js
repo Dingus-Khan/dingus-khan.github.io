@@ -29,6 +29,7 @@ shader.use();
 shader.setUniform("proj", proj);
 
 var Terrain = function(){
+<<<<<<< HEAD
 	Drawable.call(this, gl.TRIANGLE_STRIP, 4);
 
 	this.bufferData = [
@@ -36,6 +37,27 @@ var Terrain = function(){
 		100, 0, 1.0, 1.0, 1.0,
 		0, 100, 1.0, 1.0, 1.0,
 		100, 100, 1.0, 1.0, 1.0,
+=======
+	Drawable.call(this, gl.TRIANGLE_STRIP, 16);
+
+	this.bufferData = [
+		0, 0, Math.random(), Math.random(), Math.random(),
+		100, 0, Math.random(), Math.random(), Math.random(),
+		0, 100, Math.random(), Math.random(), Math.random(),
+		100, 100, Math.random(), Math.random(), Math.random(),
+		100, 0, Math.random(), Math.random(), Math.random(),
+		200, 0, Math.random(), Math.random(), Math.random(),
+		100, 100, Math.random(), Math.random(), Math.random(),
+		200, 100, Math.random(), Math.random(), Math.random(),
+		0, 100, Math.random(), Math.random(), Math.random(),
+		100, 100, Math.random(), Math.random(), Math.random(),
+		0, 200, Math.random(), Math.random(), Math.random(),
+		100, 200, Math.random(), Math.random(), Math.random(),
+		100, 100, Math.random(), Math.random(), Math.random(),
+		200, 100, Math.random(), Math.random(), Math.random(),
+		100, 200, Math.random(), Math.random(), Math.random(),
+		200, 200, Math.random(), Math.random(), Math.random()
+>>>>>>> 9d50dc718f268eb1c64cdf6c4e56718431ad28b5
 	];
 }
 
