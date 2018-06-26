@@ -60,14 +60,14 @@ function run() {
 			z = 0;
 		}
 
+		c.bufferData.push(x, y, Math.random(), Math.random(), Math.random());
+		c.updateBuffer = true;
+		c.vertexCount = c.bufferData.length / 5;
+
 		if (x > 800){
 			xInc = -xInc;
 			y += 100;
 		}
-
-		c.bufferData.push(x, y, Math.random(), Math.random(), Math.random());
-		c.updateBuffer = true;
-		c.vertexCount = c.bufferData.length / 5;
 	}
 
 	Keyboard.update();
