@@ -1,16 +1,13 @@
 var vertexShader = `#version 300 es
 in vec2 pos;
 in vec3 col;
-in vec2 tex;
 
-out vec2 Tex;
 out vec3 Col;
 
 uniform mat4 proj;
 uniform mat4 model;
 
 void main(){
-	Tex = tex;
 	Col = col;
     gl_Position = proj * model * vec4(pos, 0.0, 1.0);
 }`;
@@ -18,25 +15,23 @@ void main(){
 var fragmentShader = `#version 300 es
 precision mediump float;
 
-in vec2 Tex;
 in vec3 Col;
 
 out vec4 outColour;
 
-uniform sampler2D texImage;
-
 void main(){
-	ivec2 texSize = textureSize(texImage, 0);
-    outColour = texture(texImage, vec2(Tex.x / float(texSize.x), Tex.y / float(texSize.y))) * vec4(Col, 1.0);
+    outColour = vec4(Col, 1.0);
 }`;
 
+Keyboard.registerKey('t', 84);
+
 var shader = new Shader(vertexShader, fragmentShader);
-shader.addAttribute("pos", 2, gl.FLOAT, false, 7, 0);
-shader.addAttribute("col", 2, gl.FLOAT, false, 7, 2);
-shader.addAttribute("tex", 2, gl.FLOAT, false, 7, 5);
+shader.addAttribute("pos", 2, gl.FLOAT, false, 5, 0);
+shader.addAttribute("col", 3, gl.FLOAT, false, 5, 2);
 shader.use();
 
 shader.setUniform("proj", proj);
+shader.setUniform("model", Matrix.identity());
 
 var Tile = function(tx, ty, tw, th, w, h){
 	this.x = 0;
@@ -65,9 +60,49 @@ var Tiles = {
 	"RedSpawnZone": function(){ return new Tile(700, 200, 100, 100); }
 };
 
+var TilePanel = function(){
+	Drawable.call(this, gl.TRIANGLES, 0);
+
+	this.bufferData.push(0, 0, 0.75, 0.75, 0.75);
+	this.bufferData.push(0, 600, 0.75, 0.75, 0.75);
+	this.bufferData.push(200, 600, 0.75, 0.75, 0.75);
+	this.bufferData.push(0, 0, 0.75, 0.75, 0.75);
+	this.bufferData.push(200, 600, 0.75, 0.75, 0.75);
+	this.bufferData.push(200, 0, 0.75, 0.75, 0.75);
+
+	this.show = true;
+	this.vertexCount = this.bufferData.length / 5;
+	this.updateBuffer = true;
+
+	this.x = 600;
+	this.y = 0;
+	this.w = 200;
+	this.h = 800;
+	this.show = true;
+	this.transition = false;
+
+	this.render = function(shader){
+		if (this.x > 600 && this.show == true)
+			this.x -= 10;
+		if (this.x < 800 && this.show == false)
+			this.x += 10;
+
+		this.model = Matrix.translation(this.x, this.y);
+		shader.setUniform("model", this.model);
+		this.draw(shader);
+	}
+}
+
+var panel = new TilePanel();
+
 requestAnimationFrame(run);
 function run() {
+	if (Keyboard.wasKeyPressed('t')){
+		panel.show = !panel.show;
+	}
+
 	Keyboard.update();
 	Clear();
+	panel.render(shader);
 	requestAnimationFrame(run);
 }
