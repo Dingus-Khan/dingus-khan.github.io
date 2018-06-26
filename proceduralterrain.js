@@ -42,8 +42,8 @@ var Terrain = function(){
 }
 
 var c = new Terrain();
-var x = 0;
-var y = 0;
+var x = 100;
+var y = 100;
 var z = 0;
 
 requestAnimationFrame(run);
@@ -63,7 +63,6 @@ function run() {
 		c.vertexCount = c.bufferData.length / 5;
 	}
 
-	Keyboard.update();
 	Clear();
 	c.draw(shader);
 	requestAnimationFrame(run);
