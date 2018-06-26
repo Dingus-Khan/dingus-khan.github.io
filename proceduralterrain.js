@@ -44,15 +44,20 @@ var Terrain = function(){
 var c = new Terrain();
 var x = 0;
 var y = 0;
+var z = 0;
 
 requestAnimationFrame(run);
 function run() {
 	Keyboard.update();
 	if (Keyboard.wasKeyPressed('right')){
-		if (x == y)
+		if (z == 0){
 			x += 100;
-		else
+			y -= 100;
+			z = 1;
+		} else {
 			y += 100;
+			z = 0;
+		}
 
 		c.bufferData.push(x, y, Math.random(), Math.random(), Math.random());
 		c.updateBuffer = true;
