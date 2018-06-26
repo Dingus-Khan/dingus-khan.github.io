@@ -31,7 +31,7 @@ shader.use();
 shader.setUniform("proj", proj);
 
 var Terrain = function(){
-	Drawable.call(this, gl.TRIANGLE_STRIP, 0);
+	Drawable.call(this, gl.LINE_LOOP, 0);
 
 	this.bufferData = [];
 }
@@ -43,7 +43,7 @@ var y = Math.random() * 600;
 requestAnimationFrame(run);
 function run() {
 
-	if (Keyboard.wasKeyPressed('right')){
+	if (Keyboard.getKey('right')){
 		c.bufferData.push(x, y, Math.random(), Math.random(), Math.random());
 		c.updateBuffer = true;
 		c.vertexCount = c.bufferData.length / 5;
