@@ -34,7 +34,6 @@ var Terrain = function(){
 	Drawable.call(this, gl.TRIANGLE_STRIP, 4);
 
 	this.bufferData = [
-		0, 0, Math.random(), Math.random(), Math.random(),
 	];
 
 	var width = 17;
