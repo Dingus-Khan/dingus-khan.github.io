@@ -48,7 +48,6 @@ var z = 0;
 
 requestAnimationFrame(run);
 function run() {
-	Keyboard.update();
 	if (Keyboard.wasKeyPressed('right')){
 		if (z == 0){
 			x += 100;
@@ -64,6 +63,7 @@ function run() {
 		c.vertexCount = c.bufferData.length / 5;
 	}
 
+	Keyboard.update();
 	Clear();
 	c.draw(shader);
 	requestAnimationFrame(run);
