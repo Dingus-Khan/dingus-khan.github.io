@@ -47,11 +47,12 @@ var y = 0;
 
 requestAnimationFrame(run);
 function run() {
+	Keyboard.update();
 	if (Keyboard.wasKeyPressed('right')){
 		if (x == y)
 			x += 100;
 		else
-			y += 100;		
+			y += 100;
 
 		c.bufferData.push(x, y, Math.random(), Math.random(), Math.random());
 		c.updateBuffer = true;
