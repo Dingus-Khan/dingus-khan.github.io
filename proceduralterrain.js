@@ -45,13 +45,14 @@ var c = new Terrain();
 var x = 100;
 var y = 100;
 var z = 0;
+var xInc = 100;
 
 requestAnimationFrame(run);
 function run() {
 
 	if (Keyboard.wasKeyPressed('right')){
 		if (z == 0){
-			x += 100;
+			x += xInc;
 			y -= 100;
 			z = 1;
 		} else {
@@ -60,7 +61,7 @@ function run() {
 		}
 
 		if (x > 600){
-			x = 0;
+			xInc = -xInc;
 			y += 100;
 		}
 
