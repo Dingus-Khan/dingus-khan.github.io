@@ -36,8 +36,8 @@ var Terrain = function(){
 	this.bufferData = [
 		0, 0, Math.random(), Math.random(), Math.random(),
 		100, 0, Math.random(), Math.random(), Math.random(),
-		0, 100, Math.random(), Math.random(), Math.random(),
 		100, 100, Math.random(), Math.random(), Math.random(),
+		0, 100, Math.random(), Math.random(), Math.random(),
 	];
 }
 
