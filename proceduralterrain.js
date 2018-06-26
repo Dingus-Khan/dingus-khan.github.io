@@ -21,6 +21,8 @@ void main(){
     outColour = vec4(Col, 1.0);
 }`;
 
+Keyboard.registerKey('right', 39);
+
 var shader = new Shader(vertexShader, fragmentShader);
 shader.addAttribute("pos", 2, gl.FLOAT, false, 5, 0);
 shader.addAttribute("col", 3, gl.FLOAT, false, 5, 2);
@@ -29,24 +31,33 @@ shader.use();
 shader.setUniform("proj", proj);
 
 var Terrain = function(){
-	Drawable.call(this, gl.TRIANGLE_STRIP, 8);
+	Drawable.call(this, gl.TRIANGLE_STRIP, 4);
 
 	this.bufferData = [
-		0, 0, 0.0, 0.0, 0.0,
-		100, 0, 1.0, 1.0, 1.0,
-		0, 100, 1.0, 1.0, 1.0,
-		100, 100, 0.0, 0.0, 0.0,
-		100, 0, 0.0, 0.0, 0.0,
-		200, 0, 1.0, 1.0, 1.0,
-		100, 100, 1.0, 1.0, 1.0,
-		200, 100, 0.0, 0.0, 0.0,
+		0, 0, Math.random(), Math.random(), Math.random(),
+		100, 0, Math.random(), Math.random(), Math.random(),
+		0, 100, Math.random(), Math.random(), Math.random(),
+		100, 100, Math.random(), Math.random(), Math.random(),
 	];
 }
 
 var c = new Terrain();
+var x = 0;
+var y = 0;
 
 requestAnimationFrame(run);
 function run() {
+	if (Keyboard.wasKeyPressed('right')){
+		if (x == y)
+			x += 100;
+		else
+			y += 100;		
+
+		c.bufferData.push(x, y, Math.random(), Math.random(), Math.random());
+		c.updateBuffer = true;
+		c.vertexCount = c.bufferData.length / 5;
+	}
+
 	Clear();
 	c.draw(shader);
 	requestAnimationFrame(run);
