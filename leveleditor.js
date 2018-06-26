@@ -27,7 +27,7 @@ uniform sampler2D texImage;
 
 void main(){
 	ivec2 texSize = textureSize(texImage, 0);
-    outColour = texture(texImage, vec2(Tex.x / float(texSize.x), Tex.y / float(texSize.y))) * Col;
+    outColour = Col * texture(texImage, vec2(Tex.x / float(texSize.x), Tex.y / float(texSize.y)));
 }`;
 
 var shader = new Shader(vertexShader, fragmentShader);
@@ -38,7 +38,7 @@ shader.use();
 
 shader.setUniform("proj", proj);
 
-var Tile = function(x, y, w, h, tx, ty, tw, th){
+var Tile = function(tx, ty, tw, th){
 	this.x = x;
 	this.y = y;
 	this.w = w;
@@ -50,7 +50,19 @@ var Tile = function(x, y, w, h, tx, ty, tw, th){
 }
 
 var TileTypes = {
-	"Platform": new Tile(0, 0, 100, 100, 0, 0, 100, 100)
+	"Platform": new Tile(0, 0, 100, 100),
+	"PlatformEdge": new Tile(100, 0, 100, 100),
+	"PlatformBreakR": new Tile(200, 0, 100, 100),
+	"RedCircle": new Tile(300, 0, 200, 200),
+	"BlueCircle": new Tile(500, 0, 200, 200),
+	"PlatformBreakL": new Tile(700, 0, 100, 100),
+	"PlatformStandEnd": new Tile(0, 100, 100, 100),
+	"PlatformEdgeStand": new Tile(100, 100, 100, 100),
+	"PlatformStandMiddle": new Tile(100, 200, 100, 100),
+	"BlueSafeZone": new Tile(400, 200, 100, 100),
+	"RedSafeZone": new Tile(500, 200, 100, 100),
+	"BlueSpawnZone": new Tile(600, 200, 100, 100),
+	"RedSpawnZone": new Tile(700, 200, 100, 100)
 };
 
 requestAnimationFrame(run);
