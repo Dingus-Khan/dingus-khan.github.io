@@ -37,16 +37,19 @@ var Terrain = function(){
 }
 
 var c = new Terrain();
+var x = Math.random() * 800;
+var y = Math.random() * 600;
 
 requestAnimationFrame(run);
 function run() {
 
 	if (Keyboard.wasKeyPressed('right')){
-
-		c.bufferData.push(Math.random() * 800, Math.random() * 600, Math.random(), Math.random(), Math.random());
+		c.bufferData.push(x, y, Math.random(), Math.random(), Math.random());
 		c.updateBuffer = true;
 		c.vertexCount = c.bufferData.length / 5;
 
+		x += (-30 + (Math.random() * 60));
+		y += (-30 + (Math.random() * 60));
 	}
 
 	Keyboard.update();
