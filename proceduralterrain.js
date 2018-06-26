@@ -57,9 +57,9 @@ function run() {
 
 		counter++;
 		if (counter > 3){
-			r = Math.random();
-			g = Math.random();
-			b = Math.random();
+			r = (r + Math.random()) / 2;
+			g = (g + Math.random()) / 2;
+			b = (b + Math.random()) / 2;
 		}
 	}
 
