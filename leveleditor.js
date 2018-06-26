@@ -27,7 +27,7 @@ uniform sampler2D texImage;
 
 void main(){
 	ivec2 texSize = textureSize(texImage, 0);
-    outColour = Col * texture(texImage, vec2(Tex.x / float(texSize.x), Tex.y / float(texSize.y)));
+    outColour = texture(texImage, vec2(Tex.x / float(texSize.x), Tex.y / float(texSize.y))) * vec4(Col, 1.0);
 }`;
 
 var shader = new Shader(vertexShader, fragmentShader);
