@@ -31,7 +31,7 @@ shader.use();
 shader.setUniform("proj", proj);
 
 var Terrain = function(){
-	Drawable.call(this, gl.LINE_LOOP, 0);
+	Drawable.call(this, gl.TRIANGLE_FAN, 0);
 
 	this.bufferData = [];
 }
