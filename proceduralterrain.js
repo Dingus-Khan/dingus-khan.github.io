@@ -29,17 +29,13 @@ shader.use();
 shader.setUniform("proj", proj);
 
 var Terrain = function(){
-	Drawable.call(this, gl.TRIANGLE_STRIP, 8);
+	Drawable.call(this, gl.TRIANGLE_STRIP, 4);
 
 	this.bufferData = [
 		0, 0, 1.0, 1.0, 1.0,
-		100, 0, 1.0, 1.0, 0.0,
-		0, 100, 1.0, 0.0, 1.0,
-		100, 100, 0.0, 1.0, 1.0,
+		100, 0, 1.0, 1.0, 1.0,
+		0, 100, 1.0, 1.0, 1.0,
 		100, 100, 1.0, 1.0, 1.0,
-		200, 100, 1.0, 1.0, 0.0,
-		100, 200, 1.0, 0.0, 1.0,
-		200, 200, 0.0, 1.0, 1.0,
 	];
 }
 
