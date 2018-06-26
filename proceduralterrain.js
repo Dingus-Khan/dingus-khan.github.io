@@ -39,6 +39,10 @@ var Terrain = function(){
 var c = new Terrain();
 var x = Math.random() * 800;
 var y = Math.random() * 600;
+var r = Math.random();
+var g = Math.random();
+var b = Math.random();
+var counter = 0;
 
 requestAnimationFrame(run);
 function run() {
@@ -50,6 +54,13 @@ function run() {
 
 		x += (-30 + (Math.random() * 60));
 		y += (-30 + (Math.random() * 60));
+
+		counter++;
+		if (counter > 3){
+			r = Math.random();
+			g = Math.random();
+			b = Math.random();
+		}
 	}
 
 	Keyboard.update();
