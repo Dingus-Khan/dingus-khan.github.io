@@ -35,10 +35,17 @@ var Terrain = function(){
 
 	this.bufferData = [
 		0, 0, Math.random(), Math.random(), Math.random(),
-		0, 100, Math.random(), Math.random(), Math.random(),
-		100, 0, Math.random(), Math.random(), Math.random(),
-		100, 100, Math.random(), Math.random(), Math.random(),
 	];
+
+	var width = 17;
+	var height = 17;
+	for(r = 0; r < width; r++){
+		for(c = 0; c < height; c++){
+			this.bufferData.push(r * 30, c * 30, Math.random(), Math.random(), Math.random());
+		}
+	}
+
+	this.vertexCount = this.bufferData.length / 5;
 }
 
 var c = new Terrain();
