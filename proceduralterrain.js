@@ -51,7 +51,6 @@ var z = 0;
 
 requestAnimationFrame(run);
 function run() {
-	Keyboard.update();
 
 	if (Keyboard.wasKeyPressed('right')){
 		if (z == 0){
@@ -67,7 +66,24 @@ function run() {
 		c.updateBuffer = true;
 		c.vertexCount = c.bufferData.length / 5;
 	}
+	if (Keyboard.wasKeyPressed('left')){
+		if (z == 0){
+			x += 100;
+			y -= 100;
+			z = 1;
+		} else {
+			y += 100;
+			z = 0;
+		}
 
+		c.bufferData.push(x, y, Math.random(), Math.random(), Math.random());
+		c.updateBuffer = true;
+		c.vertexCount = c.bufferData.length / 5;
+	}
+	if (Keyboard.wasKeyPressed('up')){}
+	if (Keyboard.wasKeyPressed('down')){}
+
+	Keyboard.update();
 	Clear();
 	c.draw(shader);
 	requestAnimationFrame(run);
