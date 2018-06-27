@@ -60,6 +60,17 @@ var Tiles = {
 	"RedSpawnZone": function(){ return new Tile(700, 200, 100, 100); }
 };
 
+var Button = function(x, y, w, h, tx, ty, tw, th){
+	Drawable.call(this, gl.TRIANGLE_STRIP, 0);
+
+	this.bufferData = [
+		0, 0, tx, ty, 1, 1, 1,
+		w, 0, tx + tw, ty, 1, 1, 1,
+		0, h, tx, ty + th, 1, 1, 1,
+		w, h, tx + tw, ty + th, 1, 1, 1
+	];
+}
+
 var TilePanel = function(){
 	Drawable.call(this, gl.TRIANGLES, 0);
 
@@ -80,6 +91,8 @@ var TilePanel = function(){
 	this.h = 800;
 	this.show = true;
 	this.transition = false;
+
+	this.buttons = [];
 
 	this.render = function(shader){
 		if (this.x > 600 && this.show == true)
