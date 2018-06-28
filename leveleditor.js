@@ -86,6 +86,6 @@ function run() {
 
 	Keyboard.update();
 	Clear();
-	panel.render(shader);
+	panel.render(panelShader);
 	requestAnimationFrame(run);
 }
