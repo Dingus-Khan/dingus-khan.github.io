@@ -17,17 +17,17 @@ var Sprite = function(texture, x, y, w, h, tx, ty, tw, th){
 	this.texture = new Texture(texture, gl.REPEAT, gl.NEAREST);
 
 	this.changeTexCoords = function (tx, ty, tw, th) {
-		this.bufferData = [2] = tx;
-		this.bufferData = [3] = ty;
+		this.bufferData[2] = tx;
+		this.bufferData[3] = ty;
 
-		this.bufferData = [9] = tx;
-		this.bufferData = [10] = ty + th;
+		this.bufferData[9] = tx;
+		this.bufferData[10] = ty + th;
 
-		this.bufferData = [16] = tx + tw;
-		this.bufferData = [17] = ty;
+		this.bufferData[16] = tx + tw;
+		this.bufferData[17] = ty;
 
-		this.bufferData = [23] = tx + tw;
-		this.bufferData = [24] = ty + th;
+		this.bufferData[23] = tx + tw;
+		this.bufferData[24] = ty + th;
 
 		this.updateBuffer = true;
 	};
