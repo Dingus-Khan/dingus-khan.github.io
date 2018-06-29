@@ -31,7 +31,7 @@ panelShader.use();
 panelShader.setUniform("proj", proj);
 panelShader.setUniform("model", Matrix.identity());
 
-var buttonVertexShader = `#version 300 es
+var spriteVertexShader = `#version 300 es
 	in vec2 pos;
 	in vec2 tex;
 	in vec3 col;
@@ -50,7 +50,7 @@ var buttonVertexShader = `#version 300 es
 	}
 `;
 
-var buttonFragmentShader = `#version 300 es
+var spriteFragmentShader = `#version 300 es
 	in vec2 Tex;
 	in vec3 Col;
 
@@ -63,11 +63,11 @@ var buttonFragmentShader = `#version 300 es
 	}
 `;
 
-var buttonShader = new Shader(buttonVertexShader, buttonFragmentShader);
-buttonShader.addAttribute("pos", 2, gl.FLOAT, false, 7, 0);
-buttonShader.addAttribute("tex", 2, gl.FLOAT, false, 7, 2);
-buttonShader.addAttribute("col", 3, gl.FLOAT, false, 7, 5);
-buttonShader.use();
+var spriteShader = new Shader(spriteVertexShader, spriteFragmentShader);
+spriteShader.addAttribute("pos", 2, gl.FLOAT, false, 7, 0);
+spriteShader.addAttribute("tex", 2, gl.FLOAT, false, 7, 2);
+spriteShader.addAttribute("col", 3, gl.FLOAT, false, 7, 5);
+spriteShader.use();
 
-buttonShader.setUniform("proj", proj);
-buttonShader.setUniform("model", Matrix.identity());
+spriteShader.setUniform("proj", proj);
+spriteShader.setUniform("model", Matrix.identity());
