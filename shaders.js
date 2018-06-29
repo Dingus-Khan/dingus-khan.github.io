@@ -64,3 +64,12 @@ var buttonFragmentShader = `#version 300 es
 		outColour = texture(texImage, Tex) * vec4(Col, 1.0);
 	}
 `;
+
+var buttonShader = new Shader(buttonVertexShader, buttonFragmentShader);
+buttonShader.addAttribute("pos", 2, gl.FLOAT, false, 7, 0);
+buttonShader.addAttribute("tex", 2, gl.FLOAT, false, 7, 2);
+buttonShader.addAttribute("col", 3, gl.FLOAT, false, 7, 5);
+buttonShader.use();
+
+buttonShader.setUniform("proj", proj);
+buttonShader.setUniform("model", Matrix.identity());
