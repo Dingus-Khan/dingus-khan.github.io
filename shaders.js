@@ -51,6 +51,8 @@ var spriteVertexShader = `#version 300 es
 `;
 
 var spriteFragmentShader = `#version 300 es
+	precision mediump float;
+
 	in vec2 Tex;
 	in vec3 Col;
 
