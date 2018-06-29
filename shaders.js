@@ -31,8 +31,6 @@ panelShader.use();
 panelShader.setUniform("proj", proj);
 panelShader.setUniform("model", Matrix.identity());
 
-
-
 var buttonVertexShader = `#version 300 es
 	in vec2 pos;
 	in vec2 tex;

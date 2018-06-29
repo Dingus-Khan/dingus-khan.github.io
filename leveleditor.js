@@ -1,4 +1,6 @@
-Keyboard.registerKey('t', 84);
+var Button = function(){
+	
+}
 
 requestAnimationFrame(run);
 function run() {
