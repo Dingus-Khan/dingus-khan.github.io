@@ -14,6 +14,7 @@ var Sprite = function(texture, x, y, w, h, tx, ty, tw, th){
 	this.h = h;
 
 	this.model = Matrix.identity();
+	this.texture = new Texture(texture, gl.REPEAT, gl.NEAREST);
 
 	this.changeTexCoords = function (tx, ty, tw, th) {
 		this.bufferData = [2] = tx;
@@ -39,9 +40,12 @@ var Sprite = function(texture, x, y, w, h, tx, ty, tw, th){
 	}
 }
 
+var spr = new Sprite("test.png", 0, 0, 100, 100, 0, 0, 100, 100);
+
 requestAnimationFrame(run);
 function run() {
 	Keyboard.update();
 	Clear();
+	spr.render();
 	requestAnimationFrame(run);
 }
