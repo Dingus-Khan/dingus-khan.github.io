@@ -15,7 +15,7 @@ var Sprite = function(texture, x, y, w, h, tx, ty, tw, th){
 
 	this.model = Matrix.identity();
 
-	this.changeTex = function (tx, ty, tw, th) {
+	this.changeTexCoords = function (tx, ty, tw, th) {
 		this.bufferData = [2] = tx;
 		this.bufferData = [3] = ty;
 
@@ -27,10 +27,13 @@ var Sprite = function(texture, x, y, w, h, tx, ty, tw, th){
 
 		this.bufferData = [23] = tx + tw;
 		this.bufferData = [24] = ty + th;
+
+		this.updateBuffer = true;
 	};
 
 	this.render = function(){
 		spriteShader.use();
+		this.model = Matrix.translate(this.model, this.x, this.y);
 		spriteShader.setUniform("model", this.model);
 		this.draw(spriteShader, this.texture);
 	}
