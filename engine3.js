@@ -91,6 +91,10 @@ var SpriteBatch = function(){
 		this.sprites.push(sprite);
 	}
 	this.build = function(){
+		this.sprites.sort(function(spr1, spr2){
+			return spr1.y < spr2.y;
+		});
+
 		this.sprites.forEach(function(spr){
 			this.bufferData.push([
 				spr.x, spr.y, spr.tx, spr.ty, spr.r, spr.g, spr.b,
