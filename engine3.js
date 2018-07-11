@@ -83,6 +83,8 @@ var Camera = function(x, y, w, h) {
 	this.view = Matrix.translation(x, y);
 }
 
+var camera = new Camera(0, 0, 800, 600);
+
 function Shader(vertexShader, fragmentShader){
 	var v = System.BuildShader(gl.VERTEX_SHADER, vertexShader);
 	var f = System.BuildShader(gl.FRAGMENT_SHADER, fragmentShader);
@@ -161,7 +163,7 @@ function Texture(image, wrapMode, filterMode){
 	}
 }
 
-var Shape = function(){
+var Shape = function(x, y, w, h){
 	this.shader = new Shader(
 		`#version 300 es
 		in vec2 pos;
@@ -169,9 +171,10 @@ var Shape = function(){
 		out vec3 Col;
 		uniform mat4 proj;
 		uniform mat4 view;
+		uniform mat4 model;
 		void main(){
 			Col = col;
-			gl_Position = proj * view * vec4(pos, 0, 1);
+			gl_Position = proj * view * model * vec4(pos, 0, 1);
 		}`,
 		`#version 300 es
 		precision mediump float;
@@ -185,5 +188,34 @@ var Shape = function(){
 	this.shader.addAttribute("col", 3, gl.FLOAT, false, 5, 2);
 	this.shader.use();
 
-	
+	this.vao = gl.createVertexArray();
+	this.vbo = gl.createBuffer();
+	this.bufferData = [
+		0, 0, 1, 1, 1,
+		w, 0, 1, 1, 1,
+		0, h, 1, 1, 1,
+		w, h, 1, 1, 1
+	];
+
+	gl.bindVertexArray(this.vao);
+	gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.bufferData), gl.STATIC_DRAW);
+
+	this.model = Matrix.identity();
+	this.x = x;
+	this.y = y;
+
+	this.move = function(x, y){
+		this.x += x;
+		this.y += y;
+		this.model = Matrix.translate(this.model, x, y);
+	}
+
+	this.draw = function(){
+		gl.bindVertexArray(this.vao);
+		this.shader.use();
+		this.shader.setUniform("proj", camera.proj);
+		this.shader.setUniform("view", camera.view);
+		this.shader.setUniform("model", this.model);
+	}
 }
