@@ -303,6 +303,8 @@ var TileMap = function(tex){
 
 gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
+var tm = new TileMap("tileset.png");
+
 requestAnimationFrame(run);
 function run() {
 	gl.clear(gl.COLOR_BUFFER_BIT);
