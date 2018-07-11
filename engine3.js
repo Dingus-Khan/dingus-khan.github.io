@@ -1,6 +1,8 @@
 var canvas = document.getElementById("main");
 var gl = canvas.getContext("webgl2");
 
+
+
 var Matrix = {
 	identity: function(){
 		return [
@@ -70,44 +72,118 @@ var Matrix = {
 	}
 };
 
-var Sprite = function(x, y, w, h, tx, ty, tw, th, r, g, b){
-	this.x = x;
-	this.y = y;
-	this.w = w;
-	this.h = h;
-	this.tx = tx;
-	this.ty = ty;
-	this.tw = tw;
-	this.th = th;
-	this.r = r;
-	this.g = g;
-	this.b = b;
+var Camera = function(x, y, w, h) {
+	this.proj = [
+		2 / w, 0, 0, 0,
+		0, -2 / h, 0,
+		0, 0, 0, 1, 0,
+		-1, 1, 0, 1
+	];
+
+	this.view = Matrix.translation(x, y);
 }
 
-var SpriteBatch = function(){
-	this.sprites = [];
-	this.bufferData = [];
-	this.add = function(sprite){
-		this.sprites.push(sprite);
-	}
-	this.build = function(){
-		this.sprites.sort(function(spr1, spr2){
-			return spr1.y < spr2.y;
-		});
+function Shader(vertexShader, fragmentShader){
+	var v = System.BuildShader(gl.VERTEX_SHADER, vertexShader);
+	var f = System.BuildShader(gl.FRAGMENT_SHADER, fragmentShader);
+	this.shader = System.LinkProgram(v, f);
 
-		this.sprites.forEach(function(spr){
-			this.bufferData.push([
-				spr.x, spr.y, spr.tx, spr.ty, spr.r, spr.g, spr.b,
-				spr.x + spr.w, spr.y, spr.tx + spr.tw, spr.ty, spr.r, spr.g, spr.b,
-				spr.x + spr.w, spr.y + spr.h, spr.tx + spr.tw, spr.ty + spr.th, spr.r, spr.g, spr.b,
+	this.attributes = [];
 
-				spr.x, spr.y, spr.tx, spr.ty, spr.r, spr.g, spr.b,
-				spr.x + spr.w, spr.y + spr.h, spr.tx + spr.tw, spr.ty + spr.th, spr.r, spr.g, spr.b,
-				spr.x, spr.y + spr.h, spr.tx, spr.ty + spr.th, spr.r, spr.g, spr.b,
-			]);
-		});
+	this.addAttribute = function(name, count, type, normalise, stride, offset){
+		var loc = gl.getAttribLocation(this.shader, name);
+		if (loc != -1){
+			this.attributes.push({
+				loc: loc, count: count, type: type, normalise: normalise, stride: stride, offset: offset
+			});
+		}
 	}
-	this.draw = function(){
 
+	this.enableAttributes = function(){
+		for(i = 0; i < this.attributes.length; i++){
+			var attr = this.attributes[i];
+			gl.vertexAttribPointer(attr.loc, attr.count, attr.type, attr.normalise, attr.stride * 4, attr.offset * 4);
+			gl.enableVertexAttribArray(attr.loc);
+		}
 	}
+
+	this.setUniform = function(name, value){
+		var values = [].concat(value);
+
+		var loc = gl.getUniformLocation(this.shader, name);
+		switch(values.length){
+			case 1:
+				gl.uniform1fv(loc, values);
+				break;
+			case 2:
+				gl.uniform2fv(loc, values);
+				break;
+			case 3:
+				gl.uniform3fv(loc, values);
+				break;
+			case 4:
+				gl.uniform4fv(loc, values);
+				break;
+			case 16:
+				gl.uniformMatrix4fv(loc, false, values);
+				break;
+		}
+	}
+
+	this.use = function(){
+		gl.useProgram(this.shader);
+	}
+}
+
+function Texture(image, wrapMode, filterMode){
+	this.texture = gl.createTexture();
+	this.image = new Image();
+	this.image.textureid = this.texture;
+	this.image.wrapMode = wrapMode || gl.REPEAT;
+	this.image.filterMode = filterMode || gl.NEAREST;
+
+	this.image.onload = function(){
+		gl.bindTexture(gl.TEXTURE_2D, this.textureid);
+		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this);
+
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, this.wrapMode);
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, this.wrapMode);
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, this.filterMode);
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, this.filterMode);
+
+		gl.generateMipmap(gl.TEXTURE_2D);
+	}
+
+	this.image.src = image;
+
+	this.bind = function(){
+		gl.bindTexture(gl.TEXTURE_2D, this.texture);
+	}
+}
+
+var Shape = function(){
+	this.shader = new Shader(
+		`#version 300 es
+		in vec2 pos;
+		in vec3 col;
+		out vec3 Col;
+		uniform mat4 proj;
+		uniform mat4 view;
+		void main(){
+			Col = col;
+			gl_Position = proj * view * vec4(pos, 0, 1);
+		}`,
+		`#version 300 es
+		precision mediump float;
+		in vec3 Col;
+		out vec4 outColour;
+		void main(){
+			outColour = vec4(Col, 1.0);
+		}`
+	);
+	this.shader.addAttribute("pos", 2, gl.FLOAT, false, 5, 0);
+	this.shader.addAttribute("col", 3, gl.FLOAT, false, 5, 2);
+	this.shader.use();
+
+	
 }
