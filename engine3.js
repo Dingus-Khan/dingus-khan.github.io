@@ -252,13 +252,59 @@ var Shape = function(x, y, w, h){
 	}
 }
 
-gl.clearColor(0.1, 0.1, 0.1, 1.0);
+var TileMap = function(tex){
+	this.shader = new Shader(
+		`#version 300 es
+		in vec2 pos;
+		in vec2 tex;
+		in vec3 col;
+		out vec2 Tex;
+		out vec2 Col;
+		uniform vec2 texSize;
+		uniform mat4 proj;
+		uniform mat4 view;
+		void main(){
+			Tex = tex / texSize;
+			Col = col;
+			gl_Position = proj * view * vec4(pos, 0, 1);
+		}`,
+		`#version 300 es
+		precision mediump float;
+		in vec2 Tex;
+		in vec3 Col;
+		out vec4 outColour;
+		uniform sampler2D texImage;
+		void main(){
+			outColour = texture(texImage, Tex) * vec4(Col, 1);
+		}`);
+	this.shader.addAttribute("pos", 2, gl.FLOAT, false, 7, 0);
+	this.shader.addAttribute("tex", 2, gl.FLOAT, false, 7, 2);
+	this.shader.addAttribute("col", 3, gl.FLOAT, false, 7, 5);
+	this.shader.use();
 
-var shape = new Shape(0, 0, 100, 100);
+	this.tex = new Texture(tex, gl.REPEAT, gl.NEAREST);
+
+	this.vao = gl.createVertexArray();
+	this.vbo = gl.createBuffer();
+	this.bufferData = [
+		0, 0, 0, 0, 1, 1, 1,
+		100, 0, 100, 0, 1, 1, 1,
+		100, 100, 100, 100, 1, 1, 1,
+		0, 0, 0, 0, 1, 1, 1,
+		100, 100, 100, 100, 1, 1, 1,
+		0, 100, 0, 100, 1, 1, 1
+	];
+
+	gl.bindVertexArray(this.vao);
+	gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.bufferData), gl.STATIC_DRAW);
+	this.shader.enableAttributes();
+}
+
+gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
 requestAnimationFrame(run);
 function run() {
 	gl.clear(gl.COLOR_BUFFER_BIT);
-	shape.draw();
 	requestAnimationFrame(run);
 }
