@@ -85,6 +85,36 @@ var Camera = function(x, y, w, h) {
 
 var camera = new Camera(0, 0, 800, 600);
 
+var System = {
+	BuildShader: function(type, src){
+		var shader = gl.createShader(type);
+		gl.shaderSource(shader, src);
+		gl.compileShader(shader);
+
+		var success = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
+		if (success){
+			return shader;
+		}
+
+		console.log(gl.getShaderInfoLog(shader));
+		gl.deleteShader(shader);
+	},
+	LinkProgram: function(vertex, fragment){
+		var program = gl.createProgram();
+		gl.attachShader(program, vertex);
+		gl.attachShader(program, fragment);
+		gl.linkProgram(program);
+
+		var success = gl.getProgramParameter(program, gl.LINK_STATUS);
+		if (success){
+			return program;
+		}
+
+		console.log(gl.getProgramInfoLog(program));
+		gl.deleteProgram(program);
+	}
+};
+
 function Shader(vertexShader, fragmentShader){
 	var v = System.BuildShader(gl.VERTEX_SHADER, vertexShader);
 	var f = System.BuildShader(gl.FRAGMENT_SHADER, fragmentShader);
