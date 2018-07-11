@@ -243,10 +243,12 @@ var Shape = function(x, y, w, h){
 
 	this.draw = function(){
 		gl.bindVertexArray(this.vao);
+		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 		this.shader.use();
 		this.shader.setUniform("proj", camera.proj);
 		this.shader.setUniform("view", camera.view);
 		this.shader.setUniform("model", this.model);
+		shader.enableAttributes();
 		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 	}
 }
