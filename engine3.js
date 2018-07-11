@@ -230,6 +230,7 @@ var Shape = function(x, y, w, h){
 	gl.bindVertexArray(this.vao);
 	gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.bufferData), gl.STATIC_DRAW);
+	this.shader.enableAttributes();
 
 	this.model = Matrix.identity();
 	this.x = x;
@@ -243,12 +244,10 @@ var Shape = function(x, y, w, h){
 
 	this.draw = function(){
 		gl.bindVertexArray(this.vao);
-		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 		this.shader.use();
 		this.shader.setUniform("proj", camera.proj);
 		this.shader.setUniform("view", camera.view);
 		this.shader.setUniform("model", this.model);
-		this.shader.enableAttributes();
 		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 	}
 }
