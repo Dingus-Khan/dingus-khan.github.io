@@ -247,13 +247,17 @@ var Shape = function(x, y, w, h){
 		this.shader.setUniform("proj", camera.proj);
 		this.shader.setUniform("view", camera.view);
 		this.shader.setUniform("model", this.model);
+		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 	}
 }
 
 gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
+var shape = new Shape(0, 0, 100, 100);
+
 requestAnimationFrame(run);
 function run() {
 	gl.clear(gl.COLOR_BUFFER_BIT);
+	shape.draw();
 	requestAnimationFrame(run);
 }
