@@ -248,7 +248,7 @@ var Shape = function(x, y, w, h){
 		this.shader.setUniform("proj", camera.proj);
 		this.shader.setUniform("view", camera.view);
 		this.shader.setUniform("model", this.model);
-		shader.enableAttributes();
+		this.shader.enableAttributes();
 		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 	}
 }
