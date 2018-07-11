@@ -220,7 +220,7 @@ var Shape = function(x, y, w, h){
 	}
 }
 
-gl.clearColor(0.1, 0.1, 0.1);
+gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
 requestAnimationFrame(run);
 function run() {
