@@ -219,3 +219,11 @@ var Shape = function(x, y, w, h){
 		this.shader.setUniform("model", this.model);
 	}
 }
+
+gl.clearColor(0.1, 0.1, 0.1);
+
+requestAnimationFrame(run);
+function run() {
+	gl.clear(gl.COLOR_BUFFER_BIT);
+	requestAnimationFrame(run);
+}
