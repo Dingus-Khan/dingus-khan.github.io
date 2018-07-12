@@ -259,7 +259,7 @@ var TileMap = function(tex){
 		in vec2 tex;
 		in vec3 col;
 		out vec2 Tex;
-		out vec2 Col;
+		out vec3 Col;
 		uniform vec2 texSize;
 		uniform mat4 proj;
 		uniform mat4 view;
