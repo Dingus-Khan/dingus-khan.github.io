@@ -279,7 +279,7 @@ var TileMap = function(tex){
 		}`);
 	this.shader.addAttribute("pos", 2, gl.FLOAT, false, 7, 0);
 	this.shader.addAttribute("tex", 2, gl.FLOAT, false, 7, 2);
-	this.shader.addAttribute("col", 3, gl.FLOAT, false, 7, 5);
+	this.shader.addAttribute("col", 3, gl.FLOAT, false, 7, 4);
 	this.shader.use();
 
 	this.tex = new Texture(tex, gl.REPEAT, gl.NEAREST);
