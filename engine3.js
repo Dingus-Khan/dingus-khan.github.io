@@ -299,6 +299,15 @@ var TileMap = function(tex){
 	gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.bufferData), gl.STATIC_DRAW);
 	this.shader.enableAttributes();
+
+	this.draw = function(){
+		gl.bindVertexArray(this.vao);
+		this.shader.use();
+		this.shader.setUniform("proj", camera.proj);
+		this.shader.setUniform("view", camera.view);
+		this.tex.bind();
+		gl.drawArrays(gl.TRIANGLES, 0, 6);
+	}
 }
 
 gl.clearColor(0.1, 0.1, 0.1, 1.0);
