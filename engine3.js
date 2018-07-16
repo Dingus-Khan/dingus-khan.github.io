@@ -311,23 +311,25 @@ var TileMap = function(tex){
 				this.tiles[0].x, this.tiles[0].y, this.tiles[0].tx, this.tiles[0].ty, this.tiles[0].r, this.tiles[0].g, this.tiles[0].b,
 				this.tiles[0].x + this.tiles[0].w, this.tiles[0].y, this.tiles[0].tx + this.tiles[0].tw, this.tiles[0].ty, this.tiles[0].r, this.tiles[0].g, this.tiles[0].b,
 				this.tiles[0].x + this.tiles[0].w, this.tiles[0].y + this.tiles[0].h, this.tiles[0].tx + this.tiles[0].tw, this.tiles[0].ty + this.tiles[0].th, this.tiles[0].r, this.tiles[0].g, this.tiles[0].b,
-				
+
 				this.tiles[0].x, this.tiles[0].y, this.tiles[0].tx, this.tiles[0].ty, this.tiles[0].r, this.tiles[0].g, this.tiles[0].b,
 				this.tiles[0].x + this.tiles[0].w, this.tiles[0].y + this.tiles[0].h, this.tiles[0].tx + this.tiles[0].tw, this.tiles[0].ty + this.tiles[0].th, this.tiles[0].r, this.tiles[0].g, this.tiles[0].b,
 				this.tiles[0].x, this.tiles[0].y + this.tiles[0].h, this.tiles[0].tx, this.tiles[0].ty + this.tiles[0].th, this.tiles[0].r, this.tiles[0].g, this.tiles[0].b
 			);
 		};
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.bufferData), gl.STATIC_DRAW);
 		this.rebuild = false;
 	}
 
 	this.draw = function(){
-		if (this.bufferData.length == 0)
+		if (this.tiles.length == 0)
 			return;
+
+		gl.bindVertexArray(this.vao);
 
 		if (this.rebuild)
 			this.build();
 
-		gl.bindVertexArray(this.vao);
 		this.shader.use();
 		this.shader.setUniform("proj", camera.proj);
 		this.shader.setUniform("view", camera.view);
@@ -340,6 +342,7 @@ var TileMap = function(tex){
 gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
 var tm = new TileMap("tileset.png");
+tm.addTile(0, 0, 100, 100, 0, 0, 100, 100, 1, 1, 1);
 
 requestAnimationFrame(run);
 function run() {
