@@ -83,7 +83,7 @@ var Camera = function(x, y, w, h) {
 	this.view = Matrix.translation(x, y);
 }
 
-var camera = new Camera(0, 0, 800, 600);
+var camera = new Camera(0, 0, 400, 300);
 
 var System = {
 	BuildShader: function(type, src){
