@@ -304,8 +304,11 @@ var TileMap = function(tex){
 
 	this.rebuild = true;
 	this.addTile = function(x, y, w, h, tx, ty, tw, th, r, g, b){
+		r = r || 1;
+		g = g || 1;
+		b = b || 1;
 		this.tiles.push({
-			x, y, w, h, tx, ty, tw, th, r || 1, g || 1, b || 1
+			x, y, w, h, tx, ty, tw, th, r, g, b
 		});
 		this.rebuild = true;
 	}
