@@ -295,19 +295,46 @@ var TileMap = function(tex){
 		0, 100, 0, 100, 1, 1, 1
 	];
 
+	this.tiles = [];
+
 	gl.bindVertexArray(this.vao);
 	gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.bufferData), gl.STATIC_DRAW);
 	this.shader.enableAttributes();
 
+	this.rebuild = true;
+	this.addTile = function(x, y, w, h, tx, ty, tw, th, r, g, b){
+		this.tiles.push({
+			x, y, w, h, tx, ty, tw, th, r || 1, g || 1, b || 1
+		});
+		this.rebuild = true;
+	}
+
+	this.build = function(){
+		this.tiles.forEach(function(tile){
+			this.bufferData.push([
+				tile.x, tile.y, tile.tx, tile.ty, tile.r, tile.g, tile.b,
+				tile.x + tile.w, tile.y, tile.tx + tile.tw, tile.ty, tile.r, tile.g, tile.b,
+				tile.x + tile.w, tile.y + tile.h, tile.tx + tile.tw, tile.ty + tile.th, tile.r, tile.g, tile.b,
+				tile.x, tile.y, tile.tx, tile.ty, tile.r, tile.g, tile.b,
+				tile.x + tile.w, tile.y + tile.h, tile.tx + tile.tw, tile.ty + tile.th, tile.r, tile.g, tile.b,
+				tile.x, tile.y + tile.h, tile.tx, tile.ty + tile.th, tile.r, tile.g, tile.b,
+			]);
+		});
+		this.rebuild = false;
+	}
+
 	this.draw = function(){
+		if (this.rebuild)
+			this.build();
+
 		gl.bindVertexArray(this.vao);
 		this.shader.use();
 		this.shader.setUniform("proj", camera.proj);
 		this.shader.setUniform("view", camera.view);
 		this.shader.setUniform("texSize", [this.tex.image.width, this.tex.image.height])
 		this.tex.bind();
-		gl.drawArrays(gl.TRIANGLES, 0, 6);
+		gl.drawArrays(gl.TRIANGLES, 0, this.bufferData.length / 7);
 	}
 }
 
