@@ -308,24 +308,13 @@ var TileMap = function(tex){
 	this.build = function(){
 		for(t = 0; t < this.tiles.length; t++){
 			this.bufferData.push(
-				this.tiles[0].x, this.tiles[0].y,
-					this.tiles[0].tx, this.tiles[0].ty,
-					this.tiles[0].r, this.tiles[0].g, this.tiles[0].b,
-				this.tiles[0].x + this.tiles[0].w, this.tiles[0].y,
-					this.tiles[0].tx + this.tiles[0].tw, this.tiles[0].ty,
-					this.tiles[0].r, this.tiles[0].g, this.tiles[0].b,
-				this.tiles[0].x + this.tiles[0].w, this.tiles[0].y + this.tiles[0].h,
-					this.tiles[0].tx + this.tiles[0].tw, this.tiles[0].ty + this.tiles[0].th,
-					this.tiles[0].r, this.tiles[0].g, this.tiles[0].b,
-				this.tiles[0].x, this.tiles[0].y,
-					this.tiles[0].tx, this.tiles[0].ty,
-					this.tiles[0].r, this.tiles[0].g, this.tiles[0].b,
-				this.tiles[0].x + this.tiles[0].w, this.tiles[0].y + this.tiles[0].h,
-					this.tiles[0].tx + this.tiles[0].tw, this.tiles[0].ty + this.tiles[0].th,
-					this.tiles[0].r, this.tiles[0].g, this.tiles[0].b,
-				this.tiles[0].x, this.tiles[0].y + this.tiles[0].h,
-					this.tiles[0].tx, this.tiles[0].ty + this.tiles[0].th,
-					this.tiles[0].r, this.tiles[0].g, this.tiles[0].b
+				this.tiles[0].x, this.tiles[0].y, this.tiles[0].tx, this.tiles[0].ty, this.tiles[0].r, this.tiles[0].g, this.tiles[0].b,
+				this.tiles[0].x + this.tiles[0].w, this.tiles[0].y, this.tiles[0].tx + this.tiles[0].tw, this.tiles[0].ty, this.tiles[0].r, this.tiles[0].g, this.tiles[0].b,
+				this.tiles[0].x + this.tiles[0].w, this.tiles[0].y + this.tiles[0].h, this.tiles[0].tx + this.tiles[0].tw, this.tiles[0].ty + this.tiles[0].th, this.tiles[0].r, this.tiles[0].g, this.tiles[0].b,
+				
+				this.tiles[0].x, this.tiles[0].y, this.tiles[0].tx, this.tiles[0].ty, this.tiles[0].r, this.tiles[0].g, this.tiles[0].b,
+				this.tiles[0].x + this.tiles[0].w, this.tiles[0].y + this.tiles[0].h, this.tiles[0].tx + this.tiles[0].tw, this.tiles[0].ty + this.tiles[0].th, this.tiles[0].r, this.tiles[0].g, this.tiles[0].b,
+				this.tiles[0].x, this.tiles[0].y + this.tiles[0].h, this.tiles[0].tx, this.tiles[0].ty + this.tiles[0].th, this.tiles[0].r, this.tiles[0].g, this.tiles[0].b
 			);
 		};
 		this.rebuild = false;
