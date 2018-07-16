@@ -320,6 +320,9 @@ var TileMap = function(tex){
 	}
 
 	this.draw = function(){
+		if (this.bufferData.length == 0)
+			return;
+
 		if (this.rebuild)
 			this.build();
 
