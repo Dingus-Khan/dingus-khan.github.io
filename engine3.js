@@ -306,7 +306,7 @@ var TileMap = function(tex){
 	}
 
 	this.build = function(){
-		this.tiles.forEach(function(tile, obj){
+		for(tile in this.tiles){
 			obj.bufferData.push([
 				tile.x, tile.y, tile.tx, tile.ty, tile.r, tile.g, tile.b,
 				tile.x + tile.w, tile.y, tile.tx + tile.tw, tile.ty, tile.r, tile.g, tile.b,
@@ -315,7 +315,7 @@ var TileMap = function(tex){
 				tile.x + tile.w, tile.y + tile.h, tile.tx + tile.tw, tile.ty + tile.th, tile.r, tile.g, tile.b,
 				tile.x, tile.y + tile.h, tile.tx, tile.ty + tile.th, tile.r, tile.g, tile.b,
 			]);
-		});
+		};
 		this.rebuild = false;
 	}
 
