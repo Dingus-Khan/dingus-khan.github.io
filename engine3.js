@@ -306,7 +306,7 @@ var TileMap = function(tex){
 	}
 
 	this.build = function(){
-		this.tiles.forEach(function(tile){
+		this.tiles.forEach(function(tile, this){
 			this.bufferData.push([
 				tile.x, tile.y, tile.tx, tile.ty, tile.r, tile.g, tile.b,
 				tile.x + tile.w, tile.y, tile.tx + tile.tw, tile.ty, tile.r, tile.g, tile.b,
