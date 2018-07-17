@@ -3,6 +3,43 @@ var gl = canvas.getContext("webgl2");
 gl.enable(gl.BLEND);
 gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
+var Mouse = {
+	x: 0,
+	y: 0,
+	left: false,
+	right: false
+};
+
+document.addEventListener("mousemove", function(e){
+	Mouse.x = e.clientX;
+	Mouse.y = e.clientY;
+});
+
+canvas.addEventListener("mousedown", function(e){
+	switch(e.button){
+		case 0:
+			Mouse.left = true;
+			break;
+		case 1:
+			Mouse.right = true;
+			break;
+	}
+});
+
+canvas.addEventListener("mouseup", function(e){
+	switch(e.button){
+		case 0:
+			Mouse.left = false;
+			break;
+		case 1:
+			Mouse.right = false;
+			break;
+	}
+});
+
+canvas.addEventListener("contextmenu", function(e){
+	e.preventDefault();
+});
 
 var Matrix = {
 	identity: function(){
