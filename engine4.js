@@ -101,7 +101,6 @@ class Window {
 	draw(drawable){
 		if (drawable.shader != undefined){
 			drawable.shader.use();
-			drawable.shader.enableAttributes();
 			drawable.shader.setUniform("proj", this.camera.proj);
 			drawable.shader.setUniform("view", this.camera.view);
 		}
