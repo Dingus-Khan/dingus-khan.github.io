@@ -414,5 +414,6 @@ requestAnimationFrame(run);
 function run() {
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	tm.draw();
+	spr.draw();
 	requestAnimationFrame(run);
 }
