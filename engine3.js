@@ -121,7 +121,7 @@ var Camera = function(x, y, w, h) {
 	this.view = Matrix.translation(x, y);
 }
 
-var camera = new Camera(0, 0, 400, 300);
+var camera = new Camera(0, 0, 800, 600);
 
 var System = {
 	BuildShader: function(type, src){
@@ -423,6 +423,10 @@ var Sprite = function(tex){
 	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.bufferData), gl.STATIC_DRAW);
 	this.shader.enableAttributes();
 
+	this.model = Matrix.identity();
+	this.x = 0;
+	this.y = 0;
+
 	this.draw = function(){
 		if (this.bufferData.length == 0)
 			return;
@@ -435,7 +439,7 @@ var Sprite = function(tex){
 		this.shader.use();
 		this.shader.setUniform("proj", camera.proj);
 		this.shader.setUniform("view", camera.view);
-		this.shader.setUniform("model", Matrix.identity());
+		this.shader.setUniform("model", this.model);
 		this.shader.setUniform("texSize", [this.tex.image.width, this.tex.image.height])
 		this.tex.bind();
 		gl.drawArrays(gl.TRIANGLE_STRIP, 0, this.bufferData.length / 7);
@@ -449,8 +453,28 @@ tm.addTile(0, 0, 100, 100, 0, 0, 100, 100, 1, 1, 1);
 tm.addTile(100, 0, 100, 100, 0, 0, 100, 100, 1, 1, 1);
 var spr = new Sprite("character.png");
 
+var movementNodes = [];
+
 requestAnimationFrame(run);
 function run() {
+	if (Mouse.left){
+		movementNodes.push({x: Mouse.x, y: Mouse.y});
+	}
+
+	if (movementNodes.length > 0){
+		var xDif = spr.x - movementNodes[0].x;
+		var yDif = spr.y - movementNodes[0].y;
+
+		if (xDif != 0){
+			spr.x += Math.min(1, Math.max(-1, xDif));
+		}
+
+		if (yDif != 0){
+			spr.x += Math.min(1, Math.max(-1, xDif));
+		}
+		spr.model = Matrix.translation(spr.x, spr.y);
+	}
+
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	tm.draw();
 	spr.draw();
