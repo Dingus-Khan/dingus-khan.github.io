@@ -445,7 +445,10 @@ var game = new Window(800, 600, 400, 300);
 var sprite = new Sprite("character.png", 0, 0, 16, 32, 0, 0, 16, 32, 1, 1, 1);
 
 requestAnimationFrame(run);
-function run() {
+function run(t) {
+	sprite.scaleX = 1 + Math.sin(t);
+	sprite.scaleY = 1 + Math.cos(t);
+
 	game.clear();
 	game.draw(sprite);
 	requestAnimationFrame(run);
