@@ -327,7 +327,7 @@ class Transform {
 		if (this.updateMatrix){
 			this.matrix = Matrix.translation(-this.originX, -this.originY);
 			this.matrix = Matrix.translate(this.matrix, this.x, this.y);
-			this.matrix = Matrix.scale(this.matrix, this.x, this.y);
+			this.matrix = Matrix.scale(this.matrix, this.scaleX, this.scaleY);
 			this.updateMatrix = false;
 		}
 	}
