@@ -470,7 +470,7 @@ function run() {
 		}
 
 		if (yDif != 0){
-			spr.x -= Math.min(1, Math.max(-1, xDif));
+			spr.y -= Math.min(1, Math.max(-1, yDif));
 		}
 
 		if (xDif == 0 && yDif == 0){
