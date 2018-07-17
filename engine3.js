@@ -466,11 +466,11 @@ function run() {
 		var yDif = spr.y + 60 - movementNodes[0].y;
 
 		if (xDif != 0){
-			spr.x -= Math.min(1, Math.max(-1, xDif));
+			spr.x -= xDif == 1 ? 1 : (Math.min(1, Math.max(-1, xDif)) * 2);
 		}
 
 		if (yDif != 0){
-			spr.y -= Math.min(1, Math.max(-1, yDif));
+			spr.y -= yDif == 1 ? 1 : (Math.min(1, Math.max(-1, yDif)) * 2);
 		}
 
 		if (xDif == 0 && yDif == 0){
