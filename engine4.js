@@ -382,3 +382,13 @@ class Sprite extends Drawable {
 		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 	}
 }
+
+/////////////////////////////////////////////////
+
+var game = new Window(800, 600);
+
+requestAnimationFrame(run);
+function run() {
+	game.clear();
+	requestAnimationFrame(run);
+}
