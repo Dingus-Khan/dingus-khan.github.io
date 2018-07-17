@@ -332,7 +332,7 @@ var TileMap = function(tex){
 		this.shader.setUniform("view", camera.view);
 		this.shader.setUniform("texSize", [this.tex.image.width, this.tex.image.height])
 		this.tex.bind();
-		gl.drawArrays(gl.TRIANGLES, 0, this.bufferData.length / 7);
+		gl.drawArrays(gl.TRIANGLES, 0, this.tiles.length * 6);
 	}
 }
 
