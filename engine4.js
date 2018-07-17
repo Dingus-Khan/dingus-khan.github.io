@@ -416,6 +416,7 @@ class Sprite extends Drawable {
 
 		gl.bindVertexArray(this.vao);
 		this.build();
+		this.transform.update();
 		this.shader.enableAttributes();
 		this.shader.setUniform("model", this.model);
 		this.shader.setUniform("texSize", [this.tex.image.width, this.tex.image.height])
