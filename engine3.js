@@ -400,7 +400,8 @@ var Sprite = function(tex){
 gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
 var tm = new TileMap("tileset.png");
-var spr = new Sprite("character.png");
+tm.addTile(0, 100, 10, 110, 1, 1, 1);
+//var spr = new Sprite("character.png");
 
 requestAnimationFrame(run);
 function run() {
