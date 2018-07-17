@@ -192,7 +192,6 @@ function Texture(image, wrapMode, filterMode){
 		gl.bindTexture(gl.TEXTURE_2D, this.texture);
 	}
 }
-
 var Shape = function(x, y, w, h){
 	this.shader = new Shader(
 		`#version 300 es
@@ -235,7 +234,6 @@ var Shape = function(x, y, w, h){
 	this.model = Matrix.identity();
 	this.x = x;
 	this.y = y;
-
 	this.move = function(x, y){
 		this.x += x;
 		this.y += y;
@@ -251,7 +249,6 @@ var Shape = function(x, y, w, h){
 		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 	}
 }
-
 var TileMap = function(tex){
 	this.shader = new Shader(
 		`#version 300 es
@@ -339,10 +336,76 @@ var TileMap = function(tex){
 	}
 }
 
+var Sprite = function(tex){
+	this.shader = new Shader(
+		`#version 300 es
+		in vec2 pos;
+		in vec2 tex;
+		in vec3 col;
+		out vec2 Tex;
+		out vec3 Col;
+		uniform vec2 texSize;
+		uniform mat4 proj;
+		uniform mat4 view;
+		uniform mat4 model;
+		void main(){
+			Tex = tex / texSize;
+			Col = col;
+			gl_Position = proj * view * model * vec4(pos, 0, 1);
+		}`,
+		`#version 300 es
+		precision mediump float;
+		in vec2 Tex;
+		in vec3 Col;
+		out vec4 outColour;
+		uniform sampler2D texImage;
+		void main(){
+			outColour = texture(texImage, Tex) * vec4(Col, 1);
+		}`
+	);
+	this.shader.addAttribute("pos", 2, gl.FLOAT, false, 7, 0);
+	this.shader.addAttribute("tex", 2, gl.FLOAT, false, 7, 2);
+	this.shader.addAttribute("col", 3, gl.FLOAT, false, 7, 4);
+	this.shader.use();
+
+	this.tex = new Texture(tex, gl.REPEAT, gl.NEAREST);
+
+	this.vao = gl.createVertexArray();
+	this.vbo = gl.createBuffer();
+	this.bufferData = [
+		0, 0, 0, 0, 1, 1, 1,
+		100, 0, 100, 0, 1, 1, 1,
+		100, 100, 100, 100, 1, 1, 1,
+		0, 100, 0, 100, 1, 1, 1
+	];
+
+	gl.bindVertexArray(this.vao);
+	gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.bufferData), gl.STATIC_DRAW);
+	this.shader.enableAttributes();
+
+	this.draw = function(){
+		if (this.tiles.length == 0)
+			return;
+
+		gl.bindVertexArray(this.vao);
+
+		if (this.rebuild)
+			this.build();
+
+		this.shader.use();
+		this.shader.setUniform("proj", camera.proj);
+		this.shader.setUniform("view", camera.view);
+		this.shader.setUniform("texSize", [this.tex.image.width, this.tex.image.height])
+		this.tex.bind();
+		gl.drawArrays(gl.TRIANGLE_STRIP, 0, this.bufferData.length / 7);
+	}
+}
+
 gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
 var tm = new TileMap("tileset.png");
-tm.addTile(0, 0, 100, 100, 0, 0, 100, 100, 1, 1, 1);
+var spr = new Sprite("character.png");
 
 requestAnimationFrame(run);
 function run() {
