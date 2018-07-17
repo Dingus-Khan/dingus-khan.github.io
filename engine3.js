@@ -373,7 +373,12 @@ var Sprite = function(tex){
 
 	this.vao = gl.createVertexArray();
 	this.vbo = gl.createBuffer();
-	this.bufferData = [];
+	this.bufferData = [
+		0, 0, 0, 0, 1, 1, 1,
+		100, 0, 100, 0, 1, 1, 1,
+		0, 100, 0, 100, 1, 1, 1,
+		100, 100, 100, 100, 1, 1, 1
+	];
 
 	gl.bindVertexArray(this.vao);
 	gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
@@ -381,6 +386,9 @@ var Sprite = function(tex){
 	this.shader.enableAttributes();
 
 	this.draw = function(){
+		if (this.bufferData.length == 0)
+			return;
+
 		gl.bindVertexArray(this.vao);
 
 		if (this.rebuild)
@@ -391,7 +399,7 @@ var Sprite = function(tex){
 		this.shader.setUniform("view", camera.view);
 		this.shader.setUniform("texSize", [this.tex.image.width, this.tex.image.height])
 		this.tex.bind();
-		gl.drawArrays(gl.TRIANGLES, 0, this.bufferData.length / 7);
+		gl.drawArrays(gl.TRIANGLE_STRIP, 0, this.bufferData.length / 7);
 	}
 }
 
