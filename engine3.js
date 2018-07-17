@@ -506,8 +506,8 @@ Keyboard.registerKey('right', 39);
 requestAnimationFrame(run);
 function run() {
 
-	spr.vel.x += (-Keyboard.getKey('left') + Keyboard.getKey('right')) * spd;
-	spr.vel.y += (-Keyboard.getKey('up') + Keyboard.getKey('down')) * spd;
+	spr.vel.x += (-Keyboard.getKey('left') + Keyboard.getKey('right')) * spr.spd;
+	spr.vel.y += (-Keyboard.getKey('up') + Keyboard.getKey('down')) * spr.spd;
 
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	tm.draw();
