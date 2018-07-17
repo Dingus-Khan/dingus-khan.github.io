@@ -372,8 +372,7 @@ var Sprite = function(tex){
 
 	this.vao = gl.createVertexArray();
 	this.vbo = gl.createBuffer();
-	this.bufferData = [
-	];
+	this.bufferData = [];
 
 	gl.bindVertexArray(this.vao);
 	gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
@@ -394,14 +393,14 @@ var Sprite = function(tex){
 		this.shader.setUniform("view", camera.view);
 		this.shader.setUniform("texSize", [this.tex.image.width, this.tex.image.height])
 		this.tex.bind();
-		gl.drawArrays(gl.TRIANGLE_STRIP, 0, this.bufferData.length / 7);
+		gl.drawArrays(gl.TRIANGLES, 0, this.bufferData.length / 7);
 	}
 }
 
 gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
 var tm = new TileMap("tileset.png");
-//var spr = new Sprite("character.png");
+var spr = new Sprite("character.png");
 
 requestAnimationFrame(run);
 function run() {
