@@ -303,6 +303,7 @@ var TileMap = function(tex){
 	}
 
 	this.build = function(){
+		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 		for(t = 0; t < this.tiles.length; t++){
 			this.bufferData.push(
 				this.tiles[t].x, this.tiles[t].y, this.tiles[t].tx, this.tiles[t].ty, this.tiles[t].r, this.tiles[t].g, this.tiles[t].b,
@@ -380,9 +381,6 @@ var Sprite = function(tex){
 	this.shader.enableAttributes();
 
 	this.draw = function(){
-		if (this.tiles.length == 0)
-			return;
-
 		gl.bindVertexArray(this.vao);
 
 		if (this.rebuild)
