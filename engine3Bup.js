@@ -15,7 +15,7 @@ document.addEventListener("mousemove", function(e){
 	Mouse.y = e.clientY;
 });
 
-canvas.addEventListener("mousedown", function(e){
+document.getElementById("main").addEventListener("mousedown", function(e){
 	switch(e.button){
 		case 0:
 			Mouse.left = true;
@@ -26,7 +26,7 @@ canvas.addEventListener("mousedown", function(e){
 	}
 });
 
-canvas.addEventListener("mouseup", function(e){
+document.getElementById("main").addEventListener("mouseup", function(e){
 	switch(e.button){
 		case 0:
 			Mouse.left = false;
@@ -37,45 +37,8 @@ canvas.addEventListener("mouseup", function(e){
 	}
 });
 
-canvas.addEventListener("contextmenu", function(e){
+document.getElementById("main").addEventListener("contextmenu", function(e){
 	e.preventDefault();
-});
-
-var Keyboard = {
-	keyDown: {},
-	keyPressed: {},
-	keyMap: {},
-	registerKey: function(key, code){
-		this.keyMap[key] = code;
-		this.keyDown[this.keyMap[key]] = false;
-		this.keyPressed[this.keyMap[key]] = false;
-	},
-	getKey: function(key){
-		return this.keyDown[this.keyMap[key]];
-	},
-	wasKeyPressed: function(key){
-		return this.keyPressed[this.keyMap[key]];
-	},
-	update: function(){
-		for(var prop in this.keyMap){
-			this.keyPressed[this.keyMap[prop]] = false;
-		}
-	}
-};
-
-document.addEventListener("keydown", function(e){
-	if (Keyboard.keyDown[e.which] == false){
-		Keyboard.keyPressed[e.which] = true;
-	} else {
-		Keyboard.keyPressed[e.which] = false;
-	}
-
-	Keyboard.keyDown[e.which] = true;
-});
-
-document.addEventListener("keyup", function(e){
-	Keyboard.keyDown[e.which] = false;
-	Keyboard.keyPressed[e.which] = false;
 });
 
 var Matrix = {
