@@ -462,8 +462,8 @@ function run() {
 	}
 
 	if (movementNodes.length > 0){
-		var xDif = spr.x - movementNodes[0].x;
-		var yDif = spr.y - movementNodes[0].y;
+		var xDif = spr.x + 16 - movementNodes[0].x;
+		var yDif = spr.y + 32 - movementNodes[0].y;
 
 		if (xDif != 0){
 			spr.x -= Math.min(1, Math.max(-1, xDif));
