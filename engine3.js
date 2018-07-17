@@ -472,6 +472,10 @@ function run() {
 		if (yDif != 0){
 			spr.x += Math.min(1, Math.max(-1, xDif));
 		}
+
+		if (xDif == 0 && yDif == 0){
+			movementNodes.shift();
+		}
 		spr.model = Matrix.translation(spr.x, spr.y);
 	}
 
