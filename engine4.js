@@ -307,13 +307,13 @@ class Transform {
 		this.updateMatrix = true;
 	}
 
-	this.move(x, y){
+	move(x, y){
 		this.x += x;
 		this.y += y;
 		this.updateMatrix = true;
 	}
 
-	this.update(){
+	update(){
 		if (this.updateMatrix){
 			this.matrix = Matrix.translation(this.originX, this.originY);
 			this.matrix = Matrix.translate(this.matrix, this.x, this.y);
