@@ -401,7 +401,7 @@ var Sprite = function(tex){
 gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
 var tm = new TileMap("tileset.png");
-var spr = new Sprite("character.png");
+//var spr = new Sprite("character.png");
 
 requestAnimationFrame(run);
 function run() {
