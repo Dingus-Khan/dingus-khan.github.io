@@ -294,6 +294,8 @@ class Transform {
 		this.originY = originy;
 		this.x = 0;
 		this.y = 0;
+		this.scaleX = 1;
+		this.scaleY = 1;
 		this.updateMatrix = true;
 	}
 
@@ -315,10 +317,17 @@ class Transform {
 		this.updateMatrix = true;
 	}
 
+	setScale(x, y){
+		this.scaleX = x;
+		this.scaleY = y;
+		this.updateMatrix = true;
+	}
+
 	update(){
 		if (this.updateMatrix){
 			this.matrix = Matrix.translation(-this.originX, -this.originY);
 			this.matrix = Matrix.translate(this.matrix, this.x, this.y);
+			this.matrix = Matrix.scale(this.matrix, this.x, this.y);
 			this.updateMatrix = false;
 		}
 	}
@@ -433,7 +442,7 @@ class Sprite extends Drawable {
 
 var game = new Window(800, 600, 400, 300);
 
-var sprite = new Sprite("character.png", 0, 0, 32, 64, 0, 0, 16, 32, 1, 1, 1);
+var sprite = new Sprite("character.png", 0, 0, 16, 32, 0, 0, 16, 32, 1, 1, 1);
 
 requestAnimationFrame(run);
 function run() {
