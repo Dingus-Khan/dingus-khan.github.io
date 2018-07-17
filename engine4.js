@@ -418,7 +418,7 @@ class Sprite extends Drawable {
 		this.build();
 		this.transform.update();
 		this.shader.enableAttributes();
-		this.shader.setUniform("model", this.model);
+		this.shader.setUniform("model", this.transform.matrix);
 		this.shader.setUniform("texSize", [this.tex.image.width, this.tex.image.height])
 		this.tex.bind();
 		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
