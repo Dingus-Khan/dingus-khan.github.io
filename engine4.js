@@ -323,6 +323,12 @@ class Transform {
 		this.updateMatrix = true;
 	}
 
+	scale(x, y){
+		this.scaleX += x;
+		this.scaleY += y;
+		this.updateMatrix = true;
+	}
+
 	update(){
 		if (this.updateMatrix){
 			this.matrix = Matrix.translation(-this.originX, -this.originY);
