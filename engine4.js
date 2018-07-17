@@ -301,7 +301,7 @@ class Camera {
 			0, 0, 0, 1,
 			-1, 1, 0, 1
 		];
-		this.view = Matrix.translation(this.x, this.y);
+		this.view = Matrix.translation(-this.x, -this.y);
 	}
 }
 
