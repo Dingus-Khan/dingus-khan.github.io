@@ -285,6 +285,43 @@ class Matrix {
 	}
 };
 
+class Transform {
+	constructor(originx, originy){
+		this.matrix = Matrix.identity();
+		this.originX = originx;
+		this.originY = originy;
+		this.x = 0;
+		this.y = 0;
+		this.updateMatrix = true;
+	}
+
+	setOrigin(x, y){
+		this.originX = x;
+		this.originY = y;
+		this.updateMatrix = true;
+	}
+
+	setPosition(x, y){
+		this.x = x; // could add origin here, or handle in update function
+		this.y = y;
+		this.updateMatrix = true;
+	}
+
+	this.move(x, y){
+		this.x += x;
+		this.y += y;
+		this.updateMatrix = true;
+	}
+
+	this.update(){
+		if (this.updateMatrix){
+			this.matrix = Matrix.translation(this.originX, this.originY);
+			this.matrix = Matrix.translate(this.matrix, this.x, this.y);
+			this.updateMatrix = false;
+		}
+	}
+}
+
 class Camera {
 	constructor(x, y, w, h){
 		this.originX = w/2;
@@ -307,13 +344,11 @@ class Camera {
 
 class Drawable {
 	constructor(x, y, r, g, b){
-		this.x = x;
-		this.y = y;
 		this.r = r;
 		this.g = g;
 		this.b = b;
-		this.depth = -y;
-		this.model = Matrix.translation(x, y);
+		this.transform = new Transform();
+		this.transform.setPosition(x, y);
 
 		this.vao = gl.createVertexArray();
 		this.vbo = gl.createBuffer();
@@ -326,6 +361,7 @@ class Drawable {
 class Sprite extends Drawable {
 	constructor(tex, x, y, w, h, tx, ty, tw, th, r, g, b){
 		super(x, y, r, g, b);
+		this.transform.setOrigin(w/2, h/2);
 
 		this.shader = new Shader(
 			`#version 300 es
