@@ -397,5 +397,6 @@ var sprite = new Sprite("character.png", 0, 0, 100, 100, 0, 0, 100, 100, 1, 1, 1
 requestAnimationFrame(run);
 function run() {
 	game.clear();
+	window.draw(sprite);
 	requestAnimationFrame(run);
 }
