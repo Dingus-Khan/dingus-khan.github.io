@@ -41,6 +41,43 @@ canvas.addEventListener("contextmenu", function(e){
 	e.preventDefault();
 });
 
+var Keyboard = {
+	keyDown: {},
+	keyPressed: {},
+	keyMap: {},
+	registerKey: function(key, code){
+		this.keyMap[key] = code;
+		this.keyDown[this.keyMap[key]] = false;
+		this.keyPressed[this.keyMap[key]] = false;
+	},
+	getKey: function(key){
+		return this.keyDown[this.keyMap[key]];
+	},
+	wasKeyPressed: function(key){
+		return this.keyPressed[this.keyMap[key]];
+	},
+	update: function(){
+		for(var prop in this.keyMap){
+			this.keyPressed[this.keyMap[prop]] = false;
+		}
+	}
+};
+
+document.addEventListener("keydown", function(e){
+	if (Keyboard.keyDown[e.which] == false){
+		Keyboard.keyPressed[e.which] = true;
+	} else {
+		Keyboard.keyPressed[e.which] = false;
+	}
+
+	Keyboard.keyDown[e.which] = true;
+});
+
+document.addEventListener("keyup", function(e){
+	Keyboard.keyDown[e.which] = false;
+	Keyboard.keyPressed[e.which] = false;
+});
+
 var Matrix = {
 	identity: function(){
 		return [
@@ -427,7 +464,15 @@ var Sprite = function(tex){
 	this.x = 0;
 	this.y = 0;
 
+	this.spd = 2;
+	this.vel = {
+		x: 0,
+		y: 0
+	};
+
 	this.draw = function(){
+		this.model = Matrix.translate(this.model, this.vel.x, this.vel.y);
+
 		if (this.bufferData.length == 0)
 			return;
 
@@ -453,32 +498,16 @@ tm.addTile(0, 0, 100, 100, 0, 0, 100, 100, 1, 1, 1);
 tm.addTile(100, 0, 100, 100, 0, 0, 100, 100, 1, 1, 1);
 var spr = new Sprite("character.png");
 
-var movementNodes = [];
+Keyboard.registerKey('up', 38);
+Keyboard.registerKey('left', 37);
+Keyboard.registerKey('down', 40);
+Keyboard.registerKey('right', 39);
 
 requestAnimationFrame(run);
 function run() {
-	if (Mouse.left){
-		if (movementNodes.length == 0 || (movementNodes[movementNodes.length - 1].x != Mouse.x && movementNodes[movementNodes.length - 1].y != Mouse.y))
-			movementNodes.push({x: Mouse.x, y: Mouse.y});
-	}
 
-	if (movementNodes.length > 0){
-		var xDif = spr.x + 24 - movementNodes[0].x;
-		var yDif = spr.y + 60 - movementNodes[0].y;
-
-		if (xDif != 0){
-			spr.x -= xDif == 1 ? 1 : (Math.min(1, Math.max(-1, xDif)) * 2);
-		}
-
-		if (yDif != 0){
-			spr.y -= yDif == 1 ? 1 : (Math.min(1, Math.max(-1, yDif)) * 2);
-		}
-
-		if (xDif == 0 && yDif == 0){
-			movementNodes.shift();
-		}
-		spr.model = Matrix.translation(spr.x, spr.y);
-	}
+	spr.vel.x += (-Keyboard.getKey('left') + Keyboard.getKey('right')) * spd;
+	spr.vel.y += (-Keyboard.getKey('up') + Keyboard.getKey('down')) * spd;
 
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	tm.draw();
