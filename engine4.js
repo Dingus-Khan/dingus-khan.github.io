@@ -387,6 +387,8 @@ class Sprite extends Drawable {
 
 var game = new Window(800, 600);
 
+var sprite = new Sprite("character.png", 0, 0, 100, 100, 0, 0, 100, 100, 1, 1, 1);
+
 requestAnimationFrame(run);
 function run() {
 	game.clear();
