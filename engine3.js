@@ -397,6 +397,7 @@ var Sprite = function(tex){
 		this.shader.use();
 		this.shader.setUniform("proj", camera.proj);
 		this.shader.setUniform("view", camera.view);
+		this.shader.setUniform("model", Matrix.identity());
 		this.shader.setUniform("texSize", [this.tex.image.width, this.tex.image.height])
 		this.tex.bind();
 		gl.drawArrays(gl.TRIANGLE_STRIP, 0, this.bufferData.length / 7);
