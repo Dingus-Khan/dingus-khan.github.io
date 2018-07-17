@@ -372,6 +372,7 @@ class Sprite extends Drawable {
 		if (this.rebuild){
 			gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.bufferData), gl.STATIC_DRAW);
+			shader.enableAttributes();
 			this.rebuild = false;
 		}
 	}
