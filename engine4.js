@@ -444,6 +444,10 @@ class Sprite extends Drawable {
 	}
 }
 
+class Animation extends Sprite {
+	
+}
+
 /////////////////////////////////////////////////
 
 var game = new Window(800, 600, 400, 300);
