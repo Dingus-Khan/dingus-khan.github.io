@@ -401,7 +401,8 @@ gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
 var tm = new TileMap("tileset.png");
 tm.addTile(0, 0, 100, 100, 0, 0, 100, 100, 1, 1, 1);
-//var spr = new Sprite("character.png");
+tm.addTile(100, 0, 100, 100, 0, 0, 100, 100, 1, 1, 1);
+var spr = new Sprite("character.png");
 
 requestAnimationFrame(run);
 function run() {
