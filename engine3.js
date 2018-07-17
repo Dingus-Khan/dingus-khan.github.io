@@ -458,7 +458,7 @@ var movementNodes = [];
 requestAnimationFrame(run);
 function run() {
 	if (Mouse.left){
-		if (movemnetNodes.length == 0 || (movementNodes[movementNodes.length - 1].x != Mouse.x && movementNodes[movementNodes.length - 1].y != Mouse.y))
+		if (movementNodes.length == 0 || (movementNodes[movementNodes.length - 1].x != Mouse.x && movementNodes[movementNodes.length - 1].y != Mouse.y))
 			movementNodes.push({x: Mouse.x, y: Mouse.y});
 	}
 
