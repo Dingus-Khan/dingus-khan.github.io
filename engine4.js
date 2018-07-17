@@ -315,7 +315,7 @@ class Transform {
 
 	update(){
 		if (this.updateMatrix){
-			this.matrix = Matrix.translation(this.originX, this.originY);
+			this.matrix = Matrix.translation(-this.originX, -this.originY);
 			this.matrix = Matrix.translate(this.matrix, this.x, this.y);
 			this.updateMatrix = false;
 		}
