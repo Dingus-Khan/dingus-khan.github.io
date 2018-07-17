@@ -97,6 +97,17 @@ class Window {
 	clear(){
 		gl.clear(gl.COLOR_BUFFER_BIT);
 	}
+
+	draw(drawable){
+		if (drawable.shader != undefined){
+			drawable.shader.use();
+			drawable.shader.enableAttributes();
+			drawable.shader.setUniform("proj", this.camera.proj);
+			drawable.shader.setUniform("view", this.camera.view);
+		}
+
+		drawable.draw();
+	}
 }
 
 class Shader {
@@ -357,7 +368,6 @@ class Sprite extends Drawable {
 			x + w, y + h, tx + tw, ty + th, r, g, b
 		];
 	}
-
 	build(){
 		if (this.rebuild){
 			gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
@@ -365,17 +375,12 @@ class Sprite extends Drawable {
 			this.rebuild = false;
 		}
 	}
-
 	draw(){
 		if (this.bufferData.length == 0)
 			return;
 
 		gl.bindVertexArray(this.vao);
 		this.build();
-		this.shader.use();
-		this.shader.enableAttributes();
-		this.shader.setUniform("proj", camera.proj);
-		this.shader.setUniform("view", camera.view);
 		this.shader.setUniform("model", this.model);
 		this.shader.setUniform("texSize", [this.tex.image.width, this.tex.image.height])
 		this.tex.bind();
