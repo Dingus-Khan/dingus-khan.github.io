@@ -32,13 +32,10 @@ var Mouse = {
 
 class Window {
 	constructor(w, h, projW, projH){
-		projW = projW || w;
-		projH = projH || h;
-
 		this.width = w;
 		this.height = h;
-		this.projW = projW;
-		this.projH = projH;
+		this.projW = projW || w;
+		this.projH = projH || h;
 
 		document.addEventListener("keydown", function(e){
 			if (Keyboard.keyDown[e.which] == false){
@@ -331,8 +328,8 @@ class Camera {
 	constructor(x, y, w, h, projW, projH){
 		this.projW = projW || w;
 		this.projH = projH || h;
-		this.originX = w/2;
-		this.originY = h/2;
+		this.originX = projW/2;
+		this.originY = projH/2;
 
 		this.x = x - this.originX;
 		this.y = y - this.originY;
@@ -340,8 +337,8 @@ class Camera {
 		this.w = w;
 		this.h = h;
 		this.proj = [
-			2 / projW, 0, 0, 0,
-			0, -2 / projH, 0, 0,
+			2 / this.projW, 0, 0, 0,
+			0, -2 / this.projH, 0, 0,
 			0, 0, 0, 1,
 			-1, 1, 0, 1
 		];
