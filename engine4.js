@@ -431,7 +431,7 @@ class Sprite extends Drawable {
 
 /////////////////////////////////////////////////
 
-var game = new Window(800, 600);
+var game = new Window(800, 600, 400, 300);
 
 var sprite = new Sprite("character.png", 0, 0, 100, 100, 0, 0, 100, 100, 1, 1, 1);
 
