@@ -376,9 +376,9 @@ var Sprite = function(tex){
 	this.vbo = gl.createBuffer();
 	this.bufferData = [
 		0, 0, 0, 0, 1, 1, 1,
-		20, 0, 10, 0, 1, 1, 1,
+		20, 0, 16, 0, 1, 1, 1,
 		0, 40, 0, 20, 1, 1, 1,
-		20, 40, 10, 20, 1, 1, 1
+		20, 40, 16, 20, 1, 1, 1
 	];
 
 	gl.bindVertexArray(this.vao);
