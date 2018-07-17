@@ -31,9 +31,14 @@ var Mouse = {
 };
 
 class Window {
-	constructor(w, h){
+	constructor(w, h, projW, projH){
+		projW = projW || w;
+		projH = projH || h;
+
 		this.width = w;
 		this.height = h;
+		this.projW = projW;
+		this.projH = projH;
 
 		document.addEventListener("keydown", function(e){
 			if (Keyboard.keyDown[e.which] == false){
@@ -87,7 +92,7 @@ class Window {
 		gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 		gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
-		this.camera = new Camera(0, 0, w, h);
+		this.camera = new Camera(0, 0, this.w, this.h, this.projW, this.projH);
 	}
 
 	setCamera(camera){
@@ -323,7 +328,9 @@ class Transform {
 }
 
 class Camera {
-	constructor(x, y, w, h){
+	constructor(x, y, w, h, projW, projH){
+		this.projW = projW || w;
+		this.projH = projH || h;
 		this.originX = w/2;
 		this.originY = h/2;
 
@@ -333,8 +340,8 @@ class Camera {
 		this.w = w;
 		this.h = h;
 		this.proj = [
-			2 / w, 0, 0, 0,
-			0, -2 / h, 0, 0,
+			2 / projW, 0, 0, 0,
+			0, -2 / projH, 0, 0,
 			0, 0, 0, 1,
 			-1, 1, 0, 1
 		];
