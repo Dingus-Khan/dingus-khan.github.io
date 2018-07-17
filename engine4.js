@@ -372,7 +372,6 @@ class Sprite extends Drawable {
 		if (this.rebuild){
 			gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.bufferData), gl.STATIC_DRAW);
-			shader.enableAttributes();
 			this.rebuild = false;
 		}
 	}
@@ -382,6 +381,7 @@ class Sprite extends Drawable {
 
 		gl.bindVertexArray(this.vao);
 		this.build();
+		this.shader.enableAttributes();
 		this.shader.setUniform("model", this.model);
 		this.shader.setUniform("texSize", [this.tex.image.width, this.tex.image.height])
 		this.tex.bind();
