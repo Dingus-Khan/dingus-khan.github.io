@@ -576,8 +576,6 @@ var sprite = new Player("character.png");
 
 requestAnimationFrame(run);
 function run(t) {
-	sprite.update();
-
 	game.clear();
 	game.draw(sprite);
 	requestAnimationFrame(run);
