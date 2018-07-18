@@ -454,15 +454,8 @@ var game = new Window(800, 600, 400, 300);
 
 var sprite = new Sprite("character.png", 0, 0, 16, 32, 0, 0, 16, 32, 1, 1, 1);
 
-var diff = 0.01;
-
 requestAnimationFrame(run);
 function run(t) {
-	if (diff > 0 && diff <= 0.5){
-		sprite.transform.scale(diff, diff);
-		diff += 0.001;
-	}
-
 	game.clear();
 	game.draw(sprite);
 	requestAnimationFrame(run);
