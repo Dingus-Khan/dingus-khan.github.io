@@ -540,10 +540,10 @@ class Player extends Animation {
 
 		// addAnimation(name, start, y, frameW, frameH, w, h, frames){
 		// frame format {x, t}
-		this.addAnimation("idle_down", 0, 0, 16, 32, 16, 32, [{0, 9999}]);
-		this.addAnimation("idle_right", 0, 1, 16, 32, 16, 32, [{0, 9999}]);
-		this.addAnimation("idle_up", 0, 2, 16, 32, 16, 32, [{0, 9999}]);
-		this.addAnimation("idle_left", 0, 3, 16, 32, 16, 32, [{0, 9999}]);
+		this.addAnimation("idle_down", 0, 0, 16, 32, 16, 32, [{x: 0, t: 9999}]);
+		this.addAnimation("idle_right", 0, 1, 16, 32, 16, 32, [{x: 0, t: 9999}]);
+		this.addAnimation("idle_up", 0, 2, 16, 32, 16, 32, [{x: 0, t: 9999}]);
+		this.addAnimation("idle_left", 0, 3, 16, 32, 16, 32, [{x: 0, t: 9999}]);
 
 		this.addAnimation("walk_down", 0, 0, 16, 32, 16, 32, [{x: 0, t: 10}, {x: 1, t: 10}, {x: 2, t: 10}, {x: 3, t: 10}]);
 		this.addAnimation("walk_right", 0, 0, 16, 32, 16, 32, [{x: 0, t: 10}, {x: 1, t: 10}, {x: 2, t: 10}, {x: 3, t: 10}]);
