@@ -520,6 +520,8 @@ class Animation extends Sprite {
 
 /////////////////////////////////////////////////
 
+Keyboard.registerKey('down', 40);
+
 var game = new Window(800, 600, 400, 300);
 
 var sprite = new Animation("character.png");
@@ -535,7 +537,7 @@ function run(t) {
 			sprite.setAnimation("walk_down");
 		sprite.transform.move(0, 1);
 	}
-	
+
 	game.clear();
 	game.draw(sprite);
 	requestAnimationFrame(run);
