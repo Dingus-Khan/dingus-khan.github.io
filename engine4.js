@@ -478,7 +478,7 @@ class Animation extends Sprite {
 		this.frame = 0;
 	}
 
-	addAnimation(name, start, frames, y, time, frameW, frameH, loop, w, h){v
+	addAnimation(name, start, frames, y, time, frameW, frameH, loop, w, h){
 		w = w || this.w;
 		h = h || this.h;
 		loop = loop || true;
