@@ -537,6 +537,11 @@ class Player extends Animation {
 		this.addAnimation("walk_up", 0, 4, 2, 10, 16, 32, false, 16, 32);
 		this.addAnimation("walk_left", 0, 4, 3, 10, 16, 32, false, 16, 32);
 
+		this.addAnimation("attack_down", 0, 4, 4, 10, 32, 32, false, 32, 32);
+		this.addAnimation("attack_up", 0, 4, 5, 10, 32, 32, false, 32, 32);
+		this.addAnimation("attack_right", 0, 4, 6, 10, 32, 32, false, 32, 32);
+		this.addAnimation("attack_left", 0, 4, 7, 10, 32, 32, false, 32, 32);
+
 		this.setAnimation("idle_down");
 
 		this.vel = {x: 0, y: 0};
