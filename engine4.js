@@ -420,10 +420,14 @@ class Sprite extends Drawable {
 		this.shader.addAttribute("tex", 2, gl.FLOAT, false, 7, 2);
 		this.shader.addAttribute("col", 3, gl.FLOAT, false, 7, 4);
 		this.shader.use();
-
+		
+		this.bufferData = [
+			0, 0, this.tx, this.ty, this.r, this.g, this.b,
+			this.w, this.y, this.tx + this.tw, this.ty, this.r, this.g, this.b,
+			0, this.h, this.tx, this.ty + this.th, this.r, this.g, this.b,
+			this.w, this.h, this.tx + this.tw, this.ty + this.th, this.r, this.g, this.b
+		];
 		this.tex = new Texture(tex, gl.REPEAT, gl.NEAREST);
-
-
 	}
 	build(){
 		if (this.rebuild){
