@@ -483,7 +483,7 @@ class Animation extends Sprite {
 			loop: loop,
 			w: w,
 			h: h
-		});
+		};
 	}
 }
 
