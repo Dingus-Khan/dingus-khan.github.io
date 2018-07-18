@@ -451,12 +451,40 @@ class Sprite extends Drawable {
 		this.tex.bind();
 		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 	}
+	setSize(w, h){
+		this.w = w;
+		this.h = h;
+		this.rebuild = true;
+	}
+	setTexCoords(x, y, w, h){
+		this.tx = x;
+		this.ty = y;
+		this.tw = w;
+		this.th = h;
+		this.rebuild = true;
+	}
 }
 
 class Animation extends Sprite {
-	constructor(){}
+	constructor(){
+		this.anims = {};
+	}
 
-	addAnimation(x, y, w, h, )
+	addAnimation(name, start, endX, y, time, loop, w, h){
+		w = w || this.w;
+		h = h || this.h;
+		loop = loop || true;
+
+		this.anims[name] = {
+			start: start,
+			end: end,
+			y: y,
+			t: time,
+			loop: loop,
+			w: w,
+			h: h
+		});
+	}
 }
 
 /////////////////////////////////////////////////
