@@ -469,7 +469,9 @@ class Sprite extends Drawable {
 }
 
 class Animation extends Sprite {
-	constructor(){
+	constructor(tex){
+		super(tex, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1);
+
 		this.anims = {};
 		this.currentAnim = {};
 		this.t = 0;
@@ -502,6 +504,7 @@ class Animation extends Sprite {
 	}
 
 	draw(){
+		this.t++;
 		if (this.t > this.currentAnim.t){
 			this.t -= this.currentAnim.t;
 			this.frame++;
