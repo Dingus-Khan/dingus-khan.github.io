@@ -554,7 +554,10 @@ class Player extends Animation {
 
 /////////////////////////////////////////////////
 
+Keyboard.registerKey('up', 38);
+Keyboard.registerKey('left', 37);
 Keyboard.registerKey('down', 40);
+Keyboard.registerKey('right', 39);
 
 var game = new Window(800, 600, 400, 300);
 
