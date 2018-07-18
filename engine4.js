@@ -527,14 +527,15 @@ sprite.addAnimation("idle_down", 0, 0, 0, 999, 16, 32, true, 16, 32);
 sprite.addAnimation("walk_down", 0, 4, 0, 10, 16, 32, true, 16, 32);
 sprite.setAnimation("idle_down");
 
-if (Keyboard.getKey('down')){
-	if (sprite.currentAnim.name != "walk_down")
-		sprite.setAnimation("walk_down");
-	sprite.transform.move(0, 1);
-}
 
 requestAnimationFrame(run);
 function run(t) {
+	if (Keyboard.getKey('down')){
+		if (sprite.currentAnim.name != "walk_down")
+			sprite.setAnimation("walk_down");
+		sprite.transform.move(0, 1);
+	}
+	
 	game.clear();
 	game.draw(sprite);
 	requestAnimationFrame(run);
