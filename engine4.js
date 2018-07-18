@@ -458,7 +458,7 @@ var diff = 0.01;
 
 requestAnimationFrame(run);
 function run(t) {
-	if (diff > 0 && diff <= 0.05){
+	if (diff > 0 && diff <= 0.5){
 		sprite.transform.scale(diff, diff);
 		diff += 0.01;
 	}
