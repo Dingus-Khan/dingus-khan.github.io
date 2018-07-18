@@ -471,22 +471,46 @@ class Sprite extends Drawable {
 class Animation extends Sprite {
 	constructor(){
 		this.anims = {};
+		this.currentAnim = {};
+		this.t = 0;
+		this.frame = 0;
 	}
 
-	addAnimation(name, start, endX, y, time, loop, w, h){
+	addAnimation(name, start, frames, y, time, frameW, frameH, loop, w, h){
 		w = w || this.w;
 		h = h || this.h;
 		loop = loop || true;
 
 		this.anims[name] = {
 			start: start,
-			end: end,
+			frames: frames,
 			y: y,
 			t: time,
 			loop: loop,
+			fw: frameW,
+			fh: frameH,
 			w: w,
 			h: h
 		};
+	}
+
+	setAnimation(name){
+		this.frame = 0;
+		this.currentAnim = this.anims[name];
+		this.setTexCoords(this.currentAnim.start, this.currentAnim.y, this.currentAnim.fw, this.currentAnim.fh);
+		this.setSize(this.currentAnim.w, this.currentAnim.h);
+	}
+
+	draw(){
+		if (this.t > this.currentAnim.t){
+			this.t -= this.currentAnim.t;
+			this.frame++;
+			if (this.frames == this.currentAnim.frames)
+				this.frame = 0;
+			this.setTexCoords(this.currentAnim.start + (this.frame * this.currentAnim.fw), this.currentAnim.y, this.currentAnim.fw, this.currentAnim.fh);
+		}
+
+		super.draw();
 	}
 }
 
