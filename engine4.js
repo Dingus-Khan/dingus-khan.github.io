@@ -508,7 +508,7 @@ class Animation extends Sprite {
 		if (this.t > this.currentAnim.t){
 			this.t -= this.currentAnim.t;
 			this.frame++;
-			if (this.frame == this.currentAnim.frames)
+			if (this.frame >= this.currentAnim.frames)
 				this.frame = 0;
 			this.setTexCoords(this.currentAnim.start + (this.frame * this.currentAnim.fw), this.currentAnim.y, this.currentAnim.fw, this.currentAnim.fh);
 		}
