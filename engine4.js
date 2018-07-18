@@ -574,7 +574,7 @@ class Player extends Animation {
 
 	draw(){
 		super.draw();
-		if (this.state == "attack_" && this.frame == this.currentAnim.frames.length)
+		if (this.state == "attack_" && this.frame == this.currentAnim.frames.length - 1)
 			this.state = "";
 	}
 }
