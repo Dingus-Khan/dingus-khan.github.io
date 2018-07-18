@@ -552,6 +552,7 @@ class Player extends Animation {
 			this.state = "idle_";
 		} else {
 			this.state = "walk_";
+			this.t = 11;
 			if (this.vel.x != 0 && this.vel.y == 0)
 				this.dir = this.vel.x < 0 ? "left" : "right";
 			else if (this.vel.x == 0 && this.vel.y != 0)
