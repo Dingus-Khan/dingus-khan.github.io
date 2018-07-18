@@ -478,10 +478,9 @@ class Animation extends Sprite {
 		this.frame = 0;
 	}
 
-	addAnimation(name, start, y, frameW, frameH, w, h, frames, onFinish){
+	addAnimation(name, start, y, frameW, frameH, w, h, frames){
 		w = w || this.w;
 		h = h || this.h;
-		if (onFinish == undefined) onFinish = function(){};
 
 		this.anims[name] = {
 			name: name,
@@ -491,8 +490,7 @@ class Animation extends Sprite {
 			fh: frameH,
 			w: w,
 			h: h,
-			frames: frames,
-			onFinish: onFinish
+			frames: frames
 		};
 	}
 
@@ -513,10 +511,8 @@ class Animation extends Sprite {
 		if (this.t > this.currentAnim.frames[this.frame].t){
 			this.t -= this.currentAnim.frames[this.frame].t;
 			this.frame++;
-			if (this.frame >= this.currentAnim.frames.length){
+			if (this.frame >= this.currentAnim.frames.length)
 				this.frame = 0;
-				this.currentAnim.onFinish();
-			}
 			this.setTexCoords(this.currentAnim.start + (this.frame * this.currentAnim.fw), this.currentAnim.y * this.currentAnim.fh, this.currentAnim.fw, this.currentAnim.fh);
 		}
 
@@ -539,7 +535,7 @@ class Player extends Animation {
 		this.addAnimation("walk_up", 0, 2, 16, 32, 16, 32, [{x: 0, t: 10}, {x: 1, t: 10}, {x: 2, t: 10}, {x: 3, t: 10}]);
 		this.addAnimation("walk_left", 0, 3, 16, 32, 16, 32, [{x: 0, t: 10}, {x: 1, t: 10}, {x: 2, t: 10}, {x: 3, t: 10}]);
 
-		this.addAnimation("attack_down", 0, 4, 32, 32, 32, 32, [{x: 0, t: 4}, {x: 1, t: 4}, {x: 2, t: 4}, {x: 3, t: 8}], function(player){ player.state = ""; });
+		this.addAnimation("attack_down", 0, 4, 32, 32, 32, 32, [{x: 0, t: 4}, {x: 1, t: 4}, {x: 2, t: 4}, {x: 3, t: 8}]);
 		this.addAnimation("attack_up", 0, 5, 32, 32, 32, 32, [{x: 0, t: 4}, {x: 1, t: 4}, {x: 2, t: 4}, {x: 3, t: 8}]);
 		this.addAnimation("attack_right", 0, 6, 32, 32, 32, 32, [{x: 0, t: 4}, {x: 1, t: 4}, {x: 2, t: 4}, {x: 3, t: 8}]);
 		this.addAnimation("attack_left", 0, 7, 32, 32, 32, 32, [{x: 0, t: 4}, {x: 1, t: 4}, {x: 2, t: 4}, {x: 3, t: 8}]);
