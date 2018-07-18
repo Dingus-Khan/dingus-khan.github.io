@@ -481,7 +481,7 @@ class Animation extends Sprite {
 	addAnimation(name, start, frames, y, time, frameW, frameH, lock, w, h){
 		w = w || this.w;
 		h = h || this.h;
-		loop = loop || true;
+		lock = lock || true;
 
 		this.anims[name] = {
 			name: name,
@@ -489,7 +489,7 @@ class Animation extends Sprite {
 			frames: frames,
 			y: y,
 			t: time,
-			lock: loop,
+			lock: lock,
 			fw: frameW,
 			fh: frameH,
 			w: w,
