@@ -553,7 +553,9 @@ class Player extends Animation {
 		this.vel.x = -Keyboard.getKey('left') + Keyboard.getKey('right');
 		this.vel.y = -Keyboard.getKey('up') + Keyboard.getKey('down');
 
-		if (this.vel.x == 0 && this.vel.y == 0){
+		if (Keyboard.wasKeyPressed('space')){
+			this.state = "attack_";
+		} else if (this.vel.x == 0 && this.vel.y == 0){
 			this.state = "idle_";
 		} else {
 			this.state = "walk_";
@@ -574,6 +576,7 @@ Keyboard.registerKey('up', 38);
 Keyboard.registerKey('left', 37);
 Keyboard.registerKey('down', 40);
 Keyboard.registerKey('right', 39);
+Keyboard.registerKey('space', 32);
 
 var game = new Window(800, 600, 400, 300);
 
