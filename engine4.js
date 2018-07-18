@@ -380,6 +380,14 @@ class Drawable {
 class Sprite extends Drawable {
 	constructor(tex, x, y, w, h, tx, ty, tw, th, r, g, b){
 		super(x, y, r, g, b);
+
+		this.w = w;
+		this.h = h;
+		this.tx = tx;
+		this.ty = ty;
+		this.tw = tw;
+		this.th = th;
+
 		this.transform.setOrigin(w/2, h/2);
 
 		this.shader = new Shader(
@@ -415,15 +423,16 @@ class Sprite extends Drawable {
 
 		this.tex = new Texture(tex, gl.REPEAT, gl.NEAREST);
 
-		this.bufferData = [
-			x, y, tx, ty, r, g, b,
-			x + w, y, tx + tw, ty, r, g, b,
-			x, y + h, tx, ty + th, r, g, b,
-			x + w, y + h, tx + tw, ty + th, r, g, b
-		];
+
 	}
 	build(){
 		if (this.rebuild){
+			this.bufferData = [
+				0, 0, this.tx, this.ty, this.r, this.g, this.b,
+				this.w, this.y, this.tx + this.tw, this.ty, this.r, this.g, this.b,
+				0, this.h, this.tx, this.ty + this.th, this.r, this.g, this.b,
+				this.w, this.h, this.tx + this.tw, this.ty + this.th, this.r, this.g, this.b
+			];
 			gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.bufferData), gl.STATIC_DRAW);
 			this.rebuild = false;
@@ -445,7 +454,9 @@ class Sprite extends Drawable {
 }
 
 class Animation extends Sprite {
+	constructor(){}
 
+	addAnimation(x, y, w, h, )
 }
 
 /////////////////////////////////////////////////
