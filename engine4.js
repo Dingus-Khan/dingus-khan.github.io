@@ -506,6 +506,7 @@ class Animation extends Sprite {
 		this.currentAnim = this.anims[name];
 		this.setTexCoords(this.currentAnim.start * this.currentAnim.fw, this.currentAnim.y * this.currentAnim.fh, this.currentAnim.fw, this.currentAnim.fh);
 		this.setSize(this.currentAnim.w, this.currentAnim.h);
+		this.transform.setOrigin(this.currentAnim.w / 2, this.currentAnim.h / 2);
 	}
 
 	draw(){
