@@ -507,16 +507,20 @@ class Animation extends Sprite {
 	}
 
 	draw(){
+		let end = false;
 		this.t++;
 		if (this.t > this.currentAnim.frames[this.frame].t){
 			this.t -= this.currentAnim.frames[this.frame].t;
 			this.frame++;
-			if (this.frame >= this.currentAnim.frames.length)
+			if (this.frame >= this.currentAnim.frames.length){
 				this.frame = 0;
+				end = true;
+			}
 			this.setTexCoords(this.currentAnim.start + (this.frame * this.currentAnim.fw), this.currentAnim.y * this.currentAnim.fh, this.currentAnim.fw, this.currentAnim.fh);
 		}
 
 		super.draw();
+		return end;
 	}
 }
 
@@ -573,9 +577,9 @@ class Player extends Animation {
 	}
 
 	draw(){
-		super.draw();
-		if (this.state == "attack_" && this.frame == this.currentAnim.frames.length - 1)
+		if (super.draw()){
 			this.state = "";
+		}
 	}
 }
 
