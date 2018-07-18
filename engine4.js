@@ -481,20 +481,6 @@ class Animation extends Sprite {
 	addAnimation(name, start, y, frameW, frameH, w, h, frames){
 		w = w || this.w;
 		h = h || this.h;
-		lock = lock || true;
-
-		this.anims[name] = {
-			name: name,
-			start: start,
-			frames: frames,
-			y: y,
-			t: time,
-			lock: lock,
-			fw: frameW,
-			fh: frameH,
-			w: w,
-			h: h
-		};
 
 		this.anims[name] = {
 			name: name,
@@ -537,7 +523,6 @@ class Animation extends Sprite {
 class Player extends Animation {
 	constructor(tex){
 		super(tex);
-
 		// addAnimation(name, start, y, frameW, frameH, w, h, frames){
 		// frame format {x, t}
 		this.addAnimation("idle_down", 0, 0, 16, 32, 16, 32, [{x: 0, t: 9999}]);
