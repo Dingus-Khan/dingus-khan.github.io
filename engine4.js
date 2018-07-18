@@ -535,6 +535,12 @@ class Player extends Animation {
 		this.addAnimation("walk_left", 0, 4, 3, 10, 16, 32, false, 16, 32);
 
 		this.setAnimation("idle_down");
+
+		this.vel = {x: 0, y: 0};
+	}
+
+	update(){
+
 	}
 }
 
