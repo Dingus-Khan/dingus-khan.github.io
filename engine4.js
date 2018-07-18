@@ -478,7 +478,7 @@ class Animation extends Sprite {
 		this.frame = 0;
 	}
 
-	addAnimation(name, start, frames, y, time, frameW, frameH, loop, w, h){
+	addAnimation(name, start, frames, y, time, frameW, frameH, lock, w, h){
 		w = w || this.w;
 		h = h || this.h;
 		loop = loop || true;
@@ -489,7 +489,7 @@ class Animation extends Sprite {
 			frames: frames,
 			y: y,
 			t: time,
-			loop: loop,
+			lock: loop,
 			fw: frameW,
 			fh: frameH,
 			w: w,
@@ -538,10 +538,10 @@ class Player extends Animation {
 		this.addAnimation("walk_up", 0, 4, 2, 10, 16, 32, false, 16, 32);
 		this.addAnimation("walk_left", 0, 4, 3, 10, 16, 32, false, 16, 32);
 
-		this.addAnimation("attack_down", 0, 4, 4, 10, 32, 32, false, 32, 32);
-		this.addAnimation("attack_up", 0, 4, 5, 10, 32, 32, false, 32, 32);
-		this.addAnimation("attack_right", 0, 4, 6, 10, 32, 32, false, 32, 32);
-		this.addAnimation("attack_left", 0, 4, 7, 10, 32, 32, false, 32, 32);
+		this.addAnimation("attack_down", 0, 4, 4, 4, 32, 32, false, 32, 32);
+		this.addAnimation("attack_up", 0, 4, 5, 4, 32, 32, false, 32, 32);
+		this.addAnimation("attack_right", 0, 4, 6, 4, 32, 32, false, 32, 32);
+		this.addAnimation("attack_left", 0, 4, 7, 4, 32, 32, false, 32, 32);
 
 		this.setAnimation("idle_down");
 
