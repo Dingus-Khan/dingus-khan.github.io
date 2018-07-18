@@ -498,6 +498,9 @@ class Animation extends Sprite {
 	}
 
 	setAnimation(name){
+		if (this.currentAnim.name == name)
+			return;
+			
 		this.frame = 0;
 		this.t = 0;
 		this.currentAnim = this.anims[name];
