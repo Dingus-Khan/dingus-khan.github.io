@@ -556,6 +556,8 @@ class Player extends Animation {
 
 		if (Keyboard.wasKeyPressed('space')){
 			this.state = "attack_";
+			this.vel.x = 0;
+			this.vel.y = 0;
 		} else if (this.vel.x == 0 && this.vel.y == 0){
 			this.state = "idle_";
 		} else {
