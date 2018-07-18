@@ -537,6 +537,8 @@ class Player extends Animation {
 		this.setAnimation("idle_down");
 
 		this.vel = {x: 0, y: 0};
+		this.state = "idle_";
+		this.dir = "down";
 	}
 
 	update(){
@@ -544,10 +546,16 @@ class Player extends Animation {
 		this.vel.y = -Keyboard.getKey('up') + Keyboard.getKey('down');
 
 		if (this.vel.x == 0 && this.vel.y == 0){
-			let dir = this.currentAnim.name.split('_')[1];
-			console.log(dir);
+			this.state = "idle_";
+		} else {
+			this.state = "walk_";
+			if (this.vel.x != 0 && this.vel.y == 0)
+				this.dir = this.vel.x < 0 ? "left" : "right";
+			else if (this.vel.x == 0 && this.vel.y != 0)
+				this.dir = this.vel.y < 0 ? "up" : "down";
 		}
 
+		this.setAnimation(this.state + this.dir);
 		this.transform.move(this.vel.x, this.vel.y);
 	}
 }
