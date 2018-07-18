@@ -531,9 +531,9 @@ class Player extends Animation {
 		this.addAnimation("idle_left", 0, 3, 16, 32, 16, 32, [{x: 0, t: 9999}]);
 
 		this.addAnimation("walk_down", 0, 0, 16, 32, 16, 32, [{x: 0, t: 10}, {x: 1, t: 10}, {x: 2, t: 10}, {x: 3, t: 10}]);
-		this.addAnimation("walk_right", 0, 0, 16, 32, 16, 32, [{x: 0, t: 10}, {x: 1, t: 10}, {x: 2, t: 10}, {x: 3, t: 10}]);
-		this.addAnimation("walk_up", 0, 0, 16, 32, 16, 32, [{x: 0, t: 10}, {x: 1, t: 10}, {x: 2, t: 10}, {x: 3, t: 10}]);
-		this.addAnimation("walk_left", 0, 0, 16, 32, 16, 32, [{x: 0, t: 10}, {x: 1, t: 10}, {x: 2, t: 10}, {x: 3, t: 10}]);
+		this.addAnimation("walk_right", 0, 1, 16, 32, 16, 32, [{x: 0, t: 10}, {x: 1, t: 10}, {x: 2, t: 10}, {x: 3, t: 10}]);
+		this.addAnimation("walk_up", 0, 2, 16, 32, 16, 32, [{x: 0, t: 10}, {x: 1, t: 10}, {x: 2, t: 10}, {x: 3, t: 10}]);
+		this.addAnimation("walk_left", 0, 3, 16, 32, 16, 32, [{x: 0, t: 10}, {x: 1, t: 10}, {x: 2, t: 10}, {x: 3, t: 10}]);
 
 		this.addAnimation("attack_down", 0, 4, 32, 32, 32, 32, [{x: 0, t: 4}, {x: 1, t: 4}, {x: 2, t: 4}, {x: 3, t: 8}]);
 		this.addAnimation("attack_up", 0, 5, 32, 32, 32, 32, [{x: 0, t: 4}, {x: 1, t: 4}, {x: 2, t: 4}, {x: 3, t: 8}]);
