@@ -478,7 +478,7 @@ class Animation extends Sprite {
 		this.frame = 0;
 	}
 
-	addAnimation(name, start, frames, y, time, frameW, frameH, lock, w, h){
+	addAnimation(name, start, y, frameW, frameH, w, h, frames){
 		w = w || this.w;
 		h = h || this.h;
 		lock = lock || true;
@@ -494,6 +494,17 @@ class Animation extends Sprite {
 			fh: frameH,
 			w: w,
 			h: h
+		};
+
+		this.anims[name] = {
+			name: name,
+			start: start,
+			y: y,
+			fw: frameW,
+			fh: frameH,
+			w: w,
+			h: h,
+			frames: frames
 		};
 	}
 
@@ -511,8 +522,8 @@ class Animation extends Sprite {
 
 	draw(){
 		this.t++;
-		if (this.t > this.currentAnim.t){
-			this.t -= this.currentAnim.t;
+		if (this.t > this.currentAnim.frames[this.frame].t){
+			this.t -= this.currentAnim.frames[this.frame].t;
 			this.frame++;
 			if (this.frame >= this.currentAnim.frames)
 				this.frame = 0;
@@ -527,21 +538,22 @@ class Player extends Animation {
 	constructor(tex){
 		super(tex);
 
-		//addAnimation(name, start, frames, y, time, frameW, frameH, loop, w, h){
-		this.addAnimation("idle_down", 0, 0, 0, 999, 16, 32, false, 16, 32);
-		this.addAnimation("idle_right", 0, 0, 1, 999, 16, 32, false, 16, 32);
-		this.addAnimation("idle_up", 0, 0, 2, 999, 16, 32, false, 16, 32);
-		this.addAnimation("idle_left", 0, 0, 3, 999, 16, 32, false, 16, 32);
+		// addAnimation(name, start, y, frameW, frameH, w, h, frames){
+		// frame format {x, t}
+		this.addAnimation("idle_down", 0, 0, 16, 32, 16, 32, [{0, 9999}]);
+		this.addAnimation("idle_right", 0, 1, 16, 32, 16, 32, [{0, 9999}]);
+		this.addAnimation("idle_up", 0, 2, 16, 32, 16, 32, [{0, 9999}]);
+		this.addAnimation("idle_left", 0, 3, 16, 32, 16, 32, [{0, 9999}]);
 
-		this.addAnimation("walk_down", 0, 4, 0, 10, 16, 32, false, 16, 32);
-		this.addAnimation("walk_right", 0, 4, 1, 10, 16, 32, false, 16, 32);
-		this.addAnimation("walk_up", 0, 4, 2, 10, 16, 32, false, 16, 32);
-		this.addAnimation("walk_left", 0, 4, 3, 10, 16, 32, false, 16, 32);
+		this.addAnimation("walk_down", 0, 0, 16, 32, 16, 32, [{x: 0, t: 10}, {x: 1, t: 10}, {x: 2, t: 10}, {x: 3, t: 10}]);
+		this.addAnimation("walk_right", 0, 0, 16, 32, 16, 32, [{x: 0, t: 10}, {x: 1, t: 10}, {x: 2, t: 10}, {x: 3, t: 10}]);
+		this.addAnimation("walk_up", 0, 0, 16, 32, 16, 32, [{x: 0, t: 10}, {x: 1, t: 10}, {x: 2, t: 10}, {x: 3, t: 10}]);
+		this.addAnimation("walk_left", 0, 0, 16, 32, 16, 32, [{x: 0, t: 10}, {x: 1, t: 10}, {x: 2, t: 10}, {x: 3, t: 10}]);
 
-		this.addAnimation("attack_down", 0, 4, 4, 7, 32, 32, false, 32, 32);
-		this.addAnimation("attack_up", 0, 4, 5, 7, 32, 32, false, 32, 32);
-		this.addAnimation("attack_right", 0, 4, 6, 7, 32, 32, false, 32, 32);
-		this.addAnimation("attack_left", 0, 4, 7, 7, 32, 32, false, 32, 32);
+		this.addAnimation("attack_down", 0, 4, 32, 32, 32, 32, [{x: 0, t: 4}, {x: 1, t: 4}, {x: 2, t: 4}, {x: 3, t: 8}]);
+		this.addAnimation("attack_up", 0, 5, 32, 32, 32, 32, [{x: 0, t: 4}, {x: 1, t: 4}, {x: 2, t: 4}, {x: 3, t: 8}]);
+		this.addAnimation("attack_right", 0, 6, 32, 32, 32, 32, [{x: 0, t: 4}, {x: 1, t: 4}, {x: 2, t: 4}, {x: 3, t: 8}]);
+		this.addAnimation("attack_left", 0, 7, 32, 32, 32, 32, [{x: 0, t: 4}, {x: 1, t: 4}, {x: 2, t: 4}, {x: 3, t: 8}]);
 
 		this.setAnimation("idle_down");
 
