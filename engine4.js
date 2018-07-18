@@ -552,7 +552,7 @@ class Player extends Animation {
 		this.vel.y = -Keyboard.getKey('up') + Keyboard.getKey('down');
 		if (Keyboard.wasKeyPressed('space')){
 			this.state = "attack_";
-			Keyboard.keyPressed[keyMap["space"]] = false;
+			Keyboard.keyPressed[Keyboard.keyMap["space"]] = false;
 		}
 
 		if (this.state == "attack_"){
