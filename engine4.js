@@ -521,7 +521,9 @@ class Animation extends Sprite {
 
 var game = new Window(800, 600, 400, 300);
 
-var sprite = new Sprite("character.png", 0, 0, 16, 32, 0, 0, 16, 32, 1, 1, 1);
+var sprite = new Animation("character.png");
+sprite.addAnimation("idle_down", 0, 0, 0, 100, 16, 32, true, 16, 32);
+sprite.setAnimation("idle_down");
 
 requestAnimationFrame(run);
 function run(t) {
