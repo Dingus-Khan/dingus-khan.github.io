@@ -571,6 +571,12 @@ class Player extends Animation {
 		this.setAnimation(this.state + this.dir);
 		this.transform.move(this.vel.x, this.vel.y);
 	}
+
+	draw(){
+		super.draw();
+		if (this.currentAnim.name == "attack" && this.frame == this.currentAnim.frames.length)
+			this.state = "";
+	}
 }
 
 /////////////////////////////////////////////////
