@@ -562,11 +562,7 @@ var sprite = new Player("character.png");
 
 requestAnimationFrame(run);
 function run(t) {
-	if (Keyboard.getKey('down')){
-		if (sprite.currentAnim.name != "walk_down")
-			sprite.setAnimation("walk_down");
-		sprite.transform.move(0, 1);
-	}
+	sprite.update();
 
 	game.clear();
 	game.draw(sprite);
