@@ -540,7 +540,15 @@ class Player extends Animation {
 	}
 
 	update(){
+		this.vel.x = -Keyboard.getKey('left') + Keyboard.getKey('right');
+		this.vel.y = -Keyboard.getKey('up') + Keyboard.getKey('down');
 
+		if (this.vel.x == 0 && this.vel.y == 0){
+			let dir = this.currentAnim.name.split('_')[1];
+			console.log(dir);
+		}
+
+		this.transform.move(this.vel.x, this.vel.y);
 	}
 }
 
