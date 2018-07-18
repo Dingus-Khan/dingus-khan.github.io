@@ -497,13 +497,14 @@ class Animation extends Sprite {
 		};
 	}
 
-	setAnimation(name){
+	setAnimation(name, callback){
 		if (this.currentAnim.name == name)
 			return;
 
 		this.frame = 0;
 		this.t = 0;
 		this.currentAnim = this.anims[name];
+		this.currentAnim.callback = callback;
 		this.setTexCoords(this.currentAnim.start * this.currentAnim.fw, this.currentAnim.y * this.currentAnim.fh, this.currentAnim.fw, this.currentAnim.fh);
 		this.setSize(this.currentAnim.w, this.currentAnim.h);
 		this.transform.setOrigin(this.currentAnim.w / 2, this.currentAnim.h / 2);
@@ -514,8 +515,12 @@ class Animation extends Sprite {
 		if (this.t > this.currentAnim.t){
 			this.t -= this.currentAnim.t;
 			this.frame++;
-			if (this.frame >= this.currentAnim.frames)
+			if (this.frame >= this.currentAnim.frames){
 				this.frame = 0;
+				if (this.currentAnim.callback){
+					this.setAnimation(this.currentAnim.callback);
+				}
+			}
 			this.setTexCoords(this.currentAnim.start + (this.frame * this.currentAnim.fw), this.currentAnim.y * this.currentAnim.fh, this.currentAnim.fw, this.currentAnim.fh);
 		}
 
@@ -553,11 +558,13 @@ class Player extends Animation {
 	update(){
 		this.vel.x = -Keyboard.getKey('left') + Keyboard.getKey('right');
 		this.vel.y = -Keyboard.getKey('up') + Keyboard.getKey('down');
+		var callback;
 
 		if (Keyboard.wasKeyPressed('space')){
 			this.state = "attack_";
 			this.vel.x = 0;
 			this.vel.y = 0;
+			callback = this.currentAnim.name;
 		} else if (this.vel.x == 0 && this.vel.y == 0){
 			this.state = "idle_";
 		} else {
@@ -568,7 +575,7 @@ class Player extends Animation {
 				this.dir = this.vel.y < 0 ? "up" : "down";
 		}
 
-		this.setAnimation(this.state + this.dir);
+		this.setAnimation(this.state + this.dir, callback);
 		this.transform.move(this.vel.x, this.vel.y);
 	}
 }
