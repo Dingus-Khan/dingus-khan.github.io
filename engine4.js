@@ -478,7 +478,7 @@ class Animation extends Sprite {
 		this.frame = 0;
 	}
 
-	addAnimation(name, start, frames, y, time, frameW, frameH, loop, w, h){
+	addAnimation(name, start, frames, y, time, frameW, frameH, loop, w, h){v
 		w = w || this.w;
 		h = h || this.h;
 		loop = loop || true;
@@ -499,6 +499,7 @@ class Animation extends Sprite {
 
 	setAnimation(name){
 		this.frame = 0;
+		this.t = 0;
 		this.currentAnim = this.anims[name];
 		this.setTexCoords(this.currentAnim.start, this.currentAnim.y, this.currentAnim.fw, this.currentAnim.fh);
 		this.setSize(this.currentAnim.w, this.currentAnim.h);
@@ -518,17 +519,32 @@ class Animation extends Sprite {
 	}
 }
 
+class Player extends Animation {
+	constructor(tex){
+		super(tex);
+
+		//addAnimation(name, start, frames, y, time, frameW, frameH, loop, w, h){
+		this.addAnimation("idle_down", 0, 0, 0, 999, 16, 32, false, 16, 32);
+		this.addAnimation("idle_right", 0, 0, 1, 999, 16, 32, false, 16, 32);
+		this.addAnimation("idle_up", 0, 0, 2, 999, 16, 32, false, 16, 32);
+		this.addAnimation("idle_left", 0, 0, 3, 999, 16, 32, false, 16, 32);
+
+		this.addAnimation("walk_down", 0, 4, 0, 10, 16, 32, false, 16, 32);
+		this.addAnimation("walk_right", 0, 4, 1, 10, 16, 32, false, 16, 32);
+		this.addAnimation("walk_up", 0, 4, 2, 10, 16, 32, false, 16, 32);
+		this.addAnimation("walk_left", 0, 4, 3, 10, 16, 32, false, 16, 32);
+
+		this.setAnimation("idle_down");
+	}
+}
+
 /////////////////////////////////////////////////
 
 Keyboard.registerKey('down', 40);
 
 var game = new Window(800, 600, 400, 300);
 
-var sprite = new Animation("character.png");
-sprite.addAnimation("idle_down", 0, 0, 0, 999, 16, 32, true, 16, 32);
-sprite.addAnimation("walk_down", 0, 4, 0, 10, 16, 32, true, 16, 32);
-sprite.setAnimation("idle_down");
-
+var sprite = new Player("character.png");
 
 requestAnimationFrame(run);
 function run(t) {
