@@ -460,7 +460,7 @@ requestAnimationFrame(run);
 function run(t) {
 	if (diff > 0 && diff <= 0.5){
 		sprite.transform.scale(diff, diff);
-		diff += 0.01;
+		diff += 0.001;
 	}
 
 	game.clear();
