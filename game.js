@@ -4,7 +4,7 @@ class Player extends Animation{
 		this.weapon = new Animation(tex);
 
 		this.addAnimation("idle_right", 0, 0, 120, 120, 120, 120, [{x: 0, t: 5},{x: 120, t: 5},{x: 240, t: 5},{x: 360, t: 5},{x: 480, t: 5},{x: 600, t: 5}]);
-		this.addAnimation("idle_left", 0, 0, 120, 120, 120, 120, [{x: 0, t: 5},{x: 120, t: 5},{x: 240, t: 5},{x: 360, t: 5},{x: 480, t: 5},{x: 600, t: 5}]);
+		this.addAnimation("idle_left", 0, 0, -120, 120, 120, 120, [{x: 0, t: 5},{x: 120, t: 5},{x: 240, t: 5},{x: 360, t: 5},{x: 480, t: 5},{x: 600, t: 5}]);
 
 		this.setAnimation("idle_right");
 	}
@@ -26,6 +26,11 @@ var sprite = new Player("test.png");
 
 requestAnimationFrame(run);
 function run(t) {
+	if (keyboard.getKey('left') && !keyboard.getKey('right'))
+		sprite.setAnimation("idle_left");
+	if (keyboard.getKey('right') && !keyboard.getKey('left'))
+		sprite.setAnimation("idle_right");
+
 	game.clear();
 	game.draw(sprite);
 	requestAnimationFrame(run);
