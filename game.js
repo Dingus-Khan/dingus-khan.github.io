@@ -10,7 +10,7 @@ class Player extends Animation{
 	}
 
 	draw(){
-		this.draw();
+		super.draw();
 	}
 }
 
