@@ -20,7 +20,7 @@ Keyboard.registerKey('down', 40);
 Keyboard.registerKey('right', 39);
 Keyboard.registerKey('space', 32);
 
-var game = new Window(800, 600, 400, 300);
+var game = new Window(800, 600, 800, 600);
 
 var sprite = new Player("test.png");
 
