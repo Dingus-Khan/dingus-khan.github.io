@@ -26,9 +26,9 @@ var sprite = new Player("test.png");
 
 requestAnimationFrame(run);
 function run(t) {
-	if (keyboard.getKey('left') && !keyboard.getKey('right'))
+	if (Keyboard.getKey('left') && !Keyboard.getKey('right'))
 		sprite.setAnimation("idle_left");
-	if (keyboard.getKey('right') && !keyboard.getKey('left'))
+	if (Keyboard.getKey('right') && !Keyboard.getKey('left'))
 		sprite.setAnimation("idle_right");
 
 	game.clear();
