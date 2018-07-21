@@ -101,13 +101,7 @@ class Window {
 	}
 
 	draw(drawable){
-		if (drawable.shader != undefined){
-			drawable.shader.use();
-			drawable.shader.setUniform("proj", this.camera.proj);
-			drawable.shader.setUniform("view", this.camera.view);
-		}
-
-		drawable.draw();
+		drawable.draw(this.camera);
 	}
 }
 
@@ -441,14 +435,19 @@ class Sprite extends Drawable {
 			this.rebuild = false;
 		}
 	}
-	draw(){
+	draw(camera){
 		if (this.bufferData.length == 0)
 			return;
 
 		gl.bindVertexArray(this.vao);
+		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 		this.build();
 		this.transform.update();
+
+		this.shader.use();
 		this.shader.enableAttributes();
+		this.shader.setUniform("proj", camera.proj);
+		this.shader.setUniform("view", camera.view);
 		this.shader.setUniform("model", this.transform.matrix);
 		this.shader.setUniform("texSize", [this.tex.image.width, this.tex.image.height])
 		this.tex.bind();
@@ -506,7 +505,7 @@ class Animation extends Sprite {
 		this.transform.setOrigin(this.currentAnim.w / 2, this.currentAnim.h / 2);
 	}
 
-	draw(){
+	draw(camera){
 		let end = false;
 		this.t++;
 		if (this.t > this.currentAnim.frames[this.frame].t){
@@ -519,7 +518,7 @@ class Animation extends Sprite {
 			this.setTexCoords(this.currentAnim.start + (this.frame * this.currentAnim.fw), this.currentAnim.y * this.currentAnim.fh, this.currentAnim.fw, this.currentAnim.fh);
 		}
 
-		super.draw();
+		super.draw(camera);
 		return end;
 	}
 }
