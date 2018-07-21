@@ -10,7 +10,7 @@ class Player extends Animation{
 		this.setAnimation("attackIdle_right");
 
 		this.weapon = new Animation(tex);
-		this.weapon.addAnimation("gunIdle_right", 0, 16, 60, 60, 60, 60, [{x: 0, t: 50});
+		this.weapon.addAnimation("gunIdle_right", 0, 16, 60, 60, 60, 60, [{x: 0, t: 50}]);
 		this.weapon.addAnimation("gunShoot_right", 1, 16, 60, 60, 60, 60, [{x: 0, t: 50}]);
 		this.weapon.setAnimation("gunIdle_right");
 		this.weapon.transform.setPosition(45, -5);
