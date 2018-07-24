@@ -55,8 +55,10 @@ class Shape extends Drawable {
 }
 
 var game = new Window(800, 600, 800, 600);
+var shape = new Shape();
 requestAnimationFrame(run);
 function run(t) {
 	game.clear();
+	game.draw(shape);
 	requestAnimationFrame(run);
 }
