@@ -31,9 +31,8 @@ class Shape extends Drawable {
 				outColour = vec4(Col, 1);
 			}`
 		);
-		this.shader.addAttribute("pos", 2, gl.FLOAT, false, 7, 0);
-		this.shader.addAttribute("tex", 2, gl.FLOAT, false, 7, 2);
-		this.shader.addAttribute("col", 3, gl.FLOAT, false, 7, 4);
+		this.shader.addAttribute("pos", 2, gl.FLOAT, false, 5, 0);
+		this.shader.addAttribute("col", 3, gl.FLOAT, false, 5, 2);
 		this.shader.use();
 		gl.bindVertexArray(this.vao);
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
