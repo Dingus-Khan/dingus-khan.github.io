@@ -13,7 +13,7 @@ class Player extends Animation{
 	}
 
 	draw(camera){
-		super.draw(camera);
+		//super.draw(camera);
 		this.weapon.draw(camera);
 	}
 }
