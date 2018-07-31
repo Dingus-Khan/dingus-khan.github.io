@@ -10,6 +10,7 @@ class Player extends Animation{
 		this.setAnimation("attackIdle_right");
 
 		this.weapon = new Weapon(weapons);
+		this.weapon.transform.setPosition(30, 0);
 	}
 
 	draw(camera){
