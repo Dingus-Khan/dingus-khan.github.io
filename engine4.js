@@ -522,3 +522,90 @@ class Animation extends Sprite {
 		return end;
 	}
 }
+
+class TileMap extends Drawable {
+	constructor(tex){
+		super(0, 0, 1, 1, 1);
+
+		this.shader = new Shader(
+			`#version 300 es
+			in vec2 pos;
+			in vec2 tex;
+			in vec3 col;
+			out vec2 Tex;
+			out vec3 Col;
+			uniform vec2 texSize;
+			uniform mat4 proj;
+			uniform mat4 view;
+			uniform mat4 model;
+			void main(){
+				Tex = tex / texSize;
+				Col = col;
+				gl_Position = proj * view * model * vec4(pos, 0, 1);
+			}`,
+			`#version 300 es
+			precision mediump float;
+			in vec2 Tex;
+			in vec3 Col;
+			out vec4 outColour;
+			uniform sampler2D texImage;
+			void main(){
+				outColour = texture(texImage, Tex) * vec4(Col, 1);
+			}`
+		);
+		this.shader.addAttribute("pos", 2, gl.FLOAT, false, 7, 0);
+		this.shader.addAttribute("tex", 2, gl.FLOAT, false, 7, 2);
+		this.shader.addAttribute("col", 3, gl.FLOAT, false, 7, 4);
+		this.shader.use();
+
+		this.tex = new Texture(tex, gl.REPEAT, gl.NEAREST);
+
+		this.rebuild = true;
+	}
+
+	build(){
+		if (this.rebuild){
+			this.bufferData = [
+				0, 0, this.tx, this.ty, this.r, this.g, this.b,
+				this.w, 0, this.tx + this.tw, this.ty, this.r, this.g, this.b,
+				0, this.h, this.tx, this.ty + this.th, this.r, this.g, this.b,
+				this.w, this.h, this.tx + this.tw, this.ty + this.th, this.r, this.g, this.b
+			];
+			gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
+			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.bufferData), gl.STATIC_DRAW);
+			this.rebuild = false;
+		}
+	}
+
+	addTile(x, y, w, h, tx, ty, tw, th, r, g, b){
+		this.bufferData.push(
+			x, y, tx, ty, r, g, b,
+			x, y + h, tx, ty + th, r, g, b,
+			x + w, y + h, tx, + tw, ty + th, r, g, b,
+			x, y, tx, ty, r, g, b,
+			x + w, y + h, tx + tw, ty + th, r, g, b,
+			x + w, y, tx + tw, ty, r, g, b
+		);
+
+		this.rebuild = true;
+	}
+
+	draw(camera){
+		if (this.bufferData.length == 0)
+			return;
+
+		gl.bindVertexArray(this.vao);
+		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
+		this.build();
+		this.transform.update();
+
+		this.shader.use();
+		this.shader.enableAttributes();
+		this.shader.setUniform("proj", camera.proj);
+		this.shader.setUniform("view", camera.view);
+		this.shader.setUniform("model", Matrix.identity());
+		this.shader.setUniform("texSize", [this.tex.image.width, this.tex.image.height])
+		this.tex.bind();
+		gl.drawArrays(gl.TRIANGLES, 0, this.bufferData.length / 7);
+	}
+}

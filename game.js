@@ -37,11 +37,11 @@ Keyboard.registerKey('space', 32);
 
 var game = new Window(800, 600, 800, 600);
 
-var sprite = new Player("test.png", "entweps.png");
+var tiles = new TileMap("tileset.png");
 
 requestAnimationFrame(run);
 function run(t) {
 	game.clear();
-	game.draw(sprite);
+	game.draw(tiles);
 	requestAnimationFrame(run);
 }
