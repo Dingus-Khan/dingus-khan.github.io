@@ -10,6 +10,7 @@ class Player extends Animation{
 		this.setAnimation("attackIdle_right");
 
 		this.weapon = new Weapon(weapons);
+		this.weapon.position.x = 10;
 	}
 
 	draw(camera){
@@ -21,7 +22,7 @@ class Player extends Animation{
 class Weapon extends Animation{
 	constructor(tex){
 		super(tex);
-		this.addAnimation("gunIdle_right", 0, 16, 60, 60, 60, 60, [{x: 0, t: 50}]);
+		this.addAnimation("gunIdle_right", 0, 16, 60, 60, 60, 60, [{x: 0, t: 5}, {x: 60, t: 5}]);
 		this.addAnimation("gunShoot_right", 0, 17, 60, 60, 60, 60, [{x: 0, t: 50}]);
 		this.setAnimation("gunIdle_right");
 	}
