@@ -13,7 +13,7 @@ class Player extends Animation{
 	}
 
 	draw(camera){
-		//super.draw(camera);
+		super.draw(camera);
 		this.weapon.draw(camera);
 	}
 }
@@ -21,7 +21,7 @@ class Player extends Animation{
 class Weapon extends Animation{
 	constructor(tex){
 		super(tex);
-		this.addAnimation("gunIdle_right", 0, 0, 120, 120, 120, 120, [{x: 0, t: 5}, {x: 19, t: 5}]);
+		this.addAnimation("gunIdle_right", 0, 0, 120, 120, 120, 120, [{x: 0, t: 5}, {x: 0, t: 5}]);
 		this.addAnimation("gunShoot_right", 0, 0, 120, 120, 120, 120, [{x: 0, t: 50}]);
 		this.setAnimation("gunIdle_right");
 	}
