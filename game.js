@@ -39,11 +39,6 @@ var sprite = new Player("test.png");
 
 requestAnimationFrame(run);
 function run(t) {
-	if (Keyboard.getKey('left') && !Keyboard.getKey('right'))
-		sprite.setAnimation("attackIdle_left");
-	if (Keyboard.getKey('right') && !Keyboard.getKey('left'))
-		sprite.setAnimation("attackIdle_right");
-
 	game.clear();
 	game.draw(sprite);
 	requestAnimationFrame(run);
