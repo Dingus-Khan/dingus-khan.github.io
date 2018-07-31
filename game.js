@@ -21,9 +21,9 @@ class Player extends Animation{
 class Weapon extends Animation{
 	constructor(tex){
 		super(tex);
-		this.weapon.addAnimation("gunIdle_right", 0, 16, 60, 60, 60, 60, [{x: 0, t: 50}]);
-		this.weapon.addAnimation("gunShoot_right", 0, 17, 60, 60, 60, 60, [{x: 0, t: 50}]);
-		this.weapon.setAnimation("gunIdle_right");
+		this.addAnimation("gunIdle_right", 0, 16, 60, 60, 60, 60, [{x: 0, t: 50}]);
+		this.addAnimation("gunShoot_right", 0, 17, 60, 60, 60, 60, [{x: 0, t: 50}]);
+		this.setAnimation("gunIdle_right");
 	}
 }
 
