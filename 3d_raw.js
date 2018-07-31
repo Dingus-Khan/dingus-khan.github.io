@@ -123,9 +123,9 @@ gl.uniformMatrix4fv(gl.getUniformLocation(shader, "proj"), false, proj);
 gl.uniformMatrix4fv(gl.getUniformLocation(shader, "view"), false, view);
 gl.uniformMatrix4fv(gl.getUniformLocation(shader, "model"), false, model);
 
-var vx = 0;
-var vy = 0;
-var vz = 0;
+var x = 0;
+var z = 0;
+var r = 0;
 
 var game = new Window(800, 600, 800, 600);
 
@@ -139,9 +139,13 @@ requestAnimationFrame(run);
 function run(t) {
 	Keyboard.update();
 
-	vz = (Keyboard.getKey('up') - Keyboard.getKey('down')) / 50;
-	mat4.translate(view, view, [vx, vy, vz]);
-	mat4.rotate(view, view, 0.1, [0, Keyboard.getKey('right') - Keyboard.getKey('left'), 0])
+	r = (Keyboard.getKey('right') + -Keyboard.getKey('left')) * 1;
+	z += Math.cos(r) * (Keyboard.getKey('up') + -Keyboard.getKey('down')) / 8;
+	x -= Math.sin(r) * (Keyboard.getKey('up') + -Keyboard.getKey('down')) / 8;
+
+	mat4.translate(view, mat4.create(), [0, 0, 0]);
+	mat4.rotate(view, view, 1, [0, r, 0])
+	mat4.translate(view, mat4.create(), [x, 0, z]);
 	gl.uniformMatrix4fv(gl.getUniformLocation(shader, "view"), false, view);
 
 
