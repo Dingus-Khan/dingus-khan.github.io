@@ -35,7 +35,7 @@ Keyboard.registerKey('space', 32);
 
 var game = new Window(800, 600, 800, 600);
 
-var sprite = new Player("test.png");
+var sprite = new Player("test.png", "test.png");
 
 requestAnimationFrame(run);
 function run(t) {
