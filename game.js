@@ -20,6 +20,7 @@ class Projectiles {
 			this.projectiles[proj].x += this.projectiles[proj].vel;
 			this.projectiles[proj].range -= this.projectiles[proj].vel;
 			this.projectiles[proj].sprite.transform.move(this.projectiles[proj].vel, 0);
+			if (this.projectiles[proj].range <= 0) this.projectiles[proj].vel = 0;
 			game.draw(this.projectiles[proj].sprite)
 		}
 	}
