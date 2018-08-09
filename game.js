@@ -16,7 +16,7 @@ class Projectiles {
 	}
 
 	draw(game){
-		for (proj = 0; proj < this.projectiles.length; proj++){
+		for (var proj = 0; proj < this.projectiles.length; proj++){
 			projectiles[proj].x += projectiles[proj].vel;
 			projectiles[proj].range -= projectiles[proj].vel;
 			game.draw(projectiles[proj].sprite)
