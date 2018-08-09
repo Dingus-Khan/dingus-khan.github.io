@@ -43,6 +43,7 @@ class SpriteBatch extends Drawable {
 	}
 
 	build(){
+		this.bufferData = [];
 		for(var spr = 0; spr < this.sprites.length; spr++){
 			var sprite = this.sprites[spr];
 			this.bufferData.push(
