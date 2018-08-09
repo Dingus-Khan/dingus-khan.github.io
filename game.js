@@ -6,6 +6,7 @@ class Projectiles {
 	constructor(){
 		this.projectiles = [];
 		this.bodies = [];
+		this.tex = new Texture("proj.png", gl.REPEAT, gl.NEAREST);
 	}
 
 	fire(x, y, vel, range, tX, tY){
@@ -13,6 +14,8 @@ class Projectiles {
 			x: x, y: y, vel: vel, range: range, tX: tX, tY: tY,
 			sprite: new Sprite("proj.png", 0, 0, 20, 20, tX, tY, 20, 20, 1, 1, 1)
 		});
+
+		this.projectiles[this.projectiles.length - 1].tex = this.tex;
 	}
 
 	draw(game){
