@@ -35,7 +35,7 @@ requestAnimationFrame(run);
 function run(t) {
 
 	if (Keyboard.wasKeyPressed("space"))
-		projectiles.fire(0, 0, 10, 100, 0, 0);
+		projectiles.fire(0, 0, 10, 1000, 0, 0);
 
 	Keyboard.update();
 	game.clear();
