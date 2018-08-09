@@ -63,19 +63,19 @@ class SpriteBatch extends Drawable {
 		if (this.bufferData.length == 0)
 			return;
 
-			gl.bindVertexArray(this.vao);
-			gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
-			this.build();
-			this.transform.update();
+		gl.bindVertexArray(this.vao);
+		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
+		this.build();
+		this.transform.update();
 
-			this.shader.use();
-			this.shader.enableAttributes();
-			this.shader.setUniform("proj", camera.proj);
-			this.shader.setUniform("view", camera.view);
-			this.shader.setUniform("model", this.transform.matrix);
-			this.shader.setUniform("texSize", [this.tex.image.width, this.tex.image.height])
-			this.tex.bind();
-			gl.drawArrays(gl.TRIANGLES, 0, this.bufferData.length / 7);
+		this.shader.use();
+		this.shader.enableAttributes();
+		this.shader.setUniform("proj", camera.proj);
+		this.shader.setUniform("view", camera.view);
+		this.shader.setUniform("model", this.transform.matrix);
+		this.shader.setUniform("texSize", [this.tex.image.width, this.tex.image.height])
+		this.tex.bind();
+		gl.drawArrays(gl.TRIANGLES, 0, this.bufferData.length / 7);
 	}
 }
 
@@ -112,6 +112,8 @@ class Projectiles {
 
 var projectiles = new Projectiles();
 
+var batch = new SpriteBatch("proj.png");
+
 requestAnimationFrame(run);
 function run(t) {
 
@@ -120,6 +122,7 @@ function run(t) {
 
 	Keyboard.update();
 	game.clear();
-	projectiles.draw(game);
+	game.draw(batch);
+	//projectiles.draw(game);
 	requestAnimationFrame(run);
 }
