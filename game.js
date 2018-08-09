@@ -9,6 +9,30 @@ bullet3.transform.move(60, 0);
 
 Keyboard.registerKey('space', 32);
 
+class Projectiles {
+	constructor(){
+		this.projectiles = [];
+		this.bodies = [];
+	}
+
+	fire(x, y, vel, range, tX, tY){
+		this.projectiles.push({
+			x: x, y: y, vel: vel, range: range, tX: tX, tY: tY,
+			sprite: new Sprite("proj.png", 0, 0, 20, 20, tx, tx, 20, 20)
+		});
+	}
+
+	draw(game){
+		for (var proj in this.projectiles){
+			proj.x += proj.vel;
+			proj.range -= proj.vel;
+			game.draw(proj.sprite)
+		}
+	}
+}
+
+var projectiles = new Projectiles();
+
 requestAnimationFrame(run);
 function run(t) {
 
@@ -20,5 +44,6 @@ function run(t) {
 	game.draw(bullet);
 	game.draw(bullet2);
 	game.draw(bullet3);
+	projectiles.draw(game);
 	requestAnimationFrame(run);
 }
