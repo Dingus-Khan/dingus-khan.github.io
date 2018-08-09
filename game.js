@@ -23,10 +23,10 @@ class Projectiles {
 	}
 
 	draw(game){
-		for (var proj in this.projectiles){
-			proj.x += proj.vel;
-			proj.range -= proj.vel;
-			game.draw(proj.sprite)
+		for (proj = 0; proj < this.projectiles.length; proj++){
+			projectiles[proj].x += projectiles[proj].vel;
+			projectiles[proj].range -= projectiles[proj].vel;
+			game.draw(projectiles[proj].sprite)
 		}
 	}
 }
