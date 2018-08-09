@@ -17,9 +17,9 @@ class Projectiles {
 
 	draw(game){
 		for (var proj = 0; proj < this.projectiles.length; proj++){
-			projectiles[proj].x += projectiles[proj].vel;
-			projectiles[proj].range -= projectiles[proj].vel;
-			game.draw(projectiles[proj].sprite)
+			this.projectiles[proj].x += this.projectiles[proj].vel;
+			this.projectiles[proj].range -= this.projectiles[proj].vel;
+			game.draw(this.projectiles[proj].sprite)
 		}
 	}
 }
