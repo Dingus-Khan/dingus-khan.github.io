@@ -60,7 +60,7 @@ class SpriteBatch extends Drawable {
 	}
 
 	draw(camera){
-		if (this.bufferData.length == 0)
+		if (this.sprites.length == 0)
 			return;
 
 		gl.bindVertexArray(this.vao);
