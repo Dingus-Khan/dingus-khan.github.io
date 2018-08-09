@@ -87,7 +87,7 @@ class Window {
 		gl = canvas.getContext("webgl2");
 		gl.enable(gl.BLEND);
 		gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-		gl.clearColor(0.1, 0.1, 0.1, 1.0);
+		gl.clearColor(0.5, 0.5, 0.5, 1.0);
 
 		this.camera = new Camera(0, 0, this.w, this.h, this.projW, this.projH);
 	}

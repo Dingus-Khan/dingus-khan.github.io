@@ -1,47 +1,10 @@
-class Player extends Animation{
-	constructor(sprite, weapons){
-		super(sprite);
-		this.addAnimation("idle_right", 0, 0, 120, 120, 120, 120, [{x: 0, t: 5},{x: 120, t: 5},{x: 240, t: 5},{x: 360, t: 5},{x: 480, t: 5},{x: 600, t: 5}]);
-		this.addAnimation("idle_left", 0, 0, -120, 120, 120, 120, [{x: 0, t: 5},{x: 120, t: 5},{x: 240, t: 5},{x: 360, t: 5},{x: 480, t: 5},{x: 600, t: 5}]);
-		this.addAnimation("walk_right", 0, 1, 120, 120, 120, 120, [{x: 0, t: 5},{x: 120, t: 5},{x: 240, t: 5},{x: 360, t: 5},{x: 480, t: 5},{x: 600, t: 5}]);
-		this.addAnimation("walk_left", 0, 1, -120, 120, 120, 120, [{x: 0, t: 5},{x: 120, t: 5},{x: 240, t: 5},{x: 360, t: 5},{x: 480, t: 5},{x: 600, t: 5}]);
-		this.addAnimation("attackIdle_right", 0, 4, 120, 120, 120, 120, [{x: 0, t: 5},{x: 120, t: 5},{x: 240, t: 5},{x: 360, t: 5},{x: 480, t: 5},{x: 600, t: 5}]);
-		this.addAnimation("attackIdle_left", 0, 4, -120, 120, 120, 120, [{x: 0, t: 5},{x: 120, t: 5},{x: 240, t: 5},{x: 360, t: 5},{x: 480, t: 5},{x: 600, t: 5}]);
-		this.setAnimation("attackIdle_right");
-
-		this.weapon = new Weapon(weapons);
-		this.weapon.transform.setPosition(30, 0);
-	}
-
-	draw(camera){
-		super.draw(camera);
-		this.weapon.draw(camera);
-	}
-}
-
-class Weapon extends Animation{
-	constructor(tex){
-		super(tex);
-		this.addAnimation("gunIdle_right", 0, 0, 120, 120, 120, 120, [{x: 0, t: 5}, {x: 120, t: 5}]);
-		this.addAnimation("gunIdle_left", 120, 0, -120, 120, 120, 120, [{x: 120, t: 5}, {x: 240, t: 5}]);
-		this.addAnimation("gunShoot_right", 0, 0, 120, 120, 120, 120, [{x: 0, t: 50}]);
-		this.setAnimation("gunIdle_right");
-	}
-}
-
-Keyboard.registerKey('up', 38);
-Keyboard.registerKey('left', 37);
-Keyboard.registerKey('down', 40);
-Keyboard.registerKey('right', 39);
-Keyboard.registerKey('space', 32);
-
 var game = new Window(800, 600, 800, 600);
 
-var tiles = new TileMap("tileset.png");
+var sprite = new Sprite("tileset.png", 0, 0, 120, 120, 0, 0, 120, 120, 1, 1, 1);
 
 requestAnimationFrame(run);
 function run(t) {
 	game.clear();
-	game.draw(tiles);
+	game.draw(sprite);
 	requestAnimationFrame(run);
 }
