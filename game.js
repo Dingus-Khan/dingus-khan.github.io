@@ -2,6 +2,7 @@ class SpriteBatch extends Drawable {
 	constructor(tex){
 		super(0, 0, 1, 1, 1);
 		this.sprites = [];
+		this.transform.setOrigin(0, 0);
 
 		this.shader = new Shader(
 			`#version 300 es
