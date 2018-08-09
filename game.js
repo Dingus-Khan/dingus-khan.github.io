@@ -51,7 +51,7 @@ class SpriteBatch extends Drawable {
 				sprite.x + sprite.w, sprite.y + sprite.h, sprite.tx + sprite.tw, sprite.ty + sprite.th, sprite.r, sprite.g, sprite.b,
 
 				sprite.x, sprite.y, sprite.tx, sprite.ty, sprite.r, sprite.g, sprite.b,
-				sprite.x + sprite.w, sprite.y + sprite.h, sprite.tx + sprite.tw, sprite.ty + sprite.th, sprite.r, sprite.g, sprite.b
+				sprite.x + sprite.w, sprite.y + sprite.h, sprite.tx + sprite.tw, sprite.ty + sprite.th, sprite.r, sprite.g, sprite.b,
 				sprite.x, sprite.y + sprite.h, sprite.tx, sprite.ty + sprite.th, sprite.r, sprite.g, sprite.b,
 			);
 			gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
