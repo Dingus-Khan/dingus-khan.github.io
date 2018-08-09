@@ -18,7 +18,7 @@ class Projectiles {
 	fire(x, y, vel, range, tX, tY){
 		this.projectiles.push({
 			x: x, y: y, vel: vel, range: range, tX: tX, tY: tY,
-			sprite: new Sprite("proj.png", 0, 0, 20, 20, tx, tx, 20, 20)
+			sprite: new Sprite("proj.png", 0, 0, 20, 20, tX, tY, 20, 20)
 		});
 	}
 
