@@ -7,13 +7,17 @@ body {
 
 /*  Layout - Sidebar  */
 .sidebar {
-	width: 20%;
-	min-width: 200px;
+	width: 0%;
 	height: 100%;
 	margin: 0;
 	padding: 0;
 	position: fixed;
 	background-color: #ececec;
+}
+
+.sidebar.show {
+	min-width: 200px;
+	width: 20%;
 }
 
 .sidebar h1 {
@@ -22,7 +26,8 @@ body {
 }
 
 .main {
-	width: 80%;
+	width: 100%;
+	height: 100%;
 	margin: 0;
 	padding: 0;
 	background-color; #efefef;
@@ -30,4 +35,8 @@ body {
 	float: right;
 	overflow-y: scroll;
 	overflow-x: hidden;
+}
+
+.main.sidebarshown {
+	width: 80%;
 }
