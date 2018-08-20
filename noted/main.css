@@ -7,10 +7,11 @@ body {
 
 /*  Layout - Sidebar  */
 .sidebar {
-	width: 0%;
+	width: 200px;
 	height: 100%;
 	margin: 0;
 	padding: 0;
+	left: -200px;
 	position: fixed;
 	background-color: #ececec;
 	overflow: hidden;
@@ -18,8 +19,8 @@ body {
 }
 
 .sidebar.show {
-	width: 20%;
-	transition: width .25s ease-in-out;
+	left: 0px;
+	transition: left .25s ease-in-out;
 }
 
 .sidebar h1 {
