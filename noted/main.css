@@ -27,6 +27,13 @@ body {
 	margin-bottom: 1px solid #dedede;
 }
 
+.sidebarToggle {
+	width: 50px;
+	height: 50px;
+	background-color: #ececec; 
+}
+
+/* Layout - Main */
 .main {
 	width: 100%;
 	height: 100%;
