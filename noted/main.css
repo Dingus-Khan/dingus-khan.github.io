@@ -30,6 +30,7 @@ body {
 .sidebarToggleContainer {
 	width: 50px;
 	height: 100%;
+	display: block;
 	position: fixed;
 }
 
@@ -38,6 +39,8 @@ body {
 	height: 50px;
 	line-height: 50px;
 	background-color: #ececec;
+	display: block;
+	position: fixed;
 }
 
 .newNoteContainer {
