@@ -67,4 +67,5 @@ body {
 	bottom: 35px;
 	width: 80px;
 	height: 80px;
+	transition: all .25s ease-in-out;
 }
