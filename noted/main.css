@@ -32,7 +32,6 @@ body {
 	margin: 0;
 	padding: 0;
 	background-color; #efefef;
-	position: fixed;
 	float: right;
 	overflow-y: scroll;
 	overflow-x: hidden;
