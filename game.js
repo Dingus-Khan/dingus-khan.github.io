@@ -1,21 +1,28 @@
 var game = new Window(800, 600, 800, 600);
 var sprite = new Sprite("circle.png", 0, 0, 100, 100, 0, 0, 100, 100, 1, 1, 1);
 
-var nodes = [0, 0, 100, 100, 200, 500, -40, -300, 200, -600, 50, 120, 200, -120];
+var nodes = [75, 125, -164, 150, -213, -184, 112, -261];
 var targetX = nodes.shift();
 var targetY = nodes.shift();
+nodes.push(targetX, targetY);
+var spd = 2;
 
 requestAnimationFrame(run);
 function run(t) {
-	if (sprite.transform.x != targetX || sprite.transform.y != targetY){
-		var diffX = sprite.transform.x - targetX;
-		var diffY = sprite.transform.y - targetY;
-		if (diffX > 0) diffX = Math.min(diffX, 5); else diffX = Math.max(diffX, -5);
-		if (diffY > 0) diffY = Math.min(diffY, 5); else diffY = Math.max(diffY, -5);
-		sprite.transform.move(diffX, diffY);
-	} else {
-		targetX = nodes.shift();
-		targetY = nodes.shift();
+	if (targetX != undefined && targetY != undefined){
+		if (sprite.transform.x != targetX || sprite.transform.y != targetY){
+			var diffX = sprite.transform.x - targetX;
+			var diffY = sprite.transform.y - targetY;
+			diffX = diffX > 0 ? -Math.min(diffX, spd) : -Math.max(diffX, -spd);
+			diffY = diffY > 0 ? -Math.min(diffY, spd) : -Math.max(diffY, -spd);
+			sprite.transform.move(diffX, diffY);
+
+			console.log(diffX + ", " + diffY + "; " + targetX + ", " + targetY + "; " + sprite.transform.x + ", " + sprite.transform.y);
+		} else {
+			targetX = nodes.shift();
+			targetY = nodes.shift();
+			nodes.push(targetX, targetY);
+		}
 	}
 
 	Keyboard.update();
