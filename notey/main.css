@@ -2,3 +2,13 @@ body {
 	font-family: arial;
 	font-size: 12px;
 }
+
+/*  Layout - Sidebar  */
+.sidebar {
+	width: 100px;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	float: left;
+	position: fixed;
+}
