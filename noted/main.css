@@ -51,3 +51,18 @@ body {
 	width: 80%;
 	transition: width .25s ease-in-out;
 }
+
+.newNote {
+	position: absolute;
+	right: 50px;
+	bottom: 50px;
+	width: 100px;
+	height: 100px;
+	background-color: #ececec;
+}
+
+.newNote:hover {
+	width: 125px;
+	height: 125px;
+	transition: all .25s ease-in-out;
+}
