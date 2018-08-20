@@ -5,10 +5,12 @@ body {
 
 /*  Layout - Sidebar  */
 .sidebar {
-	width: 100px;
+	width: 20%;
+	min-width: 200px;
 	height: 100%;
 	margin: 0;
 	padding: 0;
 	float: left;
 	position: fixed;
+	background-color: #eeeeee;
 }
