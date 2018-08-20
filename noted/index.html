@@ -5,10 +5,10 @@
 		<link rel="stylesheet" type="text/css" href="main.css">
 	</head>
 	<body>
-		<div class="sidebar">
+		<div id="Sidebar" class="sidebar">
 			<h1>Noted</h1>
 		</div>
-		<div class="main">
+		<div id="Main" class="main">
 			<pre onclick="toggleSidebar()">>></pre>
 		</div>
 	</body>
@@ -16,8 +16,8 @@
 
 <script>
 	function toggleSidebar(){
-		var sidebar = document.getElementsByClassName("sidebar")[0];
-		var main = document.getElementsByClassName("main")[0];
+		var sidebar = document.getElementById("Sidebar");
+		var main = document.getElementById("Main");
 
 		if (sidebar.classList.contains("show")){
 			sidebar.classList.remove("show");
