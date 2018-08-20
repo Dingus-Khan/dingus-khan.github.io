@@ -13,11 +13,39 @@
 			</div>
 
 			<div class="newNote">new note</div>
+
+			<div id="UrgentNotes"></div>
+			<div id="StandardNotes"></div>
 		</div>
 	</body>
 </html>
 
 <script>
+	class NoteList {
+		constructor(){
+			this.Notes = [];
+		}
+
+		addNote(note){
+			this.addNote(note.title, note.contents);
+		}
+
+		addNote(title, contents){
+			var template = document.getElementById("NoteTemplate").innerHTML
+			.replace("%heading%", title)
+			.replace("%content%", contents);
+
+			document.getElementById("StandardNotes").innerHTML += template;
+		}
+	}
+
+	class Note {
+		constructor(){
+			this.title = "";
+			this.contents = "";
+		}
+	}
+
 	function toggleSidebar(){
 		var sidebar = document.getElementById("Sidebar");
 		var main = document.getElementById("Main");
@@ -30,4 +58,13 @@
 			main.classList.add("sidebarshown");
 		}
 	}
+
+	var notes = new NoteList();
 </script>
+
+<template id="NoteTemplate">
+	<div class="note">
+		<div class="note-heading">%heading%</div>
+		<div class="note-body">%content%</div>
+	</div>
+</template>

@@ -69,3 +69,11 @@ body {
 	height: 80px;
 	transition: all .25s ease-in-out;
 }
+
+/* Content - Note */
+.note {
+	width: 200px;
+	height: 200px;
+	background-color: white;
+	border: 1px solid #ececec;
+}
