@@ -27,5 +27,7 @@ body {
 	padding: 0;
 	background-color; #efefef;
 	position: fixed;
-	overflow: scroll;
+	float: right;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
