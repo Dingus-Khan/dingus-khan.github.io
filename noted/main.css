@@ -30,6 +30,7 @@ body {
 .sidebarToggleContainer {
 	width: 50px;
 	height: 100%;
+	position: fixed;
 }
 
 .sidebarToggle {
@@ -39,6 +40,12 @@ body {
 	background-color: #ececec;
 }
 
+.newNoteContainer {
+	width: 50px;
+	height: 100%;
+	position: fixed;
+	right: 0;
+}
 /* Layout - Main */
 .main {
 	width: 100%;
