@@ -34,16 +34,6 @@ body {
 	background-color: #ececec;
 }
 
-.sidebarToggle pre {
-	margin: 0;
-	padding: 0;
-	color: white;
-	font-size: 50px;
-	font-weight: bold;
-	display: inline-block;
-	vertical-align: middle;
-}
-
 /* Layout - Main */
 .main {
 	width: 100%;
