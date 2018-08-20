@@ -1,6 +1,8 @@
 body {
 	font-family: arial;
 	font-size: 12px;
+	margin: 0;
+	padding: 0;
 }
 
 /*  Layout - Sidebar  */
@@ -10,7 +12,6 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	float: left;
 	position: fixed;
 	background-color: #eeeeee;
 }
