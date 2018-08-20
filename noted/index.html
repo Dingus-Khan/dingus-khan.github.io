@@ -13,3 +13,18 @@
 		</div>
 	</body>
 </html>
+
+<script>
+	function toggleSidebar(){
+		var sidebar = document.getElementsByClassName("sidebar")[0];
+		var main = document.getElementsByClassName("main")[0];
+
+		if (sidebar.classList.contains("show")){
+			sidebar.classList.remove("show");
+			main.classList.remove("sidebarShown");
+		} else {
+			sidebar.classList.add("show");
+			main.classList.add("sidebarShown");
+		}
+	}
+</script>
