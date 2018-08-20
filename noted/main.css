@@ -27,6 +27,11 @@ body {
 	margin-bottom: 1px solid #dedede;
 }
 
+.sidebarToggleContainer {
+	width: 50px;
+	height: 100%;
+}
+
 .sidebarToggle {
 	width: 50px;
 	height: 50px;
@@ -53,7 +58,7 @@ body {
 }
 
 .newNote {
-	position: absolute;
+	position: fixed;
 	right: 50px;
 	bottom: 50px;
 	width: 50px;
@@ -72,6 +77,7 @@ body {
 
 /* Content - Note */
 .note {
+	display: inline-block;
 	width: 200px;
 	height: 200px;
 	background-color: white;
