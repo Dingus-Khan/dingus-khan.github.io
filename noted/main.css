@@ -11,7 +11,7 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	left: -200px;
+	left: -20%;
 	position: fixed;
 	background-color: #ececec;
 	overflow: hidden;
@@ -19,7 +19,7 @@ body {
 }
 
 .sidebar.show {
-	left: 0px;
+	left: 0%;
 	transition: left .25s ease-in-out;
 }
 
@@ -33,6 +33,7 @@ body {
 	height: 100%;
 	display: block;
 	position: fixed;
+	right: -50px;
 }
 
 .sidebarToggle {
