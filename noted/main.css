@@ -13,10 +13,17 @@ body {
 	margin: 0;
 	padding: 0;
 	position: fixed;
-	background-color: #eeeeee;
+	background-color: #ececec;
 }
 
 .sidebar h1 {
 	text-align: center;
-	margin-bottom: 1px solid #dfdfdf;
+	margin-bottom: 1px solid #dedede;
+}
+
+.main {
+	width: 80%;
+	margin: 0;
+	padding: 0;
+	background-color; #efefef;
 }
