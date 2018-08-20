@@ -18,6 +18,7 @@ body {
 .sidebar.show {
 	min-width: 200px;
 	width: 20%;
+	transition: width .25s ease-in-out;
 }
 
 .sidebar h1 {
@@ -39,4 +40,5 @@ body {
 
 .main.sidebarshown {
 	width: 80%;
+	transition: width .25s ease-in-out;
 }
