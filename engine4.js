@@ -692,3 +692,8 @@ class SpriteBatch extends Drawable {
 		gl.drawArrays(gl.TRIANGLES, 0, this.bufferData.length / 7);
 	}
 }
+
+// Utility functions
+function lerp(start, end, delta){
+	return start * (1 - delta) + end * delta;
+}
