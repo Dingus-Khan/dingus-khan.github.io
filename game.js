@@ -36,8 +36,8 @@ var sprite = new Sprite("circle.png", 0, 0, 100, 100, 0, 0, 100, 100, 0, 1, 1);
 entities.registerEntity(sprite);
 
 function addSprite(){
-	var spr = new Sprite("circle.png", -350 + (Math.rand() * 700), -250 + (Math.rand() * 500), 100, 100, 0, 0, 100, 100, Math.rand(), Math.rand(), Math.rand());
-	entities.registerEntity(sprite);
+	var spr = new Sprite("circle.png", -350 + (Math.random() * 700), -250 + (Math.random() * 500), 100, 100, 0, 0, 100, 100, Math.random(), Math.random(), Math.random());
+	entities.registerEntity(spr);
 	return spr;
 }
 
@@ -47,15 +47,15 @@ requestAnimationFrame(run);
 function run(t) {
 	game.t = t - this.pastTime;
 	this.pastTime = t;
-	//console.log(game.t);
+	console.log(game.t);
 
-	Keyboard.update();
 
 	if (Keyboard.wasKeyPressed('space')){
 		addSprite();
 		renderables = entities.entities.filter(function(entity){ return entity.draw !== undefined; })
 	}
 
+	Keyboard.update();
 	game.clear();
 	for (i = 0; i < renderables.length; i++)
 		game.draw(renderables[i]);
