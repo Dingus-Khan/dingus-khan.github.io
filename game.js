@@ -42,7 +42,8 @@ function addSprite(){
 }
 
 var renderables = entities.entities.filter(function(entity){ return entity.draw !== undefined; })
-
+gl.enable(gl.CULL_FACE);
+gl.cullFace(gl.FRONT_AND_BACK);
 requestAnimationFrame(run);
 function run(t) {
 	game.t = t - this.pastTime;
