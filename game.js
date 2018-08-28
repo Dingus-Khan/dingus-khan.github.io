@@ -42,22 +42,16 @@ function addSprite(){
 }
 
 var renderables = entities.entities.filter(function(entity){ return entity.draw !== undefined; })
-gl.enable(gl.CULL_FACE);
-gl.cullFace(gl.FRONT_AND_BACK);
+
 requestAnimationFrame(run);
 function run(t) {
 	game.t = t - this.pastTime;
 	this.pastTime = t;
 	console.log(game.t);
 
-
-	if (Keyboard.wasKeyPressed('space')){
-		addSprite();
-		renderables = entities.entities.filter(function(entity){ return entity.draw !== undefined; })
-	}
-
 	Keyboard.update();
 	game.clear();
+	renderables = entities.entities.filter(function(entity){ return entity.draw !== undefined; })
 	for (i = 0; i < renderables.length; i++)
 		game.draw(renderables[i]);
 	requestAnimationFrame(run);
