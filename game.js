@@ -40,20 +40,23 @@ function addSprite(){
 	return spr;
 }
 
-var renderables = entities.entities.filter(function(){ return entities.draw !== undefined; })
+var renderables = entities.entities.filter(function(entity){ return entity.draw !== undefined; })
 
 requestAnimationFrame(run);
 function run(t) {
 	game.t = t - this.pastTime;
 	this.pastTime = t;
-	console.log(game.t);
+	//console.log(game.t);
 
 	Keyboard.update();
 
-	if (Keyboard.wasKeyPressed('space'))
+	if (Keyboard.wasKeyPressed('space')){
 		addSprite();
+		renderables = entities.entities.filter(function(entity){ return entity.draw !== undefined; })
+	}
 
 	game.clear();
-
+	for (i = 0; i < renderables.length; i++)
+		game.draw(renderables[i]);
 	requestAnimationFrame(run);
 }
