@@ -47,6 +47,14 @@ var tilemap = new TileMap("circle.png");
 entities.registerEntity(tilemap);
 
 tilemap.addTile(0, 0, 100, 100, 0, 0, 100, 100, 1, 1, 1);
+tilemap.addTile(100, 0, 100, 100, 0, 0, 100, 100, 1, 1, 1);
+tilemap.addTile(200, 0, 100, 100, 0, 0, 100, 100, 1, 1, 1);
+tilemap.addTile(0, 100, 100, 100, 0, 0, 100, 100, 1, 1, 1);
+tilemap.addTile(100, 100, 100, 100, 0, 0, 100, 100, 1, 1, 1);
+tilemap.addTile(200, 100, 100, 100, 0, 0, 100, 100, 1, 1, 1);
+tilemap.addTile(0, 200, 100, 100, 0, 0, 100, 100, 1, 1, 1);
+tilemap.addTile(100, 200, 100, 100, 0, 0, 100, 100, 1, 1, 1);
+tilemap.addTile(200, 200, 100, 100, 0, 0, 100, 100, 1, 1, 1);
 
 requestAnimationFrame(run);
 function run(t) {

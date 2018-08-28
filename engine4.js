@@ -577,7 +577,7 @@ class TileMap extends Drawable {
 		this.bufferData.push(
 			x, y, tx, ty, r, g, b,
 			x, y + h, tx, ty + th, r, g, b,
-			x + w, y + h, tx, + tw, ty + th, r, g, b,
+			x + w, y + h, tx + tw, ty + th, r, g, b,
 			x, y, tx, ty, r, g, b,
 			x + w, y + h, tx + tw, ty + th, r, g, b,
 			x + w, y, tx + tw, ty, r, g, b
