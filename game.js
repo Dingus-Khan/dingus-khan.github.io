@@ -3,7 +3,8 @@ Keyboard.registerKey('space', 32);
 
 class EntityHandler {
 	constructor(){
-		this.entities = [];
+		this.entities = {};
+		this.renderables = {};
 		this.entityId = 1;
 	}
 
@@ -27,6 +28,10 @@ class EntityHandler {
 	getEntity(id){
 		return this.entities[id];
 	}
+
+	render(){
+
+	}
 }
 
 ////////////////////////////////////////
@@ -41,7 +46,6 @@ function addSprite(){
 	return spr;
 }
 
-var renderables = entities.entities.filter(function(entity){ return entity.draw !== undefined; })
 
 requestAnimationFrame(run);
 function run(t) {
@@ -51,8 +55,6 @@ function run(t) {
 
 	Keyboard.update();
 	game.clear();
-	renderables = entities.entities.filter(function(entity){ return entity.draw !== undefined; })
-	for (i = 0; i < renderables.length; i++)
-		game.draw(renderables[i]);
+
 	requestAnimationFrame(run);
 }
