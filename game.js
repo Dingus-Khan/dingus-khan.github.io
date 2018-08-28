@@ -39,7 +39,7 @@ var target = {x: 0, y: 0};
 
 requestAnimationFrame(run);
 function run(t) {
-	sprite.transform.setPosition(lerp(sprite.transform.x, target.x, 0.5), lerp(sprite.transform.y, target.y, 0.5));
+	sprite.transform.setPosition(lerp(sprite.transform.x, target.x, 0.5), lerp(sprite.transform.y, target.y, 0.1));
 
 	Keyboard.update();
 	game.clear();
