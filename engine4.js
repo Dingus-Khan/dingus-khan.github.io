@@ -697,3 +697,7 @@ class SpriteBatch extends Drawable {
 function lerp(start, end, delta){
 	return start * (1 - delta) + end * delta;
 }
+
+function clamp(num, min, max){
+	return Math.min(Math.max(num, min), max);
+}
