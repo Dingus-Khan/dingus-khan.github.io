@@ -30,13 +30,17 @@ class EntityHandler {
 			var dx = entity.transform.x - this.entities[item].transform.x;
 			var dy = entity.transform.y - this.entities[item].transform.y;
 
-			return Math.abs()
+			return Math.abs(dx) <= range || Math.abs(dy) <= range;
 		});
 	}
 }
 
+var target = {x: 0, y: 0};
+
 requestAnimationFrame(run);
 function run(t) {
+	sprite.transform.move(lerp(sprite.transform.x, target.x, 0.5), lerp(sprite.transform.y, target.y, 0.5));
+
 	Keyboard.update();
 	game.clear();
 	game.draw(sprite);
