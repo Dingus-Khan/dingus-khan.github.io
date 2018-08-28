@@ -31,7 +31,9 @@ class EntityHandler {
 	}
 
 	render(){
-
+		for (i = 0; i < this.renderables.length; i++){
+			game.draw(this.renderables[i]);
+		}
 	}
 }
 
