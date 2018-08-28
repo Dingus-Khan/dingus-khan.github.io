@@ -90,6 +90,8 @@ class Window {
 		gl.clearColor(0.5, 0.5, 0.5, 1.0);
 
 		this.camera = new Camera(0, 0, this.w, this.h, this.projW, this.projH);
+
+		this.delta = 0;
 	}
 
 	setCamera(camera){
