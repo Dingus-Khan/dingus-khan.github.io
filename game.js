@@ -22,6 +22,10 @@ class EntityHandler {
 		entity.removeComponent = undefined;
 		this.entities[id] = undefined;
 	}
+
+	getEntity(id){
+		return this.entities[id];
+	}
 }
 
 ////////////////////////////////////////
@@ -36,6 +40,8 @@ function addSprite(){
 	return spr;
 }
 
+var renderables = entities.entities.filter(function(){ return entities.draw !== undefined; })
+
 requestAnimationFrame(run);
 function run(t) {
 	game.t = t - this.pastTime;
@@ -48,6 +54,6 @@ function run(t) {
 		addSprite();
 
 	game.clear();
-	game.draw(sprite);
+
 	requestAnimationFrame(run);
 }
