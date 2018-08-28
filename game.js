@@ -50,7 +50,7 @@ function run(t) {
 	game.t = t - this.pastTime;
 	this.pastTime = t;
 
-	sprite.transform.setPosition(Mouse.x, Mouse.y);
+	sprite.transform.setPosition((Mouse.x - 400), (Mouse.y - 300));
 
 	Keyboard.update();
 	game.clear();
