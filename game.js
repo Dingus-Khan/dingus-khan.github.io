@@ -36,12 +36,12 @@ class EntityHandler {
 }
 
 var target = {x: 0, y: 0};
-var targetSz = {x: 100, y: 100};
+var targetSz = {w: 100, h: 100};
 
 requestAnimationFrame(run);
 function run(t) {
 	sprite.transform.setPosition(lerp(sprite.transform.x, target.x, 0.1), lerp(sprite.transform.y, target.y, 0.1));
-	sprite.setSize(lerp(sprite.w, targetSz.w, 0.1), lerp(sprite.h, targetSz.h, 0.1));
+	//sprite.setSize(lerp(sprite.w, targetSz.w, 0.1), lerp(sprite.h, targetSz.h, 0.1));
 
 	Keyboard.update();
 	game.clear();
