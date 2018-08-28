@@ -43,13 +43,6 @@ var entities = new EntityHandler();
 var sprite = new Sprite("circle.png", 0, 0, 100, 100, 0, 0, 100, 100, 0, 1, 1);
 entities.registerEntity(sprite);
 
-function addSprite(){
-	var spr = new Sprite("circle.png", -350 + (Math.random() * 700), -250 + (Math.random() * 500), 100, 100, 0, 0, 100, 100, Math.random(), Math.random(), Math.random());
-	entities.registerEntity(spr);
-	return spr;
-}
-
-
 requestAnimationFrame(run);
 function run(t) {
 	game.t = t - this.pastTime;
@@ -57,5 +50,6 @@ function run(t) {
 
 	Keyboard.update();
 	game.clear();
+	entities.render();
 	requestAnimationFrame(run);
 }
