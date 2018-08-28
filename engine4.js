@@ -567,12 +567,6 @@ class TileMap extends Drawable {
 
 	build(){
 		if (this.rebuild){
-			this.bufferData = [
-				0, 0, this.tx, this.ty, this.r, this.g, this.b,
-				this.w, 0, this.tx + this.tw, this.ty, this.r, this.g, this.b,
-				0, this.h, this.tx, this.ty + this.th, this.r, this.g, this.b,
-				this.w, this.h, this.tx + this.tw, this.ty + this.th, this.r, this.g, this.b
-			];
 			gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
 			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.bufferData), gl.STATIC_DRAW);
 			this.rebuild = false;

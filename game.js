@@ -41,16 +41,18 @@ class EntityHandler {
 var entities = new EntityHandler();
 
 var sprite = new Sprite("circle.png", 0, 0, 100, 100, 0, 0, 100, 100, 0, 1, 1);
-entities.registerEntity(sprite);
+//entities.registerEntity(sprite);
 
 var tilemap = new TileMap("circle.png");
+entities.registerEntity(tilemap);
+
+tilemap.addTile(0, 0, 100, 100, 0, 0, 100, 100, 1, 1, 1);
 
 requestAnimationFrame(run);
 function run(t) {
 	game.t = t - this.pastTime;
 	this.pastTime = t;
 
-	sprite.transform.setPosition((Mouse.x - 400), (Mouse.y - 300));
 
 	Keyboard.update();
 	game.clear();
