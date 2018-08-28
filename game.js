@@ -1,4 +1,5 @@
 var game = new Window(800, 600, 800, 600);
+Keyboard.registerKey('space', 32);
 
 class EntityHandler {
 	constructor(){
@@ -35,7 +36,7 @@ var sprite = new Sprite("circle.png", 0, 0, 100, 100, 0, 0, 100, 100, 0, 1, 1);
 entities.registerEntity(sprite);
 
 function addSprite(){
-	var spr = new Sprite("circle.png", 0, 0, 100, 100, 0, 0, 100, 100, Math.rand(), Math.rand(), Math.rand());
+	var spr = new Sprite("circle.png", -350 + (Math.rand() * 700), -250 + (Math.rand() * 500), 100, 100, 0, 0, 100, 100, Math.rand(), Math.rand(), Math.rand());
 	entities.registerEntity(sprite);
 	return spr;
 }
