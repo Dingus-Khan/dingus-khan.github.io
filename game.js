@@ -43,10 +43,15 @@ var entities = new EntityHandler();
 var sprite = new Sprite("circle.png", 0, 0, 100, 100, 0, 0, 100, 100, 0, 1, 1);
 entities.registerEntity(sprite);
 
+var tilemap = new TileMap("circle.png");
+
 requestAnimationFrame(run);
 function run(t) {
 	game.t = t - this.pastTime;
 	this.pastTime = t;
+
+	sprite.transform.x = Mouse.x;
+	sprite.transform.y = Mouse.y;
 
 	Keyboard.update();
 	game.clear();
