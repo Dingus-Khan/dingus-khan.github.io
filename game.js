@@ -29,42 +29,18 @@ class EntityHandler {
 	getEntity(id){
 		return this.entities[id];
 	}
-
-	render(){
-		for (var i = 0; i < this.renderables.length; i++){
-			game.draw(this.renderables[i]);
-		}
-	}
 }
 
 ////////////////////////////////////////
 var entities = new EntityHandler();
 
-
-var tilemap = new TileMap(tilesetURI.uri);
-entities.registerEntity(tilemap);
-
-tilemap.addTile(0, 0, 100, 100, 0, 0, 100, 100, 1, 1, 1);
-tilemap.addTile(100, 0, 100, 100, 0, 0, 100, 100, 1, 1, 1);
-tilemap.addTile(200, 0, 100, 100, 0, 0, 100, 100, 1, 1, 1);
-tilemap.addTile(0, 100, 100, 100, 0, 0, 100, 100, 1, 1, 1);
-tilemap.addTile(100, 100, 100, 100, 0, 0, 100, 100, 1, 1, 1);
-tilemap.addTile(200, 100, 100, 100, 0, 0, 100, 100, 1, 1, 1);
-tilemap.addTile(0, 200, 100, 100, 0, 0, 100, 100, 1, 1, 1);
-tilemap.addTile(100, 200, 100, 100, 0, 0, 100, 100, 1, 1, 1);
-tilemap.addTile(200, 200, 100, 100, 0, 0, 100, 100, 1, 1, 1);
-
-var sprite = new Sprite("circle.png", 0, 0, 100, 100, 0, 0, 100, 100, 0, 1, 1);
-entities.registerEntity(sprite);
+var sprites = new SpriteBatch();
 
 requestAnimationFrame(run);
 function run(t) {
 	game.t = t - this.pastTime;
 	this.pastTime = t;
 
-	sprite.transform.setPosition(Mouse.x, Mouse.y);
-
 	game.clear();
-	entities.render();
 	requestAnimationFrame(run);
 }
