@@ -1,4 +1,4 @@
-var game = new Window(800, 600, 800, 600);
+var game = new Window(1440, 900, 1440, 900);
 Keyboard.registerKey('space', 32);
 
 class EntityHandler {
@@ -40,8 +40,6 @@ class EntityHandler {
 ////////////////////////////////////////
 var entities = new EntityHandler();
 
-var sprite = new Sprite("circle.png", 0, 0, 100, 100, 0, 0, 100, 100, 0, 1, 1);
-//entities.registerEntity(sprite);
 
 var tilemap = new TileMap(tilesetURI.uri);
 entities.registerEntity(tilemap);
@@ -56,10 +54,15 @@ tilemap.addTile(0, 200, 100, 100, 0, 0, 100, 100, 1, 1, 1);
 tilemap.addTile(100, 200, 100, 100, 0, 0, 100, 100, 1, 1, 1);
 tilemap.addTile(200, 200, 100, 100, 0, 0, 100, 100, 1, 1, 1);
 
+var sprite = new Sprite("circle.png", 0, 0, 100, 100, 0, 0, 100, 100, 0, 1, 1);
+entities.registerEntity(sprite);
+
 requestAnimationFrame(run);
 function run(t) {
 	game.t = t - this.pastTime;
 	this.pastTime = t;
+
+	sprite.transform.setPosition(Mouse.x, Mouse.y);
 
 	game.clear();
 	entities.render();
