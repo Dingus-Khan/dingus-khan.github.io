@@ -342,8 +342,8 @@ class Camera {
 		this.originX = projW/2;
 		this.originY = projH/2;
 
-		this.x = x - this.originX;
-		this.y = y - this.originY;
+		this.x = x;
+		this.y = y;
 
 		this.w = w;
 		this.h = h;
