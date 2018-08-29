@@ -26,8 +26,12 @@ var Keyboard = {
 var Mouse = {
 	x: 0,
 	y: 0,
+	scroll: 0,
 	left: false,
-	right: false
+	right: false,
+	update: function(){
+		this.scroll = 0;
+	}
 };
 
 class Window {
@@ -55,6 +59,10 @@ class Window {
 		document.addEventListener("mousemove", function(e){
 			Mouse.x = e.clientX;
 			Mouse.y = e.clientY;
+		});
+
+		document.addEventListener("wheel", function(e){
+			Mouse.scroll = clamp(e.deltaY, -1, 1);
 		});
 
 		document.getElementById("main").addEventListener("mousedown", function(e){
@@ -99,6 +107,8 @@ class Window {
 	}
 
 	clear(){
+		Keyboard.update();
+		Mouse.update();
 		gl.clear(gl.COLOR_BUFFER_BIT);
 	}
 

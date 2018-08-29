@@ -39,7 +39,7 @@ class EntityHandler {
 
 ////////////////////////////////////////
 var entities = new EntityHandler();
- 
+
 var sprite = new Sprite("circle.png", 0, 0, 100, 100, 0, 0, 100, 100, 0, 1, 1);
 //entities.registerEntity(sprite);
 
@@ -61,8 +61,6 @@ function run(t) {
 	game.t = t - this.pastTime;
 	this.pastTime = t;
 
-
-	Keyboard.update();
 	game.clear();
 	entities.render();
 	requestAnimationFrame(run);
