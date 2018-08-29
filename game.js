@@ -43,7 +43,7 @@ var entities = new EntityHandler();
 var sprite = new Sprite("circle.png", 0, 0, 100, 100, 0, 0, 100, 100, 0, 1, 1);
 //entities.registerEntity(sprite);
 
-var tilemap = new TileMap("circle.png");
+var tilemap = new TileMap("tileset.png");
 entities.registerEntity(tilemap);
 
 tilemap.addTile(0, 0, 100, 100, 0, 0, 100, 100, 1, 1, 1);
