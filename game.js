@@ -34,7 +34,7 @@ class EntityHandler {
 ////////////////////////////////////////
 var entities = new EntityHandler();
 
-var sprites = new SpriteBatch();
+var sprites = new SpriteBatch(cowSheetUri.uri);
 
 requestAnimationFrame(run);
 function run(t) {
