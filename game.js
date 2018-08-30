@@ -48,7 +48,7 @@ function run(t) {
 	game.pastTime = t;
 
 	if (Keyboard.getKey('space'))
-		sprites.addSprite(Math.random() * 1440, Math.random() * 900, 110, 110, 0, 0, 110, 110, Math.random(), Math.random(), Math.random());
+		sprites.addSprite(Math.random() * 1330, Math.random() * 790, 110, 110, 0, 0, 110, 110, Math.random(), Math.random(), Math.random());
 
 	vel.x = a.x - lerp(a.x, Mouse.x, game.t / 1000);
 	vel.y = a.y - lerp(a.y, Mouse.y, game.t / 1000);
