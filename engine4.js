@@ -663,6 +663,7 @@ class SpriteBatch extends Drawable {
 
 	build(){
 		this.bufferData = [];
+		this.sprites.sort(function(a, b){ return a.y - b.y; });
 		for(var spr = 0; spr < this.sprites.length; spr++){
 			var sprite = this.sprites[spr];
 			this.bufferData.push(
