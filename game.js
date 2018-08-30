@@ -36,11 +36,14 @@ var entities = new EntityHandler();
 
 var sprites = new SpriteBatch(cowSheetUri.uri);
 
+sprites.addSprite(0, 0, 100, 100, 0, 0, 100, 100, 1, 0.5, 0.5);
+
 requestAnimationFrame(run);
 function run(t) {
 	game.t = t - this.pastTime;
 	this.pastTime = t;
 
 	game.clear();
+	window.draw(sprites);
 	requestAnimationFrame(run);
 }
