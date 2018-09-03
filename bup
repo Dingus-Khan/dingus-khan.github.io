@@ -1,0 +1,30 @@
+
+class EntityHandler {
+	constructor(){
+		this.entities = {};
+		this.renderables = [];
+		this.entityId = 1;
+	}
+
+	registerEntity(entity){
+		this.entities[this.entityId] = entity;
+		entity.id = this.entityId;
+		this.entityId++;
+
+		if (entity.draw !== undefined)
+			this.renderables.push(entity);
+	}
+
+	unregisterEntity(id){
+		this.entities[id].entity.id = undefined;
+		this.entities[id] = undefined;
+		var ren = this.renderables.findIndex(function(elem){ return elem.id == id; });
+		if (ren !== undefined){
+			this.renderables.splice(ren, 1);
+		}
+	}
+
+	getEntity(id){
+		return this.entities[id];
+	}
+}

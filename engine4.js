@@ -659,6 +659,7 @@ class SpriteBatch extends Drawable {
 
 	addSprite(x, y, w, h, tx, ty, tw, th, r, g, b){
 		this.sprites.push({x, y, w, h, tx, ty, tw, th, r, g, b});
+		return this.sprites[this.sprites.length - 1];
 	}
 
 	build(){
@@ -666,6 +667,8 @@ class SpriteBatch extends Drawable {
 		this.sprites.sort(function(a, b){ return a.y - b.y; });
 		for(var spr = 0; spr < this.sprites.length; spr++){
 			var sprite = this.sprites[spr];
+			var flip = sprite.tw > 0 ? 1 : -1;
+
 			this.bufferData.push(
 				sprite.x, sprite.y, sprite.tx, sprite.ty, sprite.r, sprite.g, sprite.b,
 				sprite.x + sprite.w, sprite.y, sprite.tx + sprite.tw, sprite.ty, sprite.r, sprite.g, sprite.b,

@@ -1,43 +1,69 @@
 var game = new Window(1440, 900, 1440, 900);
 Keyboard.registerKey('space', 32);
 
-class EntityHandler {
+// Texture Array - https://github.com/WebGLSamples/WebGL2Samples/blob/master/samples/texture_2d_array.html#L145-L160
+
+// Entity Management
+// Entities can have components
+// Possible components are:
+//		Graphic
+//		Transform
+//		Sound
+//		Collision
+//		Physics
+//		Animation
+class Entity {
 	constructor(){
-		this.entities = {};
-		this.renderables = [];
-		this.entityId = 1;
 	}
 
-	registerEntity(entity){
-		this.entities[this.entityId] = entity;
-		entity.id = this.entityId;
-		this.entityId++;
-
-		if (entity.draw !== undefined)
-			this.renderables.push(entity);
-	}
-
-	unregisterEntity(id){
-		this.entities[id].entity.id = undefined;
-		this.entities[id] = undefined;
-		var ren = this.renderables.findIndex(function(elem){ return elem.id == id; });
-		if (ren !== undefined){
-			this.renderables.splice(ren, 1);
-		}
-	}
-
-	getEntity(id){
-		return this.entities[id];
+	addComponent(component){
+		this[component.type] = component;
 	}
 }
 
-////////////////////////////////////////
-var entities = new EntityHandler();
+class Component {
+	constructor(type){
+		this.type = type;
+	}
+}
 
-var sprites = new SpriteBatch(cowSheetUri.uri);
-sprites.addSprite(0, 0, 110, 110, 0, 0, 110, 110, 1, 0.5, 0.5);
-var a = sprites.sprites[0];
-var vel = {x: 0, y: 0};
+// Graphic
+// basically holds a texture id and sprite definition (no transform or actual texture data)
+class GraphicComponent extends Component{
+	constructor(textureId, w, h, tx, ty, tw, th, r, g, b){
+		base("Graphic");
+		this.textureId = 0;
+		this.w = w;
+		this.h = h;
+		this.tx = tx;
+		this.ty = ty;
+		this.tw = tw;
+		this.th = th;
+		this.r = r;
+		this.g = g;
+		this.b = b;
+		this.bufferData = [];
+	}
+
+	build(){
+		this.bufferData = [
+			0, 0, this.tx, this.ty, this.r, this.g, this.b,
+			this.w, 0, this.tx + this.tw, this.ty, this.r, this.g, this.b,
+			this.w, this.h, this.tx + this.tw, this.ty + this.th, this.r, this.g, this.b,
+			0, 0, this.tx, this.ty, this.r, this.g, this.b,
+			this.w, this.h, this.tx + this.tw, this.ty + this.th, this.r, this.g, this.b,
+			0, this.h, this.tx, this.ty + this.th, this.r, this.h, this.b
+		];
+	}
+}
+
+class TransformComponent extends Component{
+	constructor(x, y){
+		base("Transform");
+		this.x = x;
+		this.y = y;
+	}
+}
 
 game.t = 0;
 game.pastTime = 0;
@@ -47,13 +73,8 @@ function run(t) {
 	game.t = t - game.pastTime;
 	game.pastTime = t;
 
-	if (Keyboard.getKey('space'))
-		sprites.addSprite(Math.random() * 1330, Math.random() * 790, 110, 110, 0, 0, 110, 110, Math.random(), Math.random(), Math.random());
 
-	vel.x = a.x - lerp(a.x, Mouse.x, game.t / 1000);
-	vel.y = a.y - lerp(a.y, Mouse.y, game.t / 1000);
-
-	a.x -= vel.x; a.y -= vel.y;
+	projectileHandler.update();
 	game.clear();
 	game.draw(sprites);
 	requestAnimationFrame(run);
