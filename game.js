@@ -58,10 +58,55 @@ class GraphicComponent extends Component{
 }
 
 class TransformComponent extends Component{
-	constructor(x, y){
+	constructor(originx, originy){
 		base("Transform");
-		this.x = x;
+		this.matrix = Matrix.identity();
+		this.originX = originx;
+		this.originY = originy;
+		this.x = 0;
+		this.y = 0;
+		this.scaleX = 1;
+		this.scaleY = 1;
+		this.updateMatrix = true;
+	}
+
+	setOrigin(x, y){
+		this.originX = x;
+		this.originY = y;
+		this.updateMatrix = true;
+	}
+
+	setPosition(x, y){
+		this.x = x; // could add origin here, or handle in update function
 		this.y = y;
+		this.updateMatrix = true;
+	}
+
+	move(x, y){
+		this.x += x;
+		this.y += y;
+		this.updateMatrix = true;
+	}
+
+	setScale(x, y){
+		this.scaleX = x;
+		this.scaleY = y;
+		this.updateMatrix = true;
+	}
+
+	scale(x, y){
+		this.scaleX += x;
+		this.scaleY += y;
+		this.updateMatrix = true;
+	}
+
+	update(){
+		if (this.updateMatrix){
+			this.matrix = Matrix.translation(-this.originX, -this.originY);
+			this.matrix = Matrix.translate(this.matrix, this.x, this.y);
+			this.matrix = Matrix.scale(this.matrix, this.scaleX, this.scaleY);
+			this.updateMatrix = false;
+		}
 	}
 }
 
