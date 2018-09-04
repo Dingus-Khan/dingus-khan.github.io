@@ -206,7 +206,7 @@ class EntityManager {
 		var renderables = this.entities.filter(function(elem){ return elem.Graphic != undefined; });
 		var buffer = [];
 		for(var i = 0; i < renderables.length; i++){
-			renderables[i].build();
+			renderables[i].Graphic.build();
 			buffer = buffer.concat(renderables.bufferData);
 		}
 
