@@ -2,6 +2,34 @@ var game = new Window(1440, 900, 1440, 900);
 Keyboard.registerKey('space', 32);
 
 // Texture Array - https://github.com/WebGLSamples/WebGL2Samples/blob/master/samples/texture_2d_array.html#L145-L160
+function loadTextures(w, h){ // loads texture images into textures, and then compiles them into a single 3d sampler2Darray
+	// prep image data into single Image object
+	var images = document.querySelectorAll('img');
+
+	var imgCanvas = document.createElement("canvas");
+	imgCanvas.width = w;
+	imgCanvas.height = h * images.length;
+	var imgCtx = imgCanvas.getContext("2d");
+	for(var img = 0; img < images.length; img++){
+		imgCtx.drawImage(images[img], 0, img * h);
+	}
+
+	var imgData = imgCtx.getImageData(0, 0, w, h * images.length);
+	var buf = new Uint8Array(imgData.data.buffer);
+
+	var texture = gl.createTexture();
+	gl.activeTexture(gl.TEXTURE0);
+	gl.bindTexture(gl.TEXTURE_2D_ARRAY, texture);
+	gl.texImage3D(gl.TEXTURE_2D_ARRAY, 0, gl.RGBA, w, h, images.length, 0, gl.RGBA, gl.UNSIGNED_BYTE, buf);
+
+	gl.texParameteri(gl.TEXTURE_2D_ARRAY, gl.TEXTURE_WRAP_S, gl.REPEAT);
+	gl.texParameteri(gl.TEXTURE_2D_ARRAY, gl.TEXTURE_WRAP_T, gl.REPEAT);
+	gl.texParameteri(gl.TEXTURE_2D_ARRAY, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+	gl.texParameteri(gl.TEXTURE_2D_ARRAY, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+	gl.generateMipmap(gl.TEXTURE_2D_ARRAY);
+
+	return {texId: texture, w: w, h: h, count: images.length};
+}
 
 // Entity Management
 // Entities can have components
@@ -112,17 +140,27 @@ class TransformComponent extends Component{
 
 // EntityManager - Renderer...
 class EntityManager {
-	constructor(){
+	constructor(textures){ // textures = array of texture data
 		this.entities = [];
+		this.textures = textures;
+		this.texSize = { w: textures[0].image.width, h: textures[0].image.height };
+
+		this.vao = gl.createVertexArray();
+		this.vbo = gl.createBuffer();
+
+		gl.bindVertexArray(this.vao);
+		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
+
+		this.bufferData = [];
 
 		this.shader = new Shader(
 			`#version 300 es
 			in vec2 pos;
 			in vec2 tex;
-			in int texId;
+			in float texId;
 			in vec3 col;
 			out vec2 Tex;
-			out int TexId;
+			out float TexId;
 			out vec3 Col;
 			uniform vec2 texSize;
 			uniform mat4 proj;
@@ -137,12 +175,12 @@ class EntityManager {
 			`#version 300 es
 			precision mediump float;
 			in vec2 Tex;
-			in int TexId;
+			in float TexId;
 			in vec3 Col;
 			out vec4 outColour;
-			uniform sampler2D texImage;
+			uniform sampler2DArray texImages;
 			void main(){
-				outColour = texture(texImage, Tex) * vec4(Col, 1);
+				outColour = texture(texImages[TexId], Tex) * vec4(Col, 1);
 			}`
 		);
 		this.shader.addAttribute("pos", 2, gl.FLOAT, false, 8, 0);
@@ -164,12 +202,25 @@ class EntityManager {
 		return this.entities[id];
 	}
 
-	render(){
+	draw(camera){
 		var renderables = this.entities.filter(function(elem){ return elem.Graphic != undefined; });
 		var buffer = [];
 		for(i = 0; i < renderables.length; i++){
 			buffer = buffer.concat(renderables.bufferData);
 		}
+
+		gl.bindVertexArray(this.vao);
+		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.bufferData), gl.STATIC_DRAW);
+
+		this.shader.use();
+		this.shader.enableAttributes();
+		this.shader.setUniform("proj", camera.proj);
+		this.shader.setUniform("view", camera.view);
+		this.shader.setUniform("model", this.transform.matrix);
+		this.shader.setUniform("texSize", [this.texSize.w, this.texSize.h]);
+
+		gl.drawArrays(gl.TRIANGLE_STRIP, 0, this.bufferData.length / 8);
 	}
 }
 
@@ -181,7 +232,7 @@ function run(t) {
 	game.t = t - game.pastTime;
 	game.pastTime = t;
 
-
 	game.clear();
+
 	requestAnimationFrame(run);
 }
