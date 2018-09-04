@@ -156,10 +156,10 @@ class EntityManager {
 			`#version 300 es
 			in vec2 pos;
 			in vec2 tex;
-			in int texId;
+			in float texId;
 			in vec3 col;
 			out vec2 Tex;
-			out int TexId;
+			out float TexId;
 			out vec3 Col;
 			uniform vec2 texSize;
 			uniform mat4 proj;
@@ -174,12 +174,13 @@ class EntityManager {
 			`#version 300 es
 			precision mediump float;
 			in vec2 Tex;
-			in int TexId;
+			in float TexId;
 			in vec3 Col;
 			out vec4 outColour;
 			uniform sampler2DArray texImages;
 			void main(){
-				outColour = texture(texImages[TexId], Tex) * vec4(Col, 1);
+				int index = TexId;
+				outColour = texture(texImages[index], Tex) * vec4(Col, 1);
 			}`
 		);
 		this.shader.addAttribute("pos", 2, gl.FLOAT, false, 8, 0);
