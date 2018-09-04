@@ -173,6 +173,7 @@ class EntityManager {
 			}`,
 			`#version 300 es
 			precision mediump float;
+			precision highp sampler2DArray;
 			in vec2 Tex;
 			in float TexId;
 			in vec3 Col;
