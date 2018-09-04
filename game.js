@@ -227,6 +227,10 @@ class EntityManager {
 game.t = 0;
 game.pastTime = 0;
 
+var manager = new EntityManager();
+var ent = new Entity();
+ent.addComponent(new GraphicComponent(0, 500, 500, 0, 0, 500, 500, 1, 1, 1));
+
 requestAnimationFrame(run);
 function run(t) {
 	game.t = t - game.pastTime;
