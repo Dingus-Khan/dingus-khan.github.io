@@ -59,7 +59,7 @@ class Component {
 // basically holds a texture id and sprite definition (no transform or actual texture data)
 class GraphicComponent extends Component{
 	constructor(textureId, w, h, tx, ty, tw, th, r, g, b){
-		base("Graphic");
+		super("Graphic");
 		this.textureId = textureId;
 		this.w = w;
 		this.h = h;
@@ -87,7 +87,7 @@ class GraphicComponent extends Component{
 
 class TransformComponent extends Component{
 	constructor(originx, originy){
-		base("Transform");
+		super("Transform");
 		this.matrix = Matrix.identity();
 		this.originX = originx;
 		this.originY = originy;
