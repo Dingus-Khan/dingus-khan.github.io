@@ -32,7 +32,7 @@ class Component {
 class GraphicComponent extends Component{
 	constructor(textureId, w, h, tx, ty, tw, th, r, g, b){
 		base("Graphic");
-		this.textureId = 0;
+		this.textureId = textureId;
 		this.w = w;
 		this.h = h;
 		this.tx = tx;
@@ -47,12 +47,12 @@ class GraphicComponent extends Component{
 
 	build(){
 		this.bufferData = [
-			0, 0, this.tx, this.ty, this.r, this.g, this.b,
-			this.w, 0, this.tx + this.tw, this.ty, this.r, this.g, this.b,
-			this.w, this.h, this.tx + this.tw, this.ty + this.th, this.r, this.g, this.b,
-			0, 0, this.tx, this.ty, this.r, this.g, this.b,
-			this.w, this.h, this.tx + this.tw, this.ty + this.th, this.r, this.g, this.b,
-			0, this.h, this.tx, this.ty + this.th, this.r, this.h, this.b
+			0, 0, this.tx, this.ty, this.textureId, this.r, this.g, this.b,
+			this.w, 0, this.tx + this.tw, this.ty, this.textureId, this.r, this.g, this.b,
+			this.w, this.h, this.tx + this.tw, this.ty + this.th, this.textureId, this.r, this.g, this.b,
+			0, 0, this.tx, this.ty, this.textureId, this.r, this.g, this.b,
+			this.w, this.h, this.tx + this.tw, this.ty + this.th, this.textureId, this.r, this.g, this.b,
+			0, this.h, this.tx, this.ty + this.th, this.textureId, this.r, this.h, this.b
 		];
 	}
 }
@@ -110,6 +110,69 @@ class TransformComponent extends Component{
 	}
 }
 
+// EntityManager - Renderer...
+class EntityManager {
+	constructor(){
+		this.entities = [];
+
+		this.shader = new Shader(
+			`#version 300 es
+			in vec2 pos;
+			in vec2 tex;
+			in int texId;
+			in vec3 col;
+			out vec2 Tex;
+			out int TexId;
+			out vec3 Col;
+			uniform vec2 texSize;
+			uniform mat4 proj;
+			uniform mat4 view;
+			uniform mat4 model;
+			void main(){
+				Tex = tex / texSize;
+				TexId = texId;
+				Col = col;
+				gl_Position = proj * view * model * vec4(pos, 0, 1);
+			}`,
+			`#version 300 es
+			precision mediump float;
+			in vec2 Tex;
+			in int TexId;
+			in vec3 Col;
+			out vec4 outColour;
+			uniform sampler2D texImage;
+			void main(){
+				outColour = texture(texImage, Tex) * vec4(Col, 1);
+			}`
+		);
+		this.shader.addAttribute("pos", 2, gl.FLOAT, false, 8, 0);
+		this.shader.addAttribute("tex", 2, gl.FLOAT, false, 8, 2);
+		this.shader.addAttribute("texId", 1, gl.FLOAT, false, 8, 4);
+		this.shader.addAttribute("col", 3, gl.FLOAT, false, 8, 5);
+	}
+
+	addEntity(e){
+		this.entities.push(e);
+		e.entityId = this.entities.lenth - 1;
+	}
+
+	removeEntity(id){
+		this.entities.splice(id, 1).entityId = undefined;
+	}
+
+	getEntity(id){
+		return this.entities[id];
+	}
+
+	render(){
+		var renderables = this.entities.filter(function(elem){ return elem.Graphic != undefined; });
+		var buffer = [];
+		for(i = 0; i < renderables.length; i++){
+			buffer = buffer.concat(renderables.bufferData);
+		}
+	}
+}
+
 game.t = 0;
 game.pastTime = 0;
 
@@ -119,8 +182,6 @@ function run(t) {
 	game.pastTime = t;
 
 
-	projectileHandler.update();
 	game.clear();
-	game.draw(sprites);
 	requestAnimationFrame(run);
 }
