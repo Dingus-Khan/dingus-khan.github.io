@@ -205,7 +205,7 @@ class EntityManager {
 	draw(camera){
 		var renderables = this.entities.filter(function(elem){ return elem.Graphic != undefined; });
 		var buffer = [];
-		for(i = 0; i < renderables.length; i++){
+		for(var i = 0; i < renderables.length; i++){
 			renderables[i].build();
 			buffer = buffer.concat(renderables.bufferData);
 		}
