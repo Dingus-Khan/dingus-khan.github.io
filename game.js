@@ -140,9 +140,9 @@ class TransformComponent extends Component{
 
 // EntityManager - Renderer...
 class EntityManager {
-	constructor(textures){ // textures = array of texture data
+	constructor(){ // textures = array of texture data
 		this.entities = [];
-		this.textures = textures;
+		this.textures = loadTextures(500, 500);
 		this.texSize = { w: textures[0].image.width, h: textures[0].image.height };
 
 		this.vao = gl.createVertexArray();
