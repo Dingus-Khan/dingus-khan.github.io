@@ -233,7 +233,7 @@ game.pastTime = 0;
 var manager = new EntityManager();
 var ent = new Entity();
 ent.addComponent(new GraphicComponent(0, 500, 500, 0, 0, 500, 500, 1, 1, 1));
-manager.addEntity()
+manager.addEntity(ent);
 
 requestAnimationFrame(run);
 function run(t) {
