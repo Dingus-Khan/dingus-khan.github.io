@@ -191,7 +191,7 @@ class EntityManager {
 
 	addEntity(e){
 		this.entities.push(e);
-		e.entityId = this.entities.lenth - 1;
+		e.entityId = this.entities.length - 1;
 	}
 
 	removeEntity(id){
