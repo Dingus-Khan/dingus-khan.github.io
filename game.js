@@ -142,7 +142,7 @@ class TransformComponent extends Component{
 class EntityManager {
 	constructor(){ // textures = array of texture data
 		this.entities = [];
-		this.textures = loadTextures(500, 500);
+		this.texture = loadTextures(500, 500);
 		this.texSize = { w: textures[0].image.width, h: textures[0].image.height };
 
 		this.vao = gl.createVertexArray();
@@ -206,6 +206,7 @@ class EntityManager {
 		var renderables = this.entities.filter(function(elem){ return elem.Graphic != undefined; });
 		var buffer = [];
 		for(i = 0; i < renderables.length; i++){
+			renderables[i].build();
 			buffer = buffer.concat(renderables.bufferData);
 		}
 
@@ -220,6 +221,8 @@ class EntityManager {
 		this.shader.setUniform("model", this.transform.matrix);
 		this.shader.setUniform("texSize", [this.texSize.w, this.texSize.h]);
 
+		gl.bindTexture(gl.TEXTURE_2D_ARRAY, this.texture.texture);
+
 		gl.drawArrays(gl.TRIANGLE_STRIP, 0, this.bufferData.length / 8);
 	}
 }
@@ -230,6 +233,7 @@ game.pastTime = 0;
 var manager = new EntityManager();
 var ent = new Entity();
 ent.addComponent(new GraphicComponent(0, 500, 500, 0, 0, 500, 500, 1, 1, 1));
+manager.addEntity()
 
 requestAnimationFrame(run);
 function run(t) {
