@@ -143,7 +143,6 @@ class EntityManager {
 	constructor(){ // textures = array of texture data
 		this.entities = [];
 		this.texture = loadTextures(500, 500);
-		this.texSize = { w: textures[0].image.width, h: textures[0].image.height };
 
 		this.vao = gl.createVertexArray();
 		this.vbo = gl.createBuffer();
@@ -219,7 +218,7 @@ class EntityManager {
 		this.shader.setUniform("proj", camera.proj);
 		this.shader.setUniform("view", camera.view);
 		this.shader.setUniform("model", this.transform.matrix);
-		this.shader.setUniform("texSize", [this.texSize.w, this.texSize.h]);
+		this.shader.setUniform("texSize", [this.texture.w, this.texture.h]);
 
 		gl.bindTexture(gl.TEXTURE_2D_ARRAY, this.texture.texture);
 
