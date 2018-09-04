@@ -179,7 +179,7 @@ class EntityManager {
 			out vec4 outColour;
 			uniform sampler2DArray texImages;
 			void main(){
-				int index = TexId;
+				int index = int(TexId);
 				outColour = texture(texImages[index], Tex) * vec4(Col, 1);
 			}`
 		);
