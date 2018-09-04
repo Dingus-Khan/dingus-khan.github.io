@@ -156,10 +156,10 @@ class EntityManager {
 			`#version 300 es
 			in vec2 pos;
 			in vec2 tex;
-			in float texId;
+			in int texId;
 			in vec3 col;
 			out vec2 Tex;
-			out float TexId;
+			out int TexId;
 			out vec3 Col;
 			uniform vec2 texSize;
 			uniform mat4 proj;
@@ -174,7 +174,7 @@ class EntityManager {
 			`#version 300 es
 			precision mediump float;
 			in vec2 Tex;
-			in float TexId;
+			in int TexId;
 			in vec3 Col;
 			out vec4 outColour;
 			uniform sampler2DArray texImages;
