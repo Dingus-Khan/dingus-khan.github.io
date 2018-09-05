@@ -80,7 +80,7 @@ class GraphicComponent extends Component{
 			this.w, this.h, this.tx + this.tw, this.ty + this.th, this.textureId, this.r, this.g, this.b,
 			0, 0, this.tx, this.ty, this.textureId, this.r, this.g, this.b,
 			this.w, this.h, this.tx + this.tw, this.ty + this.th, this.textureId, this.r, this.g, this.b,
-			0, this.h, this.tx, this.ty + this.th, this.textureId, this.r, this.h, this.b
+			0, this.h, this.tx, this.ty + this.th, this.textureId, this.r, this.g, this.b
 		];
 	}
 }
