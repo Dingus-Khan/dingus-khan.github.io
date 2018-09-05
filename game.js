@@ -180,7 +180,7 @@ class EntityManager {
 			out vec4 outColour;
 			uniform sampler2DArray texImages;
 			void main(){
-				outColour = texture(texImages, vec3(Tex, TexId)) * vec4(Col, 1);
+				outColour = texture(texImages, vec3(Tex, 0)) * vec4(Col, 1);
 			}`
 		);
 		this.shader.addAttribute("pos", 2, gl.FLOAT, false, 8, 0);
