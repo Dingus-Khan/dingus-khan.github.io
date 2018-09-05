@@ -187,6 +187,7 @@ class EntityManager {
 		this.shader.addAttribute("tex", 2, gl.FLOAT, false, 8, 2);
 		this.shader.addAttribute("texId", 1, gl.FLOAT, false, 8, 4);
 		this.shader.addAttribute("col", 3, gl.FLOAT, false, 8, 5);
+		this.matrix = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
 	}
 
 	addEntity(e){
