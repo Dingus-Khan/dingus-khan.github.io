@@ -75,7 +75,7 @@ class GraphicComponent extends Component{
 
 	build(){
 		this.bufferData = [
-			0, 0, this.tx, this.ty, this.textureId, this.r, this.g, this.b,
+			0, 0, this.tx, this.ty, this.textureId + 1, this.r, this.g, this.b,
 			this.w, 0, this.tx + this.tw, this.ty, this.textureId, this.r, this.g, this.b,
 			this.w, this.h, this.tx + this.tw, this.ty + this.th, this.textureId, this.r, this.g, this.b,
 			0, 0, this.tx, this.ty, this.textureId, this.r, this.g, this.b,
