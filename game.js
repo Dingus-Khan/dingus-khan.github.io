@@ -28,7 +28,7 @@ function loadTextures(w, h){ // loads texture images into textures, and then com
 	gl.texParameteri(gl.TEXTURE_2D_ARRAY, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
 	gl.generateMipmap(gl.TEXTURE_2D_ARRAY);
 
-	return {texId: texture, w: w, h: h, count: images.length};
+	return {texture: texture, w: w, h: h, count: images.length};
 }
 
 // Entity Management
