@@ -232,14 +232,21 @@ game.t = 0;
 game.pastTime = 0;
 
 var manager = new EntityManager();
-var ent = new Entity();
-ent.addComponent(new GraphicComponent(0, 500, 500, 0, 0, 500, 500, 1, 1, 1));
-manager.addEntity(ent);
+
+var man = new Entity();
+man.addComponent(new GraphicComponent(0, 100, 100, 0, 0, 100, 100, 1, 1, 1));
+manager.addEntity(man);
+
+var cow = new Entity();
+cow.addComponent(new GraphicComponent(1, 100, 100, 0, 0, 100, 100, 1, 1, 1));
+manager.addEntity(cow);
 
 requestAnimationFrame(run);
 function run(t) {
 	game.t = t - game.pastTime;
 	game.pastTime = t;
+
+
 
 	game.clear();
 	game.draw(manager);
