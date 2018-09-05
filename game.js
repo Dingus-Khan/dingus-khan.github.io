@@ -208,7 +208,7 @@ class EntityManager {
 		var buffer = [];
 		for(var i = 0; i < renderables.length; i++){
 			renderables[i].Graphic.build();
-			buffer = buffer.concat(renderables.bufferData);
+			buffer = buffer.concat(renderables[i].Graphic.bufferData);
 		}
 
 		gl.bindVertexArray(this.vao);
