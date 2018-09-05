@@ -205,15 +205,15 @@ class EntityManager {
 
 	draw(camera){
 		var renderables = this.entities.filter(function(elem){ return elem.Graphic != undefined; });
-		var buffer = [];
+		this.bufferData = [];
 		for(var i = 0; i < renderables.length; i++){
 			renderables[i].Graphic.build();
-			buffer = buffer.concat(renderables[i].Graphic.bufferData);
+			this.bufferData = this.bufferData.concat(renderables[i].Graphic.bufferData);
 		}
 
 		gl.bindVertexArray(this.vao);
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
-		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(buffer), gl.STATIC_DRAW);
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.bufferData), gl.STATIC_DRAW);
 
 		this.shader.use();
 		this.shader.enableAttributes();
