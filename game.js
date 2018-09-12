@@ -246,8 +246,6 @@ function run(t) {
 	game.t = t - game.pastTime;
 	game.pastTime = t;
 
-
-
 	game.clear();
 	game.draw(manager);
 	requestAnimationFrame(run);
