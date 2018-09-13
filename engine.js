@@ -2,27 +2,23 @@ class Game { // holds all other objects; contains input, update, and render meth
 	constructor(){
 		this.time = 0;
 		this.prevTime = 0;
-		this.frameTime = 0;
+		this.frameTime = 1000 / 60;
 	}
 	input(){
-		console.log("input");
 	}
 	update(){
-		console.log("input");
 	}
 	render(){
-		console.log("input");
 	}
 	run(t){ // should be called inside the requestanimationframe call
-		console.log(t);
 		this.time += t - this.prevTime;
 		this.prevTime = t;
 
 		this.input();
 		if (this.time >= this.frameTime){
-			console.log("tick");
 			this.update();
 			this.time -= this.frameTime;
+			console.log("tick: " + this.time);
 		}
 		this.render();
 		requestAnimationFrame(this.run.bind(this));
