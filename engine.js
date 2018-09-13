@@ -1,6 +1,32 @@
 class Game { // holds all other objects; contains input, update, and render methods.
-	function input (){}
-	function update(){}
+	constructor(){
+		this.time = 0;
+		this.prevTime = 0;
+		this.frameTime = 0;
+	}
+	input(){
+		console.log("input");
+	}
+	update(){
+		console.log("input");
+	}
+	render(){
+		console.log("input");
+	}
+	run(t){ // should be called inside the requestanimationframe call
+		console.log(t);
+		this.time += t - this.prevTime;
+		this.prevTime = t;
+
+		this.input();
+		if (this.time >= this.frameTime){
+			console.log("tick");
+			this.update();
+			this.time -= this.frameTime;
+		}
+		this.render();
+		requestAnimationFrame(this.run.bind(this));
+	}
 }
 
 class KeyboardInput {
