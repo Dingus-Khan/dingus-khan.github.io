@@ -125,6 +125,10 @@ class Vector3 {
 	}
 }
 
+class Timer {
+	
+}
+
 class MathsUtilities {
 	function normalizeVector(vec){
 		var len = Math.sqrt(vec.x * vec.x + vec.y * vec.y);
