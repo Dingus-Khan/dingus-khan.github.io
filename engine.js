@@ -80,3 +80,13 @@ class AnimationData { // stores a reference to a SpriteData object, and handles 
 class AnimationHandler { // stores all AnimationData, and updates each one when necessary
 
 }
+
+class MathsUtilities {
+	function normalizeVector(x, y){
+		var len = Math.sqrt(x * x + y * y);
+		return {
+			x: x / len,
+			y: y / len
+		};
+	}
+}
