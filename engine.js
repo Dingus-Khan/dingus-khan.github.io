@@ -81,9 +81,53 @@ class AnimationHandler { // stores all AnimationData, and updates each one when 
 
 }
 
+class Vector2 {
+	constructor(x, y){
+		this.x = x || 0; this.y = y || 0;
+	}
+
+	normalize(){
+		let len = Math.sqrt(this.x * this.x + this.y * this.y);
+		this.x /= len;
+		this.y /= len;
+	}
+
+	set(x, y){
+		this.x = x;
+		this.y = y;
+	}
+
+	getArray(){
+		return [this.x, this.y];
+	}
+}
+
+class Vector3 {
+	constructor(x, y, z){
+		this.x = x || 0; this.y = y || 0; this.z = z || 0;
+	}
+
+	normalize(){
+		let len = Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+		this.x /= len;
+		this.y /= len;
+		this.z /= len;
+	}
+
+	set(x, y, z){
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+
+	getArray(){
+		return [this.x, this.y, this.z];
+	}
+}
+
 class MathsUtilities {
-	function normalizeVector(x, y){
-		var len = Math.sqrt(x * x + y * y);
+	function normalizeVector(vec){
+		var len = Math.sqrt(vec.x * vec.x + vec.y * vec.y);
 		return {
 			x: x / len,
 			y: y / len
