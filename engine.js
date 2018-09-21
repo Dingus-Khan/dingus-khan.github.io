@@ -194,7 +194,7 @@ class Shader {
 }
 
 class SpriteData { // Stores basic sprite data (w, h, tx, ty, tz, tw, th, r, g, b, transform, id(added by batch), zindex (handled by batch(usually -transform.y)), overrideZ (stops batch from changing zindex(for UI and other special elements))). this covers tiles and sprites, with extra code for animation in the Animation class
-	constructor(x, y, w, h, tx, ty, tz, tw, th, overrideZ, zindex){
+	constructor(x, y, w, h, tx, ty, tz, tw, th, r, g, b, overrideZ, zindex){
 		this.w = w;
 		this.h = h;
 		this.tx = tx;
@@ -214,6 +214,15 @@ class SpriteData { // Stores basic sprite data (w, h, tx, ty, tz, tw, th, r, g, 
 class SpriteBatch { // Stores and draws SpriteData
 	constructor(){
 		this.sprites = [];
+	}
+
+	draw(){
+		let buffer = [];
+		for(i = 0; i < this.sprites.length; i++){
+			let spr = sprites[i];
+			let z = spr.overrideZ ? spr.zindex : -spr.transform.y;
+			buffer.push(spr.transform.x, spr.transform.y, z, spr.tx, spr.ty, spr.tz, spr.r, spr.g, spr.b);
+		}
 	}
 }
 
@@ -274,6 +283,10 @@ class Transform {
 			this.matrix = Matrix.scale(this.matrix, this.scaleX, this.scaleY);
 			this.updateMatrix = false;
 		}
+	}
+
+	getTransformedCoords(){
+
 	}
 }
 
@@ -442,6 +455,9 @@ class Matrix {
 			((m1[12] * m2[3]) + (m1[13] * m2[7]) + (m1[14] * m2[11]) + (m1[15] * m2[15]))
 		];
 	}
+
+	// Think about how to multiply a matrix by a vector and return it
+	// Used for producing the translated coordinates on the CPU for the spritebatching
 };
 
 class MathsUtilities {
